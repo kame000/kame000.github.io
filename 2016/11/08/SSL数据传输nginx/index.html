@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SSL 证书数据传输 | kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用nginx openssl 制作证书流程及 SSL证书数据床书配置">
+<meta name="keywords" content="nginx,openssl,SSL证书">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSL 证书数据传输">
+<meta property="og:url" content="http://www.wokoweb.com/2016/11/08/SSL数据传输nginx/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="使用nginx openssl 制作证书流程及 SSL证书数据床书配置">
+<meta property="og:updated_time" content="2017-06-28T06:47:28.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSL 证书数据传输">
+<meta name="twitter:description" content="使用nginx openssl 制作证书流程及 SSL证书数据床书配置">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SSL数据传输nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/08/SSL数据传输nginx/" class="article-date">
+  <time datetime="2016-11-07T20:10:33.000Z" itemprop="datePublished">2016-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SSL 证书数据传输
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>使用openssl制作证书</strong></p>
+<h2 id="1、服务器单向验证"><a href="#1、服务器单向验证" class="headerlink" title="1、服务器单向验证"></a>1、服务器单向验证</h2><pre><code>创建并进入sslkey存放目录
+
+# mkdir /opt/nginx/sslkey
+
+# cd /opt/nginx/sslkey
+</code></pre><h3 id="①、生成RSA密钥："><a href="#①、生成RSA密钥：" class="headerlink" title="①、生成RSA密钥："></a>①、生成RSA密钥：</h3><pre><code># openssl genrsa -out key.pem 2048
+</code></pre><h3 id="②、生成一个证书请求"><a href="#②、生成一个证书请求" class="headerlink" title="②、生成一个证书请求"></a>②、生成一个证书请求</h3><pre><code># openssl req -new -key key.pem -out cert.csr
+
+# //会提示输入省份、城市、域名信息等，重要的是，email 一定要是你的域名后缀的你可以拿着这个文件去数字证书颁发机构（即CA）申请一个数字证书。
+CA会给你一个新的文件cacert.pem，那才是你的数字证书。
+</code></pre><p><strong>如果是自己做测试，就可以用下面这个命令来生成证书：</strong></p>
+<pre><code># openssl req -new -x509 -nodes -out server.crt -keyout server.key
+</code></pre><h3 id="③、修改-nginx-配置"><a href="#③、修改-nginx-配置" class="headerlink" title="③、修改 nginx 配置"></a>③、修改 nginx 配置</h3><pre><code># HTTPS server  
+#  
+server {  
+listen 443;  
+server_name localhost;  
+##开启ssl   
+ssl on;  
+##服务器证书
+ssl_certificate /opt/nginx/sslkey/server.crt;
+##服务器证书公钥  
+ssl_certificate_key /opt/nginx/sslkey/server.key;  
+##链接超时设置
+ssl_session_timeout 5m;  
+##传输信息通道
+ssl_protocols SSLv2 SSLv3 TLSv1;
+##传输加密方式  
+ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+##  
+ssl_prefer_server_ciphers on;  
+
+location / {      
+        root /home/workspace/;      
+        index index.asp index.aspx;        
+    }  
+}
+</code></pre><p>配置好后，重启nginx，采用 https打开网站，浏览器会提示证书错误，点击继续浏览即可。</p>
+<h2 id="2、服务器-客户端双向验证"><a href="#2、服务器-客户端双向验证" class="headerlink" title="2、服务器-客户端双向验证"></a>2、服务器-客户端双向验证</h2><p>在nginx 目录下建立ca文件夹，进入ca。</p>
+<pre><code># mkdir newcerts private conf server。
+
+其中newcerts子目录将存放CA签署（颁发）过的数字证书（证书备份目录）。而private目录用于存放CA的私钥。目录conf只是用于存放一些简化参数
+
+用的配置文件，server存放服务器证书文件。
+</code></pre><h3 id="①、在conf目录创建文件openssl-conf配置文件，内容如下："><a href="#①、在conf目录创建文件openssl-conf配置文件，内容如下：" class="headerlink" title="①、在conf目录创建文件openssl.conf配置文件，内容如下："></a>①、在conf目录创建文件openssl.conf配置文件，内容如下：</h3><pre><code>[ ca ]  
+default_ca      = foo                  # The default ca section  
+
+[ foo ]  
+dir            = /opt/nginx/ca        # top dir  
+database      = /opt/nginx/ca/index.txt          # index file.  
+new_certs_dir  = /opt/nginx/ca/newcerts          # new certs dir  
+
+certificate    = /opt/nginx/ca/private/ca.crt        # The CA cert  
+serial        = /opt/nginx/ca/serial            # serial no file  
+private_key    = /opt/nginx/ca/private/ca.key  # CA private key  
+RANDFILE      =/opt/nginx/ca/private/.rand      # random number file  
+
+default_days  = 365                    # how long to certify for  
+default_crl_days= 30                    # how long before next CRL  
+default_md    = md5                    # message digest method to use  
+unique_subject = no                      # Set to &apos;no&apos; to allow creation of  
+                                        # several ctificates with same subject.  
+policy        = policy_any              # default policy  
+
+[ policy_any ]  
+countryName = match  
+stateOrProvinceName = match  
+organizationName = match  
+organizationalUnitName = match  
+localityName            = optional  
+commonName              = supplied  
+emailAddress            = optional
+</code></pre><h3 id="②、使用脚本创建证书"><a href="#②、使用脚本创建证书" class="headerlink" title="②、使用脚本创建证书"></a>②、使用脚本创建证书</h3><p>下面的几个脚本都放在/nginx/ca/目录下。</p>
+<h4 id="创建一个新的CA根证书。"><a href="#创建一个新的CA根证书。" class="headerlink" title="创建一个新的CA根证书。"></a>创建一个新的CA根证书。</h4><p>new_ca.sh:</p>
+<pre><code>#!/bin/sh  
+# Generate the key.  
+openssl genrsa -out private/ca.key  
+# Generate a certificate request.  
+openssl req -new -key private/ca.key -out private/ca.csr  
+# Self signing key is bad... this could work with a third party signed key... registeryfly has them on for $16 but I&apos;m too cheap lazy to get one on a lark.  
+# I&apos;m also not 100% sure if any old certificate will work or if you have to buy a special one that you can sign with. I could investigate further but since this  
+# service will never see the light of an unencrypted Internet see the cheap and lazy remark.  
+# So self sign our root key.  
+openssl x509 -req -days 365 -in private/ca.csr -signkey private/ca.key -out private/ca.crt  
+# Setup the first serial number for our keys... can be any 4 digit hex string... not sure if there are broader bounds but everything I&apos;ve seen uses 4 digits.  
+echo FACE &gt; serial  
+# Create the CA&apos;s key database.  
+touch index.txt  
+# Create a Certificate Revocation list for removing &apos;user certificates.&apos;  
+openssl ca -gencrl -out /opt/nginx/ca/private/ca.crl -crldays 7 -config &quot;/opt/nginx/ca/conf/openssl.conf&quot;
+</code></pre><p>执行 sh new_ca.sh生成新的CA证书。</p>
+<h4 id="生成服务器证书的脚本。"><a href="#生成服务器证书的脚本。" class="headerlink" title="生成服务器证书的脚本。"></a>生成服务器证书的脚本。</h4><p>new_server.sh:</p>
+<pre><code># Create us a key. Don&apos;t bother putting a password on it since you will need it to start apache. If you have a better work around I&apos;d love to hear it.  
+openssl genrsa -out server/server.key  
+# Take our key and create a Certificate Signing Request for it.  
+openssl req -new -key server/server.key -out server/server.csr  
+# Sign this bastard key with our bastard CA key.  
+openssl ca -in server/server.csr -cert private/ca.crt -keyfile private/ca.key -out server/server.crt -config &quot;/opt/nginx/ca/conf/openssl.conf&quot;
+</code></pre><p>执行 sh new_server.sh生成新服务器的证书</p>
+<h4 id="配置-nginx的ssl支持："><a href="#配置-nginx的ssl支持：" class="headerlink" title="配置 nginx的ssl支持："></a>配置 nginx的ssl支持：</h4><pre><code>#user  www-nginx;  
+worker_processes  1;  
+
+#error_log  logs/error.log;  
+#error_log  logs/error.log  notice;  
+#error_log  logs/error.log  info;  
+
+#pid        logs/nginx.pid;  
+
+
+events {  
+    worker_connections  1024;  
+}  
+http {  
+    include      mime.types;  
+    default_type  application/octet-stream;  
+    sendfile        on;  
+    keepalive_timeout  65;  
+    #gzip  on;  
+
+    # HTTPS server  
+    #  
+    server {  
+        listen      443;  
+        server_name  localhost;  
+        ssi on;  
+        ssi_silent_errors on;  
+        ssi_types text/shtml;  
+
+        ssl                  on;  
+        ssl_certificate      /opt/nginx/ca/server/server.crt;  
+        ssl_certificate_key  /opt/nginx/ca/server/server.key;  
+        ssl_client_certificate /opt/nginx/ca/private/ca.crt;  
+
+        ssl_session_timeout  5m;  
+        ssl_verify_client on;  #开户客户端证书验证  
+
+        ssl_protocols  SSLv2 SSLv3 TLSv1;  
+        ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;  
+        ssl_prefer_server_ciphers  on;  
+
+        location / {      
+        root /home/workspace/;      
+        index index.asp index.aspx;        
+    }  
+    }  
+}
+</code></pre><p>启动nginx ,等待客户连接，如果此时连接服务器，将提示400 Bad request certification的错误，故还需要生成客户端证书。</p>
+<h4 id="生成客户端证书"><a href="#生成客户端证书" class="headerlink" title="生成客户端证书"></a>生成客户端证书</h4><pre><code>new_user.sh:
+
+#!/bin/sh  
+# The base of where our SSL stuff lives.  
+base=&quot;/opt/nginx/ca&quot;  
+# Were we would like to store keys... in this case we take the username given to us and store everything there.  
+mkdir -p $base/users/  
+
+# Let&apos;s create us a key for this user... yeah not sure why people want to use DES3 but at least let&apos;s make us a nice big key.  
+openssl genrsa -des3 -out $base/users/client.key 1024  
+# Create a Certificate Signing Request for said key.  
+openssl req -new -key $base/users/client.key -out $base/users/client.csr  
+# Sign the key with our CA&apos;s key and cert and create the user&apos;s certificate out of it.  
+openssl ca -in $base/users/client.csr -cert $base/private/ca.crt -keyfile $base/private/ca.key -out $base/users/client.crt -config &quot;/opt/nginx/ca/conf/openssl.conf&quot;  
+
+# This is the tricky bit... convert the certificate into a form that most browsers will understand PKCS12 to be specific.  
+# The export password is the password used for the browser to extract the bits it needs and insert the key into the user&apos;s keychain.  
+# Take the same precaution with the export password that would take with any other password based authentication scheme.  
+openssl pkcs12 -export -clcerts -in $base/users/client.crt -inkey $base/users/client.key -out $base/users/client.p12
+</code></pre><p>执行 sh   new_user.sh生成一个 client证书。</p>
+<p>按照提示一步一步来，这里要注意的是客户证书的几个项目要和根证书匹配。</p>
+<p>也就是前面配置的:</p>
+<pre><code>countryName = match
+
+stateOrProvinceName = match
+
+organizationName = match
+
+organizationalUnitName = match
+</code></pre><p>不一致的话无法生成最后的客户证书，证书生成后，客户端导入证书浏览器，即可打开网站。</p>
+<p><strong>注意事项：</strong></p>
+<pre><code>1、制作证书时会提示输入密码，服务器证书和客户端证书密码可以不相同。
+
+2、服务器证书和客户端证书制作时提示输入省份、城市、域名信息等，需保持一致。
+
+3、Nginx默认未开启SSI，上面配置已开启。
+
+4、Nginx不能自启动，需要如下配置：
+</code></pre><p>cd /etc/init.d<br>sudo touch nginx<br>sudo chmod +x nginx</p>
+<p>nginx内容：</p>
+<pre><code>#! /bin/sh  
+#  
+### BEGIN INIT INFO  
+# Provides:          nginx  
+# Required-Start:    $syslog $local_fs $remote_fs  
+# Required-Stop:    $syslog $local_fs $remote_fs  
+# Should-Start:      dbus avahi  
+# Should-Stop:      dbus avahi  
+# Default-Start:    2 3 4 5  
+# Default-Stop:      1  
+# Short-Description: Nginx Server  
+# Description:      Nginx  
+### END INIT INFO  
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/nginx/sbin  
+DAEMON=/opt/nginx/sbin/nginx  
+NAME=nginx  
+DESC=&quot;Nginx Server&quot;  
+PID_FILE=/opt/nginx/logs/nginx.pid  
+
+test -x $DAEMON || exit 0  
+
+RUN=yes  
+#RUN_AS_USER=root  
+
+#DAEMON_OPTS=&quot;-a $RUN_AS_USER&quot;  
+
+set -e  
+
+case &quot;$1&quot; in  
+  start)  
+    echo -n &quot;Starting $DESC: &quot;  
+    start-stop-daemon --start --quiet --pidfile $PID_FILE \  
+        --exec $DAEMON  
+    echo &quot;$NAME.&quot;  
+    ;;  
+  stop)  
+    echo -n &quot;Stopping $DESC: &quot;  
+    start-stop-daemon --stop --oknodo --quiet --pidfile $PID_FILE \  
+        --exec $DAEMON  
+    echo &quot;$NAME.&quot;  
+    ;;  
+  force-reload)  
+    # check whether $DAEMON is running. If so, restart  
+    start-stop-daemon --stop --test --quiet --pidfile \  
+        $PID_FILE --exec $DAEMON \  
+    &amp;&amp; $0 restart \  
+    || exit 0  
+    ;;  
+  restart)  
+    echo -n &quot;Restarting $DESC: &quot;  
+    start-stop-daemon --stop --oknodo --quiet --pidfile \  
+        $PID_FILE --exec $DAEMON  
+    sleep 1  
+    start-stop-daemon --start --quiet --pidfile \  
+        $PID_FILE --exec $DAEMON  
+    echo &quot;$NAME.&quot;  
+    ;;  
+  status)  
+    if [ -s $PID_FILE ]; then  
+            RUNNING=$(cat $PID_FILE)  
+            if [ -d /proc/$RUNNING ]; then  
+                if [ $(readlink /proc/$RUNNING/exe) = $DAEMON ]; then  
+                    echo &quot;$NAME is running.&quot;  
+                    exit 0  
+                fi  
+            fi  
+
+            # No such PID, or executables don&apos;t match  
+            echo &quot;$NAME is not running, but pidfile existed.&quot;  
+            rm $PID_FILE  
+            exit 1  
+        else  
+            rm -f $PID_FILE  
+            echo &quot;$NAME not running.&quot;  
+            exit 1  
+        fi  
+    ;;  
+  *)  
+    N=/etc/init.d/$NAME  
+    echo &quot;Usage: $N {start|stop|restart|force-reload}&quot; &gt;&amp;2  
+    exit 1  
+    ;;  
+esac  
+
+exit 0
+</code></pre><p>设置自启动：</p>
+<pre><code>sudo chkconfig --list nginx    
+sudo chkconfig nginx on
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/11/08/SSL数据传输nginx/" data-id="cj4gn2lye000cngjtl67pkdhx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openssl/">openssl</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/07/ELK_Install_book/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ELK 安装配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/07/FTP使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">FTP 安装和使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

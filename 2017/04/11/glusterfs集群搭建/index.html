@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>glusterfs集群搭建 | kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="glusterfs 大文件分布式存储集群搭建手册">
+<meta name="keywords" content="glusterfs,分布式存储">
+<meta property="og:type" content="article">
+<meta property="og:title" content="glusterfs集群搭建">
+<meta property="og:url" content="http://www.wokoweb.com/2017/04/11/glusterfs集群搭建/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="glusterfs 大文件分布式存储集群搭建手册">
+<meta property="og:updated_time" content="2017-06-28T06:47:28.652Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="glusterfs集群搭建">
+<meta name="twitter:description" content="glusterfs 大文件分布式存储集群搭建手册">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-glusterfs集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/11/glusterfs集群搭建/" class="article-date">
+  <time datetime="2017-04-11T00:00:00.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      glusterfs集群搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="glusrefs-历史及由来"><a href="#glusrefs-历史及由来" class="headerlink" title="glusrefs  历史及由来"></a>glusrefs  历史及由来</h1><blockquote>
+<p>GlusterFS 是近年兴起的一个高性能开源分布式文件系统，其目标是全局命名空间、分布式前端的高性能文件系统，目前已被 RedHat 看中，GlusterFS 具有高扩展、高可性、高性能、可横向扩展等特点，并且 GlusterFS 没有元数据服务器的设计，使其没有单点故障问题。</p>
+</blockquote>
+<h1 id="GlusterFS-集群搭建"><a href="#GlusterFS-集群搭建" class="headerlink" title="GlusterFS 集群搭建"></a>GlusterFS 集群搭建</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>搭建环境如下</p>
+<table>
+<thead>
+<tr>
+<th>主机</th>
+<th>域名</th>
+<th>磁盘</th>
+<th>大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.1.100</td>
+<td>test-server1</td>
+<td>/dev/sdb</td>
+<td>50G</td>
+</tr>
+<tr>
+<td>192.168.1.107</td>
+<td>test-server2</td>
+<td>/dev/sdb</td>
+<td>50G</td>
+</tr>
+<tr>
+<td>192.168.1.126</td>
+<td>test-server3</td>
+<td>/dev/sdb</td>
+<td>50G</td>
+</tr>
+<tr>
+<td>192.168.1.217</td>
+<td>test-server4</td>
+<td>/dev/sdb</td>
+<td>50G</td>
+</tr>
+</tbody>
+</table>
+<h2 id="安装-GlusterFS"><a href="#安装-GlusterFS" class="headerlink" title="安装 GlusterFS"></a>安装 GlusterFS</h2><blockquote>
+<p>CentOS7 默认官方 yum 源中有 GlusterFS 相关的 rpm 包，但是发现没有 server 端的，官方给出的安装命令如下</p>
+</blockquote>
+<h1 id="安装-GlusterFS-yum-源"><a href="#安装-GlusterFS-yum-源" class="headerlink" title="安装 GlusterFS yum 源"></a>安装 GlusterFS yum 源</h1><p>  yum install -y centos-release-gluster &amp;&amp; yum update -y</p>
+<h1 id="安装-GlusterFS-以及客户端"><a href="#安装-GlusterFS-以及客户端" class="headerlink" title="安装 GlusterFS 以及客户端"></a>安装 GlusterFS 以及客户端</h1><p>  yum install -y glusterfs glusterfs-fuse glusterfs-cli glusterfs-server glusterfs-api</p>
+<h2 id="基础环境配置"><a href="#基础环境配置" class="headerlink" title="基础环境配置"></a>基础环境配置</h2><h3 id="ntp-时钟同步"><a href="#ntp-时钟同步" class="headerlink" title="ntp 时钟同步"></a>ntp 时钟同步</h3><blockquote>
+<p>由于 GlusterFS 需要进行节点间同步，所以各节点时间要保证一致性，故需要安装 ntp 时钟同步工具</p>
+</blockquote>
+<ul>
+<li><p>安装 ntp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install -y ntp</div><div class="line">安装完成后应进行时钟同步，这里暂时使用 windows 的时钟授权服务器，也可以选择其他时钟授权服务器，安装时测试国内的清华大等全部超时……</div></pre></td></tr></table></figure>
+</li>
+<li><p>同步时钟</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ntpdate time.windows.com</div><div class="line">同步完成后最好设置定时同步，以下为每天 0 时开始没 3 小时进行一次时钟同步</div></pre></td></tr></table></figure>
+</li>
+<li><p>增加 当前用户 cron 任务</p>
+<p>crontab -e</p>
+</li>
+<li><p>写入如下任务</p>
+<p><code>* 0-23/3 * * * root  /usr/sbin/ntpdate time.windows.com &amp;&gt; /dev/null;</code><br>/usr/sbin/clock -w</p>
+</li>
+<li><p>host 定义</p>
+<blockquote>
+<p>由于使用域名方式访问，所以需要修改本地 hosts 文件，也可以通过自建 dns 服务器来解决，不过据说 dns 服务器方式会有一点点延迟，所以推荐修改本地 hosts(没证明过)</p>
+</blockquote>
+</li>
+<li><p>修改 hosts<br>vim /etc/hosts</p>
+</li>
+<li>增加如下<br>192.168.1.100 test-server1<br>192.168.1.107 test-server2<br>192.168.1.126 test-server3<br>192.168.1.217 test-server4<h2 id="启动并加入节点"><a href="#启动并加入节点" class="headerlink" title="启动并加入节点"></a>启动并加入节点</h2></li>
+</ul>
+<p>GlusterFS 安装完成后可直接通过 systemd 启动</p>
+<pre><code>systemctl enable glusterd
+systemctl start glusterd
+</code></pre><p>启动完成后便可在任意节点上将其他节点加入进来，组建集群</p>
+<pre><code>for gfs_host in gfs-server1 gfs-server2 gfs-server3 gfs-server4;do
+  gluster peer probe $gfs_host
+done
+</code></pre><h2 id="磁盘预处理"><a href="#磁盘预处理" class="headerlink" title="磁盘预处理"></a>磁盘预处理</h2><blockquote>
+<p>GlusterFS 集群服务启动并加入其他节点后，就需要为下一步创建卷(volume)准备磁盘，以下以一块 50G 的磁盘为例，在每个节点上执行如下</p>
+</blockquote>
+<ul>
+<li>首先创建分区<br>fdisk /dev/sdb</li>
+<li>然后输入 n 创建新分区，再输入 p 选择主分区</li>
+<li><p>最后输入 w 保存分区表，如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">欢迎使用 fdisk (util-linux 2.23.2)。</div><div class="line"></div><div class="line">更改将停留在内存中，直到您决定将更改写入磁盘。</div><div class="line">使用写入命令前请三思。</div><div class="line"></div><div class="line">Device does not contain a recognized partition table</div><div class="line">使用磁盘标识符 0x445cdbb5 创建新的 DOS 磁盘标签。</div><div class="line"></div><div class="line">命令(输入 m 获取帮助)：n</div><div class="line">Partition type:</div><div class="line">   p   primary (0 primary, 0 extended, 4 free)</div><div class="line">   e   extended</div><div class="line">Select (default p): p</div><div class="line">分区号 (1-4，默认 1)：</div><div class="line">起始 扇区 (2048-104857599，默认为 2048)：</div><div class="line">将使用默认值 2048</div><div class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (2048-104857599，默认为 104857599)：</div><div class="line">将使用默认值 104857599</div><div class="line">分区 1 已设置为 Linux 类型，大小设为 50 GiB</div><div class="line"></div><div class="line">命令(输入 m 获取帮助)：w</div><div class="line">The partition table has been altered!</div><div class="line"></div><div class="line">Calling ioctl() to re-read partition table.</div><div class="line">正在同步磁盘。</div><div class="line">分区创建完成后需要对其进行格式化</div><div class="line"></div><div class="line">mkfs.ext4 /dev/sdb</div><div class="line">最后准备接下来要使用的相关挂载目录</div></pre></td></tr></table></figure>
+<ul>
+<li>创建磁盘挂载目录<br>mkdir -p /data/gfs</li>
+<li>挂载硬盘<br>mount -t ext4 /dev/sdb /data/gfs</li>
+<li><p>创建 GlusterFS 卷目录<br>mkdir -p /data/gfs/brick0<br>为了保证磁盘一直挂载，最好设置一下开机自动挂载</p>
+<p><strong>后面三个选项，defaults 表示使用默认挂载参数，</strong><br><strong># 第一个 1 代表 允许 demp</strong><br><strong># 第二个 1 代表 开机执行挂载分区检查</strong><br>echo “/dev/sdb /data/gfs ext4 defaults 1 1” &gt;&gt; /etc/fstab<br>到此集群基本部署完成</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="GlusterFS-存储卷设置"><a href="#GlusterFS-存储卷设置" class="headerlink" title="GlusterFS 存储卷设置"></a>GlusterFS 存储卷设置</h1><blockquote>
+<p>GlusterFS 集群搭建完成后，便需要创建存储卷(volume)来整合各个集群磁盘存储资源，以便后面进行挂载和使用</p>
+</blockquote>
+<h2 id="创建分布式-Hash-卷"><a href="#创建分布式-Hash-卷" class="headerlink" title="创建分布式 Hash 卷"></a>创建分布式 Hash 卷</h2><blockquote>
+<p>分布式 Hash 卷其原理是当向 GlusterFS 写入一个文件时，GlusterFS 通过弹性 Hash 算法对文件名进行计算，然后将其均匀的分布到各个节点上，因此分布式 Hash 卷没有数据冗余，创建分布式 Hash 卷命令如下</p>
+</blockquote>
+<pre><code>gluster volume create gfs_disk\
+  gfs-server1:/data/gfs/brick0 \
+  gfs-server2:/data/gfs/brick0 \
+  gfs-server3:/data/gfs/brick0 \
+  gfs-server4:/data/gfs/brick0
+</code></pre><h2 id="创建复制卷"><a href="#创建复制卷" class="headerlink" title="创建复制卷"></a>创建复制卷</h2><p>复制卷相当于 RAID1，在向 GlusterFS 中存储文件时，GlusterFS 将其拷贝到所有节点，并且是同步的，这会极大降低磁盘性能，并呈线性降低，但是复制卷随着节点数量增加，起数据冗余能力也在增加，因为每个节点上都有一份数据的完全拷贝，创建复制卷命令如下</p>
+<blockquote>
+<p>replica 参数用于指定数据拷贝有多少份<br>注意: replica 数量必须与指定的 GlusterFS 集群 brick 数量保持一致</p>
+</blockquote>
+<pre><code>gluster volume create gfs_disk replica 4 transport tcp \
+  gfs-server1:/data/gfs/brick0 \
+  gfs-server2:/data/gfs/brick0 \
+  gfs-server3:/data/gfs/brick0 \
+  gfs-server4:/data/gfs/brick0
+</code></pre><h2 id="创建分布式-Hash-复制卷"><a href="#创建分布式-Hash-复制卷" class="headerlink" title="创建分布式 Hash 复制卷"></a>创建分布式 Hash 复制卷</h2><p>顾名思义，分布式 Hash 复制卷就是将 Hash 卷与复制卷整合一下，通过 replica 参数指定复制份数，以下例子为使用4个节点创建，每两个节点组成一个复制卷，然后两对节点再组成 Hash 卷</p>
+<blockquote>
+<p>创建 分布式 Hash 复制卷时，只需要保证集群数量是 replica 数量的整数倍即可</p>
+</blockquote>
+<pre><code>gluster volume create gfs_disk replica 2 transport tcp \
+  gfs-server1:/data/gfs/brick0 \
+  gfs-server2:/data/gfs/brick0 \
+  gfs-server3:/data/gfs/brick0 \
+  gfs-server4:/data/gfs/brick0
+</code></pre><h2 id="其他卷"><a href="#其他卷" class="headerlink" title="其他卷"></a>其他卷</h2><p>条带卷: 条带卷既将文件切分成块，分布存放在各个节点，将 replica 替换成 stripe 即可<br>分布式 Hash 条带卷: 同分布式 Hash 复制卷一样，保证节点数量是 stripe 的整数倍即可<br>由于条带卷使用并不多，所以不做演示，一般条带卷适用于单个大文件超过磁盘大小时使用</p>
+<h1 id="GlusterFS-挂载及测试"><a href="#GlusterFS-挂载及测试" class="headerlink" title="GlusterFS 挂载及测试"></a>GlusterFS 挂载及测试</h1><p>无论创建的哪种卷，最终创建完成后都可以通过如下命令查看</p>
+<pre><code>gluster volume info
+</code></pre><h2 id="GlusterFS-卷挂载"><a href="#GlusterFS-卷挂载" class="headerlink" title="GlusterFS 卷挂载"></a>GlusterFS 卷挂载</h2><p>卷创建完成后，只需要像正常磁盘一样挂载即可使用，不同的是文件系统类型指定为 glusterfs 而已，操作如下</p>
+<blockquote>
+<p>mount 时指定任意一个节点即可</p>
+</blockquote>
+<pre><code>mount -t glusterfs gfs-server1:gfs_disk /mnt/gfs
+</code></pre><p>为保证一直可用，同样最好设置开机自动挂载</p>
+<pre><code>echo &quot;gfs-server1:gfs_disk /mnt/gfs glusterfs defaults 0 1&quot; &gt;&gt; /etc/fstab
+</code></pre><h2 id="测试-GlusterFS"><a href="#测试-GlusterFS" class="headerlink" title="测试 GlusterFS"></a>测试 GlusterFS</h2><p>以下以分布式 Hash 卷为例，由于准备了 4 各节点，并且 replica 为 2，所以理论上向 GlusterFS 写入一个文件应该会在任意两个节点上都有一份</p>
+<blockquote>
+<p>在 gfs-server1 上执行</p>
+</blockquote>
+<pre><code>cp test.tar.gz /mnt.gfs
+</code></pre><blockquote>
+<p>最后可以在 gfs-server3、gfs-server4 的磁盘目录中看到</p>
+</blockquote>
+<pre><code>ls /data/gfs/brick0
+</code></pre><h2 id="其他相关"><a href="#其他相关" class="headerlink" title="其他相关"></a>其他相关</h2><blockquote>
+<p>没有任何通用的文件系统，通用意味着通通不能用，关于 GlusterFS 适用场景以及缺点可参考 换个角度看GlusterFS分布式文件系统 文章，关于 GlusterFS 性能与监控可参考 GlusterFS性能监控&amp;配额 转载请注明出处，本文采用 CC4.0 协议授权</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/11/glusterfs集群搭建/" data-id="cj4gn2lyo000rngjt8ycuvecb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式存储/">分布式存储</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/19/tmux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          tmux 使用配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/10/运维技术汇总/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">运维技术架构汇总</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

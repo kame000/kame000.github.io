@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="个人文章博客站点">
+<meta property="og:type" content="website">
+<meta property="og:title" content="kame">
+<meta property="og:url" content="http://www.wokoweb.com/page/3/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="个人文章博客站点">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kame">
+<meta name="twitter:description" content="个人文章博客站点">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-ansible常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/25/ansible常用命令/" class="article-date">
+  <time datetime="2016-12-25T00:00:00.000Z" itemprop="datePublished">2016-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/25/ansible常用命令/">ansible 常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ansible-hosts文件命令"><a href="#ansible-hosts文件命令" class="headerlink" title="ansible    hosts文件命令"></a>ansible    hosts文件命令</h1><h2 id="命令说明："><a href="#命令说明：" class="headerlink" title="命令说明："></a>命令说明：</h2><p>  ansible_ssh_host<br>        将要连接的远程主机名.与你想要设定的主机的别名不同的话,可通过此变量设置.</p>
+<p>  ansible_ssh_port<br>        ssh端口号.如果不是默认的端口号,通过此变量设置.</p>
+<p>  ansible_ssh_user<br>        默认的 ssh 用户名</p>
+<p>  ansible_ssh_pass<br>        ssh 密码(这种方式并不安全,我们强烈建议使用 –ask-pass 或 SSH 密钥)</p>
+<p>  ansible_sudo_pass<br>        sudo 密码(这种方式并不安全,我们强烈建议使用 –ask-sudo-pass)</p>
+<p>  ansible_sudo_exe (new in version 1.8)<br>        sudo 命令路径(适用于1.8及以上版本)</p>
+<p>  ansible_connection<br>        与主机的连接类型.比如:local, ssh 或者 paramiko. Ansible 1.2 以前默认使用 paramiko.1.2 以后默认使用 ‘smart’,’smart’ 方式会根据是否支持 ControlPersist, 来判断’ssh’ 方式是否可行.</p>
+<p>  ansible_ssh_private_key_file<br>        ssh 使用的私钥文件.适用于有多个密钥,而你不想使用 SSH 代理的情况.</p>
+<p>  ansible_shell_type<br>        目标系统的shell类型.默认情况下,命令的执行使用 ‘sh’ 语法,可设置为 ‘csh’ 或 ‘fish’.</p>
+<p>  ansible_python_interpreter<br>        目标主机的 python 路径.适用于的情况: 系统中有多个 Python, 或者命令路径不是”/usr/bin/python”,比如  *BSD, 或者 /usr/bin/python<br>        不是 2.X 版本的 Python.我们不使用 “/usr/bin/env” 机制,因为这要求远程用户的路径设置正确,且要求 “python” 可执行程序名不可为 python以外的名字(实际有可能名为python26).</p>
+<pre><code>与 ansible_python_interpreter 的工作方式相同,可设定如 ruby 或 perl 的路径....
+</code></pre><h2 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h2><p>  web1    ansible_ssh_user=manager    ansible_ssh_pass=密码</p>
+<p>  some_host         ansible_ssh_port=2222     ansible_ssh_user=manager<br>  aws_host          ansible_ssh_private_key_file=/home/example/.ssh/aws.pem<br>  freebsd_host      ansible_python_interpreter=/usr/local/bin/python<br>  ruby_module_host  ansible_ruby_interpreter=/usr/bin/ruby.1.9.3</p>
+<h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><p>  ansible dbserver -m file -a “dest=/tmp/ss mode=755 owner=root group=root state=directory”</p>
+<p>  修改文件权限<br>  ansible dbserver -m file -a “dest=/tmp/a.txt mode=600”<br>  拷贝文件<br>  ansible dbserver -m copy -a “src=/etc/hosts dest=/etc/hosts”<br>  系统状态检查<br>  ansible dbserver -m service -a “name=iptables state=started”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/25/ansible常用命令/" data-id="cj4gn2lyi000hngjtctsdoad7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ansible/">ansible</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-iptables限制单IP链接数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/24/iptables限制单IP链接数/" class="article-date">
+  <time datetime="2016-12-24T00:00:00.000Z" itemprop="datePublished">2016-12-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/24/iptables限制单IP链接数/">iptables 限制同一IP链接数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iptables利用connlimit模块限制同一IP连接connlimit功能"><a href="#iptables利用connlimit模块限制同一IP连接connlimit功能" class="headerlink" title="iptables利用connlimit模块限制同一IP连接connlimit功能"></a>iptables利用connlimit模块限制同一IP连接connlimit功能</h1><ul>
+<li>connlimit模块允许你限制每个客户端IP的并发连接数，即每个IP同时连接到一个服务器个数。</li>
+<li><p>connlimit模块主要可以限制内网用户的网络使用，对服务器而言则可以限制每个IP发起的连接数。</p>
+<h2 id="connlimit参数"><a href="#connlimit参数" class="headerlink" title="connlimit参数"></a>connlimit参数</h2><ul>
+<li>–connlimit-above n 　　　＃限制为多少个</li>
+<li><p>–connlimit-mask n 　　　 ＃这组主机的掩码,默认是connlimit-mask 32 ,即每个IP.</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2></li>
+<li><p>限制同一IP同时最多100个http连接</p>
+<p><code>iptables -I INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 100 -j REJECT</code></p>
+</li>
+<li><p>只允许每组C类IP同时100个http连接</p>
+<p><code>iptables -p tcp --syn --dport 80 -m connlimit --connlimit-above 100 --connlimit-mask 24 -j REJECT</code></p>
+</li>
+<li><p>只允许每个IP同时5个80端口转发,超过的丢弃</p>
+<p><code>iptables -I FORWARD -p tcp --syn --dport 80 -m connlimit --connlimit-above 5 -j DROP</code></p>
+</li>
+<li><p>限制某IP最多同时100个http连接</p>
+<p><code>iptables -A INPUT -s 222.222.222.222 -p tcp --syn --dport 80 -m connlimit --connlimit-above 100 -j REJECT</code></p>
+</li>
+<li><p>限制每IP在一定的时间(比如60秒)内允许新建立最多100个http连接数</p>
+<p><code>iptables -A INPUT -p tcp --dport 80 -m recent --name BAD_HTTP_ACCESS --update --seconds 60 --hitcount 100 -j REJECT</code><br><code>iptables -A INPUT -p tcp --dport 80 -m recent --name BAD_HTTP_ACCESS --set -j ACCEPT</code></p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/24/iptables限制单IP链接数/" data-id="cj4gn2lyt000wngjtprxsgf1m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-xtarback" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/23/xtarback/" class="article-date">
+  <time datetime="2016-12-23T00:00:00.000Z" itemprop="datePublished">2016-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/23/xtarback/">xtraback原理及使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="xtrabackup"><a href="#xtrabackup" class="headerlink" title="xtrabackup"></a>xtrabackup</h1><blockquote>
+<p>xtrabackup 是 percona 的一个开源项目，可以热备份innodb ，XtraDB,和MyISAM（会锁表）。对MyISAM存储引擎会锁表，也是很郁闷的因为线上使用的是Innodb和MyISAM两种存储引擎，比较头疼！！ Xtrabackup是一个对InnoDB做数据备份的工具，支持在线热备份（备份时不影响数据读写），是商业备份工具InnoDB Hotbackup的一个很好的替代品。</p>
+</blockquote>
+<h1 id="官方原理"><a href="#官方原理" class="headerlink" title="官方原理"></a>官方原理</h1><blockquote>
+<p>在InnoDB内部会维护一个redo日志文件，我们也可以叫做事务日志文件。事务日志会存储每一个InnoDB表数据的记录修改。当InnoDB启动时，InnoDB会检查数据文件和事务日志，并执行两个步骤：它应用（前滚）已经提交的事务日志到数据文件，并将修改过但没有提交的数据进行回滚操作。</p>
+</blockquote>
+<p>xtrabackup在启动时会记住log sequence number（LSN），并且复制所有的数据文件。复制过程需要一些时间，所以这期间如果数据文件有改动，那么将会使数据库处于一个不同的时间点。这时，xtrabackup会运行一个后台进程，用于监视事务日志，并从事务日志复制最新的修改。xtrabackup必须持续的做这个操作，是因为事务日志是会轮转重复的写入，并且事务日志可以被重用。所以xtrabackup自启动开始，就不停的将事务日志中每个数据文件的修改都记录下来。</p>
+<p>上面就是xtrabackup的备份过程。接下来是准备（prepare）过程。在这个过程中，xtrabackup使用之前复制的事务日志，对各个数据文件执行灾难恢复（就像MySQL刚启动时要做的一样）。当这个过程结束后，数据库就可以做恢复还原了。 以上的过程在xtrabackup的编译二进制程序中实现。程序innobackupex可以允许我们备份MyISAM表和frm文件从而增加了便捷和功能。Innobackupex会启动xtrabackup，直到xtrabackup复制数据文件后，然后执行FLUSH TABLES WITH READ LOCK来阻止新的写入进来并把MyISAM表数据刷到硬盘上，之后复制MyISAM数据文件，最后释放锁。</p>
+<p>备份MyISAM和InnoDB表最终会处于一致，在准备（prepare）过程结束后，InnoDB表数据已经前滚到整个备份结束的点，而不是回滚到xtrabackup刚开始时的点。这个时间点与执行FLUSH TABLES WITH READ LOCK的时间点相同，所以MyISAM表数据与InnoDB表数据是同步的。类似Oracle的，InnoDB的prepare过程可以称为recover（恢复），MyISAM的数据复制过程可以称为restore（还原）。</p>
+<p>xtrabackup和innobackupex这两个工具都提供了许多前文没有提到的功能特点。手册上有对各个功能都有详细的介绍。简单介绍下，这些工具提供了如流（streaming）备份，增量（incremental）备份等，通过复制数据文件，复制日志文件和提交日志到数据文件（前滚）实现了各种复合备份方式。</p>
+<p>xtrabackup只能备份和恢复InnoDB表，而且只有ibd文件，frm文件它不管，恢复时就需要DBA提供frm。innobackupex可以备份和恢复MyISAM表以及frm文件，并且对xtrabackup也做了很好的封装，所以可以使用innobackupex来备份MySQL数据库。还有一个问题，就是innobackupex备份MyISAM表之前要对全库进行加READ LOCK，阻塞写操作，若备份是在从库上进行的话会影响主从同步，造成延迟。对InnoDB表备份不会阻塞读写。</p>
+<h2 id="xtrabackup增量备份的原理是："><a href="#xtrabackup增量备份的原理是：" class="headerlink" title="xtrabackup增量备份的原理是："></a>xtrabackup增量备份的原理是：</h2><p>首先完成一个完全备份，并记录下此时检查点LSN； 2)、然后增量备份时，比较表空间中每个页的LSN是否大于上次备份的LSN，若是则备份该页并记录当前检查点的LSN。</p>
+<p>具体来说，首先在logfile中找到并记录最后一个checkpoint（“last checkpoint LSN”），然后开始从LSN的位置开始拷贝InnoDB的logfile到xtrabackup_logfile；然后开始拷贝全部的数据文件.ibd；在拷贝全部数据文件结束之后，才停止拷贝logfile。</p>
+<p>所以xtrabackuplogfile文件在并发写入很大时也会变得很大，占用很多空间，需要注意。另外当我们使用–stream=tar或者远程备份–remote-host时默认使用/tmp，但最好显示用参数–tmpdir指定，以免把/tmp目录占满影响备份以及系统其它正常服务。 因为logfile里面记录全部的数据修改情况，所以即使在备份过程中数据文件被修改过了，恢复时仍然能够通过解析xtrabackuplogfile保持数据的一致。 xtrabackup的增量备份只能用于InnoDB表，不能用在MyISAM表上。采用增量备份MySQL数据库时xtrabackup会依据上次全备份或增量备份目录对InnoDB表进行增量备份，对MyISAM表会进行全表复制。</p>
+<p>流备份（streaming）可以将备份直接保存到远程服务器上。 当执行恢复时，由于复制是不锁表的所以此时数据文件都是不一致的，xtrabackup使用之前保存的redo log对各个数据文件检查是否与事务日志的checkpoint一致，执行恢复： 1)、根据复制数据文件时以及之后已提交事务产生的事务日志进行前滚； 2)、将未提交的事务进行回滚。</p>
+<p>这个过程就是MySQL数据库宕机之后执行的crash recovery。</p>
+<h2 id="增量备份"><a href="#增量备份" class="headerlink" title="增量备份"></a>增量备份</h2><p>在InnoDB中，每个page中都记录LSN信息，每当相关数据发生改变，page的LSN就会自动增加，xtrabackup的增量备份就是依据这一原理进行的。xtrabackup将上次备份（完全备份集或者也是一个增量备份集）以来LSN改变的page进行备份。 所以，要做增量备份第一次就要做一个完全备份（就是将MySQL实例或者说要备份的数据库表做一个完全复制，同时记录LSN），之后可以基于此进行增量备份以及恢复。</p>
+<h3 id="增量备份优点："><a href="#增量备份优点：" class="headerlink" title="增量备份优点："></a>增量备份优点：</h3><p>1)、数据库太大没有足够的空间全量备份，增量备份能有效节省空间，并且效率高；<br>2)、支持热备份，备份过程不锁表（针对InnoDB而言），不阻塞数据库的读写；<br>3)、每日备份只产生少量数据，也可采用远程备份，节省本地空间；<br>4)、备份恢复基于文件操作，降低直接对数据库操作风险；<br>5)、备份效率更高，恢复效率更高。</p>
+<h3 id="恢复与还原"><a href="#恢复与还原" class="headerlink" title="恢复与还原"></a>恢复与还原</h3><p>backup的恢复过程中包括恢复和还原两个部分。 我们前面已经说了xtrabackup只备份InnoDB表的ibd文件，而innobackupex可以备份包括InnoDB表在内的其他存储引擎的表的所有数据文件。由于不同引擎表备份时的不同，也会让恢复过程看起来不一样。</p>
+<p>先来看看完全备份集的恢复。 在InnoDB表的备份或者更直接的说ibd数据文件复制的过程中，数据库处于不一致的状态，所以要将xtraback_logfile中尚未提交的事务进行回滚，以及将已经提交的事务进行前滚，使各个数据文件处于一个一致性状态，这个过程叫做“准备(prepare)”。</p>
+<p>如果你是在一个从库上执行的备份，那说明你没有东西需要回滚，只是简单的apply redo log就可以了。另外在prepare过程中可以使用参数–use-memory增大使用系统内存量从而提高恢复速度。</p>
+<p>之后，我们就可以根据backup-my.cnf中的配置把数据文件复制回对应的目录了，当然你也可以自己复制回去，但innobackupex都会帮我们完成。在这里，对于InnoDB表来说是完成“后准备”动作，我们称之为“恢复(recovery)”，而对于MyISAM表来说由于备份时是采用锁表方式复制的，所以此时只是简单的复制回来，不需要apply log，这个我们称之为“还原(restore)”。 注：本文档里之所以使用恢复和还原，也是和其他数据库比如Oracle看起来一样。</p>
+<p>对于增量备份的恢复过程，与完全备份集的恢复类似，只是有少许不同：</p>
+<ul>
+<li>恢复过程需要使用完全备份集和各个增量备份集，各个备份集的恢复与前面说的一样（前滚和回滚），之后各个增量备份集的redo log都会应用到完全备份集中；</li>
+<li>对于完全备机集之后产生的新表，要有特殊处理方式，以便恢复后不丢表；</li>
+<li>要以完全备份集为基础，然后按顺序应用各个增量备份集。</li>
+</ul>
+<h3 id="流备份和压缩"><a href="#流备份和压缩" class="headerlink" title="流备份和压缩"></a>流备份和压缩</h3><p>提到流备份(streaming)就要说远程备份和备份压缩，先说流备份吧。 流备份是指备份的数据通过标准输出STDOUT传输给tar程序进行归档，而不是单纯的将数据文件保存到指定的备份目录中，参数–stream=tar表示开启流备份功能并打包。同时也可以利用流备份到远程服务器上。<br>举例来说:</p>
+<p>  <code>$ innobackupex --stream=TAR ${BACKUPDIR}/base | gzip &gt; ${BACKUPDIR}/base.tar.gz $ innobackupex --stream=TAR ${BACKUP_DIR}/base|ssh somebackupaddr “cat &gt; ${DIR}/base.tar”</code><br>当然了，如果你使用了流备份，那么增量备份也就不能用了，因为增量备份需要参考次备份情况，而上次备份却被打包或者压缩了。 在我们现实使用中，更多的使用增量备份，至于归档压缩我们可以通过脚本自主完成。</p>
+<h3 id="部分备份和恢复"><a href="#部分备份和恢复" class="headerlink" title="部分备份和恢复"></a>部分备份和恢复</h3><p>xtrabackup可以只备份/恢复部分库表，可以正则模式匹配或者是你想备份库表的列表，但InnoDB表必须是独立表空间，同时不能使用流备份功能。</p>
+<ul>
+<li><p>使用正则模式匹配备份部分库表，需要使用参数–include，语句类似如下:</p>
+<p><code>$ innobackupex --include=’^qb.*’ ${BACKUP_DIR}/part-base</code></p>
+</li>
+<li><p>使用数据库列表备份部分库，需要使用参数–databases，语句类似如下:</p>
+<p><code>$ innobackupex --databases=qb0 qb1 qb2 qb3 ${BACKUP_DIR}/part-base</code></p>
+</li>
+<li><p>使用表列表备份部分表，需要使用参数–tables-file，语句类似如下:</p>
+<p><code>$ innobackupex --tables-list=${CONFDIR}/tab.conf ${BACKUPDIR}/part-base</code></p>
+</li>
+</ul>
+<blockquote>
+<p>注：在我们的现实应用中，很少会只备份集群中部分库表，所以只是了解此功能即可，若有现实需要可以参考percona官方资料以获取更多信息。</p>
+</blockquote>
+<p>能备份部分库表，也就能根据完全备份集进行部分库表的恢复，在现实中很少会用到，但还是说一下吧。 首先在“准备prepare”的过程中，使用参数–export将表导出，这个导出会将每个InnoDB表创建一个以.exp结尾的文件，这些文件为之后的导入过程服务。</p>
+<pre><code>$ innobackupex --apply-log --export ${BACKUP_DIR}/base
+</code></pre><p>然后将你需要恢复的表的ibd和exp文件复制到目标机器，在目标机器上执行导入：</p>
+<pre><code>mysql&gt; create table t()engine=innodb;
+//此处需要DBA手动创建一个同结构的表或表已存在
+mysql&gt; ALTER TABLE t DISCARD TABLESPACE;
+$ cp t.ibd t.exp ${DATA_DIR}/${DB}/ mysql&gt; ALTER TABLE t IMPORT TABLESPACE; 这样的导出导入就可以保住恢复的表可以与数据库其他表保持一致性了。
+</code></pre><h3 id="并行备份"><a href="#并行备份" class="headerlink" title="并行备份"></a>并行备份</h3><p>xtrbackup还支持并行备份，默认情况下xtrabackup备份时只会开启一个进程进行数据文件的备份，若配置参数–parallel=N可以让xtrabackup开启N个子进程对多个数据文件进行并发备份，这样可以加快备份的速度。当然服务器的IO处理能力以及对服务器的影响也是要考虑的，所以另一个参数–throttle=IOS会与它同时使用，这个参数用来限制备份过程中每秒读写的IO次数，对服务器的IO是一个保护。</p>
+<p>这两个参数xtrabackup和innobackupex都支持，举例如下:</p>
+<pre><code>$ innobackupex --parallel=4 --throttle=400 ${BACKUP_DIR}/part-base 注意：对同一个数据文件只会有一个进程在备份。
+</code></pre><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>xtrabackup在备份时主要的工作是做数据文件复制，它每次只会读写1MB的数据（即64个page，不能修改），xtrabackup逐页访问1MB数据，使用innodb的bufpageis_corrupted()函数检查此页的数据是否正常，如果数据不正常，就重新读取这一页，最多重新读取10次，如果还是失败，备份就失败了，退出。 在复制事务日志的时候，每次读写512KB的数据，同样不可以配置。 之前我在维护mysql数据库的时候，使用mysqldump来进行备份与恢复，在备份的时候锁住表，然后全部备份，在数据少的时候没问题，但如果数据很多，不允许锁表，同时需要恢复数据块的情况，mysqldump就不适合了，我在恢复一个4G数据文件的数据库的时候，恢复的数据是使用mysqldump的数据，恢复了3个小时还没有反应，造成的影响很严重，所以我开始寻找其他的别发软件来满足以上的需求，幸好找到了，就是使用xtrabackup来进行备份与恢复，恢复4G数据文件的数据库，仅需要14秒，同时在备份的时候不会锁表，而且支持增量备份，所以把我的比较分享给大家，希望对大家有益！</p>
+<h3 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h3><pre><code>yum install perl-Time-HiRes -y
+yum -y install perl-DBD-MySQL.x86_64
+tar xvf percona-xtrabackup-2.1.5-680-Linux-x86_64.tar.gz
+cd percona-xtrabackup-2.1.5-Linux-x86_64/
+cp bin/* /usr/bin/
+</code></pre><blockquote>
+<p>innobackupex使用参数介绍由于innobackupex能同时备份InnoDB和MyISAM引擎的表，这里重点介绍innobackupex的备份与恢复使用通常一般都直接使用innobackupex，因为它能同时备份InnoDB和MyISAM引擎的表。要注意的是my.cnf里datadir这个参数是必须要指定的，xtrabackup_55是根据它去定位innodb数据文件的位置。</p>
+</blockquote>
+<pre><code>innobackupex语法及参数说明innobackup [--sleep=MS] [--compress[=LEVEL]] [--include=REGEXP] [--user=NAME] [--password=WORD] [--port=PORT] [--socket=SOCKET] [--no-timest a mp] [--ibbackup=IBBACKUP-BINARY] [--slave-info] [--stream=tar] [--defaults-file=MY.CNF] [--databases=LIST] [--remote-host=HOSTNAME] BACKUP-ROOT-DIR
+
+innobackup --apply-log [--use-memory=MB] [--uncompress] [--defaults-file=MY.CNF] [--ibbackup=IBBACKUP-BINARY] BACKUP-DIR
+
+innobackup --copy-back [--defaults-file=MY.CNF] BACKUP-DIR
+</code></pre><h4 id="各参数说明："><a href="#各参数说明：" class="headerlink" title="各参数说明："></a>各参数说明：</h4><pre><code>--defaults-file指定mysql的配置文件my.cnf的位置，如--defaults-file=/etc/my.cnf如果不该参数，xtrabackup将从依次从以下位置查找配置文件/etc/my.cnf、/etc/mysql/my.cnf、/usr/local/etc/my.cnf、~/.my.cnf，并读取配置文件中的[mysqld]和[xtrabackup]配置段。[mysqld]中只需要指定datadir、innodb_data_home_dir、innodb_data_file_path、innodb_log_group_home_dir、innodb_log_files_in_group、innodb_log_file_size6个参数即可让xtrabackup正常工作--apply-log对xtrabackup的--prepare参数的封装
+--copy-back做数据恢复时将备份数据文件拷贝到MySQL服务器的datadir ；
+--remote-host=HOSTNAME通过ssh将备份数据存储到进程服务器上,HOSTNAME是远程IP地址；
+--stream=[tar]
+</code></pre><blockquote>
+<p>备份文件输出格式, tar时使用tar4ibd , 该文件可在XtarBackup binary文件中获得.如果备份时有指定–stream=tar, 则tar4ibd文件所处目录一定要在$PATH中(因为使用的是tar4ibd去压缩, 在XtraBackup的binary包中可获得该文件)。<br>在使用参数stream=tar备份的时候，你的xtrabackup_logfile可能会临时放在/tmp目录下，如果你备份的时候并发写入较大的话xtrabackup_logfile可能会很大(5G+)，很可能会撑满你的/tmp目录，可以通过参数–tmpdir指定目录来解决这个问题。</p>
+</blockquote>
+<pre><code>--tmpdir=DIRECTORY
+当有指定--remote-host or --stream时, 事务日志临时存储的目录, 默认采用MySQL配置文件中所指定的临时目录tmpdir
+--redo-only --apply-log组,
+强制备份日志时只redo ,跳过rollback。这在做增量备份时非常必要。
+--use-memory=#
+该参数在prepare的时候使用，控制prepare时innodb实例使用的内存量
+--throttle=IOS  
+同xtrabackup的--throttle参数
+--sleep=是给ibbackup使用的，指定每备份1M数据，过程停止拷贝多少毫秒，也是为了在备份时尽量减小对正常业务的影响，具体可以查看ibbackup的手册 ；
+--compress[=LEVEL]对备份数据迚行压缩，仅支持ibbackup，xtrabackup还没有实现；
+--include=REGEXP对xtrabackup参数--tables的封装，也支持ibbackup。备份包含的库表，例如：--include=&quot;test.*&quot;，意思是要备份test库中所有的表。如果需要全备份，则省略这个参数；如果需要备份test库下的2个表：test1和test2,则写成：--include=&quot;test.test1|test.test2&quot;。也可以使用通配符，如：--include=&quot;test.test*&quot;。
+--databases=LIST列出需要备份的databases，如果没有指定该参数，所有包含MyISAM和InnoDB表的database都会被备份；
+--uncompress解压备份的数据文件，支持ibbackup，xtrabackup还没有实现该功能；
+--slave-info,备份从库, 加上--slave-info备份目录下会多生成一个xtrabackup_slave_info 文件, 这里会保存主日志文件以及偏移, 文件内容类似于:CHANGE MASTER TO MASTER_LOG_FILE=&apos;&apos;, MASTER_LOG_POS=0
+--socket=SOCKET指定mysql.sock所在位置，以便备份进程登录mysql.
+</code></pre><h4 id="操作："><a href="#操作：" class="headerlink" title="操作："></a>操作：</h4><p>对数据库全库备份：</p>
+<p>  innobackupex –defaults-file=/etc/my.cnf –user=root –password=111111 –port=3306 /tmp/</p>
+<blockquote>
+<p>解释：</p>
+</blockquote>
+<pre><code>--defaults-file=/etc/my.cnf  #指定my.cnf位置
+--user=root  #指定mysql帐号
+--password=111111   #指定mysql密码
+--port=3306   #指定mysql端口
+/tmp/   #指定备份好的文件存放目录，我这放在/tmp/下面，
+执行完成后，如下多了个时间为名了的目录，里面就是备份文件了：
+
+[root@drfdai-17 tmp]# ls
+2013-10-29_16-06-41
+[root@drfdai-17 tmp]# ls 2013-10-29_16-06-41/
+aa ibdata1 testxtrabackup_checkpoints
+backup-my.cnf  mysql   xtrabackup_binary   xtrabackup_logfile
+drfdai performance_schema  xtrabackup_binlog_info
+备份drfdai库：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database=drfdai /tmp/
+</code></pre><blockquote>
+<p>解释：</p>
+</blockquote>
+<pre><code>--database=drfdai #指定需要备份的数据库名
+
+  [root@drfdai-17 2013-10-29_16-23-53]# ls
+  backup-my.cnf  ibdata1xtrabackup_binlog_info  xtrabackup_logfile
+  drfdai xtrabackup_binary  xtrabackup_checkpoints
+</code></pre><h4 id="备份多个库："><a href="#备份多个库：" class="headerlink" title="备份多个库："></a>备份多个库：</h4><pre><code>innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database=&apos;drfdai mysql&apos; /tmp/
+</code></pre><blockquote>
+<p>解释：</p>
+</blockquote>
+<pre><code>--database=&apos;drfdai mysql&apos;  #指定你需要备份的那几个库名，用单引号把这些库名引起来，每个库中间用空格隔开。
+[root@drfdai-17 2013-10-29_16-33-09]# ls
+backup-my.cnf  ibdata1  xtrabackup_binary   xtrabackup_checkpoints
+drfdai mysqlxtrabackup_binlog_info  xtrabackup_logfile
+</code></pre><h4 id="备份多个表："><a href="#备份多个表：" class="headerlink" title="备份多个表："></a>备份多个表：</h4><pre><code>innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database=&apos;drfdai.aa1 drfdai.aa2&apos; /tmp/
+</code></pre><blockquote>
+<p>解释：</p>
+</blockquote>
+<pre><code>--database=&apos;drfdai.aa1 drfdai.aa2&apos; #指定备份drfdai库下面的aa1表和aa2表
+</code></pre><h3 id="还原操作："><a href="#还原操作：" class="headerlink" title="还原操作："></a>还原操作：</h3><pre><code>停止mysql数据库并删除欲恢复的数据库文件夹
+如我的mysql数据库文件夹是在/data/mysql/data中，所以我删掉这个文件夹
+然后重建一个/data/mysql/data/
+      rm -rf /data/mysql/data
+      mkdir /data/mysql/data
+</code></pre><h4 id="还原完整备份："><a href="#还原完整备份：" class="headerlink" title="还原完整备份："></a>还原完整备份：</h4><pre><code>innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --apply-log /tmp/2013-10-29_17-17-47/
+这里的--apply-log指明是将日志应用到数据文件上，完成之后将备份文件中的数据恢复到数据库中
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --copy-back /tmp/2013-10-29_17-17-47/
+这里的—copy-back指明是进行数据恢复。数据恢复完成之后，需要修改相关文件的权限mysql数据库才能正常启动。
+
+chown -R mysql:mysql /data/mysql/data
+</code></pre><h4 id="增量备份："><a href="#增量备份：" class="headerlink" title="增量备份："></a>增量备份：</h4><pre><code>次先进行完备： innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 /tmp/ 备份完后，会生成最新的目录，名为：2013-10-29_17-17-47
+
+进行第一次增量备份：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306  --incremental --incremental-basedir=/tmp/2013-10-29_17-17-47 /tmp
+备份完成后，会生成最新增量备份，名为：2013-10-29_17-57-21
+解释：
+
+--incremental #指定为此次为增量备份
+--incremental-basedir=/tmp/2013-10-29_17-17-47  #指定是从哪个备份目录为参考点进行增量备份
+进行第二次增量备份：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306  --incremental --incremental-basedir=/tmp/2013-10-29_17-57-21/ /tmp
+以此类推，第三，第四 ……
+</code></pre><h4 id="增量备份恢复："><a href="#增量备份恢复：" class="headerlink" title="增量备份恢复："></a>增量备份恢复：</h4><blockquote>
+<p>增量备份恢复的步骤和完整备份恢复的步骤基本一致，只是应用日志的过程稍有不同。增量备份恢复时，是先将所有的增量备份挨个应用到完整备份的数据文件中，然后再将完整备份中的数据恢复到数据库中。命令如下：</p>
+</blockquote>
+<ul>
+<li><p>应用第一个增量备份</p>
+<p>  innobackupex –user=root –password=MySQLPASSWORD –defaults-file=/etc/my.cnf –apply-log /mysqlbackup/full/2011-08-09_14-50-20/ –incremental-dir=/mysqlbackup/trn/2011-08-09_15-12-43/</p>
+</li>
+<li><p>应用第二个增量备份</p>
+<p>  innobackupex –user=root –password=MySQLPASSWORD –defaults-file=/etc/my.cnf –apply-log /mysqlbackup/full/2011-08-09_14-50-20/ –incremental-dir=/mysqlbackup/trn/2011-08-05_15-15-47/</p>
+</li>
+</ul>
+<ul>
+<li><p>将完整备份中的数据恢复到数据库中</p>
+<p>  innobackupex –user=root –password=MySQLPASSWORD –defaults-file=/etc/my.cnf –copy-back /mysqlbackup/full/2011-08-05_14-50-20/ 其中，–incremental-dir指定要恢复的增量备份的位置。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/23/xtarback/" data-id="cj4gn2lzd001qngjtbz8f1kqz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xtraback/">xtraback</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx非80端口转发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/11/nginx非80端口转发/" class="article-date">
+  <time datetime="2016-12-11T00:00:00.000Z" itemprop="datePublished">2016-12-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/11/nginx非80端口转发/">nginx做非80端口转发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p><br>最近在使用PHP重写一个使用JAVA写的项目，因为需要查看之前的项目，所以要在本地搭建一个Tomcat来跑JAVA的项目。搭建成功后，因为Tomcat监听的端口是8080，因此，访问的URL前缀是localhost:8080，每次访问项目的时候都要先输入这一串内容，感觉比较繁杂，所以想着将其变成localhost来访问，但是这样的话就是访问80端口了，要达到目的，就得做端口转发。笔者见识比较少，暂时想到的是使用Nginx/Apache等程序做转发。如果有更好的方案，欢迎指教。<br></p>
+
+<h2 id="增加Nginx虚拟主机"><a href="#增加Nginx虚拟主机" class="headerlink" title="增加Nginx虚拟主机"></a>增加Nginx虚拟主机</h2><p>﻿</p>
+<blockquote>
+<p>要做Nginx的转发，当然就要对Nginx做配置。可以通过添加虚拟主机配置来增强Nginx的功能。首先看看Nginx的配置文件，笔者的Nginx文件是在/etc/nginx/nginx.conf。从上图可以看到Nginx在最后引入了vhosts.d目录下的配置文件。那么就要在/etc/nginx/vhosts.d目录下创建以.conf为后缀的文件（如果该目录不存在需要自己创建）。</p>
+</blockquote>
+<h2 id="Nginx做非80端口转发"><a href="#Nginx做非80端口转发" class="headerlink" title="Nginx做非80端口转发"></a>Nginx做非80端口转发</h2><p>要做转发，可以使用Nginx的proxy_pass配置项。Nginx监听80端口，接收到请求之后就会转发到要转发的URL。具体的配置如下:</p>
+<pre><code>server {
+    server_name www.test.com
+    listen 80;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+    }
+}
+</code></pre><p>是的，就是这么简单就可以了。这是配置端口转发的核心。</p>
+<p>但是，当遇到需要获取真实IP的业务时，还需要添加关于真实IP的配置：</p>
+<pre><code>server {
+    server_name www.test.com
+    listen 80;
+
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host:80;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</code></pre><p>proxy_set_header这句配置是改变http的请求头。而Host是请求的主机名，X-Real-IP是请求的真实IP，X-Forwarded-For表示请求是由谁发起的。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>这次的配置可能对大部分人来说都很简单，但是笔者刚接触Nginx配置这一块，因此记录下来，分享给有需要的人。如有建议和批评，欢迎指出。通过这次的学习发现，Nginx的配置是很值得学习的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/11/nginx非80端口转发/" data-id="cj4gn2lz30018ngjtjwndhqsh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/端口转发/">端口转发</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-AFS与NFS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/11/AFS与NFS/" class="article-date">
+  <time datetime="2016-12-11T00:00:00.000Z" itemprop="datePublished">2016-12-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/11/AFS与NFS/">NFS 与 AFS 区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><blockquote>
+<p>对于像 NFS 和 AFS这种网络文件系统而言，因为受网络的影响，使得对数据访问和存储的实时性就有了一定的挑战，特别是在早期100Mb\/s的网络环境下（当然10Mb\/s的网络环境就是一个噩耗了）。为了解决响应实效的问题，一种被称为CacheFS的本地缓存方案被开发出来，用来提供分布式文件系统的本地缓存。<br>作为内核2.6.30的一部分，一种CacheFS 实现机制 已经加入进来，当前它支持NFS和AFS，但是其他文件系统也能从中获得好处</p>
+</blockquote>
+<h1 id="什么是-FS-Cache-和-CacheFS"><a href="#什么是-FS-Cache-和-CacheFS" class="headerlink" title="什么是 FS-Cache 和 CacheFS?"></a>什么是 FS-Cache 和 CacheFS?</h1><p>FS-Cache 是指在文件系统和缓存之间的接口。  CacheFS 指的则是FS-cache的缓存后端。CacheFS做实际的数据存储和检索处理，并使用块设备的分区。<br>CacheFS并不能用在任何文件系统上，文件系统必须能被FS-Cache写入。FS-Cache可以使用任何一种它想要的缓存机制（使用缓存接口），文件系统本身并不关心使用何种缓存机制。AFS和NFS都能使用FSCache来修改。2.6.30核心已经包含了能够利用FS-Cache的修改版。<br>一图胜千言，下图给出了使用FS-Cache和CacheFS的通用数据流图。</p>
+<p>  图一:  FS-Cache, CacheFS, 和 CacheFiles在上图里，NFS/AFS/ISOFS?我们一般称为netfs?调用FS-Cache，而FS-Cache则调用CacheFile或者CacheFS函数，这是两种不同的数据缓存实现机制。FS-Cache都可以调用。这样因为FC-Cache的原因，左边的文件系统就可以直接使用缓存而不必知道具体的实现机制。注意：CacheFS使用的是块设备上的分区(这里是/dev/hda5)，而CacheFiles则使用缺省的/var/fscache目录来缓存文件。<br>  下图给出了更多的细节</p>
+<p>图二:  FS-Cache, CacheFS, and CacheFiles 的更多细节此图显示了netfs文件系统是如何和FS-Cache进行通讯的，以及FS-Cache是如何和CacheFS或者CacheFiles通讯的。我们也注意到netfs也需要和VFS进行通讯，这显然的，毕竟CacheFS仅仅只是用来做数据缓存，而并不是来实现一个完整的文件系统，而在当前Linux里，所有的文件系统都需要和VFS打交道，以保证应用程序对不同的文件系统保持透明。<br>FS-Cache背后的关键概念是：在透过缓存访问netfs上的文件之前，FS-Cache并不要求该文件被完整的载入到缓存中。这是因为：</p>
+<p>没有缓存的情况下也必须能操作<br>必须能够打开比大于缓存大小的文件<br>所有打开的远程文件的大小不应该受到缓存大小的限制<br>如果一次只是访问某个远程的某一个部分，不应该强迫用户要缓存整个文件<br>所以，FS-Cache是建立在页(page)的概念上，而不是文件。否则的话，即便是读取一个字节的内容，也需要缓存整个文件的。  FS-Cache的实现提供了下面的一些特性：<br>可以使用多个缓存。用标签(tag)来区分识别<br>缓存可以在多个netfs之间共享。共享时，每个netfs的共享数据是相互独立的。另外，它也并不会把同一个文件的试图关联起来。比如，如果一个文件同时被NFS和CIFS读，那么在缓存里将会有两份拷贝。<br>任何时刻缓存都增加或者删除<br>netfs提供了一个接口，允许任何一方从文件回退缓存The netfs is provided with an interface that allows either party (netfsor FS-Cache) to withdraw caching facilities from a file<br>netfs的接口应该尽可能少的返回错误，宁可让netfs无视这些The interface to the netfs returns as few errors as possible, preferring to let the netfs remain oblivious<br>数据IO直接和netfs的page打交道<br>尽可能异步<br>使用CacheFS 或者 CacheFiles</p>
+<p>使用FS-Cache和CacheFS/CacheFiles 是相当简单的。首先确保内核是否支持。你可以在内核源代码目录检查.config文件.确保FS-Cache和CacheFS都被选中。 另外，确保NFS Client Caching Support 也被选中了。<br>第二步是确保nfsutils 是最新的，建议你下载最新版本，并编译安装。<br>第三步是编译安装最新的cachefilesd。目前最新版本是0.9,安装cachefilesd需要创建/etc/cachefilesd.conf文件，用来控制FS-Cache和CacheFS(或CacheFiles)的行为。格式很简单，详细情况，请猛击这个HOWTO文档。<br>配置文件里第一步是定义缓存的位置，你可以把缓存的位置定义在系统安装分区上，当然你可以使用SD卡或者USB硬盘来作为缓存路径，不过性能上可能会差一些。当然，如果机器上有空闲的空间，使用新的分区来做存储路径也不错。如果你足够有钱，使用固态盘(SSD)会有更好的性能。<br>我们这里举的例子是采取一个分区来当做存储目录。这个分区应该做成支持extended attributes (xattr)的文件系统，大部分Linux下的文件系统都支持这个特性，包括ext 2/3/4,xfs,reiserfs,jfs等，这里使用ext3文件系统。<br>首先使用<br>  mkfs.ext3 /dev/sda1<br>格式化<br>然后使用<br>  tune2fs -o user_xattr /dev/sda1<br>打开xattr特性。<br>接下来，在/etc/fstab加入下面这行：<br>/dev/sda1   /var/fscache   ext3   defaults,user_xattr  0   0<br>以上步骤对CacheFS和CacheFiles都适合。下一步就是启动cachefilesd服务了<br>% service cachefilesd start<br>如果没有报错，在/var/fscache目录，你应该可以看到下面这两个新创建的目录：</p>
+<h2 id="cache"><a href="#cache" class="headerlink" title="cache"></a>cache</h2><p>graveyard<br>如果你查看/var/fscache/cache目录，你会看到一些奇怪的文件名，这意味着到目前为止一切OK。但是在使用这些你看到的文件之前，你需要确保netfs使用缓存。<br>比如，NFS能够使用FS-Cache 和 CacheFS/CacheFiles. 只需要一个fsc挂载参数就可以做到。就像下面这样的命令：% mount -o fsc bigserver:/group-data /mnt/group-data<br>这里”bigserver”是NFS服务器的机器名，/group-data是导出的共享目录。客户端把它挂载到/mnt/group-data目录上。关键的地方就是这个-o fsc参数。<br>netfs挂载后，缓存并不会自动开始工作，只有发生了读或者写的操作后，缓存才会工作，如果你在/var/fscache/cache里看到了新创建的文件，那就表示缓存功能已经激活了。<br>缓存并不关心你的NFS挂载的时候使用的是哪个版本,v2,v3,v4都是支持的，但是有些区别：<br>对于V2和V3,因为协议的限制，直接IO（Direct IO）和并发写是不支持的。<br>而NFS v4提供较好的锁机制，使得写缓存或直接IO是支持的，因此确保你挂载时，使用的版本是v4.<br>那么我如何直到CacheFS工作得如何呢？我们有一些统计和观察的方法。首先请确保使用上面的方法激活了缓存。在/proc文件系统里，有一些统计信息在里面，如果你想查看这些信息，先确保你运行的核心打开下面的两个参数：<br>CONFIG_FSCACHE_STATS=y<br>CONFIG_FSCACHE_HISTOGRAM=y<br>那么你就可以从下面两个位置能看到一些信息了：<br>/proc/fs/fscache/stats<br>/proc/fs/fscache/histograms<br>对这些信息的详细解释，这里就不展开了，感兴趣的可以参考相应的文档。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  这篇文档对FS-Cache和CacheFS做了一个大致的介绍。FS-Cache的目标是为本地数据缓存提供一个中心点，同时报纸原始文件系统与缓存机制的无关性。而CacheFS则是实际用来缓存文件系统，它被FS-Cache用来调用当做缓存的功能。CacheFS使用块设备的分区来存储缓存数据，当然FS-Cache也能够使用CacheFiles来当做缓存功能。<br>  CacheFS已经进入到了2.6.30的官方核心里，它将用在新的文件系统里。NFS和AFS都已经准备使用FS-Cache+CacheFS/CacheFiles了。<br>  FS-Cache另外的一个使用领域就是用来缓存本地文件系统，目前，文件系统都是依赖内核来缓存数据和调度相关IO操作，缓存不是直接受你的控制。<br>  FS-Cache使用非常大的缓存（比磁盘缓存大很多）时，读的性能有了非常大的提升，而且对于那些有着很好的写性能的文件系统，比如 NILFS ，使用FS-Cache和CacheFS也能显著提升读的性能。<br>  但是，本地系统可能需要某种关机自动备份的功能用来确保数据从缓存写入到实际的文件系统里。<br>  FS-Cahce和CacheFS/CacheFiles的另外一个使用领域就是对压缩文件系统?比如SquashFS?产生影响。SquashFS是压缩的文件系统，采取只读挂载的方式。因为FS-Cache的确有帮助提升读性能的能力，因此将它和SquashFS联合起来是有好处的。<br>  而且，SquashFS使用FS-Cache后变得可以被修改，对，就是能够被修改。<br>  最后，如果你在桌面，笔记本，客户端使用NFS，那么你有足够的理由来尝试FS-Cache和CacheFS/CacheFiles，它能给你性能上的提升。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/11/AFS与NFS/" data-id="cj4gn2lxx0001ngjtd5wvr3ig" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NFS/">NFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络存储/">网络存储</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ELK_Install_book" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/07/ELK_Install_book/" class="article-date">
+  <time datetime="2016-12-07T00:00:00.000Z" itemprop="datePublished">2016-12-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/07/ELK_Install_book/">ELK 安装配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="http://i.imgur.com/G1IS6v8.png" alt=""></h2><h2 id="一、logstash-agent-端-安装配置"><a href="#一、logstash-agent-端-安装配置" class="headerlink" title="一、logstash agent 端 安装配置"></a>一、logstash agent 端 安装配置</h2><hr>
+<h3 id="1-logstash下载安装配置（web-nginx-agent）"><a href="#1-logstash下载安装配置（web-nginx-agent）" class="headerlink" title="1.    logstash下载安装配置（web_nginx agent）"></a>1.    logstash下载安装配置（web_nginx agent）</h3><pre><code>wget https://download.elastic.co/logstash/logstash/logstash-2.2.2.tar.gz
+tar -xf logstash-2.2.2.tar.gz
+cd logstash
+&gt;&gt;安装JAVA
+yum install java-1.8.0-openjdk.x86_64
+</code></pre><h3 id="2-添加logstash配置文件"><a href="#2-添加logstash配置文件" class="headerlink" title="2.    添加logstash配置文件"></a>2.    添加logstash配置文件</h3><pre><code>vim shipper.conf
+input {
+     file{
+         type =&gt; &quot;nginx-www-access&quot;
+             path =&gt; &quot;/app/nginx/logs/*access.log&quot;
+             exclude =&gt; &quot;vlog_access.log&quot;
+             start_position =&gt; &quot;end&quot;
+     }
+
+}
+
+filter {
+     if [type] == &apos;nginx-www-access&apos; or [type] == &apos;flash-vlog&apos; {
+         date {
+           match =&gt; [ &quot;timestamp&quot; , &quot;dd/MMM/YYYY:HH:mm:ss Z&quot; ]
+         }
+         grok {
+             match =&gt; { &quot;message&quot; =&gt; &quot;%{NGINXACCESS}&quot; }
+         }
+         mutate {
+             gsub =&gt; [&quot;x_forwarded_for&quot;, &quot;,.*&quot;, &quot;&quot;]
+         }
+
+         if [x_forwarded_for] == &apos;-&apos; {
+             mutate {
+                 replace =&gt; { &quot;x_forwarded_for&quot; =&gt; &quot;%{clientip}&quot; }
+             }
+         }
+
+         mutate {
+            convert =&gt; [ &quot;upstream_response_time&quot;, &quot;float&quot;]
+         }
+         mutate {
+            convert =&gt; [ &quot;request_time&quot;, &quot;float&quot;]
+         }
+
+
+         geoip {
+            source =&gt; &quot;x_forwarded_for&quot;
+            target =&gt; &quot;geoip&quot;
+            add_field =&gt; [ &quot;[geoip][coordinates]&quot;, &quot;%{[geoip][longitude]}&quot; ]
+            add_field =&gt; [ &quot;[geoip][coordinates]&quot;, &quot;%{[geoip][latitude]}&quot;  ]
+         }
+         mutate {
+            convert =&gt; [ &quot;[geoip][coordinates]&quot;, &quot;float&quot;]
+         }
+
+
+     }
+}
+output {
+     redis{
+         host =&gt; &quot;IP&quot;
+         data_type =&gt; &quot;list&quot;
+         key =&gt; &quot;logstash:web&quot;
+         port =&gt; &quot;6379&quot;
+     }
+}
+添加logstash nginx日志格式配置
+
+mkdir -p logstash_dir/patterns
+cd logstash_dir/patterns
+vim nginx
+添加如下内容
+NGINXACCESS %{IPORHOST:clientip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:timestamp}\] &quot;(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})&quot; %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent} &quot;%{DATA:x_forwarded_for}&quot; %{DATA:request_body} %{IPORHOST:httphost} &quot;%{DATA:cookie}&quot; (?:%{NUMBER:upstream_response_time:float}|-) (?:%{NUMBER:request_time:float}|-)
+
+修改nginx 配置文件
+
+ log_format  short &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos; &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos; &apos;&quot;$http_user_agent&quot; &quot;$http_x_forward
+ ed_for&quot; $request_body $host &quot;$http_cookie&quot; &apos; &apos;$upstream_response_time $request_time &apos;;
+ 重新加载  nginx 配置文件
+</code></pre><h2 id="二、-安装redis"><a href="#二、-安装redis" class="headerlink" title="二、    安装redis"></a>二、    安装redis</h2><h3 id="2-1-安装配置redis"><a href="#2-1-安装配置redis" class="headerlink" title="2.1    安装配置redis"></a>2.1    安装配置redis</h3><pre><code>wget 下载源码包
+解压
+cd   dir
+make test
+make prefix=/dir/  install
+</code></pre><h3 id="2-2-配置文件修改"><a href="#2-2-配置文件修改" class="headerlink" title="2.2    配置文件修改"></a>2.2    配置文件修改</h3><pre><code>daemonize yes
+save 900 1
+save 300 10
+save 60 10000
+</code></pre><h2 id="三、-服务器端ELK安装和配置"><a href="#三、-服务器端ELK安装和配置" class="headerlink" title="三、    服务器端ELK安装和配置"></a>三、    服务器端ELK安装和配置</h2><h3 id="3-1-logstash-server"><a href="#3-1-logstash-server" class="headerlink" title="3.1    logstash-server"></a>3.1    logstash-server</h3><h4 id="3-1-1-安装"><a href="#3-1-1-安装" class="headerlink" title="3.1.1    安装"></a>3.1.1    安装</h4><pre><code>wget https://download.elastic.co/logstash/logstash/logstash-2.2.2.tar.gz
+tar -xf logstash-2.2.2.tar.gz
+cd logstash
+&gt;&gt;安装JAVA
+yum install java-1.8.0-openjdk.x86_64
+</code></pre><h4 id="3-1-2-配置文件更改"><a href="#3-1-2-配置文件更改" class="headerlink" title="3.1.2    配置文件更改"></a>3.1.2    配置文件更改</h4><pre><code>input {
+     redis {
+         host =&gt; &apos;IP&apos;
+         data_type =&gt; &apos;list&apos;
+         port =&gt; &quot;6379&quot;
+         key =&gt; &apos;logstash:web&apos;
+         type =&gt; &apos;redis-input&apos;
+         #threads =&gt; 5
+         threads =&gt; 10
+     }
+}
+
+
+output {
+     #stdout { }
+     elasticsearch {
+         hosts =&gt; &quot;IP:9200&quot;
+     }
+}
+./bin/logstash -f
+</code></pre><h3 id="3-2-install-elasticsearch"><a href="#3-2-install-elasticsearch" class="headerlink" title="3.2    install elasticsearch"></a>3.2    install elasticsearch</h3><h4 id="3-2-1-安装"><a href="#3-2-1-安装" class="headerlink" title="3.2.1    安装"></a>3.2.1    安装</h4><pre><code>wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.2.1/elasticsearch-2.2.1.tar.gz
+tar -xf elasticsearch
+cd elasticsearch
+</code></pre><h4 id="3-2-2-配置文件更改"><a href="#3-2-2-配置文件更改" class="headerlink" title="3.2.2    配置文件更改"></a>3.2.2    配置文件更改</h4><pre><code>vim config/elasticsearch.yml
+修改如下：
+# network.host: 192.168.0.1 更改为本机IP
+# http.port: 9200 端口默认为9200 iptables增加端口认证
+./bin/elasticsearch
+</code></pre><h3 id="3-3-安装配置-kibana"><a href="#3-3-安装配置-kibana" class="headerlink" title="3.3    安装配置 kibana"></a>3.3    安装配置 kibana</h3><h4 id="3-3-1-安装"><a href="#3-3-1-安装" class="headerlink" title="3.3.1    安装"></a>3.3.1    安装</h4><pre><code>wget https://download.elastic.co/kibana/kibana/kibana-4.4.2-linux-x64.tar.gz
+tar -xf kibana
+cd kibana
+</code></pre><h4 id="3-3-2-配置文件更改"><a href="#3-3-2-配置文件更改" class="headerlink" title="3.3.2    配置文件更改"></a>3.3.2    配置文件更改</h4><pre><code>修改配置文件
+vim config/kibana.yml
+
+# elasticsearch.url: &quot;http://localhost:9200&quot; 更改为elasticsearch IP
+
+
+# kibana.index: &quot;.kibana&quot; 注释取消
+# server.port: 5601
+./bin/kibana
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/07/ELK_Install_book/" data-id="cj4gn2ly50004ngjtybmqt1d7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ELK/">ELK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据提取/">数据提取</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SSL数据传输nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/08/SSL数据传输nginx/" class="article-date">
+  <time datetime="2016-11-07T20:10:33.000Z" itemprop="datePublished">2016-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/08/SSL数据传输nginx/">SSL 证书数据传输</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>使用openssl制作证书</strong></p>
+<h2 id="1、服务器单向验证"><a href="#1、服务器单向验证" class="headerlink" title="1、服务器单向验证"></a>1、服务器单向验证</h2><pre><code>创建并进入sslkey存放目录
+
+# mkdir /opt/nginx/sslkey
+
+# cd /opt/nginx/sslkey
+</code></pre><h3 id="①、生成RSA密钥："><a href="#①、生成RSA密钥：" class="headerlink" title="①、生成RSA密钥："></a>①、生成RSA密钥：</h3><pre><code># openssl genrsa -out key.pem 2048
+</code></pre><h3 id="②、生成一个证书请求"><a href="#②、生成一个证书请求" class="headerlink" title="②、生成一个证书请求"></a>②、生成一个证书请求</h3><pre><code># openssl req -new -key key.pem -out cert.csr
+
+# //会提示输入省份、城市、域名信息等，重要的是，email 一定要是你的域名后缀的你可以拿着这个文件去数字证书颁发机构（即CA）申请一个数字证书。
+CA会给你一个新的文件cacert.pem，那才是你的数字证书。
+</code></pre><p><strong>如果是自己做测试，就可以用下面这个命令来生成证书：</strong></p>
+<pre><code># openssl req -new -x509 -nodes -out server.crt -keyout server.key
+</code></pre><h3 id="③、修改-nginx-配置"><a href="#③、修改-nginx-配置" class="headerlink" title="③、修改 nginx 配置"></a>③、修改 nginx 配置</h3><pre><code># HTTPS server  
+#  
+server {  
+listen 443;  
+server_name localhost;  
+##开启ssl   
+ssl on;  
+##服务器证书
+ssl_certificate /opt/nginx/sslkey/server.crt;
+##服务器证书公钥  
+ssl_certificate_key /opt/nginx/sslkey/server.key;  
+##链接超时设置
+ssl_session_timeout 5m;  
+##传输信息通道
+ssl_protocols SSLv2 SSLv3 TLSv1;
+##传输加密方式  
+ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+##  
+ssl_prefer_server_ciphers on;  
+
+location / {      
+        root /home/workspace/;      
+        index index.asp index.aspx;        
+    }  
+}
+</code></pre><p>配置好后，重启nginx，采用 https打开网站，浏览器会提示证书错误，点击继续浏览即可。</p>
+<h2 id="2、服务器-客户端双向验证"><a href="#2、服务器-客户端双向验证" class="headerlink" title="2、服务器-客户端双向验证"></a>2、服务器-客户端双向验证</h2><p>在nginx 目录下建立ca文件夹，进入ca。</p>
+<pre><code># mkdir newcerts private conf server。
+
+其中newcerts子目录将存放CA签署（颁发）过的数字证书（证书备份目录）。而private目录用于存放CA的私钥。目录conf只是用于存放一些简化参数
+
+用的配置文件，server存放服务器证书文件。
+</code></pre><h3 id="①、在conf目录创建文件openssl-conf配置文件，内容如下："><a href="#①、在conf目录创建文件openssl-conf配置文件，内容如下：" class="headerlink" title="①、在conf目录创建文件openssl.conf配置文件，内容如下："></a>①、在conf目录创建文件openssl.conf配置文件，内容如下：</h3><pre><code>[ ca ]  
+default_ca      = foo                  # The default ca section  
+
+[ foo ]  
+dir            = /opt/nginx/ca        # top dir  
+database      = /opt/nginx/ca/index.txt          # index file.  
+new_certs_dir  = /opt/nginx/ca/newcerts          # new certs dir  
+
+certificate    = /opt/nginx/ca/private/ca.crt        # The CA cert  
+serial        = /opt/nginx/ca/serial            # serial no file  
+private_key    = /opt/nginx/ca/private/ca.key  # CA private key  
+RANDFILE      =/opt/nginx/ca/private/.rand      # random number file  
+
+default_days  = 365                    # how long to certify for  
+default_crl_days= 30                    # how long before next CRL  
+default_md    = md5                    # message digest method to use  
+unique_subject = no                      # Set to &apos;no&apos; to allow creation of  
+                                        # several ctificates with same subject.  
+policy        = policy_any              # default policy  
+
+[ policy_any ]  
+countryName = match  
+stateOrProvinceName = match  
+organizationName = match  
+organizationalUnitName = match  
+localityName            = optional  
+commonName              = supplied  
+emailAddress            = optional
+</code></pre><h3 id="②、使用脚本创建证书"><a href="#②、使用脚本创建证书" class="headerlink" title="②、使用脚本创建证书"></a>②、使用脚本创建证书</h3><p>下面的几个脚本都放在/nginx/ca/目录下。</p>
+<h4 id="创建一个新的CA根证书。"><a href="#创建一个新的CA根证书。" class="headerlink" title="创建一个新的CA根证书。"></a>创建一个新的CA根证书。</h4><p>new_ca.sh:</p>
+<pre><code>#!/bin/sh  
+# Generate the key.  
+openssl genrsa -out private/ca.key  
+# Generate a certificate request.  
+openssl req -new -key private/ca.key -out private/ca.csr  
+# Self signing key is bad... this could work with a third party signed key... registeryfly has them on for $16 but I&apos;m too cheap lazy to get one on a lark.  
+# I&apos;m also not 100% sure if any old certificate will work or if you have to buy a special one that you can sign with. I could investigate further but since this  
+# service will never see the light of an unencrypted Internet see the cheap and lazy remark.  
+# So self sign our root key.  
+openssl x509 -req -days 365 -in private/ca.csr -signkey private/ca.key -out private/ca.crt  
+# Setup the first serial number for our keys... can be any 4 digit hex string... not sure if there are broader bounds but everything I&apos;ve seen uses 4 digits.  
+echo FACE &gt; serial  
+# Create the CA&apos;s key database.  
+touch index.txt  
+# Create a Certificate Revocation list for removing &apos;user certificates.&apos;  
+openssl ca -gencrl -out /opt/nginx/ca/private/ca.crl -crldays 7 -config &quot;/opt/nginx/ca/conf/openssl.conf&quot;
+</code></pre><p>执行 sh new_ca.sh生成新的CA证书。</p>
+<h4 id="生成服务器证书的脚本。"><a href="#生成服务器证书的脚本。" class="headerlink" title="生成服务器证书的脚本。"></a>生成服务器证书的脚本。</h4><p>new_server.sh:</p>
+<pre><code># Create us a key. Don&apos;t bother putting a password on it since you will need it to start apache. If you have a better work around I&apos;d love to hear it.  
+openssl genrsa -out server/server.key  
+# Take our key and create a Certificate Signing Request for it.  
+openssl req -new -key server/server.key -out server/server.csr  
+# Sign this bastard key with our bastard CA key.  
+openssl ca -in server/server.csr -cert private/ca.crt -keyfile private/ca.key -out server/server.crt -config &quot;/opt/nginx/ca/conf/openssl.conf&quot;
+</code></pre><p>执行 sh new_server.sh生成新服务器的证书</p>
+<h4 id="配置-nginx的ssl支持："><a href="#配置-nginx的ssl支持：" class="headerlink" title="配置 nginx的ssl支持："></a>配置 nginx的ssl支持：</h4><pre><code>#user  www-nginx;  
+worker_processes  1;  
+
+#error_log  logs/error.log;  
+#error_log  logs/error.log  notice;  
+#error_log  logs/error.log  info;  
+
+#pid        logs/nginx.pid;  
+
+
+events {  
+    worker_connections  1024;  
+}  
+http {  
+    include      mime.types;  
+    default_type  application/octet-stream;  
+    sendfile        on;  
+    keepalive_timeout  65;  
+    #gzip  on;  
+
+    # HTTPS server  
+    #  
+    server {  
+        listen      443;  
+        server_name  localhost;  
+        ssi on;  
+        ssi_silent_errors on;  
+        ssi_types text/shtml;  
+
+        ssl                  on;  
+        ssl_certificate      /opt/nginx/ca/server/server.crt;  
+        ssl_certificate_key  /opt/nginx/ca/server/server.key;  
+        ssl_client_certificate /opt/nginx/ca/private/ca.crt;  
+
+        ssl_session_timeout  5m;  
+        ssl_verify_client on;  #开户客户端证书验证  
+
+        ssl_protocols  SSLv2 SSLv3 TLSv1;  
+        ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;  
+        ssl_prefer_server_ciphers  on;  
+
+        location / {      
+        root /home/workspace/;      
+        index index.asp index.aspx;        
+    }  
+    }  
+}
+</code></pre><p>启动nginx ,等待客户连接，如果此时连接服务器，将提示400 Bad request certification的错误，故还需要生成客户端证书。</p>
+<h4 id="生成客户端证书"><a href="#生成客户端证书" class="headerlink" title="生成客户端证书"></a>生成客户端证书</h4><pre><code>new_user.sh:
+
+#!/bin/sh  
+# The base of where our SSL stuff lives.  
+base=&quot;/opt/nginx/ca&quot;  
+# Were we would like to store keys... in this case we take the username given to us and store everything there.  
+mkdir -p $base/users/  
+
+# Let&apos;s create us a key for this user... yeah not sure why people want to use DES3 but at least let&apos;s make us a nice big key.  
+openssl genrsa -des3 -out $base/users/client.key 1024  
+# Create a Certificate Signing Request for said key.  
+openssl req -new -key $base/users/client.key -out $base/users/client.csr  
+# Sign the key with our CA&apos;s key and cert and create the user&apos;s certificate out of it.  
+openssl ca -in $base/users/client.csr -cert $base/private/ca.crt -keyfile $base/private/ca.key -out $base/users/client.crt -config &quot;/opt/nginx/ca/conf/openssl.conf&quot;  
+
+# This is the tricky bit... convert the certificate into a form that most browsers will understand PKCS12 to be specific.  
+# The export password is the password used for the browser to extract the bits it needs and insert the key into the user&apos;s keychain.  
+# Take the same precaution with the export password that would take with any other password based authentication scheme.  
+openssl pkcs12 -export -clcerts -in $base/users/client.crt -inkey $base/users/client.key -out $base/users/client.p12
+</code></pre><p>执行 sh   new_user.sh生成一个 client证书。</p>
+<p>按照提示一步一步来，这里要注意的是客户证书的几个项目要和根证书匹配。</p>
+<p>也就是前面配置的:</p>
+<pre><code>countryName = match
+
+stateOrProvinceName = match
+
+organizationName = match
+
+organizationalUnitName = match
+</code></pre><p>不一致的话无法生成最后的客户证书，证书生成后，客户端导入证书浏览器，即可打开网站。</p>
+<p><strong>注意事项：</strong></p>
+<pre><code>1、制作证书时会提示输入密码，服务器证书和客户端证书密码可以不相同。
+
+2、服务器证书和客户端证书制作时提示输入省份、城市、域名信息等，需保持一致。
+
+3、Nginx默认未开启SSI，上面配置已开启。
+
+4、Nginx不能自启动，需要如下配置：
+</code></pre><p>cd /etc/init.d<br>sudo touch nginx<br>sudo chmod +x nginx</p>
+<p>nginx内容：</p>
+<pre><code>#! /bin/sh  
+#  
+### BEGIN INIT INFO  
+# Provides:          nginx  
+# Required-Start:    $syslog $local_fs $remote_fs  
+# Required-Stop:    $syslog $local_fs $remote_fs  
+# Should-Start:      dbus avahi  
+# Should-Stop:      dbus avahi  
+# Default-Start:    2 3 4 5  
+# Default-Stop:      1  
+# Short-Description: Nginx Server  
+# Description:      Nginx  
+### END INIT INFO  
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/opt/nginx/sbin  
+DAEMON=/opt/nginx/sbin/nginx  
+NAME=nginx  
+DESC=&quot;Nginx Server&quot;  
+PID_FILE=/opt/nginx/logs/nginx.pid  
+
+test -x $DAEMON || exit 0  
+
+RUN=yes  
+#RUN_AS_USER=root  
+
+#DAEMON_OPTS=&quot;-a $RUN_AS_USER&quot;  
+
+set -e  
+
+case &quot;$1&quot; in  
+  start)  
+    echo -n &quot;Starting $DESC: &quot;  
+    start-stop-daemon --start --quiet --pidfile $PID_FILE \  
+        --exec $DAEMON  
+    echo &quot;$NAME.&quot;  
+    ;;  
+  stop)  
+    echo -n &quot;Stopping $DESC: &quot;  
+    start-stop-daemon --stop --oknodo --quiet --pidfile $PID_FILE \  
+        --exec $DAEMON  
+    echo &quot;$NAME.&quot;  
+    ;;  
+  force-reload)  
+    # check whether $DAEMON is running. If so, restart  
+    start-stop-daemon --stop --test --quiet --pidfile \  
+        $PID_FILE --exec $DAEMON \  
+    &amp;&amp; $0 restart \  
+    || exit 0  
+    ;;  
+  restart)  
+    echo -n &quot;Restarting $DESC: &quot;  
+    start-stop-daemon --stop --oknodo --quiet --pidfile \  
+        $PID_FILE --exec $DAEMON  
+    sleep 1  
+    start-stop-daemon --start --quiet --pidfile \  
+        $PID_FILE --exec $DAEMON  
+    echo &quot;$NAME.&quot;  
+    ;;  
+  status)  
+    if [ -s $PID_FILE ]; then  
+            RUNNING=$(cat $PID_FILE)  
+            if [ -d /proc/$RUNNING ]; then  
+                if [ $(readlink /proc/$RUNNING/exe) = $DAEMON ]; then  
+                    echo &quot;$NAME is running.&quot;  
+                    exit 0  
+                fi  
+            fi  
+
+            # No such PID, or executables don&apos;t match  
+            echo &quot;$NAME is not running, but pidfile existed.&quot;  
+            rm $PID_FILE  
+            exit 1  
+        else  
+            rm -f $PID_FILE  
+            echo &quot;$NAME not running.&quot;  
+            exit 1  
+        fi  
+    ;;  
+  *)  
+    N=/etc/init.d/$NAME  
+    echo &quot;Usage: $N {start|stop|restart|force-reload}&quot; &gt;&amp;2  
+    exit 1  
+    ;;  
+esac  
+
+exit 0
+</code></pre><p>设置自启动：</p>
+<pre><code>sudo chkconfig --list nginx    
+sudo chkconfig nginx on
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/11/08/SSL数据传输nginx/" data-id="cj4gn2lye000cngjtl67pkdhx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openssl/">openssl</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-FTP使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/07/FTP使用/" class="article-date">
+  <time datetime="2016-10-07T00:00:00.000Z" itemprop="datePublished">2016-10-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/07/FTP使用/">FTP 安装和使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Centos 6.5配置FTP服务器</p>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><ul>
+<li><p>安装vsftpd，ftp的服务器</p>
+<p>  yum install vsftpd<br>  设置开机启动</p>
+<p>  chkconfig vsftpd on<br>  启动服务</p>
+<p>  service vsftpd start</p>
+<h2 id="配置FTP用户组-用户以及相应权限"><a href="#配置FTP用户组-用户以及相应权限" class="headerlink" title="配置FTP用户组/用户以及相应权限"></a>配置FTP用户组/用户以及相应权限</h2></li>
+<li><p>添加用户组</p>
+<p>groupadd ftp</p>
+</li>
+<li><p>添加用户</p>
+<p>useradd -g ftp -M -d /srv/ftp/zhujin -s /sbin/nologin zhujin<br>-g接的是用户组<br>-M表示不设置它的主目录，假设如果没有-M，则在/home下会有跟用户名(zhujin)一样的目录。<br>-d后面接的是用zhujin登陆FTP的时候，它的初始目录。<br>-s 后面接/sbin/nologin表示用户不需要登录系统，因为我们只需要用来登陆FTP<br>zhujin表示用户名了</p>
+</li>
+<li><p>设置刚才添加的用户的密码</p>
+<p>passwd zhujin</p>
+</li>
+<li>更改FTP目录的权限<br>chown -R zhujin:ftp /srv/ftp/zhujin<br>这时候重启vsftpd</li>
+</ul>
+<p>  /etc/init.d/vsftpd restart</p>
+<ul>
+<li><p>把用户限制在固定的目录<br>如果这时候登陆会发现刚才新建的用户可以访问并读取所有的目录的数据，这并不是我们想要的，需要把他们限定在某个目录下。修改配置文件<br>vsftpd.conf，目录一般在/etc/vsftpd/vsftpd.conf，添加下面两行：</p>
+<p>chroot_list_enable=YES<br>chroot_list_file=/etc/vsftpd/chroot_list<br>然后在文件/etc/vsftpd/chroot_list里面填入你想要限制的用户，比如我就填入了zhujin，这时候重启vsftp，然后重新登陆就可以了。</p>
+</li>
+</ul>
+<h2 id="设置匿名用户以及它的根目录"><a href="#设置匿名用户以及它的根目录" class="headerlink" title="设置匿名用户以及它的根目录"></a>设置匿名用户以及它的根目录</h2><ul>
+<li>允许匿名用户登陆<br>需要修改配置文件vsftpd.conf，添加下面内容：<br>anonymous_enable=YES</li>
+<li>设置匿名用户的根目录<br>需要修改配置文件vsftpd.conf，添加下面内容：<br>anon_root=/srv/ftp/anon<br>完成后重启一下vsftpd<br>/etc/init.d/vsftpd restart</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/10/07/FTP使用/" data-id="cj4gn2ly60005ngjt72jzghv6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FTP/">FTP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux内核优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/24/linux内核优化/" class="article-date">
+  <time datetime="2016-09-24T00:00:00.000Z" itemprop="datePublished">2016-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/24/linux内核优化/">linux 内核优化配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="系统内核优化配置"><a href="#系统内核优化配置" class="headerlink" title="系统内核优化配置"></a>系统内核优化配置</h1><h2 id="系统sysctl-conf-配置优化"><a href="#系统sysctl-conf-配置优化" class="headerlink" title="系统sysctl.conf 配置优化"></a>系统sysctl.conf 配置优化</h2><blockquote>
+<p>线上服务器</p>
+</blockquote>
+<pre><code>fs.file-max=65535
+
+net.ipv4.tcp_max_tw_buckets = 60000
+
+net.ipv4.tcp_sack = 1
+
+net.ipv4.tcp_window_scaling = 1
+
+net.ipv4.tcp_rmem = 4096 87380 4194304
+
+net.ipv4.tcp_wmem = 4096 16384 4194304
+
+net.ipv4.tcp_max_syn_backlog = 65536
+
+net.core.netdev_max_backlog = 32768
+
+net.core.somaxconn = 32768
+
+net.core.wmem_default = 8388608
+
+net.core.rmem_default = 8388608
+
+net.core.rmem_max = 16777216
+
+net.core.wmem_max = 16777216
+
+net.ipv4.tcp_timestamps = 0
+
+net.ipv4.tcp_synack_retries = 2
+
+net.ipv4.tcp_syn_retries = 2
+
+net.ipv4.tcp_tw_recycle = 1
+
+#net.ipv4.tcp_tw_len = 1
+
+net.ipv4.tcp_tw_reuse = 1
+
+net.ipv4.tcp_mem = 94500000 915000000 927000000
+
+net.ipv4.tcp_max_orphans = 3276800
+
+net.ipv4.tcp_tw_recycle = 1
+
+net.ipv4.ip_local_port_range = 1024 65000
+
+net.nf_conntrack_max = 6553500
+
+net.netfilter.nf_conntrack_max = 6553500
+
+net.netfilter.nf_conntrack_tcp_timeout_close_wait = 60
+
+net.netfilter.nf_conntrack_tcp_timeout_fin_wait = 120
+
+net.netfilter.nf_conntrack_tcp_timeout_time_wait = 120
+
+net.netfilter.nf_conntrack_tcp_timeout_established = 3600
+</code></pre><h2 id="系统-etc-security-limits-conf"><a href="#系统-etc-security-limits-conf" class="headerlink" title="系统/etc/security/limits.conf"></a>系统/etc/security/limits.conf</h2><pre><code>* soft nproc 65535
+
+* hard nproc 65535
+
+* soft nofile 65535
+
+* hard nofile 65535
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/09/24/linux内核优化/" data-id="cj4gn2lyw0011ngjtdzjumhh3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-php安装redis扩展" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/13/php安装redis扩展/" class="article-date">
+  <time datetime="2016-09-13T00:00:00.000Z" itemprop="datePublished">2016-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/13/php安装redis扩展/">Linux下php安装Redis扩展</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、安装redis"><a href="#1、安装redis" class="headerlink" title="1、安装redis"></a>1、安装redis</h2><blockquote>
+<p>下载：<a href="https://github.com/nicolasff/phpredis/archive/2.2.4.tar.gz" target="_blank" rel="external">https://github.com/nicolasff/phpredis/archive/2.2.4.tar.gz</a></p>
+</blockquote>
+<p>上传phpredis-2.2.4.tar.gz到/usr/local/src目录</p>
+<pre><code>cd /usr/local/src #进入软件包存放目录
+
+tar zxvf phpredis-2.2.4.tar.gz #解压
+
+cd phpredis-2.2.4 #进入安装目录
+
+/usr/local/php/bin/phpize #用phpize生成configure配置文件
+
+./configure --with-php-config=/usr/local/php/bin/php-config  #配置
+
+make  #编译
+
+make install  #安装
+</code></pre><p>安装完成之后，出现下面的安装路径</p>
+<pre><code>/usr/local/php/lib/php/extensions/no-debug-non-zts-20090626/
+</code></pre><h2 id="2、配置php支持"><a href="#2、配置php支持" class="headerlink" title="2、配置php支持"></a>2、配置php支持</h2><pre><code>vi /usr/local/php/etc/php.ini  #编辑配置文件，在最后一行添加以下内容
+</code></pre><h3 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h3><pre><code>extension=&quot;redis.so&quot;
+</code></pre><h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/09/13/php安装redis扩展/" data-id="cj4gn2lz6001cngjtrbznz5f9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

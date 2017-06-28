@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="个人文章博客站点">
+<meta property="og:type" content="website">
+<meta property="og:title" content="kame">
+<meta property="og:url" content="http://www.wokoweb.com/page/2/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="个人文章博客站点">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kame">
+<meta name="twitter:description" content="个人文章博客站点">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-iptables_shell" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/iptables_shell/" class="article-date">
+  <time datetime="2017-03-12T00:00:00.000Z" itemprop="datePublished">2017-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/12/iptables_shell/">iptables 经典shell</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>#!/bin/sh
+#
+modprobe ipt_MASQUERADE
+modprobe ip_conntrack_ftp
+modprobe ip_nat_ftp
+iptables -F
+iptables -t nat -F
+iptables -X
+iptables -t nat -X
+</code></pre><hr>
+<blockquote>
+<p>INPUT键</p>
+</blockquote>
+<pre><code>iptables -P INPUT DROP
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -p tcp -m multiport --dports 110,80,25 -j ACCEPT
+iptables -A INPUT -p tcp -s 192.168.0.0/24 --dport 139 -j ACCEPT
+</code></pre><blockquote>
+<p>允许内网samba,smtp,pop3,连接</p>
+</blockquote>
+<pre><code>iptables -A INPUT -i eth1 -p udp -m multiport --dports 53 -j ACCEPT
+</code></pre><blockquote>
+<p>允许dns连接</p>
+</blockquote>
+<pre><code>iptables -A INPUT -p tcp --dport 1723 -j ACCEPT
+iptables -A INPUT -p gre -j ACCEPT
+</code></pre><blockquote>
+<p>允许外网vpn连接</p>
+</blockquote>
+<pre><code>iptables -A INPUT -s 192.186.0.0/24 -p tcp -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -i ppp0 -p tcp --syn -m connlimit --connlimit-above 15 -j DROP
+</code></pre><blockquote>
+<p>为了防止DOS太多连接进来,那么可以允许最多15个初始连接,超过的丢弃</p>
+</blockquote>
+<pre><code>iptables -A INPUT -s 192.186.0.0/24 -p tcp --syn -m connlimit --connlimit-above 15 -j DROP
+</code></pre><blockquote>
+<p>为了防止DOS太多连接进来,那么可以允许最多15个初始连接,超过的丢弃</p>
+</blockquote>
+<pre><code>iptables -A INPUT -p icmp -m limit --limit 3/s -j LOG --log-level INFO --log-prefix &quot;ICMP packet IN: &quot;
+iptables -A INPUT -p icmp -j DROP
+</code></pre><blockquote>
+<p>禁止icmp通信-ping 不通</p>
+</blockquote>
+<pre><code>iptables -t nat -A POSTROUTING -o ppp0 -s 192.168.0.0/24 -j MASQUERADE
+</code></pre><blockquote>
+<p>内网转发</p>
+</blockquote>
+<pre><code>iptables -N syn-flood
+iptables -A INPUT -p tcp --syn -j syn-flood
+iptables -I syn-flood -p tcp -m limit --limit 3/s --limit-burst 6 -j RETURN
+iptables -A syn-flood -j REJECT
+</code></pre><blockquote>
+<p>防止SYN攻击 轻量</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>FORWARD链</p>
+</blockquote>
+<pre><code>iptables -P FORWARD DROP
+iptables -A FORWARD -p tcp -s 192.168.0.0/24 -m multiport --dports 80,110,21,25,1723 -j ACCEPT
+iptables -A FORWARD -p udp -s 192.168.0.0/24 --dport 53 -j ACCEPT
+iptables -A FORWARD -p gre -s 192.168.0.0/24 -j ACCEPT
+iptables -A FORWARD -p icmp -s 192.168.0.0/24 -j ACCEPT
+</code></pre><blockquote>
+<p>允许 vpn客户走vpn网络连接外网</p>
+</blockquote>
+<pre><code>iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -I FORWARD -p udp --dport 53 -m string --string &quot;tencent&quot; -m time --timestart 8:15 --timestop 12:30 --days Mon,Tue,Wed,Thu,Fri,Sat  -j DROP
+</code></pre><blockquote>
+<p>星期一到星期六的8:00-12:30禁止qq通信</p>
+</blockquote>
+<pre><code>iptables -I FORWARD -p udp --dport 53 -m string --string &quot;TENCENT&quot; -m time --timestart 8:15 --timestop 12:30 --days Mon,Tue,Wed,Thu,Fri,Sat  -j DROP
+</code></pre><blockquote>
+<p>星期一到星期六的8:00-12:30禁止qq通信</p>
+</blockquote>
+<pre><code>iptables -I FORWARD -p udp --dport 53 -m string --string &quot;tencent&quot; -m time --timestart 13:30 --timestop 20:30 --days Mon,Tue,Wed,Thu,Fri,Sat  -j DROP
+iptables -I FORWARD -p udp --dport 53 -m string --string &quot;TENCENT&quot; -m time --timestart 13:30 --timestop 20:30 --days Mon,Tue,Wed,Thu,Fri,Sat  -j DROP
+</code></pre><blockquote>
+<p>星期一到星期六的13:30-20:30禁止QQ通信</p>
+</blockquote>
+<pre><code>iptables -I FORWARD -s 192.168.0.0/24 -m string --string &quot;qq.com&quot; -m time --timestart 8:15 --timestop 12:30 --days Mon,Tue,Wed,Thu,Fri,Sat  -j DROP
+</code></pre><blockquote>
+<p>星期一到星期六的8:00-12:30禁止qq网页</p>
+</blockquote>
+<pre><code>iptables -I FORWARD -s 192.168.0.0/24 -m string --string &quot;qq.com&quot; -m time --timestart 13:00 --timestop 20:30 --days Mon,Tue,Wed,Thu,Fri,Sat  -j DROP
+</code></pre><blockquote>
+<p>星期一到星期六的13:30-20:30禁止QQ网页</p>
+</blockquote>
+<pre><code>iptables -I FORWARD -s 192.168.0.0/24 -m string --string &quot;ay2000.net&quot; -j DROP
+iptables -I FORWARD -d 192.168.0.0/24 -m string --string &quot;宽频影院&quot; -j DROP
+iptables -I FORWARD -s 192.168.0.0/24 -m string --string &quot;色情&quot; -j DROP
+iptables -I FORWARD -p tcp --sport 80 -m string --string &quot;广告&quot; -j DROP
+</code></pre><blockquote>
+<p>禁止ay2000.net，宽频影院，色情，广告网页连接 ！但中文 不是很理想</p>
+</blockquote>
+<pre><code>iptables -A FORWARD -m ipp2p --edk --kazaa --bit -j DROP
+iptables -A FORWARD -p tcp -m ipp2p --ares -j DROP
+iptables -A FORWARD -p udp -m ipp2p --kazaa -j DROP
+</code></pre><blockquote>
+<p>禁止BT连接</p>
+</blockquote>
+<pre><code>iptables -A FORWARD -p tcp --syn --dport 80 -m connlimit --connlimit-above 15 --connlimit-mask 24
+</code></pre><hr>
+<pre><code>sysctl -w net.ipv4.ip_forward=1 &amp;&gt;/dev/null
+</code></pre><blockquote>
+<p>打开转发</p>
+</blockquote>
+<pre><code>sysctl -w net.ipv4.tcp_syncookies=1 &amp;&gt;/dev/null
+</code></pre><blockquote>
+<p>打开 syncookie （轻量级预防 DOS 攻击）</p>
+</blockquote>
+<pre><code>sysctl -w net.ipv4.netfilter.ip_conntrack_tcp_timeout_established=3800 &amp;&gt;/dev/null
+</code></pre><blockquote>
+<p>设置默认 TCP 连接痴呆时长为 3800 秒（此选项可以大大降低连接数）</p>
+</blockquote>
+<pre><code>sysctl -w net.ipv4.ip_conntrack_max=300000 &amp;&gt;/dev/null
+</code></pre><blockquote>
+<p>设置支持最大连接树为 30W（这个根据你的内存和 iptables 版本来，每个 connection 需要 300 多个字节）</p>
+</blockquote>
+<pre><code>iptables -I INPUT -s 192.168.0.50 -j ACCEPT
+iptables -I FORWARD -s 192.168.0.50 -j ACCEPT
+</code></pre><blockquote>
+<p>192.168.0.50是我的机子，全部放行！</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/03/12/iptables_shell/" data-id="cj4gn2lyq000ungjtun44zt9w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-awk使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/11/awk使用/" class="article-date">
+  <time datetime="2017-03-11T00:00:00.000Z" itemprop="datePublished">2017-03-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/11/awk使用/">awk 高级使用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>awk的函数分成数学函数、字符串函数、I/O处理函数以及用户自定义的函数，其中用户自定义的函数我们在上一篇中也有简单的介绍，下面我们一一来介绍这几类函数。</p>
+</blockquote>
+<h2 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h2><h3 id="awk-中支持以下数学函数："><a href="#awk-中支持以下数学函数：" class="headerlink" title="awk 中支持以下数学函数："></a>awk 中支持以下数学函数：</h3><pre><code>atan2(y,x)：反正切函数；
+cos(x)：余弦函数；
+sin(x)：正弦函数；
+exp(x)：以自然对数e为底指数函数；
+log(x)：计算以e 为底的对数值；
+sqrt(x)：绝对值函数；
+int(x)：将数值转换成整数；
+rand()：返回0到1的一个随机数值，不包含1；
+srand([expr])：设置随机种子，一般与rand函数配合使用，如果参数为空，默认使用当前时间为种子；
+</code></pre><p>例如，我们使用rand()函数生成一个随机数值：</p>
+<pre><code>[kodango@devops awk_temp]$ awk &apos;BEGIN {print rand(),rand();}&apos;0.237788 0.291066[kodango@devops awk_temp]$ awk &apos;BEGIN {print rand(),rand();}&apos;0.237788 0.291066
+</code></pre><p>但是你会发现，每次awk执行都会生成同样的随机数，但是在一次执行过程中产生的随机数又是不同的。因为每次awk执行都使用了同样的种子，所以我们可以用srand()函数来设置种子:</p>
+<pre><code>[kodango@devops awk_temp]$ awk &apos;BEGIN {srand();print rand(),rand();}&apos;0.171625 0.00692412[kodango@devops awk_temp]$ awk &apos;BEGIN {srand();print rand(),rand();}&apos;0.43269 0.782984
+</code></pre><p>这样每次生成的随机数就不一样了。</p>
+<p>利用rand()函数我们也可以生成1到n的整数：</p>
+<pre><code>[kodango@devops awk_temp]$ awk &apos;
+&gt; function randint(n) { return int(n*rand()); }
+&gt; BEGIN { srand(); print randint(10);
+&gt; }&apos;3
+</code></pre><p>字符串函数</p>
+<p>awk中包含大多数常见的字符串操作函数。</p>
+<ul>
+<li><ol>
+<li>sub(ere, repl[, in])</li>
+</ol>
+</li>
+</ul>
+<p>描述：简单地说，就是将in中匹配ere的部分替换成repl，返回值是替换的次数。如果in参数省略，默认使用$0。替换的动作会直接修改变量的值。</p>
+<p>下面是一个简单的替换的例子：</p>
+<pre><code>[kodango@devops ~]$ echo &quot;hello, world&quot; | awk &apos;{print sub(/ello/, &quot;i&quot;); print}&apos;1
+hi, world
+</code></pre><p>在repl参数中&amp;是一个元字符，它表示匹配的内容，例如：</p>
+<pre><code>[kodango@devops ~]$ awk &apos;BEGIN {var=&quot;kodango&quot;; sub(/kodango/, &quot;hello, &amp;&quot;, var); print var}&apos;
+hello, kodango
+</code></pre><ul>
+<li><ol>
+<li>gsub(ere, repl[, in])</li>
+</ol>
+</li>
+</ul>
+<p>描述：同sub()函数功能类似，只不过是gsub()是全局替换，即替换所有匹配的内容。</p>
+<ul>
+<li><ol>
+<li>index(s, t)</li>
+</ol>
+</li>
+</ul>
+<p>描述：返回字符串t在s中出现的位置，注意这里位置是从1开始计算的，如果没有找到则返回0。</p>
+<p>例如：</p>
+<p>  [kodango@devops ~]$ awk ‘BEGIN {print index(“kodango”, “o”)}’2[kodango@devops ~]$ awk ‘BEGIN {print index(“kodango”, “w”)}’0</p>
+<ul>
+<li><ol>
+<li>length[([s])]</li>
+</ol>
+</li>
+</ul>
+<p>描述：返回字符串的长度，如果参数s没有指定，则默认使用$0作为参数。</p>
+<p>例如：</p>
+<p>  [kodango@devops ~]$ awk ‘BEGIN {print length(‘kodango’);}’0[kodango@devops ~]$ echo “first line” | awk ‘{print length();}’10</p>
+<ul>
+<li><ol>
+<li>match(s, ere)</li>
+</ol>
+</li>
+</ul>
+<p>描述： 返回字符串s匹配ere的起始位置，如果不匹配则返回0。该函数会定义RSTART和RLENGTH两个内置变量。RSTART与返回值相同，RLENGTH记录匹配子串的长度，如果不匹配则为-1。</p>
+<p>例如：</p>
+<pre><code>[kodango@devops ~]$ awk &apos;BEGIN {
+print match(&quot;kodango&quot;, /dango/);
+printf &quot;Matched at: %d, Matched substr length: %d\n&quot;, RSTART, RLENGTH;
+}&apos;3Matched at: 3, Matched substr length: 5
+</code></pre><ul>
+<li><ol>
+<li>split(s, a[, fs])</li>
+</ol>
+</li>
+</ul>
+<p>描述：将字符串按照分隔符fs，分隔成多个部分，并存到数组a中。注意，存放的位置是从第1个数组元素开始的。如果fs为空，则默认使用FS分隔。函数返回值分隔的个数。</p>
+<p>例如：</p>
+<pre><code>[kodango@devops ~]$ awk &apos;BEGIN {
+  &gt; split(&quot;1;2;3;4;5&quot;, arr, &quot;;&quot;)
+  &gt; for (i in arr)
+  &gt;     printf &quot;arr[%d]=%d\n&quot;, i, arr[i];
+  &gt; }&apos;
+  arr[4]=4
+  arr[5]=5
+  arr[1]=1
+  arr[2]=2
+  arr[3]=3
+  这里有一个奇怪的地方是for..in..输出的数组不是按顺序输出的，如果要按顺序输出可以用常规的for循环:
+
+  [kodango@devops ~]$ awk &apos;BEGIN {
+  &gt; split(&quot;1;2;3;4;5&quot;, arr, &quot;;&quot;)
+  &gt; for (i=0;^C
+  [kodango@devops ~]$ awk &apos;BEGIN {&gt; n=split(&quot;1;2;3;4;5&quot;, arr, &quot;;&quot;)&gt; for (i=1; i&lt;=n; i++)&gt;     printf &quot;arr[%d]=%d\n&quot;, i, arr[i];&gt; }&apos;
+  arr[1]=1
+  arr[2]=2
+  arr[3]=3
+  arr[4]=4
+  arr[5]=5
+</code></pre><ul>
+<li><ol>
+<li>sprintf(fmt, expr, expr, …)</li>
+</ol>
+</li>
+</ul>
+<p>描述：类似printf，只不过不会将格式化后的内容输出到标准输出，而是当作返回值返回。</p>
+<p>例如：</p>
+<pre><code>[kodango@devops ~]$ awk &apos;BEGIN {
+  &gt; var=sprintf(&quot;%s=%s&quot;, &quot;name&quot;, &quot;value&quot;)
+  &gt; print var
+  &gt; }&apos;
+  name=value
+</code></pre><ul>
+<li><ol>
+<li>substr(s, m[, n])</li>
+</ol>
+</li>
+</ul>
+<p>描述：返回从位置m开始的，长度为n的子串，其中位置从1开始计算，如果未指定n或者n值大于剩余的字符个数，则子串一直到字符串末尾为止。</p>
+<p>例如：</p>
+<pre><code>[kodango@devops ~]$ awk &apos;BEGIN { print substr(&quot;kodango&quot;, 2, 3); }&apos;
+oda
+[kodango@devops ~]$ awk &apos;BEGIN { print substr(&quot;kodango&quot;, 2); }&apos;
+odango
+</code></pre><ul>
+<li><ol>
+<li>tolower(s)</li>
+</ol>
+</li>
+</ul>
+<p>描述：将字符串转换成小写字符。</p>
+<p>例如：</p>
+<pre><code>[kodango@devops ~]$ awk &apos;BEGIN {print tolower(&quot;KODANGO&quot;);}&apos;
+kodango
+</code></pre><ul>
+<li><ol>
+<li>toupper(s)</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>描述：将字符串转换成大写字符。</p>
+</blockquote>
+<p>例如</p>
+<p>  [kodango@devops ~]$ awk ‘BEGIN {print tolower(“kodango”);}’<br>  KODANGO</p>
+<h2 id="I-O处理函数"><a href="#I-O处理函数" class="headerlink" title="I/O处理函数"></a>I/O处理函数</h2><ul>
+<li><ol>
+<li>getline</li>
+</ol>
+</li>
+</ul>
+<p>getline的用法相对比较复杂，它有几种不同的形式。不过它的主要作用就是从输入中每次获取一行输入。</p>
+<p>a. expression | getline [var]</p>
+<p>这种形式将前面管道前命令输出的结果作为getline的输入，每次读取一行。如果后面跟有var，则将读取的内容保存到var变量中，否则会重新设置$0和NF。</p>
+<p>例如，我们将上面的statement.txt文件的内容显示作为getline的输入：</p>
+<pre><code>[kodango@devops awk_temp]$ awk &apos;BEGIN { while(&quot;cat statement.txt&quot; | getline var) print var}&apos;
+statement
+deleteexitnext
+</code></pre><p>上面的例子中命令要用双引号，”cat statement.txt”，这一点同print/printf是一样的。</p>
+<p>如果不加var，则直接写到$0中，注意NF值也会被更新：</p>
+<pre><code>[kodango@devops awk_temp]$ awk &apos;BEGIN { while(&quot;cat statement.txt&quot; | getline) print $0,NF}&apos;
+statement 1delete 1exit 1next 1
+b. getline [var]
+</code></pre><p>第二种形式是直接使用getline，它会从处理的文件中读取输入。同样地，如果var没有，则会设置$0，并且这时候会更新<br>NF, NR和FNR：</p>
+<pre><code>[kodango@devops awk_temp]$ awk &apos;{      
+&gt; while (getline)
+&gt;    print NF, NR, FNR, $0;
+&gt; }&apos; statement.txt
+1 2 2 delete1 3 3 exit1 4 4 next
+c. getline [var] &lt; expression
+</code></pre><p>第三种形式从expression中重定向输入，与第一种方法类似，这里就不加赘述了。</p>
+<ul>
+<li><ol>
+<li>close</li>
+</ol>
+</li>
+</ul>
+<p>close函数可以用于关闭已经打开的文件或者管道，例如getline函数的第一种形式用到管道，我们可以用close函数把这个管道关闭，close函数的参数与管道的命令一致：</p>
+<pre><code>[kodango@devops awk_temp]$ awk &apos;BEGIN {
+  while(&quot;cat statement.txt&quot; | getline) {
+    print $0;
+    close(&quot;cat statement.txt&quot;);
+    }}&apos;
+    statement
+    statement
+    statement
+    statement
+    statement
+    但是每次读了一行后，关闭管道，然后重新打开又重新读取第一行就死循环了。所以要慎用，一般情况下也很少会用到close函数。
+</code></pre><ul>
+<li><ol>
+<li>system</li>
+</ol>
+</li>
+</ul>
+<p>这个函数很简单，就是用于执行外部命令，例如：</p>
+<pre><code>[kodango@devops awk_temp]$ awk &apos;BEGIN {system(&quot;uname -r&quot;);}&apos;3.6.2-1-ARCH
+</code></pre><h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>快速了解Awk系列的几篇文章相对比较粗糙，我是参考Awk的man手册以及《Sed &amp; wk》附录B总结而成的，但是应该可以让大家对awk有一个大致的了解，欢迎大家一起交流。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/03/11/awk使用/" data-id="cj4gn2lyk000jngjtmxg7asrk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awk/">awk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx标准配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/19/nginx标准配置/" class="article-date">
+  <time datetime="2017-02-19T00:00:00.000Z" itemprop="datePublished">2017-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/19/nginx标准配置/">nginx 标准配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nginx-版本"><a href="#nginx-版本" class="headerlink" title="nginx  版本"></a>nginx  版本</h2><h3 id="nginx-官方版本"><a href="#nginx-官方版本" class="headerlink" title="nginx 官方版本"></a>nginx 官方版本</h3><h4 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h4><h5 id="源码包安装"><a href="#源码包安装" class="headerlink" title="源码包安装"></a>源码包安装</h5><pre><code>-  下载nginx对应版本源码包
+-  安装编译参数
+
+`    ./configure --user=www --group=www --prefix=/app/nginx --with-http_stub_status_module --with-http_ssl_module`
+</code></pre><h5 id="yum-安装"><a href="#yum-安装" class="headerlink" title="yum 安装"></a>yum 安装</h5><pre><code>yum  install nginx
+</code></pre><h2 id="使用方向"><a href="#使用方向" class="headerlink" title="使用方向"></a>使用方向</h2><h3 id="tengine-做前端负载及缓存"><a href="#tengine-做前端负载及缓存" class="headerlink" title="tengine 做前端负载及缓存"></a>tengine 做前端负载及缓存</h3><pre><code>http {
+include       mime.types;
+default_type  application/octet-stream;
+autoindex     off;
+
+##linux 2.4+   network optimize
+sendfile        on;
+tcp_nopush     on;
+tcp_nodelay    on;
+
+## tengine
+server_info     off;
+server_tag    off;
+server_tokens off;
+access_log    off;
+
+keepalive_timeout  60;
+### 限制header clien_body 大小等参数
+server_names_hash_bucket_size 128;
+client_header_buffer_size 32k;
+large_client_header_buffers 4 32k;
+client_max_body_size 10m;
+client_body_buffer_size 256k;
+
+
+##cache_buff_tmp
+
+  #  fastcgi_intercept_errors on;
+  #  fastcgi_hide_header X-Powered-By;
+  #  fastcgi_connect_timeout 180;
+  #  fastcgi_send_timeout 180;
+  #  fastcgi_read_timeout 180;
+  #  fastcgi_buffer_size 128k;
+  #  fastcgi_buffers 4 128K;
+  #  fastcgi_busy_buffers_size 128k;
+  #  fastcgi_temp_file_write_size 128k;
+  #  fastcgi_temp_path /home/cache_php;
+
+
+#gzip  on;
+gzip on;
+gzip_min_length 1k;
+gzip_buffers 4 16k;
+gzip_http_version 1.0;
+gzip_comp_level 4;
+gzip_disable &quot;MSIE [1-6].&quot;;
+gzip_types text/plain application/x-javascript text/css  text/javascript application/json application/x-httpd-php application/xml;
+gzip_vary on;
+</code></pre><p>`</p>
+<pre><code>    ### lua  moty   add
+    lua_package_path &quot;/opt/nginx/conf/waf/?.lua&quot;;
+    lua_shared_dict limit 10m;
+    init_by_lua_file  /opt/nginx/conf/waf/init.lua;
+    access_by_lua_file /opt/nginx/conf/waf/waf.lua;
+
+
+    ###  upstream     
+    include vhost/upstream.conf ;
+
+    log_format access &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot;&apos;
+        &apos;$status $body_bytes_sent &quot;$http_referer&quot;&apos;
+        &apos;&quot;$http_user_agent&quot; $http_x_forwarded_for&apos;;
+
+    ### whiteIPlist
+    geo $whiteiplist  {
+        default 1;
+        192.168.6.0/24 0;
+    }
+        map $whiteiplist  $limit {
+        1 $binary_remote_addr;
+        0 &quot;&quot;;
+    }
+
+
+    ### limite  session
+
+    limit_req_zone $cookie_token zone=session_limit:20m rate=10r/s;
+    limit_req_zone $binary_remote_addr $uri zone=auth_limit:20m rate=10r/m;
+
+    ###  proxy_buffer   
+    proxy_connect_timeout 600;
+    proxy_read_timeout 600;
+    proxy_send_timeout 600;
+    proxy_buffer_size 128k;
+    proxy_buffers 4 128k;
+    proxy_busy_buffers_size 256k;
+    proxy_temp_file_write_size 256k;
+    proxy_headers_hash_max_size 1024;
+    proxy_headers_hash_bucket_size 128;
+
+    proxy_redirect off;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_temp_path /home/data/nginx/nginx_temp;
+    proxy_cache_path /home/data/nginx/nginx_cache levels=1:2 keys_zone=cache_one:2048m inactive=30m max_size=60g;
+
+
+       # proxy_temp_path   /home/cache/nginx/proxy_temp;
+       # proxy_cache_path  /home/cache/nginx/proxy_cache_www levels=1:2   keys_zone=cache_www:3000m inactive=1d max_size=20g;
+
+        include  vhost/ap18game.com.conf;
+    }
+
+
+    ## 创建 负载均衡配置文件
+    upstream webserver {
+    consistent_hash $request_uri;
+    server web1:80 weight=1;
+    server web2:80 weight=1;
+    session_sticky;
+
+
+    check interval=3000 rise=2 fall=5 timeout=1000 type=http;
+    check_http_send &quot;GET / HTTP/1.0\r\n\r\n&quot;;
+    check_http_expect_alive http_2xx http_3xx;
+    }
+
+
+
+    server {
+    listen       80;
+    server_name  webserver;
+    root         /home/data/nginx/nginx_cache;
+    index        index.php index.html index.htm;
+    #charset koi8-r;
+
+    ##access_log
+    access_log  /home/data/nginx/logs/webserver.access.log  access;
+
+    #trim on;
+    #trim_jscss on;
+    #location / {
+    #    root   html;
+    #    index  index.html index.htm;
+    #}
+
+    location / {
+    proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;
+
+    #if (-d $request_filename) {
+    #    rewrite ^/(.*)$ http://$host/index.html break;
+    #}
+
+        ##  defend   CC    lua简单防CC
+        limit_req zone=session_limit burst=5;
+         rewrite_by_lua &apos;
+         local random = ngx.var.cookie_random
+         if (random == nil) then
+            return ngx.redirect(&quot;/auth?url=&quot; .. ngx.var.request_uri)
+         end
+        local token = ngx.md5(&quot;opencdn&quot; .. ngx.var.remote_addr .. random)
+        if (ngx.var.cookie_token ~= token) then
+              return ngx.redirect(&quot;/auth?url=&quot;.. ngx.var.request_uri)
+        end
+    &apos;;
+        ### 负载均衡
+        proxy_redirect         off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://webserver;
+   }
+
+    ###  defend  CC
+    location /auth {
+    limit_req zone=auth_limit burst=1;
+    if ($arg_url = &quot;&quot;) {
+        return 403;
+    }
+    access_by_lua &apos;
+        local random = math.random(9999)
+        local token = ngx.md5(&quot;opencdn&quot; .. ngx.var.remote_addr .. random)
+        if (ngx.var.cookie_token ~= token) then
+            ngx.header[&quot;Set-Cookie&quot;] = {&quot;token=&quot; .. token, &quot;random=&quot; .. random}
+            return ngx.redirect(ngx.var.arg_url)
+        end
+    &apos;;
+    }
+
+    #location ~ .*\. (php)?$ {
+    #       proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;
+    #       proxy_pass http://webserver;
+    #}
+
+    ###  前端缓存                                                                                                                                                                      
+    location ~ .*\.(htm|html|js|css|gif|jpg|jpeg|png|bmp|ico|swf|flv|otf)$ {
+            proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;
+            proxy_cache cache_one;
+            proxy_cache_valid 200 304 15m;
+            proxy_cache_valid 301 302 10m;
+            proxy_cache_valid any 1m;
+            proxy_cache_key $host$uri$is_args$args;
+            add_header Ten-webcache &apos;$upstream_cache_status from $host&apos;;
+            proxy_pass http://webserver;
+            expires 30m;
+    }
+
+
+
+    ##  test lua
+    location /lua {
+            default_type &apos;text/plain&apos;;
+            content_by_lua &apos;ngx.say(&quot;hello, lua&quot;)&apos;;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+    location /nstatus {
+            check_status;
+            access_log off;
+            allow 182.52.236.240;
+            deny all;
+    }
+}    
+</code></pre><h3 id="nginx-做网站防火墙"><a href="#nginx-做网站防火墙" class="headerlink" title="nginx 做网站防火墙"></a>nginx 做网站防火墙</h3><p>   <strong>主要使用使用lua   waf模块</strong></p>
+<pre><code>git clone http://luajit.org/git/luajit-2.0.git
+wget http://tengine.taobao.org/download/tengine-2.1.0.tar.gz
+git clone https://github.com/loveshell/ngx_lua_waf
+ cd luajit-2.0 &amp;&amp; git checkout v2.1
+ make
+ make install PREFIX=/usr/local/luajit
+ 解压安装tengine
+  ./configure --prefix=/opt/nginx --with-http_lua_module --with-luajit-lib=/usr/local/luajit/lib/ --with-luajit-inc=/usr/local/luajit/include/luajit-2.1/ --with-ld-opt=-Wl,-rpath,/usr/local/luajit/lib
+
+ make &amp;&amp; make install
+</code></pre><h4 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h4><p>在nginx.conf中添加一个location</p>
+<pre><code>location /lua {
+     default_type &apos;text/plain&apos;;
+    content_by_lua &apos;ngx.say(&quot;hello, lua&quot;)&apos;;
+}
+</code></pre><h4 id="配置ngx-lua-waf"><a href="#配置ngx-lua-waf" class="headerlink" title="配置ngx_lua_waf"></a>配置ngx_lua_waf</h4><p>nginx下常见的开源waf有mod_security、naxsi、ngx_lua_waf这三个，mod_security是最老牌的，功能最强规则细定制性又强，但是配置最复杂高并发时性能差。naxsi是原生nginx下的waf，性能不错但是基于白名单，配置也很麻烦。ngx_lua_waf功能和规则虽然没有这两个强大，但赢在性能高和易用性强，基本上零配置，而且常见的攻击类型都能防御，是比较省心的选择。安装好ngx_lua后，把下载好的ngx_lua_waf复制到conf目录下,重命名为waf，在nginx.conf的http段添加：</p>
+<pre><code>lua_package_path &quot;/opt/nginx/conf/waf/?.lua&quot;;
+lua_shared_dict limit 10m;
+init_by_lua_file  /opt/nginxconf/waf/init.lua;
+access_by_lua_file /opt/nginx/conf/waf/waf.lua;
+</code></pre><p>修改/opt/nginx/conf/waf/config.lua文件，该文件为waf的配置文件，将RulePath和logdir改为实际的目录：</p>
+<pre><code>RulePath = &quot;/opt/nginx/conf/waf/wafconf/&quot;
+logdir = &quot;/opt/nginx/logs/waf&quot;   //确保此文件夹nginx有写入权限
+</code></pre><p>其它的安全配置，按照实际需要开启。设置好和启动nginx</p>
+<h3 id="nginx-做后端代理"><a href="#nginx-做后端代理" class="headerlink" title="nginx 做后端代理"></a>nginx 做后端代理</h3><h4 id="nginx-做后端处理配置"><a href="#nginx-做后端处理配置" class="headerlink" title="nginx 做后端处理配置"></a>nginx 做后端处理配置</h4><pre><code>user  www www;
+worker_processes  8;
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
+
+error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+pid        logs/nginx.pid;
+worker_rlimit_nofile  65535;
+
+
+events {
+    use epoll;
+    worker_connections  65535;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;
+    #                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
+    #                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
+
+    #log_format short &apos;[$time_local] | $status | $host | $request | $remote_addr | $http_user_agent | $http_referer | $http_cookie&apos;;
+    log_format  short &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos; &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos; &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot; $request_body $host &quot;$http_cookie&quot; &apos; &apos;$upstream_response_time $request_time &apos;;
+    #access_log  logs/access.log  short;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server_tokens off;
+
+    charset     UTF-8;
+    server_names_hash_bucket_size       128;
+    client_header_buffer_size           4k;
+    large_client_header_buffers  4      32k;
+    client_max_body_size 30m;
+    client_body_buffer_size 128k;
+    fastcgi_connect_timeout 300;
+    fastcgi_read_timeout 300;
+    fastcgi_send_timeout 300;
+    fastcgi_buffer_size 64k;
+    fastcgi_buffers   4 32k;
+    fastcgi_busy_buffers_size 64k;
+    fastcgi_temp_file_write_size 64k;
+    ####open_file_cache
+    open_file_cache max=65536  inactive=60s;
+    open_file_cache_valid      80s;
+    open_file_cache_min_uses   1;
+
+    include ./vhost/*.conf;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/02/19/nginx标准配置/" data-id="cj4gn2lyx0014ngjtl6svi979" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/标准配置/">标准配置</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-install_supervisor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/17/install_supervisor/" class="article-date">
+  <time datetime="2017-02-17T00:00:00.000Z" itemprop="datePublished">2017-02-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/17/install_supervisor/">centos7 安装supervisor</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="centos-7-安装-supervisor"><a href="#centos-7-安装-supervisor" class="headerlink" title="centos 7 安装 supervisor"></a>centos 7 安装 supervisor</h1><pre><code>yum -y install python-setuptools
+
+easy_install supervisor
+echo_supervisord_conf &gt; /etc/supervisord.conf
+mkdir -p /var/log/supervisor
+mkdir -p /etc/supervisor/conf.d/
+echo -e &quot;[include]\nfiles = /etc/supervisor/conf.d/*.conf&quot;&gt;&gt;/etc/supervisord.conf     
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/02/17/install_supervisor/" data-id="cj4gn2lyp000sngjteoc7qkbp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/supervisor/">supervisor</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-docker常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/23/docker常用命令/" class="article-date">
+  <time datetime="2017-01-23T00:00:00.000Z" itemprop="datePublished">2017-01-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/23/docker常用命令/">docker 常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>  docker  search   image_name           查找image</p>
+<p>  docker  build     -t   name    Docfile_dir       创建docker_image</p>
+<p>  docker  ps -a    查看正在运行docker</p>
+<p>  docker rm $(docker ps -a -q)    清除没有运行的docker   image</p>
+<p>   docker run -idt   -p  dport:hport   docker_image_name   启动docker image</p>
+<p>  docker export     docker_image_id  &gt;   image_name.tar   到处image</p>
+<p>  导入image</p>
+<p>  $    cat    ubuntu.tar    |    sudo    docker    import    -    test/ubuntu:v1.0</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/01/23/docker常用命令/" data-id="cj4gn2lyl000lngjtxhgs8ok2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nginx静态文件服务" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/22/nginx静态文件服务/" class="article-date">
+  <time datetime="2017-01-22T00:00:00.000Z" itemprop="datePublished">2017-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/22/nginx静态文件服务/">nginx静态文件服务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Nginx-静态文件服务"><a href="#Nginx-静态文件服务" class="headerlink" title="Nginx 静态文件服务"></a>Nginx 静态文件服务</h1><p>我们先来看看最简单的本地静态文件服务配置示例：</p>
+<pre><code>server {
+        listen       80;
+        server_name www.test.com;
+        charset utf-8;
+        root   /data/www.test.com;
+        index  index.html index.htm;
+       }
+</code></pre><p>就这些？恩，就这些！如果只是提供简单的对外静态文件，它真的就可以用了。可是他不完美，远远没有发挥 Nginx 的半成功力，为什么这么说呢，看看下面的配置吧，为了大家看着方便，我们把每一项的作用都做了注释。</p>
+<pre><code>http {
+# 这个将为打开文件指定缓存，默认是没有启用的，max 指定缓存数量，
+# 建议和打开文件数一致，inactive 是指经过多长时间文件没被请求后删除缓存。
+open_file_cache max=204800 inactive=20s;
+
+# open_file_cache 指令中的inactive 参数时间内文件的最少使用次数，
+# 如果超过这个数字，文件描述符一直是在缓存中打开的，如上例，如果有一个
+# 文件在inactive 时间内一次没被使用，它将被移除。
+open_file_cache_min_uses 1;
+
+# 这个是指多长时间检查一次缓存的有效信息
+open_file_cache_valid 30s;
+
+# 默认情况下，Nginx的gzip压缩是关闭的， gzip压缩功能就是可以让你节省不
+# 少带宽，但是会增加服务器CPU的开销哦，Nginx默认只对text/html进行压缩 ，
+# 如果要对html之外的内容进行压缩传输，我们需要手动来设置。
+gzip on;
+gzip_min_length 1k;
+gzip_buffers 4 16k;
+gzip_http_version 1.0;
+gzip_comp_level 2;
+gzip_types text/plain application/x-javascript text/css application/xml;
+
+server {
+        listen       80;
+        server_name www.test.com;
+        charset utf-8;
+        root   /data/www.test.com;
+        index  index.html index.htm;
+       }
+}
+</code></pre><p>我们都知道，应用程序和网站一样，其性能关乎生存。但如何使你的应用程序或者网站性能更好，并没有一个明确的答案。代码质量和架构是其中的一个原因，但是在很多例子中我们看到，你可以通过关注一些十分基础的应用内容分发技术（basic application delivery techniques），来提高终端用户的体验。其中一个例子就是实现和调整应用栈（application stack）的缓存。</p>
+<h2 id="文件缓存漫谈"><a href="#文件缓存漫谈" class="headerlink" title="文件缓存漫谈"></a>文件缓存漫谈</h2><p>一个 web 缓存坐落于客户端和原始服务器（origin server）中间，它保留了所有可见内容的拷贝。如果一个客户端请求的内容在缓存中存储，则可以直接在缓存中获得该内容而不需要与服务器通信。这样一来，由于web缓存距离客户端“更近”，就可以提高响应性能，并更有效率的使用应用服务器，因为服务器不用每次请求都进行页面生成工作。</p>
+<p>在浏览器和应用服务器之间，存在多种潜在缓存，如：客户端浏览器缓存、中间缓存、内容分发网络（CDN）和服务器上的负载平衡和反向代理。缓存，仅在反向代理和负载均衡的层面，就对性能提高有很大的帮助。</p>
+<p>举个例子说明，去年，我接手了一项任务，这项任务的内容是对一个加载缓慢的网站进行性能优化。首先引起我注意的事情是，这个网站差不多花费了超过1秒钟才生成了主页。经过一系列调试，我发现加载缓慢的原因在于页面被标记为不可缓存，即为了响应每一个请求，页面都是动态生成的。由于页面本身并不需要经常性的变更，并且不涉及个性化，那么这样做其实并没有必要。为了验证一下我的结论，我将页面标记为每5秒缓存一次，仅仅做了这一个调整，就能明显的感受到性能的提升。第一个字节到达的时间降低到几毫秒，同时页面的加载明显要更快。</p>
+<p>并不是只有大规模的内容分发网络（CDN）可以在使用缓存中受益——缓存还可以提高负载平衡器、反向代理和应用服务器前端web服务的性能。通过上面的例子，我们看到，缓存内容结果，可以更高效的使用应用服务器，因为不需要每次都去做重复的页面生成工作。此外，Web缓存还可以用来提高网站可靠性。当服务器宕机或者繁忙时，比起返回错误信息给用户，不如通过配置Nginx将已经缓存下来的内容发送给用户。这意味着，网站在应用服务器或者数据库故障的情况下，可以保持部分甚至全部的功能运转。</p>
+<p>下面讨论如何安装和配置 Nginx 的基础缓存（Basic Caching）。</p>
+<h2 id="如何安装和配置基础缓存"><a href="#如何安装和配置基础缓存" class="headerlink" title="如何安装和配置基础缓存"></a>如何安装和配置基础缓存</h2><p>我们只需要两个命令就可以启用基础缓存： proxy_cache_path 和 proxy_cache 。proxy_cache_path 用来设置缓存的路径和配置，proxy_cache 用来启用缓存。</p>
+<pre><code>proxy_cache_path/path/to/cache levels=1:2 keys_zone=my_cache:10m max_size=10g inactive=60m
+use_temp_path=off;
+
+server {
+    ...
+    location / {
+        proxy_cache my_cache;
+        proxy_pass http://my_upstream;
+    }
+
+}
+</code></pre><p>proxy_cache_path 命令中的参数及对应配置说明如下：</p>
+<p>用于缓存的本地磁盘目录是 /path/to/cache/<br>levels 在 /path/to/cache/ 设置了一个两级层次结构的目录。将大量的文件放置在单个目录中会导致文件访问缓慢，所以针对大多数部署，我们推荐使用两级目录层次结构。如果 levels 参数没有配置，则 Nginx 会将所有的文件放到同一个目录中。<br>keys_zone 设置一个共享内存区，该内存区用于存储缓存键和元数据，有些类似计时器的用途。将键的拷贝放入内存可以使 Nginx 在不检索磁盘的情况下快速决定一个请求是HIT还是MISS，这样大大提高了检索速度。一个 1MB 的内存空间可以存储大约 8000个key，那么上面配置的 10MB 内存空间可以存储差不多 80000 个 key。<br>max_size 设置了缓存的上限（在上面的例子中是 10G）。这是一个可选项；如果不指定具体值，那就是允许缓存不断增长，占用所有可用的磁盘空间。当缓存达到这个上线，处理器便调用 cache manager 来移除最近最少被使用的文件，这样把缓存的空间降低至这个限制之下。<br>inactive 指定了项目在不被访问的情况下能够在内存中保持的时间。在上面的例子中，如果一个文件在 60 分钟之内没有被请求，则缓存管理将会自动将其在内存中删除，不管该文件是否过期。该参数默认值为 10 分钟（10m）。注意，非活动内容有别于过期内容。 Nginx 不会自动删除由缓存控制头部指定的过期内容（本例中 Cache-Control:max-age=120）。过期内容只有在 inactive 指定时间内没有被访问的情况下才会被删除。如果过期内容被访问了，那么 Nginx 就会将其从原服务器上刷新，并更新对应的inactive计时器。<br>Nginx 最初会将注定写入缓存的文件先放入一个临时存储区域，use_temp_path=off命令指示 Nginx 将在缓存这些文件时将它们写入同一个目录下。我们强烈建议你将参数设置为off来避免在文件系统中不必要的数据拷贝。use_temp_path在 Nginx 1.7版本和 Nginx Plus R6中有所介绍。<br>最终，proxy_cache 命令启动缓存那些URL与location部分匹配的内容（本例中，为/）。你同样可以将proxy_cache命令添加到server部分，这将会将缓存应用到所有的那些location中未指定自己的proxy_cache命令的服务中。</p>
+<h2 id="陈旧总比没有强"><a href="#陈旧总比没有强" class="headerlink" title="陈旧总比没有强"></a>陈旧总比没有强</h2><p>Nginx 内容缓存的一个非常强大的特性是：当无法从原始服务器获取最新的内容时， Nginx 可以分发缓存中的陈旧（stale，编者注：即过期内容）内容。这种情况一般发生在关联缓存内容的原始服务器宕机或者繁忙时。比起对客户端传达错误信息， Nginx 可发送在其内存中的陈旧的文件。 Nginx 的这种代理方式，为服务器提供额外级别的容错能力，并确保了在服务器故障或流量峰值的情况下的正常运行。为了开启该功能，只需要添加 proxy_cache_use_stale 命令即可：<br>      location / {<br>          …<br>          proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;<br>      }<br>按照上面例子中的配置，当 Nginx 收到服务器返回的error，timeout或者其他指定的5xx错误，并且在其缓存中有请求文件的陈旧版本，则会将这些陈旧版本的文件而不是错误信息发送给客户端。</p>
+<h2 id="缓存微调"><a href="#缓存微调" class="headerlink" title="缓存微调"></a>缓存微调</h2><p>Nginx 提供了丰富的可选项配置用于缓存性能的微调。下面是使用了几个配置的例子：</p>
+<pre><code>proxy_cache_path /path/to/cache levels=1:2 keys_zone=my_cache:10m max_size=10g inactive=60m
+use_temp_path=off;
+server {
+    ...
+    location / {
+        proxy_cache my_cache;
+        proxy_cache_revalidate on;
+        proxy_cache_min_uses 3;
+        proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+        proxy_cache_lock on;
+        proxy_pass http://my_upstream;
+    }
+}
+</code></pre><p>这些命令配置了下列的行为：</p>
+<p>proxy_cache_revalidate 指示 Nginx 在刷新来自服务器的内容时使用 GET 请求。如果客户端的请求项已经被缓存过了，但是在缓存控制头部中定义为过期，那么 Nginx 就会在 GET 请求中包含 If-Modified-Since 字段，发送至服务器端。这项配置可以节约带宽，因为对于 Nginx 已经缓存过的文件，服务器只会在该文件请求头中 Last-Modified 记录的时间内被修改时才将全部文件一起发送。<br>proxy_cache_min_uses 该指令设置同一链接请求达到几次即被缓存，默认值为 1 。当缓存不断被填满时，这项设置便十分有用，因为这确保了只有那些被经常访问的内容会被缓存。<br>proxy_cache_use_stale 中的 updating 参数告知 Nginx 在客户端请求的项目的更新正在原服务器中下载时发送旧内容，而不是向服务器转发重复的请求。第一个请求陈旧文件的用户不得不等待文件在原服务器中更新完毕。陈旧的文件会返回给随后的请求直到更新后的文件被全部下载。<br>当 proxy_cache_lock 被启用时，当多个客户端请求一个缓存中不存在的文件（或称之为一个 MISS），只有这些请求中的第一个被允许发送至服务器。其他请求在第一个请求得到满意结果之后在缓存中得到文件。如果不启用 proxy_cache_lock，则所有在缓存中找不到文件的请求都会直接与服务器通信。</p>
+<h2 id="跨多硬盘分割缓存"><a href="#跨多硬盘分割缓存" class="headerlink" title="跨多硬盘分割缓存"></a>跨多硬盘分割缓存</h2><p>使用 Nginx 不需要建立一个RAID（磁盘阵列）。如果有多个硬盘， Nginx 可以用来在多个硬盘之间分割缓存。下面是一个基于请求 URI 跨越两个硬盘之间均分缓存的例子：</p>
+<pre><code>proxy_cache_path /path/to/hdd1 levels=1:2 keys_zone=my_cache_hdd1:10m max_size=10g
+
+inactive=60m use_temp_path=off;
+proxy_cache_path /path/to/hdd2 levels=1:2 keys_zone=my_cache_hdd2:10m max_size=10g inactive=60m use_temp_path=off;
+split_clients $request_uri $my_cache {
+    50% &quot;my_cache_hdd1&quot;;
+    50% &quot;my_cache_hdd2&quot;;
+}
+
+server {
+    ...
+    location / {
+        proxy_cache $my_cache;
+        proxy_pass http://my_upstream;
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/01/22/nginx静态文件服务/" data-id="cj4gn2lz4001angjt595k8de7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-检测NetWork" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/19/检测NetWork/" class="article-date">
+  <time datetime="2017-01-19T00:00:00.000Z" itemprop="datePublished">2017-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/19/检测NetWork/">检查NetWork</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#显示菜单(单选)</div><div class="line">display_menu()&#123;</div><div class="line">local soft=$1</div><div class="line">local prompt=&quot;which $&#123;soft&#125; you&apos;d select: &quot;</div><div class="line">eval local arr=(\$&#123;$&#123;soft&#125;_arr[@]&#125;)</div><div class="line">while true</div><div class="line">do</div><div class="line">    echo -e &quot;#################### $&#123;soft&#125; setting ####################\n\n&quot;</div><div class="line">    for ((i=1;i&lt;=$&#123;#arr[@]&#125;;i++ )); do echo -e &quot;$i) $&#123;arr[$i-1]&#125;&quot;; done</div><div class="line">    echo</div><div class="line">    read -p &quot;$&#123;prompt&#125;&quot; $soft</div><div class="line">    eval local select=\$$soft</div><div class="line">    if [ &quot;$select&quot; == &quot;&quot; ] || [ &quot;$&#123;arr[$soft-1]&#125;&quot; == &quot;&quot;  ];then</div><div class="line">        prompt=&quot;input errors,please input a number: &quot;</div><div class="line">    else</div><div class="line">        eval $soft=$&#123;arr[$soft-1]&#125;</div><div class="line">        eval echo &quot;your selection: \$$soft&quot;             </div><div class="line">        break</div><div class="line">    fi</div><div class="line">done</div><div class="line">&#125;</div><div class="line"></div><div class="line">#把带宽bit单位转换为人类可读单位</div><div class="line">bit_to_human_readable()&#123;</div><div class="line">    #input bit value</div><div class="line">    local trafficValue=$1</div><div class="line"></div><div class="line">    if [[ $&#123;trafficValue%.*&#125; -gt 922 ]];then</div><div class="line">        #conv to Kb</div><div class="line">        trafficValue=`awk -v value=$trafficValue &apos;BEGIN&#123;printf &quot;%0.1f&quot;,value/1024&#125;&apos;`</div><div class="line">        if [[ $&#123;trafficValue%.*&#125; -gt 922 ]];then</div><div class="line">            #conv to Mb</div><div class="line">            trafficValue=`awk -v value=$trafficValue &apos;BEGIN&#123;printf &quot;%0.1f&quot;,value/1024&#125;&apos;`</div><div class="line">            echo &quot;$&#123;trafficValue&#125;Mb&quot;</div><div class="line">        else</div><div class="line">            echo &quot;$&#123;trafficValue&#125;Kb&quot;</div><div class="line">        fi</div><div class="line">    else</div><div class="line">        echo &quot;$&#123;trafficValue&#125;b&quot;</div><div class="line">    fi</div><div class="line">&#125;</div><div class="line"></div><div class="line">#判断包管理工具</div><div class="line">check_package_manager()&#123;</div><div class="line">    local manager=$1</div><div class="line">    local systemPackage=&apos;&apos;</div><div class="line">    if cat /etc/issue | grep -q -E -i &quot;ubuntu|debian&quot;;then</div><div class="line">        systemPackage=&apos;apt&apos;</div><div class="line">    elif cat /etc/issue | grep -q -E -i &quot;centos|red hat|redhat&quot;;then</div><div class="line">        systemPackage=&apos;yum&apos;</div><div class="line">    elif cat /proc/version | grep -q -E -i &quot;ubuntu|debian&quot;;then</div><div class="line">        systemPackage=&apos;apt&apos;</div><div class="line">    elif cat /proc/version | grep -q -E -i &quot;centos|red hat|redhat&quot;;then</div><div class="line">        systemPackage=&apos;yum&apos;</div><div class="line">    else</div><div class="line">        echo &quot;unkonw&quot;</div><div class="line">    fi</div><div class="line"></div><div class="line">    if [ &quot;$manager&quot; == &quot;$systemPackage&quot; ];then</div><div class="line">        return 0</div><div class="line">    else</div><div class="line">        return 1</div><div class="line">    fi   </div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">#实时流量</div><div class="line">realTimeTraffic()&#123;</div><div class="line">    local eth=&quot;&quot;</div><div class="line">    local nic_arr=(`ifconfig | grep -E -o &quot;^[a-z0-9]+&quot; | grep -v &quot;lo&quot; | uniq`)</div><div class="line">    local nicLen=$&#123;#nic_arr[@]&#125;</div><div class="line">    if [[ $nicLen -eq 0 ]]; then</div><div class="line">        echo &quot;sorry,I can not detect any network device,please report this issue to author.&quot;</div><div class="line">        exit 1</div><div class="line">    elif [[ $nicLen -eq 1 ]]; then</div><div class="line">        eth=$nic_arr</div><div class="line">    else</div><div class="line">        display_menu nic</div><div class="line">        eth=$nic</div><div class="line">    fi   </div><div class="line"></div><div class="line">    local clear=true</div><div class="line">    local eth_in_peak=0</div><div class="line">    local eth_out_peak=0</div><div class="line">    local eth_in=0</div><div class="line">    local eth_out=0</div><div class="line"></div><div class="line">    while true;do</div><div class="line">        #移动光标到0:0位置</div><div class="line">        printf &quot;\033[0;0H&quot;</div><div class="line">        #清屏并打印Now Peak</div><div class="line">        [[ $clear == true ]] &amp;&amp; printf &quot;\033[2J&quot; &amp;&amp; echo &quot;$eth--------Now--------Peak-----------&quot;</div><div class="line">        traffic_be=(`awk -v eth=$eth -F&apos;[: ]+&apos; &apos;&#123;if ($0 ~eth)&#123;print $3,$11&#125;&#125;&apos; /proc/net/dev`)</div><div class="line">        sleep 2</div><div class="line">        traffic_af=(`awk -v eth=$eth -F&apos;[: ]+&apos; &apos;&#123;if ($0 ~eth)&#123;print $3,$11&#125;&#125;&apos; /proc/net/dev`)</div><div class="line">        #计算速率</div><div class="line">        eth_in=$(( ($&#123;traffic_af[0]&#125;-$&#123;traffic_be[0]&#125;)*8/2 ))</div><div class="line">        eth_out=$(( ($&#123;traffic_af[1]&#125;-$&#123;traffic_be[1]&#125;)*8/2 ))</div><div class="line">        #计算流量峰值</div><div class="line">        [[ $eth_in -gt $eth_in_peak ]] &amp;&amp; eth_in_peak=$eth_in</div><div class="line">        [[ $eth_out -gt $eth_out_peak ]] &amp;&amp; eth_out_peak=$eth_out</div><div class="line">        #移动光标到2:1</div><div class="line">        printf &quot;\033[2;1H&quot;</div><div class="line">        #清除当前行</div><div class="line">        printf &quot;\033[K&quot;   </div><div class="line">        printf &quot;%-20s %-20s\n&quot; &quot;Receive:  $(bit_to_human_readable $eth_in)&quot; &quot;$(bit_to_human_readable $eth_in_peak)&quot;</div><div class="line">        #清除当前行</div><div class="line">        printf &quot;\033[K&quot;</div><div class="line">        printf &quot;%-20s %-20s\n&quot; &quot;Transmit: $(bit_to_human_readable $eth_out)&quot; &quot;$(bit_to_human_readable $eth_out_peak)&quot;</div><div class="line">        [[ $clear == true ]] &amp;&amp; clear=false</div><div class="line">    done</div><div class="line">&#125;</div><div class="line"></div><div class="line">#流量和连接概览</div><div class="line">trafficAndConnectionOverview()&#123;</div><div class="line">    if ! which tcpdump &gt; /dev/null;then</div><div class="line">        echo &quot;tcpdump not found,going to install it.&quot;</div><div class="line">        if check_package_manager apt;then</div><div class="line">            apt-get -y install tcpdump</div><div class="line">        elif check_package_manager yum;then</div><div class="line">            yum -y install tcpdump</div><div class="line">        fi</div><div class="line">    fi</div><div class="line"></div><div class="line">    local reg=&quot;&quot;</div><div class="line">    local eth=&quot;&quot;</div><div class="line">    local nic_arr=(`ifconfig | grep -E -o &quot;^[a-z0-9]+&quot; | grep -v &quot;lo&quot; | uniq`)</div><div class="line">    local nicLen=$&#123;#nic_arr[@]&#125;</div><div class="line">    if [[ $nicLen -eq 0 ]]; then</div><div class="line">        echo &quot;sorry,I can not detect any network device,please report this issue to author.&quot;</div><div class="line">        exit 1</div><div class="line">    elif [[ $nicLen -eq 1 ]]; then</div><div class="line">        eth=$nic_arr</div><div class="line">    else</div><div class="line">        display_menu nic</div><div class="line">        eth=$nic</div><div class="line">    fi</div><div class="line"></div><div class="line">    echo &quot;please wait for 10s to generate network data...&quot;</div><div class="line">    echo</div><div class="line">    #当前流量值</div><div class="line">    local traffic_be=(`awk -v eth=$eth -F&apos;[: ]+&apos; &apos;&#123;if ($0 ~eth)&#123;print $3,$11&#125;&#125;&apos; /proc/net/dev`)</div><div class="line">    #tcpdump监听网络</div><div class="line">    tcpdump -v -i $eth -tnn &gt; /tmp/tcpdump_temp 2&gt;&amp;1 &amp;</div><div class="line">    sleep 10</div><div class="line">    clear</div><div class="line">    kill `ps aux | grep tcpdump | grep -v grep | awk &apos;&#123;print $2&#125;&apos;`</div><div class="line"></div><div class="line">    #10s后流量值</div><div class="line">    local traffic_af=(`awk -v eth=$eth -F&apos;[: ]+&apos; &apos;&#123;if ($0 ~eth)&#123;print $3,$11&#125;&#125;&apos; /proc/net/dev`)</div><div class="line">    #打印10s平均速率</div><div class="line">    local eth_in=$(( ($&#123;traffic_af[0]&#125;-$&#123;traffic_be[0]&#125;)*8/10 ))</div><div class="line">    local eth_out=$(( ($&#123;traffic_af[1]&#125;-$&#123;traffic_be[1]&#125;)*8/10 ))</div><div class="line">    echo -e &quot;\033[32mnetwork device $eth average traffic in 10s: \033[0m&quot;</div><div class="line">    echo &quot;$eth Receive: $(bit_to_human_readable $eth_in)/s&quot;</div><div class="line">    echo &quot;$eth Transmit: $(bit_to_human_readable $eth_out)/s&quot;</div><div class="line">    echo</div><div class="line"></div><div class="line">    local regTcpdump=$(ifconfig | grep -A 1 $eth | awk -F&apos;[: ]+&apos; &apos;$0~/inet addr:/&#123;printf $4&quot;|&quot;&#125;&apos; | sed -e &apos;s/|$//&apos; -e &apos;s/^/(/&apos; -e &apos;s/$/)\\\\\.[0-9]+:/&apos;)</div><div class="line"></div><div class="line">    #新旧版本tcpdump输出格式不一样,分别处理</div><div class="line">    if awk &apos;/^IP/&#123;print;exit&#125;&apos; /tmp/tcpdump_temp | grep -q &quot;)$&quot;;then</div><div class="line">        #处理tcpdump文件</div><div class="line">        awk &apos;/^IP/&#123;print;getline;print&#125;&apos; /tmp/tcpdump_temp &gt; /tmp/tcpdump_temp2</div><div class="line">    else</div><div class="line">        #处理tcpdump文件</div><div class="line">        awk &apos;/^IP/&#123;print&#125;&apos; /tmp/tcpdump_temp &gt; /tmp/tcpdump_temp2</div><div class="line">        sed -i -r &apos;s#(.*: [0-9]+\))(.*)#\1\n    \2#&apos; /tmp/tcpdump_temp2</div><div class="line">    fi</div><div class="line"></div><div class="line">    awk &apos;&#123;len=$NF;sub(/\)/,&quot;&quot;,len);getline;print $0,len&#125;&apos; /tmp/tcpdump_temp2 &gt; /tmp/tcpdump</div><div class="line"></div><div class="line">    #统计每个端口在10s内的平均流量</div><div class="line">    echo -e &quot;\033[32maverage traffic in 10s base on server port: \033[0m&quot;</div><div class="line">    awk -F&apos;[ .:]+&apos; -v regTcpdump=$regTcpdump &apos;&#123;if ($0 ~ regTcpdump)&#123;line=&quot;clients &gt; &quot;$8&quot;.&quot;$9&quot;.&quot;$10&quot;.&quot;$11&quot;:&quot;$12&#125;else&#123;line=$2&quot;.&quot;$3&quot;.&quot;$4&quot;.&quot;$5&quot;:&quot;$6&quot; &gt; clients&quot;&#125;;sum[line]+=$NF*8/10&#125;END&#123;for (line in sum)&#123;printf &quot;%s %d\n&quot;,line,sum[line]&#125;&#125;&apos; /tmp/tcpdump | \</div><div class="line">    sort -k 4 -nr | head -n 10 | while read a b c d;do</div><div class="line">        echo &quot;$a $b $c $(bit_to_human_readable $d)/s&quot;</div><div class="line">    done</div><div class="line">    echo -ne &quot;\033[11A&quot;</div><div class="line">    echo -ne &quot;\033[50C&quot;</div><div class="line">    echo -e &quot;\033[32maverage traffic in 10s base on client port: \033[0m&quot;</div><div class="line">    awk -F&apos;[ .:]+&apos; -v regTcpdump=$regTcpdump &apos;&#123;if ($0 ~ regTcpdump)&#123;line=$2&quot;.&quot;$3&quot;.&quot;$4&quot;.&quot;$5&quot;:&quot;$6&quot; &gt; server&quot;&#125;else&#123;line=&quot;server &gt; &quot;$8&quot;.&quot;$9&quot;.&quot;$10&quot;.&quot;$11&quot;:&quot;$12&#125;;sum[line]+=$NF*8/10&#125;END&#123;for (line in sum)&#123;printf &quot;%s %d\n&quot;,line,sum[line]&#125;&#125;&apos; /tmp/tcpdump | \</div><div class="line">    sort -k 4 -nr | head -n 10 | while read a b c d;do</div><div class="line">            echo -ne &quot;\033[50C&quot;</div><div class="line">            echo &quot;$a $b $c $(bit_to_human_readable $d)/s&quot;</div><div class="line">    done   </div><div class="line"></div><div class="line">    echo</div><div class="line"></div><div class="line">    #统计在10s内占用带宽最大的前10个ip</div><div class="line">    echo -e &quot;\033[32mtop 10 ip average traffic in 10s base on server: \033[0m&quot;</div><div class="line">    awk -F&apos;[ .:]+&apos; -v regTcpdump=$regTcpdump &apos;&#123;if ($0 ~ regTcpdump)&#123;line=$2&quot;.&quot;$3&quot;.&quot;$4&quot;.&quot;$5&quot; &gt; &quot;$8&quot;.&quot;$9&quot;.&quot;$10&quot;.&quot;$11&quot;:&quot;$12&#125;else&#123;line=$2&quot;.&quot;$3&quot;.&quot;$4&quot;.&quot;$5&quot;:&quot;$6&quot; &gt; &quot;$8&quot;.&quot;$9&quot;.&quot;$10&quot;.&quot;$11&#125;;sum[line]+=$NF*8/10&#125;END&#123;for (line in sum)&#123;printf &quot;%s %d\n&quot;,line,sum[line]&#125;&#125;&apos; /tmp/tcpdump | \</div><div class="line">    sort -k 4 -nr | head -n 10 | while read a b c d;do</div><div class="line">        echo &quot;$a $b $c $(bit_to_human_readable $d)/s&quot;</div><div class="line">    done</div><div class="line">    echo -ne &quot;\033[11A&quot;</div><div class="line">    echo -ne &quot;\033[50C&quot;</div><div class="line">    echo -e &quot;\033[32mtop 10 ip average traffic in 10s base on client: \033[0m&quot;</div><div class="line">    awk -F&apos;[ .:]+&apos; -v regTcpdump=$regTcpdump &apos;&#123;if ($0 ~ regTcpdump)&#123;line=$2&quot;.&quot;$3&quot;.&quot;$4&quot;.&quot;$5&quot;:&quot;$6&quot; &gt; &quot;$8&quot;.&quot;$9&quot;.&quot;$10&quot;.&quot;$11&#125;else&#123;line=$2&quot;.&quot;$3&quot;.&quot;$4&quot;.&quot;$5&quot; &gt; &quot;$8&quot;.&quot;$9&quot;.&quot;$10&quot;.&quot;$11&quot;:&quot;$12&#125;;sum[line]+=$NF*8/10&#125;END&#123;for (line in sum)&#123;printf &quot;%s %d\n&quot;,line,sum[line]&#125;&#125;&apos; /tmp/tcpdump | \</div><div class="line">    sort -k 4 -nr | head -n 10 | while read a b c d;do</div><div class="line">        echo -ne &quot;\033[50C&quot;</div><div class="line">        echo &quot;$a $b $c $(bit_to_human_readable $d)/s&quot;</div><div class="line">    done</div><div class="line"></div><div class="line">    echo</div><div class="line">    #统计连接状态</div><div class="line">    local regSS=$(ifconfig | grep -A 1 $eth | awk -F&apos;[: ]+&apos; &apos;$0~/inet addr:/&#123;printf $4&quot;|&quot;&#125;&apos; | sed -e &apos;s/|$//&apos;)</div><div class="line">    ss -an | grep -v -E &quot;LISTEN|UNCONN&quot; | grep -E &quot;$regSS&quot; &gt; /tmp/ss</div><div class="line">    echo -e &quot;\033[32mconnection state count: \033[0m&quot;</div><div class="line">    awk &apos;NR&gt;1&#123;sum[$(NF-4)]+=1&#125;END&#123;for (state in sum)&#123;print state,sum[state]&#125;&#125;&apos; /tmp/ss | sort -k 2 -nr</div><div class="line">    echo</div><div class="line">    #统计各端口连接状态</div><div class="line">    echo -e &quot;\033[32mconnection state count by port base on server: \033[0m&quot;</div><div class="line">    awk &apos;NR&gt;1&#123;sum[$(NF-4),$(NF-1)]+=1&#125;END&#123;for (key in sum)&#123;split(key,subkey,SUBSEP);print subkey[1],subkey[2],sum[subkey[1],subkey[2]]&#125;&#125;&apos; /tmp/ss | sort -k 3 -nr | head -n 10   </div><div class="line">    echo -ne &quot;\033[11A&quot;</div><div class="line">    echo -ne &quot;\033[50C&quot;</div><div class="line">    echo -e &quot;\033[32mconnection state count by port base on client: \033[0m&quot;</div><div class="line">    awk &apos;NR&gt;1&#123;sum[$(NF-4),$(NF)]+=1&#125;END&#123;for (key in sum)&#123;split(key,subkey,SUBSEP);print subkey[1],subkey[2],sum[subkey[1],subkey[2]]&#125;&#125;&apos; /tmp/ss | sort -k 3 -nr | head -n 10 | awk &apos;&#123;print &quot;\033[50C&quot;$0&#125;&apos;   </div><div class="line">    echo   </div><div class="line">    #统计端口为80且状态为ESTAB连接数最多的前10个IP</div><div class="line">    echo -e &quot;\033[32mtop 10 ip ESTAB state count at port 80: \033[0m&quot;</div><div class="line">    cat /tmp/ss | grep ESTAB | awk -F&apos;[: ]+&apos; &apos;&#123;sum[$(NF-2)]+=1&#125;END&#123;for (ip in sum)&#123;print ip,sum[ip]&#125;&#125;&apos; | sort -k 2 -nr | head -n 10</div><div class="line">    echo</div><div class="line">    #统计端口为80且状态为SYN-RECV连接数最多的前10个IP</div><div class="line">    echo -e &quot;\033[32mtop 10 ip SYN-RECV state count at port 80: \033[0m&quot;</div><div class="line">    cat /tmp/ss | grep -E &quot;$regSS&quot; | grep SYN-RECV | awk -F&apos;[: ]+&apos; &apos;&#123;sum[$(NF-2)]+=1&#125;END&#123;for (ip in sum)&#123;print ip,sum[ip]&#125;&#125;&apos; | sort -k 2 -nr | head -n 10</div><div class="line">&#125;</div><div class="line"></div><div class="line">main()&#123;</div><div class="line">    while true; do</div><div class="line">        echo -e &quot;1) real time traffic.\n2) traffic and connection overview.\n&quot;</div><div class="line">        read -p &quot;please input your select(ie 1): &quot; select</div><div class="line">        case  $select in</div><div class="line">            1) realTimeTraffic;break;;</div><div class="line">            2) trafficAndConnectionOverview;break;;</div><div class="line">            *) echo &quot;input error,please input a number.&quot;;;</div><div class="line">        esac</div><div class="line">    done   </div><div class="line">&#125;</div><div class="line"></div><div class="line">main</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/01/19/检测NetWork/" data-id="cj4gn2lzi001xngjt93s9dett" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Centos加硬盘" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/11/Centos加硬盘/" class="article-date">
+  <time datetime="2017-01-11T00:00:00.000Z" itemprop="datePublished">2017-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/11/Centos加硬盘/">Centos7 加硬盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Centos-增加硬盘"><a href="#Centos-增加硬盘" class="headerlink" title="Centos 增加硬盘"></a>Centos 增加硬盘</h1><h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><p>在正常运行CentOS 7.1的机器上添加一块80G的新硬盘.</p>
+<h2 id="系统："><a href="#系统：" class="headerlink" title="系统："></a>系统：</h2><pre><code># cat /etc/redhat-release
+CentOS Linux release 7.1.1503 (Core)
+
+# uname -a
+Linux localhost.localdomain 3.10.0-229.el7.x86_64 #1 SMP Fri Mar 6 11:36:42 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux     
+</code></pre><h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><ul>
+<li>关机、加硬盘、开机</li>
+<li><p>查看硬盘是否识别到</p>
+<pre><code># fdisk -l
+
+Disk /dev/sda: 500.1 GB, 500107862016 bytes, 976773168 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0xf0b1ebb0
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        4096   209723391   104859648    7  HPFS/NTFS/exFAT
+/dev/sda2       209723392   210747391      512000   83  Linux
+/dev/sda3       210747392   976773119   383012864   8e  Linux LVM
+
+Disk /dev/sdb: 80.0 GB, 80026361856 bytes, 156301488 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x947748e0
+</code></pre></li>
+<li><p>fdisk /dev/sdb 硬盘分区</p>
+<pre><code># fdisk /dev/sdb
+Welcome to fdisk (util-linux 2.23.2).
+
+    Changes will remain in memory only, until you decide to write them.
+    Be careful before using the write command.
+</code></pre></li>
+</ul>
+<pre><code>     Command (m for help): m  #帮助
+     Command action
+    a   toggle a bootable flag
+    b   edit bsd disklabel
+    c   toggle the dos compatibility flag
+    d   delete a partition
+    g   create a new empty GPT partition table
+    G   create an IRIX (SGI) partition table
+    l   list known partition types
+    m   print this menu
+    n   add a new partition
+    o   create a new empty DOS partition table
+    p   print the partition table
+q   quit without saving changes
+</code></pre><p>   s   create a new empty Sun disklabel<br>   t   change a partition’s system id<br>   u   change display/entry units<br>   v   verify the partition table<br>   w   write table to disk and exit<br>   x   extra functionality (experts only)</p>
+<pre><code>Command (m for help): p  #查看分区
+
+Disk /dev/sdb: 80.0 GB, 80026361856 bytes, 156301488 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk label type: dos
+Disk identifier: 0x947748e0
+
+   Device Boot      Start         End      Blocks   Id  System
+
+Command (m for help): n   #新建分区
+Partition type:
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended
+Select (default p): p    #主分区
+Partition number (1-4, default 1): 1    #分区个数
+First sector (2048-156301487, default 2048):     #使用所有，直接回车
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-156301487, default 156301487): #直接回车
+Using default value 156301487
+Partition 1 of type Linux and of size 74.5 GiB is set
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+</code></pre><ul>
+<li><p>查看分区是否成功</p>
+<h1 id="ll-dev-sdb"><a href="#ll-dev-sdb" class="headerlink" title="ll /dev/sdb*"></a>ll /dev/sdb*</h1><p>brw-rw—-. 1 root disk 8, 16 Apr 15 22:11 /dev/sdb<br>brw-rw—-. 1 root disk 8, 17 Apr 15 22:11 /dev/sdb1</p>
+</li>
+<li><p>格式化分区</p>
+<h1 id="mkfs-系统支持的文件系统格式"><a href="#mkfs-系统支持的文件系统格式" class="headerlink" title="mkfs    #系统支持的文件系统格式"></a>mkfs    #系统支持的文件系统格式</h1><p>mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs</p>
+<h1 id="mkfs-xfs-dev-sdb1-CentOS7-1-默认的文件系统为xfs，保存同系统一致"><a href="#mkfs-xfs-dev-sdb1-CentOS7-1-默认的文件系统为xfs，保存同系统一致" class="headerlink" title="mkfs.xfs /dev/sdb1   #CentOS7.1 默认的文件系统为xfs，保存同系统一致"></a>mkfs.xfs /dev/sdb1   #CentOS7.1 默认的文件系统为xfs，保存同系统一致</h1></li>
+<li><p>挂载新硬盘，并添加到 /etc/fstab自动挂载</p>
+</li>
+</ul>
+<p>mkdir /newdisk<br>mount /dev/sdb1 /newdisk</p>
+<h1 id="vi-etc-fstab"><a href="#vi-etc-fstab" class="headerlink" title="vi /etc/fstab"></a>vi /etc/fstab</h1><h1 id="etc-fstab"><a href="#etc-fstab" class="headerlink" title="/etc/fstab"></a>/etc/fstab</h1><h1 id="Created-by-anaconda-on-Wed-Apr-15-18-50-24-2015"><a href="#Created-by-anaconda-on-Wed-Apr-15-18-50-24-2015" class="headerlink" title="Created by anaconda on Wed Apr 15 18:50:24 2015"></a>Created by anaconda on Wed Apr 15 18:50:24 2015</h1><p>  #</p>
+<h1 id="Accessible-filesystems-by-reference-are-maintained-under-‘-dev-disk’"><a href="#Accessible-filesystems-by-reference-are-maintained-under-‘-dev-disk’" class="headerlink" title="Accessible filesystems, by reference, are maintained under ‘/dev/disk’"></a>Accessible filesystems, by reference, are maintained under ‘/dev/disk’</h1><h1 id="See-man-pages-fstab-5-findfs-8-mount-8-and-or-blkid-8-for-more-info"><a href="#See-man-pages-fstab-5-findfs-8-mount-8-and-or-blkid-8-for-more-info" class="headerlink" title="See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info"></a>See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info</h1><p>  #<br>  /dev/sdb1               /newdisk            xfs     defaults        0 0</p>
+<ul>
+<li><p>重启验证一下</p>
+<h1 id="df-hT"><a href="#df-hT" class="headerlink" title="df -hT"></a>df -hT</h1><p>Filesystem              Type      Size  Used Avail Use% Mounted on<br>/dev/mapper/centos-root xfs        50G  1.1G   49G   3% /<br>devtmpfs                devtmpfs  927M     0  927M   0% /dev<br>tmpfs                   tmpfs     937M     0  937M   0% /dev/shm<br>tmpfs                   tmpfs     937M  8.5M  928M   1% /run<br>tmpfs                   tmpfs     937M     0  937M   0% /sys/fs/cgroup<br>/dev/sdb1               xfs        75G   33M   75G   1% /newdisk<br>/dev/mapper/centos-home xfs       312G   33M  312G   1% /home<br>/dev/sda2               xfs       497M  121M  377M  25% /boot</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/01/11/Centos加硬盘/" data-id="cj4gn2ly00002ngjt2ey8e97f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Centos/">Centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/硬盘/">硬盘</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ansible优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/29/ansible优化/" class="article-date">
+  <time datetime="2016-12-29T00:00:00.000Z" itemprop="datePublished">2016-12-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/29/ansible优化/">ansible 优化配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ansible-优化"><a href="#ansible-优化" class="headerlink" title="ansible  优化"></a>ansible  优化</h1><h2 id="ControlPersist"><a href="#ControlPersist" class="headerlink" title="ControlPersist"></a>ControlPersist</h2><p>高版本的 ssh 具有 ControlPersist 特性，即 持久化 socket ,一次验证多次通信.并且只需要修改 ssh client 就行了，也就是 ansible 控制机即可</p>
+<h2 id="添加-ControlMaster-的配置"><a href="#添加-ControlMaster-的配置" class="headerlink" title="添加 ControlMaster 的配置"></a>添加 ControlMaster 的配置</h2><p>  cat ~/.ssh/config</p>
+<p>  Host *<br>  Compression yes<br>  ServerAliveInterval 60<br>  ServerAliveCountMax 5<br>  ControlMaster auto<br>  ControlPath ~/.ssh/sockets/%r@%h-%p<br>  ControlPersist 4h</p>
+<h2 id="pipelining"><a href="#pipelining" class="headerlink" title="pipelining"></a>pipelining</h2><blockquote>
+<p>打开此选项可以减少 ansible 执行没有文件传输时 ssh 在远端机器上执行任务的连接数，不过如果使用 sudo ，必须关闭 requiretty 选项，选项默认关闭</p>
+</blockquote>
+<pre><code>pipelining=True
+</code></pre><p>看官方文档说关闭这个是为了兼容不同的 sudo 配置，如果不使用 sudo，还是推荐开启的，这边本地通过管理十台云主机的批量执行命令，已经可以直观感受到执行速度的差异了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/29/ansible优化/" data-id="cj4gn2lyf000engjtkum2p6fn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ansible/">ansible</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Install_Atom" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/25/Install_Atom/" class="article-date">
+  <time datetime="2016-12-25T00:00:00.000Z" itemprop="datePublished">2016-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/25/Install_Atom/">linux下安装 Atom</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="linux下安装atom"><a href="#linux下安装atom" class="headerlink" title="linux下安装atom"></a>linux下安装atom</h1><p>在你的Ubuntu/Linux Mint上安装文本编辑器：Atom</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-get update
+sudo apt-get install atom
+</code></pre><h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><pre><code>sudo apt-get remove atom
+sudo add-apt-repository --remove ppa:webupd8team/atom
+以上只会卸载该软件，要卸载附加的一些软件包，请使用以下命令卸载多余的软件包：
+
+sudo apt-get autoremove
+</code></pre><h2 id="常用命令集合"><a href="#常用命令集合" class="headerlink" title="常用命令集合"></a>常用命令集合</h2><h3 id="文件切换"><a href="#文件切换" class="headerlink" title="文件切换"></a>文件切换</h3><pre><code>ctrl-shift-s 保存所有打开的文件
+cmd-shift-o 打开目录
+cmd-\ 显示或隐藏目录树
+ctrl-0 焦点移到目录树
+目录树下，使用a，m，delete来增加，修改和删除
+cmd-t或cmd-p 查找文件
+cmd-b 在打开的文件之间切换
+cmd-shift-b 只搜索从上次git commit后修改或者新增的文件
+</code></pre><h3 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h3><pre><code>（等价于上下左右）
+ctrl-p 前一行
+ctrl-n 后一行
+ctrl-f 前一个字符
+ctrl-b 后一个字符
+
+alt-B, alt-left 移动到单词开始
+alt-F, alt-right 移动到单词末尾
+
+cmd-right, ctrl-E 移动到一行结束
+cmd-left, ctrl-A 移动到一行开始
+
+cmd-up 移动到文件开始
+cmd-down 移动到文件结束
+
+ctrl-g 移动到指定行 row:column 处
+
+cmd-r 在方法之间跳转
+</code></pre><h3 id="目录树操作"><a href="#目录树操作" class="headerlink" title="目录树操作"></a>目录树操作</h3><pre><code>cmd-\ 或者 cmd-k cmd-b 显示(隐藏)目录树
+ctrl-0 焦点切换到目录树(再按一次或者Esc退出目录树)
+a 添加文件
+d 将当前文件另存为(duplicate)
+i 显示(隐藏)版本控制忽略的文件
+alt-right 和 alt-left 展开(隐藏)所有目录
+ctrl-al-] 和 ctrl-al-[ 同上
+ctrl-[ 和 ctrl-] 展开(隐藏)当前目录
+ctrl-f 和 ctrl-b 同上
+cmd-k h 或者 cmd-k left 在左半视图中打开文件
+cmd-k j 或者 cmd-k down 在下半视图中打开文件
+cmd-k k 或者 cmd-k up 在上半视图中打开文件
+cmd-k l 或者 cmd-k right 在右半视图中打开文件
+ctrl-shift-C 复制当前文件绝对路径
+</code></pre><h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3><pre><code>cmd-F2 在本行增加书签
+F2 跳到当前文件的下一条书签
+shift-F2 跳到当前文件的上一条书签
+ctrl-F2 列出当前工程所有书签
+</code></pre><h3 id="选取"><a href="#选取" class="headerlink" title="选取"></a>选取</h3><pre><code>大部分和导航一致，只不过加上shift
+ctrl-shift-P 选取至上一行
+ctrl-shift-N 选取至下一样
+ctrl-shift-B 选取至前一个字符
+ctrl-shift-F 选取至后一个字符
+alt-shift-B, alt-shift-left 选取至字符开始
+alt-shift-F, alt-shift-right 选取至字符结束
+ctrl-shift-E, cmd-shift-right 选取至本行结束
+ctrl-shift-A, cmd-shift-left 选取至本行开始
+cmd-shift-up 选取至文件开始
+cmd-shift-down 选取至文件结尾
+cmd-A 全选
+cmd-L 选取一行，继续按回选取下一行
+ctrl-shift-W 选取当前单词
+</code></pre><h3 id="编辑和删除文本"><a href="#编辑和删除文本" class="headerlink" title="编辑和删除文本"></a>编辑和删除文本</h3><p>基本操作</p>
+<pre><code>ctrl-T 使光标前后字符交换
+cmd-J 将下一行与当前行合并
+ctrl-cmd-up, ctrl-cmd-down 使当前行向上或者向下移动
+cmd-shift-D 复制当前行到下一行
+cmd-K, cmd-U 使当前字符大写
+cmd-K, cmd-L 使当前字符小写
+cmd-shift-P 搜索命令
+</code></pre><h3 id="删除和剪切"><a href="#删除和剪切" class="headerlink" title="删除和剪切"></a>删除和剪切</h3><pre><code>ctrl-shift-K 删除当前行
+cmd-backspace 删除到当前行开始
+cmd-fn-backspace 删除到当前行结束
+ctrl-K 剪切到当前行结束
+alt-backspace 或 alt-H 删除到当前单词开始
+alt-delete 或 alt-D 删除到当前单词结束
+</code></pre><h3 id="多光标和多处选取"><a href="#多光标和多处选取" class="headerlink" title="多光标和多处选取"></a>多光标和多处选取</h3><pre><code>cmd-click 增加新光标
+cmd-shift-L 将多行选取改为多行光标
+ctrl-shift-up, ctrl-shift-down 增加上（下）一行光标
+cmd-D 选取文档中和当前单词相同的下一处
+ctrl-cmd-G 选取文档中所有和当前光标单词相同的位置
+</code></pre><h3 id="括号跳转"><a href="#括号跳转" class="headerlink" title="括号跳转"></a>括号跳转</h3><pre><code>ctrl-m 相应括号之间，html tag之间等跳转
+ctrl-cmd-m 括号(tag)之间文本选取
+alt-cmd-. 关闭当前XML/HTML tag
+</code></pre><h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><pre><code>ctrl-shift-U 调出切换编码选项
+</code></pre><h3 id="查找和替换"><a href="#查找和替换" class="headerlink" title="查找和替换"></a>查找和替换</h3><pre><code>cmd-F 在buffer中查找
+cmd-shift-f 在整个工程中查找
+</code></pre><h3 id="代码片段"><a href="#代码片段" class="headerlink" title="代码片段"></a>代码片段</h3><pre><code>alt-shift-S 查看当前可用代码片段
+
+在~/.atom目录下snippets.cson文件中存放了你定制的snippets
+定制说明
+</code></pre><h3 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h3><pre><code>ctrl-space 提示补全信息
+</code></pre><h3 id="折叠"><a href="#折叠" class="headerlink" title="折叠"></a>折叠</h3><pre><code>alt-cmd-[ 折叠
+alt-cmd-] 展开
+alt-cmd-shift-{ 折叠全部
+alt-cmd-shift-} 展开全部
+cmd-k cmd-N 指定折叠层级 N为层级数
+</code></pre><h3 id="文件语法高亮"><a href="#文件语法高亮" class="headerlink" title="文件语法高亮"></a>文件语法高亮</h3><pre><code>ctrl-shift-L 选择文本类型
+
+使用Atom进行写作
+
+ctrl-shift-M Markdown预览
+可用代码片段
+
+b, legal, img, l, i, code, t, table
+git操作
+
+cmd-alt-Z checkout HEAD 版本
+cmd-shift-B 弹出untracked 和 modified文件列表
+alt-g down alt-g up 在修改处跳转
+alt-G D 弹出diff列表
+alt-G O 在github上打开文件
+alt-G G 在github上打开项目地址
+alt-G B 在github上打开文件blame
+alt-G H 在github上打开文件history
+alt-G I 在github上打开issues
+alt-G R 在github打开分支比较
+alt-G C 拷贝当前文件在gihub上的网址
+</code></pre><h3 id="推荐一些好用的插件"><a href="#推荐一些好用的插件" class="headerlink" title="推荐一些好用的插件"></a>推荐一些好用的插件</h3><pre><code>主题
+atom-material-ui 好看到爆
+atom-material-syntax
+美化
+atom-beautify 一键代码美化
+file-icons 给文件加上好看的图标
+atom-minimap 方便美观的缩略滚动图
+pretty-json json格式化工具
+activate-power-mode 炫酷的打字特效
+git
+atomatigit 可视化git操作
+git-time-machine git版本对比工具，可视化选择每一个commit
+merge-conflicts 合并冲突可视化工具
+代码提示
+emmet 这个不用介绍了吧
+atom-ternjs js代码提示很强大，高度定制化
+docblockr jsdoc 给js添加注释
+autoclose-html 闭合html标签
+color-picker 取色器 必备插件
+pigments 颜色显示插件 必装
+terminal-panel 直接在atom里面写命令了
+svg-preview svg预览
+便捷操作
+advanced-open-file 快速打开、切换文件
+project-folder 快速打开、切换项目
+script 立即执行当前js文件
+高亮
+language-vue vue框架代码高亮
+终端
+platformio-atom-ide-terminal 终端插件，支持显示、隐藏及多窗口
+就这些了，欢迎pull更多好用的插件！
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/25/Install_Atom/" data-id="cj4gn2ly70006ngjtedwp9qdu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Atom/">Atom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件/">软件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

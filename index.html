@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="个人文章博客站点">
+<meta property="og:type" content="website">
+<meta property="og:title" content="kame">
+<meta property="og:url" content="http://www.wokoweb.com/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="个人文章博客站点">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kame">
+<meta name="twitter:description" content="个人文章博客站点">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-mysql备份机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/28/mysql备份机制/" class="article-date">
+  <time datetime="2017-06-28T06:47:28.656Z" itemprop="datePublished">2017-06-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/06/28/mysql备份机制/" data-id="cj4gn2lxe0000ngjtppz06r8g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="layout-suibi" class="article article-type-layout" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/29/suibi/" class="article-date">
+  <time datetime="2017-04-29T10:38:47.000Z" itemprop="datePublished">2017-04-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/29/suibi/">suibi</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/29/suibi/" data-id="cj4gn2lz8001hngjt3nw26ta5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-glusterfs详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/glusterfs详解/" class="article-date">
+  <time datetime="2017-04-20T00:00:00.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>GlusterFS（GNU ClusterFile System）是一个开源的分布式文件系统，它的历史可以追溯到2006年，最初的目标是代替Lustre和GPFS分布式文件系统。经过八年左右的蓬勃发展，GlusterFS目前在开源社区活跃度非常之高，这个后起之秀已经俨然与Lustre、MooseFS、CEPH并列成为四大开源分布式文件系统。由于GlusterFS新颖和KISS（KeepIt as Stupid and Simple）的系统架构，使其在扩展性、可靠性、性能、维护性等方面具有独特的优势，目前开源社区风头有压倒之势，国内外有大量用户在研究、测试和部署应用。</p>
+</blockquote>
+<p>当然，GlusterFS不是一个完美的分布式文件系统，这个系统自身也有许多不足之处，包括众所周知的元数据性能和小文件问题。没有普遍适用各种应用场景的分布式文件系统，通用的意思就是通通不能用，四大开源系统不例外，所有商业产品也不例外。每个分布式文件系统都有它适用的应用场景，适合的才是最好的。这一次我们反其道而行之，不再谈GlusterFS的各种优点，而是深入谈谈GlusterFS当下的问题和不足，从而更加深入地理解GlusterFS系统，期望帮助大家进行正确的系统选型决策和规避应用中的问题。同时，这些问题也是GlusterFS研究和研发的很好切入点。</p>
+<h2 id="元数据性能"><a href="#元数据性能" class="headerlink" title="元数据性能"></a>元数据性能</h2><p>GlusterFS使用弹性哈希算法代替传统分布式文件系统中的集中或分布式元数据服务，这个是GlusterFS最核心的思想，从而获得了接近线性的高扩展性，同时也提高了系统性能和可靠性。GlusterFS使用算法进行数据定位，集群中的任何服务器和客户端只需根据路径和文件名就可以对数据进行定位和读写访问，文件定位可独立并行化进行。</p>
+<p>这种算法的特点是，给定确定的文件名，查找和定位会非常快。但是，如果事先不知道文件名，要列出文件目录（ls或ls -l），性能就会大幅下降。对于Distributed哈希卷，文件通过HASH算法分散到集群节点上，每个节点上的命名空间均不重叠，所有集群共同构成完整的命名空间，访问时使用HASH算法进行查找定位。列文件目录时，需要查询所有节点，并对文件目录信息及属性进行聚合。这时，哈希算法根本发挥不上作用，相对于有中心的元数据服务，查询效率要差很多。</p>
+<p>从我接触的一些用户和实践来看，当集群规模变大以及文件数量达到百万级别时，ls文件目录和rm删除文件目录这两个典型元数据操作就会变得非常慢，创建和删除100万个空文件可能会花上15分钟。如何解决这个问题呢？我们建议合理组织文件目录，目录层次不要太深，单个目录下文件数量不要过多；增大服务器内存配置，并且增大GlusterFS目录缓存参数；网络配置方面，建议采用万兆或者InfiniBand。从研发角度看，可以考虑优化方法提升元数据性能。比如，可以构建全局统一的分布式元数据缓存系统；也可以将元数据与数据重新分离，每个节点上的元数据采用全内存或数据库设计，并采用SSD进行元数据持久化。</p>
+<h2 id="小文件问题"><a href="#小文件问题" class="headerlink" title="小文件问题"></a>小文件问题</h2><p>理论和实践上分析，GlusterFS目前主要适用大文件存储场景，对于小文件尤其是海量小文件，存储效率和访问性能都表现不佳。海量小文件LOSF问题是工业界和学术界公认的难题，GlusterFS作为通用的分布式文件系统，并没有对小文件作额外的优化措施，性能不好也是可以理解的。</p>
+<p>对于LOSF而言，IOPS/OPS是关键性能衡量指标，造成性能和存储效率低下的主要原因包括元数据管理、数据布局和I/O管理、Cache管理、网络开销等方面。从理论分析以及LOSF优化实践来看，优化应该从元数据管理、缓存机制、合并小文件等方面展开，而且优化是一个系统工程，结合硬件、软件，从多个层面同时着手，优化效果会更显著。GlusterFS小文件优化可以考虑这些方法，这里不再赘述，关于小文件问题请参考“海量小文件问题综述”一文。</p>
+<h2 id="集群管理模式"><a href="#集群管理模式" class="headerlink" title="集群管理模式"></a>集群管理模式</h2><p>GlusterFS集群采用全对等式架构，每个节点在集群中的地位是完全对等的，集群配置信息和卷配置信息在所有节点之间实时同步。这种架构的优点是，每个节点都拥有整个集群的配置信息，具有高度的独立自治性，信息可以本地查询。但同时带来的问题的，一旦配置信息发生变化，信息需要实时同步到其他所有节点，保证配置信息一致性，否则GlusterFS就无法正常工作。在集群规模较大时，不同节点并发修改配置时，这个问题表现尤为突出。因为这个配置信息同步模型是网状的，大规模集群不仅信息同步效率差，而且出现数据不一致的概率会增加。</p>
+<p>实际上，大规模集群管理应该是采用集中式管理更好，不仅管理简单，效率也高。可能有人会认为集中式集群管理与GlusterFS的无中心架构不协调，其实不然。GlusterFS 2.0以前，主要通过静态配置文件来对集群进行配置管理，没有Glusterd集群管理服务，这说明glusterd并不是GlusterFS不可或缺的组成部分，它们之间是松耦合关系，可以用其他的方式来替换。从其他分布式系统管理实践来看，也都是采用集群式管理居多，这也算一个佐证，GlusterFS 4.0开发计划也表现有向集中式管理转变的趋势。</p>
+<h2 id="容量负载均衡"><a href="#容量负载均衡" class="headerlink" title="容量负载均衡"></a>容量负载均衡</h2><p>GlusterFS的哈希分布是以目录为基本单位的，文件的父目录利用扩展属性记录了子卷映射信息，子文件在父目录所属存储服务器中进行分布。由于文件目录事先保存了分布信息，因此新增节点不会影响现有文件存储分布，它将从此后的新创建目录开始参与存储分布调度。这种设计，新增节点不需要移动任何文件，但是负载均衡没有平滑处理，老节点负载较重。GlusterFS实现了容量负载均衡功能，可以对已经存在的目录文件进行Rebalance，使得早先创建的老目录可以在新增存储节点上分布，并可对现有文件数据进行迁移实现容量负载均衡。</p>
+<p>GlusterFS目前的容量负载均衡存在一些问题。由于采用Hash算法进行数据分布，容量负载均衡需要对所有数据重新进行计算并分配存储节点，对于那些不需要迁移的数据来说，这个计算是多余的。Hash分布具有随机性和均匀性的特点，数据重新分布之后，老节点会有大量数据迁入和迁出，这个多出了很多数据迁移量。相对于有中心的架构，可谓节点一变而动全身，增加和删除节点增加了大量数据迁移工作。GlusterFS应该优化数据分布，最小化容量负载均衡数据迁移。此外，GlusterFS容量负载均衡也没有很好考虑执行的自动化、智能化和并行化。目前，GlusterFS在增加和删除节点上，需要手工执行负载均衡，也没有考虑当前系统的负载情况，可能影响正常的业务访问。GlusterFS的容量负载均衡是通过在当前执行节点上挂载卷，然后进行文件复制、删除和改名操作实现的，没有在所有集群节点上并发进行，负载均衡性能差。</p>
+<h2 id="数据分布问题"><a href="#数据分布问题" class="headerlink" title="数据分布问题"></a>数据分布问题</h2><p>Glusterfs主要有三种基本的集群模式，即分布式集群(Distributed cluster)、条带集群(Stripe cluster)、复制集群(Replica cluster)。这三种基本集群还可以采用类似堆积木的方式，构成更加复杂的复合集群。三种基本集群各由一个translator来实现，分别由自己独立的命名空间。对于分布式集群，文件通过HASH算法分散到集群节点上，访问时使用HASH算法进行查找定位。复制集群类似RAID1，所有节点数据完全相同，访问时可以选择任意个节点。条带集群与RAID0相似，文件被分成数据块以Round Robin方式分布到所有节点上，访问时根据位置信息确定节点。</p>
+<p>哈希分布可以保证数据分布式的均衡性，但前提是文件数量要足够多，当文件数量较少时，难以保证分布的均衡性，导致节点之间负载不均衡。这个对有中心的分布式系统是很容易做到的，但GlusteFS缺乏集中式的调度，实现起来比较复杂。复制卷包含多个副本，对于读请求可以实现负载均衡，但实际上负载大多集中在第一个副本上，其他副本负载很轻，这个是实现上问题，与理论不太相符。条带卷原本是实现更高性能和超大文件，但在性能方面的表现太差强人意，远远不如哈希卷和复制卷，没有被好好实现，连官方都不推荐应用。</p>
+<h2 id="数据可用性问题"><a href="#数据可用性问题" class="headerlink" title="数据可用性问题"></a>数据可用性问题</h2><p>副本（Replication）就是对原始数据的完全拷贝。通过为系统中的文件增加各种不同形式的副本，保存冗余的文件数据，可以十分有效地提高文件的可用性，避免在地理上广泛分布的系统节点由网络断开或机器故障等动态不可测因素而引起的数据丢失或不可获取。GlusterFS主要使用复制来提供数据的高可用性，通过的集群模式有复制卷和哈希复制卷两种模式。复制卷是文件级RAID1，具有容错能力，数据同步写到多个brick上，每个副本都可以响应读请求。当有副本节点发生故障，其他副本节点仍然正常提供读写服务，故障节点恢复后通过自修复服务或同步访问时自动进行数据同步。</p>
+<p>一般而言，副本数量越多，文件的可靠性就越高，但是如果为所有文件都保存较多的副本数量，存储利用率低（为副本数量分之一），并增加文件管理的复杂度。目前GlusterFS社区正在研发纠删码功能，通过冗余编码提高存储可用性，并且具备较低的空间复杂度和数据冗余度，存储利用率高。</p>
+<p>GlusterFS的复制卷以brick为单位进行镜像，这个模式不太灵活，文件的复制关系不能动态调整，在已经有副本发生故障的情况下会一定程度上降低系统的可用性。对于有元数据服务的分布式系统，复制关系可以是以文件为单位的，文件的不同副本动态分布在多个存储节点上；当有副本发生故障，可以重新选择一个存储节点生成一个新副本，从而保证副本数量，保证可用性。另外，还可以实现不同文件目录配置不同的副本数量，热点文件的动态迁移。对于无中心的GlusterFS系统来说，这些看起来理所当然的功能，实现起来都是要大费周折的。不过值得一提的是，4.0开发计划已经在考虑这方面的副本特性。</p>
+<h2 id="数据安全问题"><a href="#数据安全问题" class="headerlink" title="数据安全问题"></a>数据安全问题</h2><p>GlusterFS以原始数据格式（如EXT4、XFS、ZFS）存储数据，并实现多种数据自动修复机制。因此，系统极具弹性，即使离线情形下文件也可以通过其他标准工具进行访问。如果用户需要从GlusterFS中迁移数据，不需要作任何修改仍然可以完全使用这些数据。</p>
+<p>然而，数据安全成了问题，因为数据是以平凡的方式保存的，接触数据的人可以直接复制和查看。这对很多应用显然是不能接受的，比如云存储系统，用户特别关心数据安全。私有存储格式可以保证数据的安全性，即使泄露也是不可知的。GlusterFS要实现自己的私有格式，在设计实现和数据管理上相对复杂一些，也会对性能产生一定影响。</p>
+<p>GlusterFS在访问文件目录时根据扩展属性判断副本是否一致，这个进行数据自动修复的前提条件。节点发生正常的故障，以及从挂载点进行正常的操作，这些情况下发生的数据不一致，都是可以判断和自动修复的。但是，如果直接从节点系统底层对原始数据进行修改或者破坏，GlusterFS大多情况下是无法判断的，因为数据本身也没有校验，数据一致性无法保证。</p>
+<h2 id="Cache一致性"><a href="#Cache一致性" class="headerlink" title="Cache一致性"></a>Cache一致性</h2><p>为了简化Cache一致性，GlusterFS没有引入客户端写Cache，而采用了客户端只读Cache。GlusterFS采用简单的弱一致性，数据缓存的更新规则是根据设置的失效时间进行重置的。对于缓存的数据，客户端周期性询问服务器，查询文件最后被修改的时间，如果本地缓存的数据早于该时间，则让缓存数据失效，下次读取数据时就去服务器获取最新的数据。</p>
+<p>GlusterFS客户端读Cache刷新的时间缺省是1秒，可以通过重新设置卷参数Performance.cache-refresh-timeout进行调整。这意味着，如果同时有多个用户在读写一个文件，一个用户更新了数据，另一个用户在Cache刷新周期到来前可能读到非最新的数据，即无法保证数据的强一致性。因此实际应用时需要在性能和数据一致性之间进行折中，如果需要更高的数据一致性，就得调小缓存刷新周期，甚至禁用读缓存；反之，是可以把缓存周期调大一点，以提升读性能。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/20/glusterfs详解/" data-id="cj4gn2lyn000pngjtydzvoa94" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/glusterfs/">glusterfs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tmux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/19/tmux/" class="article-date">
+  <time datetime="2017-04-19T00:00:00.000Z" itemprop="datePublished">2017-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/19/tmux/">tmux 使用配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="此类配置可以在命令行模式中输入show-options-g查询"><a href="#此类配置可以在命令行模式中输入show-options-g查询" class="headerlink" title="此类配置可以在命令行模式中输入show-options -g查询"></a>此类配置可以在命令行模式中输入show-options -g查询</h1><pre><code>set-option -g base-index 1                        # 窗口的初始序号；默认为0，这里设置为1
+set-option -g display-time 5000                   # 提示信息的持续时间；设置足够的时间以避免看不清提示，单位为毫秒
+set-option -g repeat-time 1000                    # 控制台激活后的持续时间；设置合适的时间以避免每次操作都要先激活控制台，单位为毫秒
+set-option -g status-keys vi                      # 操作状态栏时的默认键盘布局；可以设置为vi或emacs
+set-option -g status-utf8 on                      # 开启状态栏的UTF-8支持
+
+set-option -g status-bg blue
+set-option -g status-fg &apos;#bbbbbb&apos;
+set-option -g status-left-fg green
+set-option -g status-left-bg blue
+set-option -g status-right-fg green
+set-option -g status-right-bg blue
+set-option -g status-left-length 10               # 状态栏左方的内容长度；
+set-option -g status-right-length 15              # 状态栏右方的内容长度；建议把更多的空间留给状态栏左方（用于列出当前窗口）
+set-option -g status-left &apos;[#(whoami)]&apos;           # 状态栏左方的内容
+set-option -g status-right &apos;[#(date +&quot; %m-%d %H:%M &quot;)]&apos;     # 状态栏右方的内容；这里的设置将得到类似23:59的显示
+set-option -g status-justify &quot;centre&quot;             # 窗口列表居中显示
+set-option -g default-terminal &quot;screen-256color&quot;  # 支持256色显示
+</code></pre><h1 id="分割窗口边界的颜色"><a href="#分割窗口边界的颜色" class="headerlink" title="分割窗口边界的颜色"></a>分割窗口边界的颜色</h1><pre><code>set-option -g pane-active-border-fg &apos;#55ff55&apos;
+set-option -g pane-border-fg &apos;#555555&apos;
+</code></pre><h1 id="此类设置可以在命令行模式中输入show-window-options-g查询"><a href="#此类设置可以在命令行模式中输入show-window-options-g查询" class="headerlink" title="此类设置可以在命令行模式中输入show-window-options -g查询"></a>此类设置可以在命令行模式中输入show-window-options -g查询</h1><pre><code>set-window-option -g mode-keys vi    # 复制模式中的默认键盘布局；可以设置为vi或emacs
+set-window-option -g utf8 on         # 开启窗口的UTF-8支持
+set-window-option -g mode-mouse on   # 窗口切换后让人可以用鼠标上下滑动显示历史输出
+</code></pre><h1 id="窗口切分快捷键"><a href="#窗口切分快捷键" class="headerlink" title="窗口切分快捷键"></a>窗口切分快捷键</h1><pre><code>bind \ split-window -h                      # 使用 \ 将窗口竖切
+bind - split-window -v                      # 使用 - 将窗口横切
+bind K confirm-before -p &quot;kill-window #W? (y/n)&quot; kill-window    # 使用大写 K 来关闭窗口
+bind &apos;&quot;&apos; choose-window                      # 双引号选择窗口
+</code></pre><h1 id="Pane之间切换的快捷键"><a href="#Pane之间切换的快捷键" class="headerlink" title="Pane之间切换的快捷键"></a>Pane之间切换的快捷键</h1><pre><code>bind h select-pane -L                       # 定位到左边窗口的快捷键
+bind j select-pane -D                       # 定位到上边窗口的快捷键
+bind k select-pane -U                       # 定位到下方窗口的快捷键
+bind l select-pane -R                       # 定位到右边窗口的快捷键
+</code></pre><h1 id="设置window属性"><a href="#设置window属性" class="headerlink" title="设置window属性"></a>设置window属性</h1><pre><code>setw -g window-status-current-bg red
+setw -g window-status-current-fg white
+setw -g window-status-current-attr bright
+setw -g window-status-attr bright
+set-option -g window-status-format &apos;#I #W&apos;
+set-option -g window-status-current-format &apos; #I #W &apos;
+setw -g window-status-current-bg blue
+setw -g window-status-current-fg green
+</code></pre><h1 id="不使用prefix键，使用Ctrl和左右方向键方便切换窗口"><a href="#不使用prefix键，使用Ctrl和左右方向键方便切换窗口" class="headerlink" title="不使用prefix键，使用Ctrl和左右方向键方便切换窗口"></a>不使用prefix键，使用Ctrl和左右方向键方便切换窗口</h1><pre><code>bind-key -n &quot;C-Left&quot; select-window -t :-
+bind-key -n &quot;C-Right&quot; select-window -t :+
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/19/tmux/" data-id="cj4gn2lza001kngjtomc87bxo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-glusterfs集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/11/glusterfs集群搭建/" class="article-date">
+  <time datetime="2017-04-11T00:00:00.000Z" itemprop="datePublished">2017-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="glusrefs-历史及由来"><a href="#glusrefs-历史及由来" class="headerlink" title="glusrefs  历史及由来"></a>glusrefs  历史及由来</h1><blockquote>
+<p>GlusterFS 是近年兴起的一个高性能开源分布式文件系统，其目标是全局命名空间、分布式前端的高性能文件系统，目前已被 RedHat 看中，GlusterFS 具有高扩展、高可性、高性能、可横向扩展等特点，并且 GlusterFS 没有元数据服务器的设计，使其没有单点故障问题。</p>
+</blockquote>
+<h1 id="GlusterFS-集群搭建"><a href="#GlusterFS-集群搭建" class="headerlink" title="GlusterFS 集群搭建"></a>GlusterFS 集群搭建</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>搭建环境如下</p>
+<table>
+<thead>
+<tr>
+<th>主机</th>
+<th>域名</th>
+<th>磁盘</th>
+<th>大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.1.100</td>
+<td>test-server1</td>
+<td>/dev/sdb</td>
+<td>50G</td>
+</tr>
+<tr>
+<td>192.168.1.107</td>
+<td>test-server2</td>
+<td>/dev/sdb</td>
+<td>50G</td>
+</tr>
+<tr>
+<td>192.168.1.126</td>
+<td>test-server3</td>
+<td>/dev/sdb</td>
+<td>50G</td>
+</tr>
+<tr>
+<td>192.168.1.217</td>
+<td>test-server4</td>
+<td>/dev/sdb</td>
+<td>50G</td>
+</tr>
+</tbody>
+</table>
+<h2 id="安装-GlusterFS"><a href="#安装-GlusterFS" class="headerlink" title="安装 GlusterFS"></a>安装 GlusterFS</h2><blockquote>
+<p>CentOS7 默认官方 yum 源中有 GlusterFS 相关的 rpm 包，但是发现没有 server 端的，官方给出的安装命令如下</p>
+</blockquote>
+<h1 id="安装-GlusterFS-yum-源"><a href="#安装-GlusterFS-yum-源" class="headerlink" title="安装 GlusterFS yum 源"></a>安装 GlusterFS yum 源</h1><p>  yum install -y centos-release-gluster &amp;&amp; yum update -y</p>
+<h1 id="安装-GlusterFS-以及客户端"><a href="#安装-GlusterFS-以及客户端" class="headerlink" title="安装 GlusterFS 以及客户端"></a>安装 GlusterFS 以及客户端</h1><p>  yum install -y glusterfs glusterfs-fuse glusterfs-cli glusterfs-server glusterfs-api</p>
+<h2 id="基础环境配置"><a href="#基础环境配置" class="headerlink" title="基础环境配置"></a>基础环境配置</h2><h3 id="ntp-时钟同步"><a href="#ntp-时钟同步" class="headerlink" title="ntp 时钟同步"></a>ntp 时钟同步</h3><blockquote>
+<p>由于 GlusterFS 需要进行节点间同步，所以各节点时间要保证一致性，故需要安装 ntp 时钟同步工具</p>
+</blockquote>
+<ul>
+<li><p>安装 ntp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install -y ntp</div><div class="line">安装完成后应进行时钟同步，这里暂时使用 windows 的时钟授权服务器，也可以选择其他时钟授权服务器，安装时测试国内的清华大等全部超时……</div></pre></td></tr></table></figure>
+</li>
+<li><p>同步时钟</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ntpdate time.windows.com</div><div class="line">同步完成后最好设置定时同步，以下为每天 0 时开始没 3 小时进行一次时钟同步</div></pre></td></tr></table></figure>
+</li>
+<li><p>增加 当前用户 cron 任务</p>
+<p>crontab -e</p>
+</li>
+<li><p>写入如下任务</p>
+<p><code>* 0-23/3 * * * root  /usr/sbin/ntpdate time.windows.com &amp;&gt; /dev/null;</code><br>/usr/sbin/clock -w</p>
+</li>
+<li><p>host 定义</p>
+<blockquote>
+<p>由于使用域名方式访问，所以需要修改本地 hosts 文件，也可以通过自建 dns 服务器来解决，不过据说 dns 服务器方式会有一点点延迟，所以推荐修改本地 hosts(没证明过)</p>
+</blockquote>
+</li>
+<li><p>修改 hosts<br>vim /etc/hosts</p>
+</li>
+<li>增加如下<br>192.168.1.100 test-server1<br>192.168.1.107 test-server2<br>192.168.1.126 test-server3<br>192.168.1.217 test-server4<h2 id="启动并加入节点"><a href="#启动并加入节点" class="headerlink" title="启动并加入节点"></a>启动并加入节点</h2></li>
+</ul>
+<p>GlusterFS 安装完成后可直接通过 systemd 启动</p>
+<pre><code>systemctl enable glusterd
+systemctl start glusterd
+</code></pre><p>启动完成后便可在任意节点上将其他节点加入进来，组建集群</p>
+<pre><code>for gfs_host in gfs-server1 gfs-server2 gfs-server3 gfs-server4;do
+  gluster peer probe $gfs_host
+done
+</code></pre><h2 id="磁盘预处理"><a href="#磁盘预处理" class="headerlink" title="磁盘预处理"></a>磁盘预处理</h2><blockquote>
+<p>GlusterFS 集群服务启动并加入其他节点后，就需要为下一步创建卷(volume)准备磁盘，以下以一块 50G 的磁盘为例，在每个节点上执行如下</p>
+</blockquote>
+<ul>
+<li>首先创建分区<br>fdisk /dev/sdb</li>
+<li>然后输入 n 创建新分区，再输入 p 选择主分区</li>
+<li><p>最后输入 w 保存分区表，如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">欢迎使用 fdisk (util-linux 2.23.2)。</div><div class="line"></div><div class="line">更改将停留在内存中，直到您决定将更改写入磁盘。</div><div class="line">使用写入命令前请三思。</div><div class="line"></div><div class="line">Device does not contain a recognized partition table</div><div class="line">使用磁盘标识符 0x445cdbb5 创建新的 DOS 磁盘标签。</div><div class="line"></div><div class="line">命令(输入 m 获取帮助)：n</div><div class="line">Partition type:</div><div class="line">   p   primary (0 primary, 0 extended, 4 free)</div><div class="line">   e   extended</div><div class="line">Select (default p): p</div><div class="line">分区号 (1-4，默认 1)：</div><div class="line">起始 扇区 (2048-104857599，默认为 2048)：</div><div class="line">将使用默认值 2048</div><div class="line">Last 扇区, +扇区 or +size&#123;K,M,G&#125; (2048-104857599，默认为 104857599)：</div><div class="line">将使用默认值 104857599</div><div class="line">分区 1 已设置为 Linux 类型，大小设为 50 GiB</div><div class="line"></div><div class="line">命令(输入 m 获取帮助)：w</div><div class="line">The partition table has been altered!</div><div class="line"></div><div class="line">Calling ioctl() to re-read partition table.</div><div class="line">正在同步磁盘。</div><div class="line">分区创建完成后需要对其进行格式化</div><div class="line"></div><div class="line">mkfs.ext4 /dev/sdb</div><div class="line">最后准备接下来要使用的相关挂载目录</div></pre></td></tr></table></figure>
+<ul>
+<li>创建磁盘挂载目录<br>mkdir -p /data/gfs</li>
+<li>挂载硬盘<br>mount -t ext4 /dev/sdb /data/gfs</li>
+<li><p>创建 GlusterFS 卷目录<br>mkdir -p /data/gfs/brick0<br>为了保证磁盘一直挂载，最好设置一下开机自动挂载</p>
+<p><strong>后面三个选项，defaults 表示使用默认挂载参数，</strong><br><strong># 第一个 1 代表 允许 demp</strong><br><strong># 第二个 1 代表 开机执行挂载分区检查</strong><br>echo “/dev/sdb /data/gfs ext4 defaults 1 1” &gt;&gt; /etc/fstab<br>到此集群基本部署完成</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="GlusterFS-存储卷设置"><a href="#GlusterFS-存储卷设置" class="headerlink" title="GlusterFS 存储卷设置"></a>GlusterFS 存储卷设置</h1><blockquote>
+<p>GlusterFS 集群搭建完成后，便需要创建存储卷(volume)来整合各个集群磁盘存储资源，以便后面进行挂载和使用</p>
+</blockquote>
+<h2 id="创建分布式-Hash-卷"><a href="#创建分布式-Hash-卷" class="headerlink" title="创建分布式 Hash 卷"></a>创建分布式 Hash 卷</h2><blockquote>
+<p>分布式 Hash 卷其原理是当向 GlusterFS 写入一个文件时，GlusterFS 通过弹性 Hash 算法对文件名进行计算，然后将其均匀的分布到各个节点上，因此分布式 Hash 卷没有数据冗余，创建分布式 Hash 卷命令如下</p>
+</blockquote>
+<pre><code>gluster volume create gfs_disk\
+  gfs-server1:/data/gfs/brick0 \
+  gfs-server2:/data/gfs/brick0 \
+  gfs-server3:/data/gfs/brick0 \
+  gfs-server4:/data/gfs/brick0
+</code></pre><h2 id="创建复制卷"><a href="#创建复制卷" class="headerlink" title="创建复制卷"></a>创建复制卷</h2><p>复制卷相当于 RAID1，在向 GlusterFS 中存储文件时，GlusterFS 将其拷贝到所有节点，并且是同步的，这会极大降低磁盘性能，并呈线性降低，但是复制卷随着节点数量增加，起数据冗余能力也在增加，因为每个节点上都有一份数据的完全拷贝，创建复制卷命令如下</p>
+<blockquote>
+<p>replica 参数用于指定数据拷贝有多少份<br>注意: replica 数量必须与指定的 GlusterFS 集群 brick 数量保持一致</p>
+</blockquote>
+<pre><code>gluster volume create gfs_disk replica 4 transport tcp \
+  gfs-server1:/data/gfs/brick0 \
+  gfs-server2:/data/gfs/brick0 \
+  gfs-server3:/data/gfs/brick0 \
+  gfs-server4:/data/gfs/brick0
+</code></pre><h2 id="创建分布式-Hash-复制卷"><a href="#创建分布式-Hash-复制卷" class="headerlink" title="创建分布式 Hash 复制卷"></a>创建分布式 Hash 复制卷</h2><p>顾名思义，分布式 Hash 复制卷就是将 Hash 卷与复制卷整合一下，通过 replica 参数指定复制份数，以下例子为使用4个节点创建，每两个节点组成一个复制卷，然后两对节点再组成 Hash 卷</p>
+<blockquote>
+<p>创建 分布式 Hash 复制卷时，只需要保证集群数量是 replica 数量的整数倍即可</p>
+</blockquote>
+<pre><code>gluster volume create gfs_disk replica 2 transport tcp \
+  gfs-server1:/data/gfs/brick0 \
+  gfs-server2:/data/gfs/brick0 \
+  gfs-server3:/data/gfs/brick0 \
+  gfs-server4:/data/gfs/brick0
+</code></pre><h2 id="其他卷"><a href="#其他卷" class="headerlink" title="其他卷"></a>其他卷</h2><p>条带卷: 条带卷既将文件切分成块，分布存放在各个节点，将 replica 替换成 stripe 即可<br>分布式 Hash 条带卷: 同分布式 Hash 复制卷一样，保证节点数量是 stripe 的整数倍即可<br>由于条带卷使用并不多，所以不做演示，一般条带卷适用于单个大文件超过磁盘大小时使用</p>
+<h1 id="GlusterFS-挂载及测试"><a href="#GlusterFS-挂载及测试" class="headerlink" title="GlusterFS 挂载及测试"></a>GlusterFS 挂载及测试</h1><p>无论创建的哪种卷，最终创建完成后都可以通过如下命令查看</p>
+<pre><code>gluster volume info
+</code></pre><h2 id="GlusterFS-卷挂载"><a href="#GlusterFS-卷挂载" class="headerlink" title="GlusterFS 卷挂载"></a>GlusterFS 卷挂载</h2><p>卷创建完成后，只需要像正常磁盘一样挂载即可使用，不同的是文件系统类型指定为 glusterfs 而已，操作如下</p>
+<blockquote>
+<p>mount 时指定任意一个节点即可</p>
+</blockquote>
+<pre><code>mount -t glusterfs gfs-server1:gfs_disk /mnt/gfs
+</code></pre><p>为保证一直可用，同样最好设置开机自动挂载</p>
+<pre><code>echo &quot;gfs-server1:gfs_disk /mnt/gfs glusterfs defaults 0 1&quot; &gt;&gt; /etc/fstab
+</code></pre><h2 id="测试-GlusterFS"><a href="#测试-GlusterFS" class="headerlink" title="测试 GlusterFS"></a>测试 GlusterFS</h2><p>以下以分布式 Hash 卷为例，由于准备了 4 各节点，并且 replica 为 2，所以理论上向 GlusterFS 写入一个文件应该会在任意两个节点上都有一份</p>
+<blockquote>
+<p>在 gfs-server1 上执行</p>
+</blockquote>
+<pre><code>cp test.tar.gz /mnt.gfs
+</code></pre><blockquote>
+<p>最后可以在 gfs-server3、gfs-server4 的磁盘目录中看到</p>
+</blockquote>
+<pre><code>ls /data/gfs/brick0
+</code></pre><h2 id="其他相关"><a href="#其他相关" class="headerlink" title="其他相关"></a>其他相关</h2><blockquote>
+<p>没有任何通用的文件系统，通用意味着通通不能用，关于 GlusterFS 适用场景以及缺点可参考 换个角度看GlusterFS分布式文件系统 文章，关于 GlusterFS 性能与监控可参考 GlusterFS性能监控&amp;配额 转载请注明出处，本文采用 CC4.0 协议授权</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/11/glusterfs集群搭建/" data-id="cj4gn2lyo000rngjt8ycuvecb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式存储/">分布式存储</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-运维技术汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/10/运维技术汇总/" class="article-date">
+  <time datetime="2017-04-10T00:00:00.000Z" itemprop="datePublished">2017-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/10/运维技术汇总/">运维技术架构汇总</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="技术汇总"><a href="#技术汇总" class="headerlink" title="技术汇总"></a>技术汇总</h1><h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><ul>
+<li>lvs+keepalived</li>
+</ul>
+<p><img src="http://wokoweb.com/img/jishu1.png" alt="img ss "></p>
+<ul>
+<li>nginx+keepalived</li>
+</ul>
+<p><img src="http://wokoweb.com/img/jishu2.png" alt="img ss "></p>
+<ul>
+<li>Haproxy +  keepalived</li>
+</ul>
+<p><img src="http://wokoweb.com/img/jishu3.png" alt="img ss "></p>
+<ul>
+<li>DNS轮询</li>
+</ul>
+<h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><ul>
+<li>nginx  <ul>
+<li>tengine     </li>
+<li>nginx_lua(网站防火墙)    </li>
+<li>防CC  httpgard</li>
+</ul>
+</li>
+<li>php<ul>
+<li>php fastcgi  优化扩展</li>
+<li>php 7.0 优化<h2 id="数据库-缓存"><a href="#数据库-缓存" class="headerlink" title="数据库  缓存"></a>数据库  缓存</h2></li>
+</ul>
+</li>
+<li><p>mysql</p>
+<ul>
+<li><p>mysql主从复制</p>
+<p><img src="http://wokoweb.com/img/jishu4.png" alt="img ss "></p>
+</li>
+<li><p>mysql+hearbeat+DRBD</p>
+<p><img src="http://wokoweb.com/img/jishu5.jpg" alt="img ss "></p>
+</li>
+</ul>
+</li>
+<li><p>mongodb</p>
+<ul>
+<li><p>mongo 副本集集群</p>
+<p><img src="http://wokoweb.com/img/jishu6.png" alt="img ss "></p>
+</li>
+<li><p>mongo sharding  分片集群  </p>
+<p><img src="http://wokoweb.com/img/jishu7.png" alt="img ss "></p>
+</li>
+</ul>
+</li>
+<li><p>memcache</p>
+</li>
+</ul>
+<p><img src="http://wokoweb.com/img/jishu8.png" alt="img ss "></p>
+<ul>
+<li>redis<ul>
+<li>redis  sentinel<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">                +-------------+</div><div class="line">            | Sentinel 1  | &lt;--- Client A</div><div class="line">            | Redis 1 (M) |</div><div class="line">            +-------------+</div><div class="line">                    |</div><div class="line">                    |</div><div class="line">+-------------+     |                     +------------+</div><div class="line">| Sentinel 2  |-----+-- / partition / ----| Sentinel 3 | &lt;--- Client B</div><div class="line">| Redis 2 (S) |                           | Redis 3 (M)|</div><div class="line">+-------------+                           +------------+</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="ELK"><a href="#ELK" class="headerlink" title="ELK"></a>ELK</h2><ul>
+<li>logstash   </li>
+<li>elasticsearch  </li>
+<li>kibana</li>
+</ul>
+<h2 id="监控备份"><a href="#监控备份" class="headerlink" title="监控备份"></a>监控备份</h2><h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><ul>
+<li>zabbix    </li>
+<li>nagois</li>
+<li>catti</li>
+</ul>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><ul>
+<li>bacula<ul>
+<li>文件存储备份</li>
+<li>mysql 数据库备份<ul>
+<li>xtraback</li>
+<li>mysqldump<h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>centos   系统内核优化<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2></li>
+<li>分布式存储<ul>
+<li>glusterfs</li>
+<li>分布式Hdoop(HDFS)</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/10/运维技术汇总/" data-id="cj4gn2lzi001zngjtycwm3u6h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术汇总/">技术汇总</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-xtarback备份脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/xtarback备份脚本/" class="article-date">
+  <time datetime="2017-04-01T07:00:00.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/xtarback备份脚本/">xtraback备份脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line"># xtraback 备份脚本</div><div class="line"># by kame</div><div class="line"># mail:kamesite7011@.gmail.com</div><div class="line">#!/bin/sh</div><div class="line">#percona-xtrabackup全量和增量备份脚本</div><div class="line"></div><div class="line">#usage: 1. full backup  : ./backup.sh full</div><div class="line">#       2. incremental backup : ./backup.sh inc</div><div class="line">Innobackupex_Path=/usr/bin/innobackupex</div><div class="line">Mysql_Client=/usr/bin/mysql</div><div class="line">Bak_Time=`date +%Y%m%d_%H%M%S`</div><div class="line">#请勿在Incrbackup_Path及下属文件夹创建或写入内容，否则可能导致增量备份不成功</div><div class="line">Backup_Dir=/opt/backup   #备份主目录</div><div class="line">    #Backup_Dir=/opt/backup/data/`data -I`   #按日期生成备份主目录</div><div class="line">Fullbackup_Path=$Backup_Dir/full # 全库备份的目录  </div><div class="line">Incrbackup_Path=$Backup_Dir/incr # 增量备份的目录  </div><div class="line">Log_Path=$Backup_Dir/logs   #日志文件目录</div><div class="line">Keep_Fullbackup=5    #保留的全备份数量,此处要加1; 如要保留2个，此处要写3</div><div class="line">Mysql_Conf=/etc/my.cnf #mysql配置文件</div><div class="line">Mysql_Opts=&apos;--socket=/opt/mysql/mysql.sock  --host=localhost --user=root --password=9hb1a$OCinbl&apos;  #mysql的连接配置，按需修改</div><div class="line">Error()  </div><div class="line">  &#123;  </div><div class="line">    echo -e &quot;\e[1;31m$1\e[0m&quot; 1&gt;&amp;2</div><div class="line">    exit 1  </div><div class="line">  &#125;  </div><div class="line">Backup()</div><div class="line">  &#123;</div><div class="line">    #两个参数为全量备份,第一个参数为备份目录，第二个参数为日志全路径</div><div class="line">    if [ $# = 2 ] ; then</div><div class="line">        $Innobackupex_Path --defaults-file=$Mysql_Conf $Mysql_Opts  --no-timestamp  $1/full_$Bak_Time&gt;$2 2&gt;&amp;1</div><div class="line">    #三个参数为增量备份，第一个为增量备份目录，第二个为上个增量备份目录,第三个为日志全路径</div><div class="line">    elif [ $# = 3 ];then</div><div class="line">        $Innobackupex_Path --defaults-file=$Mysql_Conf $Mysql_Opts  --no-timestamp --incremental  $1/incr_$Bak_Time  --incremental-basedir $2 &gt;$3 2&gt;&amp;1</div><div class="line">    else</div><div class="line">    Error &quot;Backup(): 参数不正确&quot;</div><div class="line">     fi</div><div class="line">  &#125;</div><div class="line">#获得某个目录下，最近修改的目录</div><div class="line">Lastest_Dir()</div><div class="line">  &#123;</div><div class="line">    if [ -d $1 ]; then</div><div class="line">        path=`ls -t $1 |head -n 1`</div><div class="line">        if [  $path ]; then</div><div class="line">            echo $path</div><div class="line">        else</div><div class="line">            Error &quot;Lastest_Diri(): 目录为空,没有最新目录&quot;</div><div class="line">        fi</div><div class="line">    else</div><div class="line">        Error &quot;Latest_Dir(): 目录不存在或者不是目录&quot;</div><div class="line">    fi</div><div class="line">  &#125;</div><div class="line">#进行增量备份</div><div class="line">Do_Inc()</div><div class="line">  &#123;</div><div class="line">    if [ &quot;$(ls -A $Incrbackup_Path)&quot; ] ; then</div><div class="line">        #不是第一次增量备份，以最新的增量备份目录为base_dir</div><div class="line">        Backup $Incrbackup_Path $Incrbackup_Path/`Lastest_Dir $Incrbackup_Path`  $Log_Path/incr_$Bak_Time.log</div><div class="line">      else</div><div class="line">        #第一次增量备份要先全量备份</div><div class="line">        Backup $Incrbackup_Path  $Log_Path/incr_full_$Bak_Time.log</div><div class="line">    fi</div><div class="line">  &#125;</div><div class="line">#进行全量备份</div><div class="line">Do_Full()</div><div class="line">  &#123;</div><div class="line">    Backup  $Fullbackup_Path $Log_Path/full_$Bak_Time.log</div><div class="line">    cd $Fullbackup_Path</div><div class="line">    ls -t |tail -n +$Keep_Fullbackup |xargs  rm -rf</div><div class="line">  &#125;</div><div class="line">#环境和配置检查</div><div class="line">Check()</div><div class="line">  &#123;</div><div class="line">    #检查目录和创建目录</div><div class="line">    if [ ! -d $Fullbackup_Path ];then</div><div class="line">        mkdir -p $Fullbackup_Path</div><div class="line">    fi</div><div class="line">    if [ ! -d $Incrbackup_Path ];then</div><div class="line">        mkdir -p $Incrbackup_Path</div><div class="line">    fi</div><div class="line">    if [ ! -d $Log_Path ];then</div><div class="line">        mkdir -p $Log_Path</div><div class="line">    fi</div><div class="line">    #检测所需的软件</div><div class="line">    if [ ! -f $Innobackupex_Path ];then</div><div class="line">        Error &quot;未安装xtradbbackup或xtradbbackup路径不正确&quot;</div><div class="line">    fi</div><div class="line">    if [ ! -f $Mysql_Client ];then</div><div class="line">        Error &quot;未安装mysql客户端&quot;</div><div class="line">    fi</div><div class="line">    if [ ! -f $Mysql_Conf ];then</div><div class="line">        Error &quot;mysql配置文件路径不正确&quot;</div><div class="line">    fi</div><div class="line">    #检查mysql的运行状态</div><div class="line">    if [ `netstat -tlnp |grep mysqld |wc -l` = 0 ];then</div><div class="line">        Error &quot;MySQL没有运行&quot;</div><div class="line">    fi</div><div class="line">    #验证mysql的用户和密码是否正确</div><div class="line">    if  ! `echo &apos;exit&apos; | $Mysql_Client -s  $Mysql_Opts &gt;/dev/null 2&gt;&amp;1` ; then</div><div class="line">        Error &quot;提供的数据库连接配置不正确!&quot;  </div><div class="line">    fi</div><div class="line">  &#125;</div><div class="line">case $1 in</div><div class="line">       full)</div><div class="line">          Check</div><div class="line">          Do_Full</div><div class="line">          ;;</div><div class="line">        inc)</div><div class="line">          Check</div><div class="line">          Do_Inc</div><div class="line">          ;;</div><div class="line">         *)</div><div class="line">          echo &quot;full 全量备份&quot;</div><div class="line">      echo &quot;inc  增量备份&quot;</div><div class="line">      ;;</div><div class="line">esac</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/01/xtarback备份脚本/" data-id="cj4gn2lzf001sngjtg8ulrh2h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xtraback/">xtraback</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-bacula" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/bacula/" class="article-date">
+  <time datetime="2017-04-01T00:00:00.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/bacula/">bacula  安装使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>开源网络备份软件 bacula 的安装、配置和运行</p>
+</blockquote>
+<h1 id="安装bacula"><a href="#安装bacula" class="headerlink" title="安装bacula"></a>安装bacula</h1><h2 id="bacula的几种网络备份拓扑"><a href="#bacula的几种网络备份拓扑" class="headerlink" title="bacula的几种网络备份拓扑"></a>bacula的几种网络备份拓扑</h2><p>前面文章介绍了bacula有5个组成部分，在实际的应用中，没有必要将5个部分分别放在不同的服务器上，它们之间的某些部分是可以合并的，常见的bacula部署结构有如下几种：</p>
+<p>﻿Director与SD以及Console在一台机器上，而客户端FD在另外一台机器上，当然客户端FD可以有一台或者多台上。<br>Director与Console在一台机器上，SD在一台机器上，客户端FD在一台或者多台上。<br>Director与客户端FD、SD以及Console端都在一台机器上，也就是服务器自己备份自己，数据保存在本机。</p>
+<h2 id="编译与安装bacula"><a href="#编译与安装bacula" class="headerlink" title="编译与安装bacula"></a>编译与安装bacula</h2><p>这里对上一节的第一种bacula部署结构进行介绍。环境如表4-1所示。</p>
+<p>表1 一个bacula部署结构的环境</p>
+<pre><code>主机名       ip地址         操作系统   应用角色
+baculaServer 192.168.12.188 CentOS     release 5.4 Director、SD、Console
+baculaClient 192.168.12.189 CentOS     release 5.4 FD
+</code></pre><p>整个拓扑结构：</p>
+<p>图1 bacula实例的拓扑结构</p>
+<p><img src="images/2017/04/untitled.png" alt="markdown write"></p>
+<p>在bacula服务器端安装bacula</p>
+<p>首先在<a href="http://www.bacula.org下载相应的源码，这里下载的是bacula-5.0.1.tar.gz，接着进行编译安装，安装过程如下：" target="_blank" rel="external">http://www.bacula.org下载相应的源码，这里下载的是bacula-5.0.1.tar.gz，接着进行编译安装，安装过程如下：</a></p>
+<pre><code># tar zxvf bacula-5.0.1.tar.gz
+# cd bacula-5.0.1
+# ./configure --prefix=/opt/bacula --with-mysql=/opt/mysql
+# make
+# make install
+</code></pre><p>bacula需要数据库的支持，这里采用Mysql数据库，并假定Mysql已经在bacula服务器端安装好了，且Mysql安装路径为/opt/mysql（bacula在编译时通过“–with-mysql”选项指定了Mysql数据库的安装路径）。 bacula安装完成后，所有配置文件默认放在/opt/bacula/etc/目录下。</p>
+<p>在bacula客户端安装bacula</p>
+<p>由于bacula客户端只是是需要备份的客户端，因而只需安装相应的客户端组件即可，过程如下：</p>
+<pre><code># tar zxvf bacula-5.0.1.tar.gz
+# cd bacula-5.0.1
+# ./configure --prefix=/opt/bacula --enable-client-only
+# make
+# make install
+</code></pre><h2 id="初始化Mysql数据库"><a href="#初始化Mysql数据库" class="headerlink" title="初始化Mysql数据库"></a>初始化Mysql数据库</h2><blockquote>
+<p>在baculaServer上安装完bacula后，还需要创建bacula对应的Mysql数据库以及访问数据库的授权，好在bacula已经为用户准备好了这样的脚本，接下来只要在bacula服务器端上执行如下脚本即可。</p>
+</blockquote>
+<pre><code>#cd /opt/bacula/etc
+# ./grant_mysql_privileges
+# ./create_mysql_database
+</code></pre><p>  Creation of bacula database succeeded.</p>
+<pre><code># ./make_mysql_tables
+</code></pre><p>Creation of Bacula MySQL tables succeeded.<br>接下来可以登录Mysql数据库，查看bacula的数据库和数据表是否已经建立。在执行上面三行Mysql初始代码时，默认由空密码的root用户执行，因此要请确保Mysql数据库root密码为空。</p>
+<h1 id="配置bacula备份系统"><a href="#配置bacula备份系统" class="headerlink" title="配置bacula备份系统"></a>配置bacula备份系统</h1><blockquote>
+<p>其实就是对Director端配置文件bacula-dir.conf、SD配置文件bacula-sd.conf、客户端FD配置文件bacula-fd.conf以及Console端配置文件bconsole.conf进行配置的过程。<br>根据上面的安装部署，将Director端、SD、Console端集中在一台服务器baculaServer（即192.168.12.188）上，而将客户端FD部署在baculaClient（即192.168.12.189）服务器上，下面详细讲述配置过程。</p>
+</blockquote>
+<h2 id="配置bacula的Console端"><a href="#配置bacula的Console端" class="headerlink" title="配置bacula的Console端"></a>配置bacula的Console端</h2><p>Console端的配置文件是bconsole.conf，这个配置文件很简单，配置完的文件如下：</p>
+<pre><code>Director {
+  Name = f10-64-build-dir #控制端名称，在下面的bacula-dir.conf  和bacula-sd.conf#文件中会陆续的被引用
+  DIRport = 9101 #控制端服务端口
+  address = 192.168.12.188 #控制端服务器IP地址
+  Password = &quot;ouDao0SGXx/F+Tx4YygkK4so0l/ieqGJIkQ5DMsTQh6t&quot;
+  #控制端密码文件
+}
+</code></pre><h2 id="配置bacula的Director端"><a href="#配置bacula的Director端" class="headerlink" title="配置bacula的Director端"></a>配置bacula的Director端</h2><p>bacula-dir.conf是Director端的配置文件，也是bacula的核心配置文件，这个文件非常复杂，共分为10个逻辑段，分别是：</p>
+<pre><code>Director，定义全局设置
+Catalog，定义后台数据库
+Jobdefs，定义默认执行任务
+Job，自定义一个备份或者恢复任务
+Fileset，定义备份哪些数据，不备份哪些数据
+Schedule，定义备份时间策略
+Pool，定义供Job使用的池属性
+Client，定义要备份的主机地址
+Storage，定义数据的存储方式
+Messages，定义发送日志报告和记录日志的位置
+代码清单1是一个已经配置好的文件，其中，“#”号后面的内容为注释。
+</code></pre><p>代码清单1 已经设置好的Director端的配置文件</p>
+<pre><code>Director { #定义bacula的全局配置
+Name = f10-64-build-dir
+DIRport = 9101 #定义Director的监听端口
+QueryFile = &quot;/opt/bacula/etc/query.sql&quot;
+WorkingDirectory = &quot;/opt/bacula/var/bacula/working&quot;
+PidDirectory = &quot;/var/run&quot;
+Maximum Concurrent jobs = 1 #定义一次能处理的最大并发数#验证密码，这个密码必须与bconsole.conf文件中对应的Director逻辑段密码相同
+Password = &quot;ouDao0SGXx/F+Tx4YygkK4so0l/ieqGJIkQ5DMsTQh6t&quot;
+</code></pre><p>  #定义日志输出方式，“Daemon”在下面的Messages逻辑段中进行了定义<br>      Messages = Daemon<br>      }</p>
+<pre><code>  Job { #自定义一个备份任务
+  Name = &quot;Client1&quot; #备份任务名称
+  Client = dbfd #指定要备份的客户端主机，“dbfd”在后面Client逻辑段中进行定义
+  Level = Incremental #定义备份的级别，Incremental为增量备份。Level的取值#可为Full（完全备份）、Incremental（增量备份）和Differential（差异备份），如果第一#次没做完全备份，则先进行完全备份后再执行Incrementaltype = Backup #定义Job的类型，“backup”为备份任务，可选的类型还有restore和verify等
+  FileSet = dbfs #指定要备份的客户端数据，“dbfs”在后面FileSet逻辑段中进行定义
+  Schedule = dbscd #指定这个备份任务的执行时间策略，“dbscd”在后面的Schedule逻辑段中进行了定义
+  Storage = dbsd #指定备份数据的存储路径与介质，“dbsd” 在后面的Storage逻辑段中进行定义
+  Messages = Standard
+  Pool = dbpool #指定备份使用的pool属性，“dbpool”在后面的Pool逻辑段中进行定义。write Bootstrap = &quot;/opt/bacula/var/bacula/working/Client2.bsr&quot; #指定备份的引导信息路径
+  }
+
+
+Job { #定义一个名为Client的差异备份的任务
+Name = &quot;Client&quot;
+Type = Backup
+FileSet = dbfs
+Schedule = dbscd
+Storage = dbsd
+Messages = Standard
+Pool = dbpool
+Client = dbfd
+Level = Differential #指定备份级别为差异备份
+Write Bootstrap = &quot;/opt/bacula/var/bacula/working/Client1.bsr&quot;
+}
+
+
+Job { #定义一个名为BackupCatalog的完全备份任务
+Name = &quot;BackupCatalog&quot;
+Type = Backup
+Level = Full #指定备份级别为完全备份
+Client = dbfd
+FileSet=&quot;dbfs&quot;
+Schedule = &quot;dbscd&quot;
+Pool = dbpool
+Storage = dbsd
+Messages = Standard
+RunBeforeJob = &quot;/opt/bacula/etc/make_catalog_backup bacula bacula&quot;
+RunAfterJob = &quot;/opt/bacula/etc/delete_catalog_backup&quot;
+Write Bootstrap = &quot;/opt/var/bacula/working/BackupCatalog.bsr&quot;
+}
+
+
+Job { #定义一个还原任务
+Name = &quot;RestoreFiles&quot;
+Type = Restore #定义Job的类型为“Restore ”，即恢复数据
+Client=dbfd
+FileSet=dbfs
+Storage = dbsd
+Pool = dbpool
+Messages = Standard
+Where = /tmp/bacula-restores #指定默认恢复数据到这个路径
+}
+
+
+FileSet { #定义一个名为dbfs的备份资源，也就是指定需要备份哪些数据，需要排除哪些数据等，可以指定多个FileSet
+Name = dbfs
+Include {
+Options {
+signature = MD5; Compression=gzip; } #表示使用MD5签名并压缩file = /cws3 #指定客户端FD需要备份的文件目录
+}
+
+Exclude { #通过Exclude排除不需要备份的文件或者目录，可根据具体情况修改
+File = /opt/bacula/var/bacula/working
+File = /tmp
+File = /proc
+File = /tmp
+File = /.journal
+File = /.fsck
+}
+}
+
+Schedule { #定义一个名为dbscd的备份任务调度策略
+Name = dbscd
+Run = Full 1st sun at 23:05 #第一周的周日晚23:05分进行完全备份
+Run = Differential 2nd-5th sun at 23:05 #第2~5周的周日晚23:05进行差异备份
+Run = Incremental mon-sat at 23:05 #所有周一至周六晚23:05分进行增量备份
+}
+
+
+FileSet {
+Name = &quot;Catalog&quot;
+Include {
+Options {
+signature = MD5
+}
+File = /opt/bacula/var/bacula/working/bacula.sql
+}
+}
+
+
+Client { #Client用来定义备份哪个客户端FD的数据
+Name = dbfd #Clinet的名称，可以在前面的Job中调用
+Address = 192.168.12.189 #要备份的客户端FD主机的IP地址
+FDPort = 9102 #与客户端FD通信的端口
+Catalog = MyCatalog #使用哪个数据库存储信息，“MyCatalog”在后面的MyCatalog逻辑段中进行定义
+Password = &quot;ouDao0SGXx/F+Tx4YygkK4so0l/ieqGJIkQ5DMsTQh6t&quot; #Director端与客户端FD的验证密码，这个值必须与客户端FD配置文件bacula-fd.conf中密码相同
+File Retention = 30 days #指定保存在数据库中的记录多久循环一次，这里是30天，只影响数据库中的记录不影响备份的文件
+Job Retention = 6 months #指定Job的保持周期，应该大于File Retention指定的值
+AutoPrune = yes #当达到指定的保持周期时，是否自动删除数据库中的记录，yes表示自动清除过期的Job
+}
+
+Client {
+Name = dbfd1
+Address = 192.168.12.188
+FDPort = 9102
+Catalog = MyCatalog
+Password = &quot;Wr8lj3q51PgZ21U2FSaTXICYhLmQkT1XhHbm8a6/j8Bz&quot;
+File Retention = 30 days
+Job Retention = 6 months
+AutoPrune = yes
+}
+
+
+Storage { # Storage用来定义将客户端的数据备份到哪个存储设备上
+Name = dbsd
+Address = 192.168.12.188 #指定存储端SD的IP地址
+SDPort = 9103 #指定存储端SD通信的端口
+Password = &quot;ouDao0SGXx/F+Tx4YygkK4so0l/ieqGJIkQ5DMsTQh6t&quot; #Director端与存储端SD的验证密码，这个值必须与存储端SD配置文件bacula-sd.conf中Director逻辑段密码相同
+Device = dbdev #指定数据备份的存储介质，必须与存储端（这里是192.168.12.188）的bacula-sd.conf配置文件中的“Device” 逻辑段的“Name”项名称相同
+Media Type = File #指定存储介质的类别，必须与存储端SD（这里是192.168.12.188）的bacula-sd.conf配置文件中的“Device” 逻辑段的“Media Type”项名称相同
+}
+
+Catalog { # Catalog逻辑段用来定义关于日志和数据库设定
+Name = MyCatalog
+dbname = &quot;bacula&quot;; dbuser = &quot;bacula&quot;; dbpassword = &quot;&quot; #指定库名、用户名和密码
+}
+
+Messages { # Messages逻辑段用来设定Director端如何保存日志，以及日志的保存格式，可以将日志信息发送到管理员邮箱，前提是必须开启sendmail服务
+Name = Standard
+mailcommand = &quot;/usr/sbin/bsmtp -h localhost -f \&quot;\(Bacula\) \&lt;%r\&gt;\&quot; -s \&quot;Bacula: %t %e of %c %l\&quot; %r&quot;
+operatorcommand = &quot;/usr/sbin/bsmtp -h localhost -f \&quot;\(Bacula\) \&lt;%r\&gt;\&quot; -s \&quot;Bacula: Intervention needed for %j\&quot; %r&quot;
+mail = dba.gao@gmail.com = all, !skipped
+operator = exitgogo@126.com = mount
+console = all, !skipped, !saved
+append = &quot;/opt/bacula/log/bacula.log&quot; = all, !skipped #定义bacula的运行日志
+append =&quot;/opt/bacula/log/bacula.err.log&quot; = error,warning, fatal #定义bacula的错误日志
+catalog = all
+}
+
+Messages { #定义了一个名为Daemon的Messages逻辑段，“Daemon”已经在前面进行了引用
+Name = Daemon
+mailcommand = &quot;/usr/sbin/bsmtp -h localhost -f \&quot;\(Bacula\) \&lt;%r\&gt;\&quot; -s \&quot;Bacula daemon message\&quot; %r&quot;
+mail = exitgogo@126.com = all, !skipped
+console = all, !skipped, !saved
+append = &quot;/opt/bacula/log/bacula_demo.log&quot; = all, !skipped
+}
+
+
+Pool { #定义供Job任务使用的池属性信息，例如，设定备份文件过期时间、是否覆盖过期的备份数据、是否自动清除过期备份等
+Name = dbpool
+Pool Type = Backup
+Recycle = yes #重复使用
+AutoPrune = yes #表示自动清除过期备份文件
+Volume Retention = 7 days #指定备份文件保留的时间
+Label Format =&quot;db-${Year}-${Month:p/2/0/r}-${Day:p/2/0/r}-id${JobId}&quot; #设定备份文件的命名格式，这个设定格式会产生的命名文件为：db-2010-04-18-id139
+Maximum Volumes = 7 #设置最多保存多少个备份文件
+Recycle Current Volume = yes #表示可以使用最近过期的备份文件来存储新备份
+Maximum Volume Jobs = 1 #表示每次执行备份任务创建一个备份文件
+}
+
+Console { #限定Console利用tray-monitor获得Director的状态信息
+Name = f10-64-build-mon
+Password = &quot;RSQy3sRjak3ktZ8Hr07gc728VkZHBr0QCjOC5x3pXEap&quot;
+CommandACL = status, .status
+}
+3 配置bacula的SD
+
+SD可以是一台单独的服务器，也可以和Director在一台机器上，本例就将SD和Director端放在一起进行配置，SD的配置文件是bacula-sd.conf，代码清单2是一个已经配置好的bacula-sd.conf文件。
+
+代码清单2 配置好的bacula-sd.conf文件
+
+Storage { #定义存储，本例中是f10-64-build-sd
+Name = f10-64-build-sd #定义存储名称
+SDPort = 9103 #监听端口
+WorkingDirectory = &quot;/opt/bacula/var/bacula/working&quot;
+Pid Directory = &quot;/var/run&quot;
+Maximum Concurrent Jobs = 20
+}
+
+Director { #定义一个控制StorageDaemon的Director
+Name = f10-64-build-dir #这里的“Name”值必须和Director端配置文件bacula-dir.conf中Director逻辑段名称相同
+Password = &quot;ouDao0SGXx/F+Tx4YygkK4so0l/ieqGJIkQ5DMsTQh6t&quot; #这里的“Password”值必须和Director端配置文件bacula-dir.conf中Storage逻辑段密码相同
+}
+
+Director { #定义一个监控端的Director
+Name = f10-64-build-mon #这里的“Name”值必须和Director端配置文件bacula-dir.conf中Console逻辑段名称相同
+Password = &quot;RSQy3sRjak3ktZ8Hr07gc728VkZHBr0QCjOC5x3pXEap&quot; #这里的“Password”值必须和Director端配置文件bacula-dir.conf中Console逻辑段密码相同
+Monitor = yes
+}
+
+Device { #定义Device
+Name = dbdev #定义Device的名称，这个名称在Director端配置文件bacula-dir.conf中的Storage逻辑段Device项中被引用
+Media Type = File #指定存储介质的类型，File表示使用文件系统存储
+Archive Device = /webdata #Archive Device用来指定备份存储的介质，可以是cd、dvd、tap等，这里是将备份的文件保存的/webdata目录下
+LabelMedia = yes; #通过Label命令来建立卷文件
+Random Access = yes; #设置是否采用随机访问存储介质，这里选择yes
+AutomaticMount = yes; #表示当存储设备打开时，是否自动使用它，这选择yes
+RemovableMedia = no; #是否支持可移动的设备，如tap或cd，这里选择no
+AlwaysOpen = no; #是否确保tap设备总是可用，这里没有使用tap设备，因此设置为no
+}
+
+Messages { #为存储端SD定义一个日志或消息处理机制
+Name = Standard
+director = f10-64-build-dir = all
+}
+4 配置bacula的FD端
+
+客户端FD运行在一台独立的服务器上，在本例中是baculaclient主机（即192.168.12.189），它的配置文件是bacula-fd.conf，配置好的文件如下：
+
+Director { #定义一个允许连接FD的控制端
+Name = f10-64-build-dir #这里的“Name”值必须和Director端配置文件bacula-dir.conf中Director逻辑段名称相同
+Password = &quot;ouDao0SGXx/F+Tx4YygkK4so0l/ieqGJIkQ5DMsTQh6t&quot; #这里的“Password”值必须和Director端配置文件bacula-dir.conf中Client逻辑段密码相同
+}
+
+Director { #定义一个允许连接FD的监控端
+Name = f10-64-build-mon
+Password = &quot;RSQy3sRjak3ktZ8Hr07gc728VkZHBr0QCjOC5x3pXEap&quot;
+Monitor = yes
+}
+
+FileDaemon { #定义一个FD端
+Name = localhost.localdomain-fd
+FDport = 9102 #监控端口
+WorkingDirectory = /opt/bacula/var/bacula/working
+Pid Directory = /var/run
+Maximum Concurrent Jobs = 20 #定义一次能处理的并发作业数
+}
+
+Messages { #定义一个用于FD端的Messages
+Name = Standard
+director = localhost.localdomain-dir = all, !skipped, !restored
+}
+启动bacula的Director daemon与Storage daemon
+
+完成上面的配置后，就可以启动或关闭bacula了。在baculaserver上启动或关闭控制端的所有服务，有如下两种方式。
+
+第一种方式如下：
+
+[root@baculaserver etc]# /opt/bacula/sbin/bacula
+{start|stop|restart|status}
+也可以通过分别管理bacula各个配置端的方式，依次启动或者关闭每个服务：
+
+[root@baculaserver etc]# /opt/bacula/etc/bacula-ctl-dir {start|stop|restart|status}
+[root@baculaserver etc]# /opt/bacula/etc/bacula-ctl-sd {start|stop|restart|status}
+[root@baculaserver etc]# /opt/bacula/etc/bacula-ctl-fd {start|stop|restart|status}
+由于将客户端FD配置到了另一个主机baculaclient上，因此无需在baculaserver上启动File daemon服务。启动bacula的所有服务后，通过netstat命令，观察启动端口情况：
+
+[root@localhost etc]# netstat -antl |grep 91
+tcp 0 0 0.0.0.0:9101 0.0.0.0:* LISTEN
+tcp 0 0 0.0.0.0:9102 0.0.0.0:* LISTEN
+tcp 0 0 0.0.0.0:9103 0.0.0.0:* LISTEN
+其中，9101代表Director daemon；9102代表File daemon；9103代表Storage daemon。注意在启动bacula的所有服务前，必须启动MySQL数据库，如果MySQL数据库没有启动，连接bacula的控制端时会报错：
+
+[root@baculaserver opt]# /opt/bacula/sbin/bconsole
+Connecting to Director 192.168.12.188:9101
+19-04月 09:45 bconsole JobId 0: Fatal error: bsock.c:135 Unable to connect to Director daemon on 192.168.12.188:9101. ERR=拒绝连接
+此时，执行netstat命令可以发现，9101端口根本没有启动。
+
+在客户端FD启动File daemon
+
+最后 ，在客户端FD（即baculaclient）上启动File daemon服务，操作如下：
+
+[root@baculaclient etc]# /opt/bacula/sbin/bacula start
+Starting the Bacula File daemon
+管理客户端FD的服务，也可以通过以下方式完成：
+
+[root@baculaclient etc]# /opt/bacula/sbin/bacula {start|stop|restart|status}
+[root@ baculaclient etc]# /opt/bacula/etc/bacula-ctl-fd {start|stop|restart|status}
+</code></pre><p>来源： <a href="http://www.linuxde.net/2012/04/9619.html" target="_blank" rel="external">http://www.linuxde.net/2012/04/9619.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/01/bacula/" data-id="cj4gn2lym000nngjt8x5k8muj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bacula/">bacula</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-NFScache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/01/NFScache/" class="article-date">
+  <time datetime="2017-04-01T00:00:00.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/01/NFScache/">Cachefiles</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-CacheFiles介绍"><a href="#1-CacheFiles介绍" class="headerlink" title="1. CacheFiles介绍"></a>1. CacheFiles介绍</h2><blockquote>
+<p>NFS是一种经常使用到的网络共享文件系统，在分布式环境下，多台服务器的文件共享是一个问题。然而，对于这个问题，最常想到最容易做到的那就非NFS莫属了。那么如何来提高NFS文件的访问性能呢？加上缓存呗。没错。在linux下，有一个缓存文件系统叫FS-Cache，来缓存网络文件系统，如NFS。 FS-Cache是在linux内核版本2.6.30及以上版本引入的。在RHCE6.x 、CentOS6.x版本下可用。</p>
+</blockquote>
+<p>为了使FS-Cache工作，需要缓存后端来提供实际存储。默认的缓存后端是cachefiles。因此，一旦设置了cachefiles，它会为NSF共享自动的启用文件缓存。</p>
+<blockquote>
+<p>FS-Cache是由David Howells开发的。当前的设计是对Andrew文件系统和网络文件系统的操作。 需要开启cachefilesd的守护进程来管理。该守护进程管理缓存文件和目录，将网络文件系统如AFS、NFS永久缓存到本地磁盘。</p>
+</blockquote>
+<h2 id="2-CacheFiles前提条件"><a href="#2-CacheFiles前提条件" class="headerlink" title="2. CacheFiles前提条件"></a>2. CacheFiles前提条件</h2><p>需要本地文件系统支持用户自定义的扩展文件属性，如xattr。因为cachefiles使用xattr存储额外信息来维护缓存的。<br>ext4文件系统默认启用xattr。<br>如果是使用ext3文件系统，需要加上user_xattr选项。按照如下步骤操作：</p>
+<pre><code>vim /etc/fstab
+/dev/sdb1 /data ext3 defaults,user_xattr 0 0
+# mount -o remount /data
+[warning] user_xattr针对缓存存储分区而言的。[/warning]
+</code></pre><h2 id="3-安装"><a href="#3-安装" class="headerlink" title="3. 安装"></a>3. 安装</h2><pre><code># yum install cachefilesd.x86_64
+</code></pre><h2 id="4-配置"><a href="#4-配置" class="headerlink" title="4. 配置"></a>4. 配置</h2><pre><code># vim /etc/cachefilesd.conf
+dir /var/cache/fscache
+tag mycache
+brun 10%
+bcull 7%
+bstop 3%
+frun 10%
+fcull 7%
+fstop 3%
+# Assuming you&apos;re using SELinux with the default security policy included in
+# this package
+secctx system_u:system_r:cachefiles_kernel_t:s0
+</code></pre><h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><p>dir: 缓存root目录。默认/var/cache/fscache。<br>tag: 指定一个FS-Cache标签，用来区分多个缓存。默认是”CacheFiles”。<br>secctx system_u:system_r:cachefiles_kernel_t:s0 ： 开启SELinux的话，需要更改安全上下文。<br>brun 10%, bcull 7%, bstop 3%, frun 10%, fcull 7%, fstop 3% ： 缓存策略。</p>
+<h2 id="5-缓存剔除规则："><a href="#5-缓存剔除规则：" class="headerlink" title="5. 缓存剔除规则："></a>5. 缓存剔除规则：</h2><p>缓存需要删除来释放空间，将最少使用的对象丢弃掉。cachefiles是基于访问时间来清除缓存的。空的目录如果不使用将删掉。</p>
+<pre><code>(*) brun
+(*) frun
+</code></pre><p>如果剩余空间和缓存中可用的文件数超过了上面的限制，缓存剔除关闭。</p>
+<pre><code>(*) bcull
+(*) fcull
+</code></pre><p>如果可用空间或缓存中的可用文件数量低于上面的限制，缓存剔除将开启。</p>
+<pre><code>(*) bstop
+(*) fstop
+</code></pre><p>如果可用空间或缓存中的可用文件数量低于上面任一限制，然后，没有进一步的分配磁盘空间或文件被允许直到再次超过上面限制。</p>
+<p>必须按照下面原则设置：<br>    0 &lt;= bstop &lt; bcull &lt; brun &lt; 100<br>    0 &lt;= fstop &lt; fcull &lt; frun &lt; 100<br>[warning]这些都是可利用的空间和可用的文件的百分比.[/warning]</p>
+<h2 id="6-缓存结构"><a href="#6-缓存结构" class="headerlink" title="6. 缓存结构"></a>6. 缓存结构</h2><p>cachefiles模块将在缓存root目录下自动创建两个子目录：cache和graveyard。<br>主动缓存对象存储于cache目录下。守护进程检测graveyard目录，并将删除任何出现在该目录中的缓存。</p>
+<h2 id="7-NFS挂载启用fsc选项"><a href="#7-NFS挂载启用fsc选项" class="headerlink" title="7. NFS挂载启用fsc选项"></a>7. NFS挂载启用fsc选项</h2><pre><code># /etc/init.d/cachefilesd restart
+# mount -t nfs 10.31.247.202:/data /data/nfs/ -o fsc,remount
+</code></pre><p>查看缓存状态</p>
+<pre><code>[warning]注意FSC列的值，如果是yes说明启用，否则没有。[/warning]
+</code></pre><h2 id="8-测试"><a href="#8-测试" class="headerlink" title="8. 测试"></a>8. 测试</h2><p>在没有使用cachefiles情况下：</p>
+<p>在使用cachefiles情况下：</p>
+<p>第一次耗时长，是由于第一次没有缓存。</p>
+<h2 id="9-查看cachefiles统计信息"><a href="#9-查看cachefiles统计信息" class="headerlink" title="9. 查看cachefiles统计信息"></a>9. 查看cachefiles统计信息</h2><p>  cat /proc/fs/fscache/stats</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/04/01/NFScache/" data-id="cj4gn2lyc0009ngjtxaljp4pm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NFS/">NFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tmux快捷键" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/18/tmux快捷键/" class="article-date">
+  <time datetime="2017-03-18T00:00:00.000Z" itemprop="datePublished">2017-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/18/tmux快捷键/">tmux 快捷键</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>tmux快捷键</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Ctrl+b</th>
+<th>激活控制台；此时以下按键生效</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统操作</td>
+<td>?</td>
+<td style="text-align:left">列出所有快捷键；按q返回</td>
+</tr>
+<tr>
+<td></td>
+<td>d</td>
+<td style="text-align:left">脱离当前会话；这样可以暂时返回Shell界面，输入tmux attach能够重新进入之前的会话</td>
+</tr>
+<tr>
+<td></td>
+<td>D</td>
+<td style="text-align:left">选择要脱离的会话；在同时开启了多个会话时使用</td>
+</tr>
+<tr>
+<td></td>
+<td>Ctrl+z</td>
+<td style="text-align:left">挂起当前会话</td>
+</tr>
+<tr>
+<td></td>
+<td>r</td>
+<td style="text-align:left">强制重绘未脱离的会话</td>
+</tr>
+<tr>
+<td></td>
+<td>s</td>
+<td style="text-align:left">选择并切换会话；在同时开启了多个会话时使用</td>
+</tr>
+<tr>
+<td></td>
+<td>:</td>
+<td style="text-align:left">进入命令行模式；此时可以输入支持的命令，例如kill-server可以关闭服务器</td>
+</tr>
+<tr>
+<td></td>
+<td>[</td>
+<td style="text-align:left">进入复制模式；此时的操作与vi/emacs相同，按q/Esc退出</td>
+</tr>
+<tr>
+<td></td>
+<td>~</td>
+<td style="text-align:left">列出提示信息缓存；其中包含了之前tmux返回的各种提示信息</td>
+</tr>
+<tr>
+<td>窗口操作</td>
+<td>c</td>
+<td style="text-align:left">创建新窗口</td>
+</tr>
+<tr>
+<td></td>
+<td>&amp;</td>
+<td style="text-align:left">关闭当前窗口</td>
+</tr>
+<tr>
+<td></td>
+<td>数字键</td>
+<td style="text-align:left">切换至指定窗口</td>
+</tr>
+<tr>
+<td></td>
+<td>p</td>
+<td style="text-align:left">切换至上一窗口</td>
+</tr>
+<tr>
+<td></td>
+<td>n</td>
+<td style="text-align:left">切换至下一窗口</td>
+</tr>
+<tr>
+<td></td>
+<td>l</td>
+<td style="text-align:left">在前后两个窗口间互相切换</td>
+</tr>
+<tr>
+<td></td>
+<td>w</td>
+<td style="text-align:left">通过窗口列表切换窗口</td>
+</tr>
+<tr>
+<td></td>
+<td>,</td>
+<td style="text-align:left">重命名当前窗口；这样便于识别</td>
+</tr>
+<tr>
+<td></td>
+<td>.</td>
+<td style="text-align:left">修改当前窗口编号；相当于窗口重新排序</td>
+</tr>
+<tr>
+<td></td>
+<td>f</td>
+<td style="text-align:left">在所有窗口中查找指定文本</td>
+</tr>
+<tr>
+<td>面板操作</td>
+<td>”</td>
+<td style="text-align:left">将当前面板平分为上下两块</td>
+</tr>
+<tr>
+<td></td>
+<td>%</td>
+<td style="text-align:left">将当前面板平分为左右两块</td>
+</tr>
+<tr>
+<td></td>
+<td>x</td>
+<td style="text-align:left">关闭当前面板</td>
+</tr>
+<tr>
+<td></td>
+<td>!</td>
+<td style="text-align:left">将当前面板置于新窗口；即新建一个窗口，其中仅包含当前面板</td>
+</tr>
+<tr>
+<td></td>
+<td>Ctrl+方向键</td>
+<td style="text-align:left">以1个单元格为单位移动边缘以调整当前面板大小</td>
+</tr>
+<tr>
+<td></td>
+<td>Alt+方向键</td>
+<td style="text-align:left">以5个单元格为单位移动边缘以调整当前面板大小</td>
+</tr>
+<tr>
+<td></td>
+<td>Space</td>
+<td style="text-align:left">在预置的面板布局中循环切换；依次包括even-horizontal、even-vertical、main-horizontal、main-vertical、tiled</td>
+</tr>
+<tr>
+<td></td>
+<td>q</td>
+<td style="text-align:left">显示面板编号</td>
+</tr>
+<tr>
+<td></td>
+<td>o</td>
+<td style="text-align:left">在当前窗口中选择下一面板</td>
+</tr>
+<tr>
+<td></td>
+<td>方向键</td>
+<td style="text-align:left">移动光标以选择面板</td>
+</tr>
+<tr>
+<td></td>
+<td>{</td>
+<td style="text-align:left">向前置换当前面板</td>
+</tr>
+<tr>
+<td></td>
+<td>}</td>
+<td style="text-align:left">向后置换当前面板</td>
+</tr>
+<tr>
+<td></td>
+<td>Alt+o</td>
+<td style="text-align:left">逆时针旋转当前窗口的面板</td>
+</tr>
+<tr>
+<td></td>
+<td>Ctrl+o</td>
+<td style="text-align:left">顺时针旋转当前窗口的面板</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/03/18/tmux快捷键/" data-id="cj4gn2lzb001mngjttb68w2oi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

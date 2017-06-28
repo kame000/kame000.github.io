@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>xtraback原理及使用 | kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="xtraback 工作原理介绍、配置及使用。">
+<meta name="keywords" content="mysql,xtraback">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xtraback原理及使用">
+<meta property="og:url" content="http://www.wokoweb.com/2016/12/23/xtarback/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="xtraback 工作原理介绍、配置及使用。">
+<meta property="og:updated_time" content="2017-06-28T06:47:28.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="xtraback原理及使用">
+<meta name="twitter:description" content="xtraback 工作原理介绍、配置及使用。">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-xtarback" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/23/xtarback/" class="article-date">
+  <time datetime="2016-12-23T00:00:00.000Z" itemprop="datePublished">2016-12-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      xtraback原理及使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="xtrabackup"><a href="#xtrabackup" class="headerlink" title="xtrabackup"></a>xtrabackup</h1><blockquote>
+<p>xtrabackup 是 percona 的一个开源项目，可以热备份innodb ，XtraDB,和MyISAM（会锁表）。对MyISAM存储引擎会锁表，也是很郁闷的因为线上使用的是Innodb和MyISAM两种存储引擎，比较头疼！！ Xtrabackup是一个对InnoDB做数据备份的工具，支持在线热备份（备份时不影响数据读写），是商业备份工具InnoDB Hotbackup的一个很好的替代品。</p>
+</blockquote>
+<h1 id="官方原理"><a href="#官方原理" class="headerlink" title="官方原理"></a>官方原理</h1><blockquote>
+<p>在InnoDB内部会维护一个redo日志文件，我们也可以叫做事务日志文件。事务日志会存储每一个InnoDB表数据的记录修改。当InnoDB启动时，InnoDB会检查数据文件和事务日志，并执行两个步骤：它应用（前滚）已经提交的事务日志到数据文件，并将修改过但没有提交的数据进行回滚操作。</p>
+</blockquote>
+<p>xtrabackup在启动时会记住log sequence number（LSN），并且复制所有的数据文件。复制过程需要一些时间，所以这期间如果数据文件有改动，那么将会使数据库处于一个不同的时间点。这时，xtrabackup会运行一个后台进程，用于监视事务日志，并从事务日志复制最新的修改。xtrabackup必须持续的做这个操作，是因为事务日志是会轮转重复的写入，并且事务日志可以被重用。所以xtrabackup自启动开始，就不停的将事务日志中每个数据文件的修改都记录下来。</p>
+<p>上面就是xtrabackup的备份过程。接下来是准备（prepare）过程。在这个过程中，xtrabackup使用之前复制的事务日志，对各个数据文件执行灾难恢复（就像MySQL刚启动时要做的一样）。当这个过程结束后，数据库就可以做恢复还原了。 以上的过程在xtrabackup的编译二进制程序中实现。程序innobackupex可以允许我们备份MyISAM表和frm文件从而增加了便捷和功能。Innobackupex会启动xtrabackup，直到xtrabackup复制数据文件后，然后执行FLUSH TABLES WITH READ LOCK来阻止新的写入进来并把MyISAM表数据刷到硬盘上，之后复制MyISAM数据文件，最后释放锁。</p>
+<p>备份MyISAM和InnoDB表最终会处于一致，在准备（prepare）过程结束后，InnoDB表数据已经前滚到整个备份结束的点，而不是回滚到xtrabackup刚开始时的点。这个时间点与执行FLUSH TABLES WITH READ LOCK的时间点相同，所以MyISAM表数据与InnoDB表数据是同步的。类似Oracle的，InnoDB的prepare过程可以称为recover（恢复），MyISAM的数据复制过程可以称为restore（还原）。</p>
+<p>xtrabackup和innobackupex这两个工具都提供了许多前文没有提到的功能特点。手册上有对各个功能都有详细的介绍。简单介绍下，这些工具提供了如流（streaming）备份，增量（incremental）备份等，通过复制数据文件，复制日志文件和提交日志到数据文件（前滚）实现了各种复合备份方式。</p>
+<p>xtrabackup只能备份和恢复InnoDB表，而且只有ibd文件，frm文件它不管，恢复时就需要DBA提供frm。innobackupex可以备份和恢复MyISAM表以及frm文件，并且对xtrabackup也做了很好的封装，所以可以使用innobackupex来备份MySQL数据库。还有一个问题，就是innobackupex备份MyISAM表之前要对全库进行加READ LOCK，阻塞写操作，若备份是在从库上进行的话会影响主从同步，造成延迟。对InnoDB表备份不会阻塞读写。</p>
+<h2 id="xtrabackup增量备份的原理是："><a href="#xtrabackup增量备份的原理是：" class="headerlink" title="xtrabackup增量备份的原理是："></a>xtrabackup增量备份的原理是：</h2><p>首先完成一个完全备份，并记录下此时检查点LSN； 2)、然后增量备份时，比较表空间中每个页的LSN是否大于上次备份的LSN，若是则备份该页并记录当前检查点的LSN。</p>
+<p>具体来说，首先在logfile中找到并记录最后一个checkpoint（“last checkpoint LSN”），然后开始从LSN的位置开始拷贝InnoDB的logfile到xtrabackup_logfile；然后开始拷贝全部的数据文件.ibd；在拷贝全部数据文件结束之后，才停止拷贝logfile。</p>
+<p>所以xtrabackuplogfile文件在并发写入很大时也会变得很大，占用很多空间，需要注意。另外当我们使用–stream=tar或者远程备份–remote-host时默认使用/tmp，但最好显示用参数–tmpdir指定，以免把/tmp目录占满影响备份以及系统其它正常服务。 因为logfile里面记录全部的数据修改情况，所以即使在备份过程中数据文件被修改过了，恢复时仍然能够通过解析xtrabackuplogfile保持数据的一致。 xtrabackup的增量备份只能用于InnoDB表，不能用在MyISAM表上。采用增量备份MySQL数据库时xtrabackup会依据上次全备份或增量备份目录对InnoDB表进行增量备份，对MyISAM表会进行全表复制。</p>
+<p>流备份（streaming）可以将备份直接保存到远程服务器上。 当执行恢复时，由于复制是不锁表的所以此时数据文件都是不一致的，xtrabackup使用之前保存的redo log对各个数据文件检查是否与事务日志的checkpoint一致，执行恢复： 1)、根据复制数据文件时以及之后已提交事务产生的事务日志进行前滚； 2)、将未提交的事务进行回滚。</p>
+<p>这个过程就是MySQL数据库宕机之后执行的crash recovery。</p>
+<h2 id="增量备份"><a href="#增量备份" class="headerlink" title="增量备份"></a>增量备份</h2><p>在InnoDB中，每个page中都记录LSN信息，每当相关数据发生改变，page的LSN就会自动增加，xtrabackup的增量备份就是依据这一原理进行的。xtrabackup将上次备份（完全备份集或者也是一个增量备份集）以来LSN改变的page进行备份。 所以，要做增量备份第一次就要做一个完全备份（就是将MySQL实例或者说要备份的数据库表做一个完全复制，同时记录LSN），之后可以基于此进行增量备份以及恢复。</p>
+<h3 id="增量备份优点："><a href="#增量备份优点：" class="headerlink" title="增量备份优点："></a>增量备份优点：</h3><p>1)、数据库太大没有足够的空间全量备份，增量备份能有效节省空间，并且效率高；<br>2)、支持热备份，备份过程不锁表（针对InnoDB而言），不阻塞数据库的读写；<br>3)、每日备份只产生少量数据，也可采用远程备份，节省本地空间；<br>4)、备份恢复基于文件操作，降低直接对数据库操作风险；<br>5)、备份效率更高，恢复效率更高。</p>
+<h3 id="恢复与还原"><a href="#恢复与还原" class="headerlink" title="恢复与还原"></a>恢复与还原</h3><p>backup的恢复过程中包括恢复和还原两个部分。 我们前面已经说了xtrabackup只备份InnoDB表的ibd文件，而innobackupex可以备份包括InnoDB表在内的其他存储引擎的表的所有数据文件。由于不同引擎表备份时的不同，也会让恢复过程看起来不一样。</p>
+<p>先来看看完全备份集的恢复。 在InnoDB表的备份或者更直接的说ibd数据文件复制的过程中，数据库处于不一致的状态，所以要将xtraback_logfile中尚未提交的事务进行回滚，以及将已经提交的事务进行前滚，使各个数据文件处于一个一致性状态，这个过程叫做“准备(prepare)”。</p>
+<p>如果你是在一个从库上执行的备份，那说明你没有东西需要回滚，只是简单的apply redo log就可以了。另外在prepare过程中可以使用参数–use-memory增大使用系统内存量从而提高恢复速度。</p>
+<p>之后，我们就可以根据backup-my.cnf中的配置把数据文件复制回对应的目录了，当然你也可以自己复制回去，但innobackupex都会帮我们完成。在这里，对于InnoDB表来说是完成“后准备”动作，我们称之为“恢复(recovery)”，而对于MyISAM表来说由于备份时是采用锁表方式复制的，所以此时只是简单的复制回来，不需要apply log，这个我们称之为“还原(restore)”。 注：本文档里之所以使用恢复和还原，也是和其他数据库比如Oracle看起来一样。</p>
+<p>对于增量备份的恢复过程，与完全备份集的恢复类似，只是有少许不同：</p>
+<ul>
+<li>恢复过程需要使用完全备份集和各个增量备份集，各个备份集的恢复与前面说的一样（前滚和回滚），之后各个增量备份集的redo log都会应用到完全备份集中；</li>
+<li>对于完全备机集之后产生的新表，要有特殊处理方式，以便恢复后不丢表；</li>
+<li>要以完全备份集为基础，然后按顺序应用各个增量备份集。</li>
+</ul>
+<h3 id="流备份和压缩"><a href="#流备份和压缩" class="headerlink" title="流备份和压缩"></a>流备份和压缩</h3><p>提到流备份(streaming)就要说远程备份和备份压缩，先说流备份吧。 流备份是指备份的数据通过标准输出STDOUT传输给tar程序进行归档，而不是单纯的将数据文件保存到指定的备份目录中，参数–stream=tar表示开启流备份功能并打包。同时也可以利用流备份到远程服务器上。<br>举例来说:</p>
+<p>  <code>$ innobackupex --stream=TAR ${BACKUPDIR}/base | gzip &gt; ${BACKUPDIR}/base.tar.gz $ innobackupex --stream=TAR ${BACKUP_DIR}/base|ssh somebackupaddr “cat &gt; ${DIR}/base.tar”</code><br>当然了，如果你使用了流备份，那么增量备份也就不能用了，因为增量备份需要参考次备份情况，而上次备份却被打包或者压缩了。 在我们现实使用中，更多的使用增量备份，至于归档压缩我们可以通过脚本自主完成。</p>
+<h3 id="部分备份和恢复"><a href="#部分备份和恢复" class="headerlink" title="部分备份和恢复"></a>部分备份和恢复</h3><p>xtrabackup可以只备份/恢复部分库表，可以正则模式匹配或者是你想备份库表的列表，但InnoDB表必须是独立表空间，同时不能使用流备份功能。</p>
+<ul>
+<li><p>使用正则模式匹配备份部分库表，需要使用参数–include，语句类似如下:</p>
+<p><code>$ innobackupex --include=’^qb.*’ ${BACKUP_DIR}/part-base</code></p>
+</li>
+<li><p>使用数据库列表备份部分库，需要使用参数–databases，语句类似如下:</p>
+<p><code>$ innobackupex --databases=qb0 qb1 qb2 qb3 ${BACKUP_DIR}/part-base</code></p>
+</li>
+<li><p>使用表列表备份部分表，需要使用参数–tables-file，语句类似如下:</p>
+<p><code>$ innobackupex --tables-list=${CONFDIR}/tab.conf ${BACKUPDIR}/part-base</code></p>
+</li>
+</ul>
+<blockquote>
+<p>注：在我们的现实应用中，很少会只备份集群中部分库表，所以只是了解此功能即可，若有现实需要可以参考percona官方资料以获取更多信息。</p>
+</blockquote>
+<p>能备份部分库表，也就能根据完全备份集进行部分库表的恢复，在现实中很少会用到，但还是说一下吧。 首先在“准备prepare”的过程中，使用参数–export将表导出，这个导出会将每个InnoDB表创建一个以.exp结尾的文件，这些文件为之后的导入过程服务。</p>
+<pre><code>$ innobackupex --apply-log --export ${BACKUP_DIR}/base
+</code></pre><p>然后将你需要恢复的表的ibd和exp文件复制到目标机器，在目标机器上执行导入：</p>
+<pre><code>mysql&gt; create table t()engine=innodb;
+//此处需要DBA手动创建一个同结构的表或表已存在
+mysql&gt; ALTER TABLE t DISCARD TABLESPACE;
+$ cp t.ibd t.exp ${DATA_DIR}/${DB}/ mysql&gt; ALTER TABLE t IMPORT TABLESPACE; 这样的导出导入就可以保住恢复的表可以与数据库其他表保持一致性了。
+</code></pre><h3 id="并行备份"><a href="#并行备份" class="headerlink" title="并行备份"></a>并行备份</h3><p>xtrbackup还支持并行备份，默认情况下xtrabackup备份时只会开启一个进程进行数据文件的备份，若配置参数–parallel=N可以让xtrabackup开启N个子进程对多个数据文件进行并发备份，这样可以加快备份的速度。当然服务器的IO处理能力以及对服务器的影响也是要考虑的，所以另一个参数–throttle=IOS会与它同时使用，这个参数用来限制备份过程中每秒读写的IO次数，对服务器的IO是一个保护。</p>
+<p>这两个参数xtrabackup和innobackupex都支持，举例如下:</p>
+<pre><code>$ innobackupex --parallel=4 --throttle=400 ${BACKUP_DIR}/part-base 注意：对同一个数据文件只会有一个进程在备份。
+</code></pre><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>xtrabackup在备份时主要的工作是做数据文件复制，它每次只会读写1MB的数据（即64个page，不能修改），xtrabackup逐页访问1MB数据，使用innodb的bufpageis_corrupted()函数检查此页的数据是否正常，如果数据不正常，就重新读取这一页，最多重新读取10次，如果还是失败，备份就失败了，退出。 在复制事务日志的时候，每次读写512KB的数据，同样不可以配置。 之前我在维护mysql数据库的时候，使用mysqldump来进行备份与恢复，在备份的时候锁住表，然后全部备份，在数据少的时候没问题，但如果数据很多，不允许锁表，同时需要恢复数据块的情况，mysqldump就不适合了，我在恢复一个4G数据文件的数据库的时候，恢复的数据是使用mysqldump的数据，恢复了3个小时还没有反应，造成的影响很严重，所以我开始寻找其他的别发软件来满足以上的需求，幸好找到了，就是使用xtrabackup来进行备份与恢复，恢复4G数据文件的数据库，仅需要14秒，同时在备份的时候不会锁表，而且支持增量备份，所以把我的比较分享给大家，希望对大家有益！</p>
+<h3 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h3><pre><code>yum install perl-Time-HiRes -y
+yum -y install perl-DBD-MySQL.x86_64
+tar xvf percona-xtrabackup-2.1.5-680-Linux-x86_64.tar.gz
+cd percona-xtrabackup-2.1.5-Linux-x86_64/
+cp bin/* /usr/bin/
+</code></pre><blockquote>
+<p>innobackupex使用参数介绍由于innobackupex能同时备份InnoDB和MyISAM引擎的表，这里重点介绍innobackupex的备份与恢复使用通常一般都直接使用innobackupex，因为它能同时备份InnoDB和MyISAM引擎的表。要注意的是my.cnf里datadir这个参数是必须要指定的，xtrabackup_55是根据它去定位innodb数据文件的位置。</p>
+</blockquote>
+<pre><code>innobackupex语法及参数说明innobackup [--sleep=MS] [--compress[=LEVEL]] [--include=REGEXP] [--user=NAME] [--password=WORD] [--port=PORT] [--socket=SOCKET] [--no-timest a mp] [--ibbackup=IBBACKUP-BINARY] [--slave-info] [--stream=tar] [--defaults-file=MY.CNF] [--databases=LIST] [--remote-host=HOSTNAME] BACKUP-ROOT-DIR
+
+innobackup --apply-log [--use-memory=MB] [--uncompress] [--defaults-file=MY.CNF] [--ibbackup=IBBACKUP-BINARY] BACKUP-DIR
+
+innobackup --copy-back [--defaults-file=MY.CNF] BACKUP-DIR
+</code></pre><h4 id="各参数说明："><a href="#各参数说明：" class="headerlink" title="各参数说明："></a>各参数说明：</h4><pre><code>--defaults-file指定mysql的配置文件my.cnf的位置，如--defaults-file=/etc/my.cnf如果不该参数，xtrabackup将从依次从以下位置查找配置文件/etc/my.cnf、/etc/mysql/my.cnf、/usr/local/etc/my.cnf、~/.my.cnf，并读取配置文件中的[mysqld]和[xtrabackup]配置段。[mysqld]中只需要指定datadir、innodb_data_home_dir、innodb_data_file_path、innodb_log_group_home_dir、innodb_log_files_in_group、innodb_log_file_size6个参数即可让xtrabackup正常工作--apply-log对xtrabackup的--prepare参数的封装
+--copy-back做数据恢复时将备份数据文件拷贝到MySQL服务器的datadir ；
+--remote-host=HOSTNAME通过ssh将备份数据存储到进程服务器上,HOSTNAME是远程IP地址；
+--stream=[tar]
+</code></pre><blockquote>
+<p>备份文件输出格式, tar时使用tar4ibd , 该文件可在XtarBackup binary文件中获得.如果备份时有指定–stream=tar, 则tar4ibd文件所处目录一定要在$PATH中(因为使用的是tar4ibd去压缩, 在XtraBackup的binary包中可获得该文件)。<br>在使用参数stream=tar备份的时候，你的xtrabackup_logfile可能会临时放在/tmp目录下，如果你备份的时候并发写入较大的话xtrabackup_logfile可能会很大(5G+)，很可能会撑满你的/tmp目录，可以通过参数–tmpdir指定目录来解决这个问题。</p>
+</blockquote>
+<pre><code>--tmpdir=DIRECTORY
+当有指定--remote-host or --stream时, 事务日志临时存储的目录, 默认采用MySQL配置文件中所指定的临时目录tmpdir
+--redo-only --apply-log组,
+强制备份日志时只redo ,跳过rollback。这在做增量备份时非常必要。
+--use-memory=#
+该参数在prepare的时候使用，控制prepare时innodb实例使用的内存量
+--throttle=IOS  
+同xtrabackup的--throttle参数
+--sleep=是给ibbackup使用的，指定每备份1M数据，过程停止拷贝多少毫秒，也是为了在备份时尽量减小对正常业务的影响，具体可以查看ibbackup的手册 ；
+--compress[=LEVEL]对备份数据迚行压缩，仅支持ibbackup，xtrabackup还没有实现；
+--include=REGEXP对xtrabackup参数--tables的封装，也支持ibbackup。备份包含的库表，例如：--include=&quot;test.*&quot;，意思是要备份test库中所有的表。如果需要全备份，则省略这个参数；如果需要备份test库下的2个表：test1和test2,则写成：--include=&quot;test.test1|test.test2&quot;。也可以使用通配符，如：--include=&quot;test.test*&quot;。
+--databases=LIST列出需要备份的databases，如果没有指定该参数，所有包含MyISAM和InnoDB表的database都会被备份；
+--uncompress解压备份的数据文件，支持ibbackup，xtrabackup还没有实现该功能；
+--slave-info,备份从库, 加上--slave-info备份目录下会多生成一个xtrabackup_slave_info 文件, 这里会保存主日志文件以及偏移, 文件内容类似于:CHANGE MASTER TO MASTER_LOG_FILE=&apos;&apos;, MASTER_LOG_POS=0
+--socket=SOCKET指定mysql.sock所在位置，以便备份进程登录mysql.
+</code></pre><h4 id="操作："><a href="#操作：" class="headerlink" title="操作："></a>操作：</h4><p>对数据库全库备份：</p>
+<p>  innobackupex –defaults-file=/etc/my.cnf –user=root –password=111111 –port=3306 /tmp/</p>
+<blockquote>
+<p>解释：</p>
+</blockquote>
+<pre><code>--defaults-file=/etc/my.cnf  #指定my.cnf位置
+--user=root  #指定mysql帐号
+--password=111111   #指定mysql密码
+--port=3306   #指定mysql端口
+/tmp/   #指定备份好的文件存放目录，我这放在/tmp/下面，
+执行完成后，如下多了个时间为名了的目录，里面就是备份文件了：
+
+[root@drfdai-17 tmp]# ls
+2013-10-29_16-06-41
+[root@drfdai-17 tmp]# ls 2013-10-29_16-06-41/
+aa ibdata1 testxtrabackup_checkpoints
+backup-my.cnf  mysql   xtrabackup_binary   xtrabackup_logfile
+drfdai performance_schema  xtrabackup_binlog_info
+备份drfdai库：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database=drfdai /tmp/
+</code></pre><blockquote>
+<p>解释：</p>
+</blockquote>
+<pre><code>--database=drfdai #指定需要备份的数据库名
+
+  [root@drfdai-17 2013-10-29_16-23-53]# ls
+  backup-my.cnf  ibdata1xtrabackup_binlog_info  xtrabackup_logfile
+  drfdai xtrabackup_binary  xtrabackup_checkpoints
+</code></pre><h4 id="备份多个库："><a href="#备份多个库：" class="headerlink" title="备份多个库："></a>备份多个库：</h4><pre><code>innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database=&apos;drfdai mysql&apos; /tmp/
+</code></pre><blockquote>
+<p>解释：</p>
+</blockquote>
+<pre><code>--database=&apos;drfdai mysql&apos;  #指定你需要备份的那几个库名，用单引号把这些库名引起来，每个库中间用空格隔开。
+[root@drfdai-17 2013-10-29_16-33-09]# ls
+backup-my.cnf  ibdata1  xtrabackup_binary   xtrabackup_checkpoints
+drfdai mysqlxtrabackup_binlog_info  xtrabackup_logfile
+</code></pre><h4 id="备份多个表："><a href="#备份多个表：" class="headerlink" title="备份多个表："></a>备份多个表：</h4><pre><code>innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database=&apos;drfdai.aa1 drfdai.aa2&apos; /tmp/
+</code></pre><blockquote>
+<p>解释：</p>
+</blockquote>
+<pre><code>--database=&apos;drfdai.aa1 drfdai.aa2&apos; #指定备份drfdai库下面的aa1表和aa2表
+</code></pre><h3 id="还原操作："><a href="#还原操作：" class="headerlink" title="还原操作："></a>还原操作：</h3><pre><code>停止mysql数据库并删除欲恢复的数据库文件夹
+如我的mysql数据库文件夹是在/data/mysql/data中，所以我删掉这个文件夹
+然后重建一个/data/mysql/data/
+      rm -rf /data/mysql/data
+      mkdir /data/mysql/data
+</code></pre><h4 id="还原完整备份："><a href="#还原完整备份：" class="headerlink" title="还原完整备份："></a>还原完整备份：</h4><pre><code>innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --apply-log /tmp/2013-10-29_17-17-47/
+这里的--apply-log指明是将日志应用到数据文件上，完成之后将备份文件中的数据恢复到数据库中
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --copy-back /tmp/2013-10-29_17-17-47/
+这里的—copy-back指明是进行数据恢复。数据恢复完成之后，需要修改相关文件的权限mysql数据库才能正常启动。
+
+chown -R mysql:mysql /data/mysql/data
+</code></pre><h4 id="增量备份："><a href="#增量备份：" class="headerlink" title="增量备份："></a>增量备份：</h4><pre><code>次先进行完备： innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 /tmp/ 备份完后，会生成最新的目录，名为：2013-10-29_17-17-47
+
+进行第一次增量备份：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306  --incremental --incremental-basedir=/tmp/2013-10-29_17-17-47 /tmp
+备份完成后，会生成最新增量备份，名为：2013-10-29_17-57-21
+解释：
+
+--incremental #指定为此次为增量备份
+--incremental-basedir=/tmp/2013-10-29_17-17-47  #指定是从哪个备份目录为参考点进行增量备份
+进行第二次增量备份：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306  --incremental --incremental-basedir=/tmp/2013-10-29_17-57-21/ /tmp
+以此类推，第三，第四 ……
+</code></pre><h4 id="增量备份恢复："><a href="#增量备份恢复：" class="headerlink" title="增量备份恢复："></a>增量备份恢复：</h4><blockquote>
+<p>增量备份恢复的步骤和完整备份恢复的步骤基本一致，只是应用日志的过程稍有不同。增量备份恢复时，是先将所有的增量备份挨个应用到完整备份的数据文件中，然后再将完整备份中的数据恢复到数据库中。命令如下：</p>
+</blockquote>
+<ul>
+<li><p>应用第一个增量备份</p>
+<p>  innobackupex –user=root –password=MySQLPASSWORD –defaults-file=/etc/my.cnf –apply-log /mysqlbackup/full/2011-08-09_14-50-20/ –incremental-dir=/mysqlbackup/trn/2011-08-09_15-12-43/</p>
+</li>
+<li><p>应用第二个增量备份</p>
+<p>  innobackupex –user=root –password=MySQLPASSWORD –defaults-file=/etc/my.cnf –apply-log /mysqlbackup/full/2011-08-09_14-50-20/ –incremental-dir=/mysqlbackup/trn/2011-08-05_15-15-47/</p>
+</li>
+</ul>
+<ul>
+<li><p>将完整备份中的数据恢复到数据库中</p>
+<p>  innobackupex –user=root –password=MySQLPASSWORD –defaults-file=/etc/my.cnf –copy-back /mysqlbackup/full/2011-08-05_14-50-20/ 其中，–incremental-dir指定要恢复的增量备份的位置。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/23/xtarback/" data-id="cj4gn2lzd001qngjtbz8f1kqz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xtraback/">xtraback</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/24/iptables限制单IP链接数/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          iptables 限制同一IP链接数
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/11/nginx非80端口转发/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">nginx做非80端口转发</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

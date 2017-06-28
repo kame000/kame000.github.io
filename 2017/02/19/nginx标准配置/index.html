@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>nginx 标准配置 | kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nginx 日志使用过程中的一些配置信息">
+<meta name="keywords" content="nginx,标准配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx 标准配置">
+<meta property="og:url" content="http://www.wokoweb.com/2017/02/19/nginx标准配置/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="nginx 日志使用过程中的一些配置信息">
+<meta property="og:updated_time" content="2017-06-28T06:47:28.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx 标准配置">
+<meta name="twitter:description" content="nginx 日志使用过程中的一些配置信息">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nginx标准配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/19/nginx标准配置/" class="article-date">
+  <time datetime="2017-02-19T00:00:00.000Z" itemprop="datePublished">2017-02-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nginx 标准配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nginx-版本"><a href="#nginx-版本" class="headerlink" title="nginx  版本"></a>nginx  版本</h2><h3 id="nginx-官方版本"><a href="#nginx-官方版本" class="headerlink" title="nginx 官方版本"></a>nginx 官方版本</h3><h4 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h4><h5 id="源码包安装"><a href="#源码包安装" class="headerlink" title="源码包安装"></a>源码包安装</h5><pre><code>-  下载nginx对应版本源码包
+-  安装编译参数
+
+`    ./configure --user=www --group=www --prefix=/app/nginx --with-http_stub_status_module --with-http_ssl_module`
+</code></pre><h5 id="yum-安装"><a href="#yum-安装" class="headerlink" title="yum 安装"></a>yum 安装</h5><pre><code>yum  install nginx
+</code></pre><h2 id="使用方向"><a href="#使用方向" class="headerlink" title="使用方向"></a>使用方向</h2><h3 id="tengine-做前端负载及缓存"><a href="#tengine-做前端负载及缓存" class="headerlink" title="tengine 做前端负载及缓存"></a>tengine 做前端负载及缓存</h3><pre><code>http {
+include       mime.types;
+default_type  application/octet-stream;
+autoindex     off;
+
+##linux 2.4+   network optimize
+sendfile        on;
+tcp_nopush     on;
+tcp_nodelay    on;
+
+## tengine
+server_info     off;
+server_tag    off;
+server_tokens off;
+access_log    off;
+
+keepalive_timeout  60;
+### 限制header clien_body 大小等参数
+server_names_hash_bucket_size 128;
+client_header_buffer_size 32k;
+large_client_header_buffers 4 32k;
+client_max_body_size 10m;
+client_body_buffer_size 256k;
+
+
+##cache_buff_tmp
+
+  #  fastcgi_intercept_errors on;
+  #  fastcgi_hide_header X-Powered-By;
+  #  fastcgi_connect_timeout 180;
+  #  fastcgi_send_timeout 180;
+  #  fastcgi_read_timeout 180;
+  #  fastcgi_buffer_size 128k;
+  #  fastcgi_buffers 4 128K;
+  #  fastcgi_busy_buffers_size 128k;
+  #  fastcgi_temp_file_write_size 128k;
+  #  fastcgi_temp_path /home/cache_php;
+
+
+#gzip  on;
+gzip on;
+gzip_min_length 1k;
+gzip_buffers 4 16k;
+gzip_http_version 1.0;
+gzip_comp_level 4;
+gzip_disable &quot;MSIE [1-6].&quot;;
+gzip_types text/plain application/x-javascript text/css  text/javascript application/json application/x-httpd-php application/xml;
+gzip_vary on;
+</code></pre><p>`</p>
+<pre><code>    ### lua  moty   add
+    lua_package_path &quot;/opt/nginx/conf/waf/?.lua&quot;;
+    lua_shared_dict limit 10m;
+    init_by_lua_file  /opt/nginx/conf/waf/init.lua;
+    access_by_lua_file /opt/nginx/conf/waf/waf.lua;
+
+
+    ###  upstream     
+    include vhost/upstream.conf ;
+
+    log_format access &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot;&apos;
+        &apos;$status $body_bytes_sent &quot;$http_referer&quot;&apos;
+        &apos;&quot;$http_user_agent&quot; $http_x_forwarded_for&apos;;
+
+    ### whiteIPlist
+    geo $whiteiplist  {
+        default 1;
+        192.168.6.0/24 0;
+    }
+        map $whiteiplist  $limit {
+        1 $binary_remote_addr;
+        0 &quot;&quot;;
+    }
+
+
+    ### limite  session
+
+    limit_req_zone $cookie_token zone=session_limit:20m rate=10r/s;
+    limit_req_zone $binary_remote_addr $uri zone=auth_limit:20m rate=10r/m;
+
+    ###  proxy_buffer   
+    proxy_connect_timeout 600;
+    proxy_read_timeout 600;
+    proxy_send_timeout 600;
+    proxy_buffer_size 128k;
+    proxy_buffers 4 128k;
+    proxy_busy_buffers_size 256k;
+    proxy_temp_file_write_size 256k;
+    proxy_headers_hash_max_size 1024;
+    proxy_headers_hash_bucket_size 128;
+
+    proxy_redirect off;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_temp_path /home/data/nginx/nginx_temp;
+    proxy_cache_path /home/data/nginx/nginx_cache levels=1:2 keys_zone=cache_one:2048m inactive=30m max_size=60g;
+
+
+       # proxy_temp_path   /home/cache/nginx/proxy_temp;
+       # proxy_cache_path  /home/cache/nginx/proxy_cache_www levels=1:2   keys_zone=cache_www:3000m inactive=1d max_size=20g;
+
+        include  vhost/ap18game.com.conf;
+    }
+
+
+    ## 创建 负载均衡配置文件
+    upstream webserver {
+    consistent_hash $request_uri;
+    server web1:80 weight=1;
+    server web2:80 weight=1;
+    session_sticky;
+
+
+    check interval=3000 rise=2 fall=5 timeout=1000 type=http;
+    check_http_send &quot;GET / HTTP/1.0\r\n\r\n&quot;;
+    check_http_expect_alive http_2xx http_3xx;
+    }
+
+
+
+    server {
+    listen       80;
+    server_name  webserver;
+    root         /home/data/nginx/nginx_cache;
+    index        index.php index.html index.htm;
+    #charset koi8-r;
+
+    ##access_log
+    access_log  /home/data/nginx/logs/webserver.access.log  access;
+
+    #trim on;
+    #trim_jscss on;
+    #location / {
+    #    root   html;
+    #    index  index.html index.htm;
+    #}
+
+    location / {
+    proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;
+
+    #if (-d $request_filename) {
+    #    rewrite ^/(.*)$ http://$host/index.html break;
+    #}
+
+        ##  defend   CC    lua简单防CC
+        limit_req zone=session_limit burst=5;
+         rewrite_by_lua &apos;
+         local random = ngx.var.cookie_random
+         if (random == nil) then
+            return ngx.redirect(&quot;/auth?url=&quot; .. ngx.var.request_uri)
+         end
+        local token = ngx.md5(&quot;opencdn&quot; .. ngx.var.remote_addr .. random)
+        if (ngx.var.cookie_token ~= token) then
+              return ngx.redirect(&quot;/auth?url=&quot;.. ngx.var.request_uri)
+        end
+    &apos;;
+        ### 负载均衡
+        proxy_redirect         off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://webserver;
+   }
+
+    ###  defend  CC
+    location /auth {
+    limit_req zone=auth_limit burst=1;
+    if ($arg_url = &quot;&quot;) {
+        return 403;
+    }
+    access_by_lua &apos;
+        local random = math.random(9999)
+        local token = ngx.md5(&quot;opencdn&quot; .. ngx.var.remote_addr .. random)
+        if (ngx.var.cookie_token ~= token) then
+            ngx.header[&quot;Set-Cookie&quot;] = {&quot;token=&quot; .. token, &quot;random=&quot; .. random}
+            return ngx.redirect(ngx.var.arg_url)
+        end
+    &apos;;
+    }
+
+    #location ~ .*\. (php)?$ {
+    #       proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;
+    #       proxy_pass http://webserver;
+    #}
+
+    ###  前端缓存                                                                                                                                                                      
+    location ~ .*\.(htm|html|js|css|gif|jpg|jpeg|png|bmp|ico|swf|flv|otf)$ {
+            proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;
+            proxy_cache cache_one;
+            proxy_cache_valid 200 304 15m;
+            proxy_cache_valid 301 302 10m;
+            proxy_cache_valid any 1m;
+            proxy_cache_key $host$uri$is_args$args;
+            add_header Ten-webcache &apos;$upstream_cache_status from $host&apos;;
+            proxy_pass http://webserver;
+            expires 30m;
+    }
+
+
+
+    ##  test lua
+    location /lua {
+            default_type &apos;text/plain&apos;;
+            content_by_lua &apos;ngx.say(&quot;hello, lua&quot;)&apos;;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+    location /nstatus {
+            check_status;
+            access_log off;
+            allow 182.52.236.240;
+            deny all;
+    }
+}    
+</code></pre><h3 id="nginx-做网站防火墙"><a href="#nginx-做网站防火墙" class="headerlink" title="nginx 做网站防火墙"></a>nginx 做网站防火墙</h3><p>   <strong>主要使用使用lua   waf模块</strong></p>
+<pre><code>git clone http://luajit.org/git/luajit-2.0.git
+wget http://tengine.taobao.org/download/tengine-2.1.0.tar.gz
+git clone https://github.com/loveshell/ngx_lua_waf
+ cd luajit-2.0 &amp;&amp; git checkout v2.1
+ make
+ make install PREFIX=/usr/local/luajit
+ 解压安装tengine
+  ./configure --prefix=/opt/nginx --with-http_lua_module --with-luajit-lib=/usr/local/luajit/lib/ --with-luajit-inc=/usr/local/luajit/include/luajit-2.1/ --with-ld-opt=-Wl,-rpath,/usr/local/luajit/lib
+
+ make &amp;&amp; make install
+</code></pre><h4 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h4><p>在nginx.conf中添加一个location</p>
+<pre><code>location /lua {
+     default_type &apos;text/plain&apos;;
+    content_by_lua &apos;ngx.say(&quot;hello, lua&quot;)&apos;;
+}
+</code></pre><h4 id="配置ngx-lua-waf"><a href="#配置ngx-lua-waf" class="headerlink" title="配置ngx_lua_waf"></a>配置ngx_lua_waf</h4><p>nginx下常见的开源waf有mod_security、naxsi、ngx_lua_waf这三个，mod_security是最老牌的，功能最强规则细定制性又强，但是配置最复杂高并发时性能差。naxsi是原生nginx下的waf，性能不错但是基于白名单，配置也很麻烦。ngx_lua_waf功能和规则虽然没有这两个强大，但赢在性能高和易用性强，基本上零配置，而且常见的攻击类型都能防御，是比较省心的选择。安装好ngx_lua后，把下载好的ngx_lua_waf复制到conf目录下,重命名为waf，在nginx.conf的http段添加：</p>
+<pre><code>lua_package_path &quot;/opt/nginx/conf/waf/?.lua&quot;;
+lua_shared_dict limit 10m;
+init_by_lua_file  /opt/nginxconf/waf/init.lua;
+access_by_lua_file /opt/nginx/conf/waf/waf.lua;
+</code></pre><p>修改/opt/nginx/conf/waf/config.lua文件，该文件为waf的配置文件，将RulePath和logdir改为实际的目录：</p>
+<pre><code>RulePath = &quot;/opt/nginx/conf/waf/wafconf/&quot;
+logdir = &quot;/opt/nginx/logs/waf&quot;   //确保此文件夹nginx有写入权限
+</code></pre><p>其它的安全配置，按照实际需要开启。设置好和启动nginx</p>
+<h3 id="nginx-做后端代理"><a href="#nginx-做后端代理" class="headerlink" title="nginx 做后端代理"></a>nginx 做后端代理</h3><h4 id="nginx-做后端处理配置"><a href="#nginx-做后端处理配置" class="headerlink" title="nginx 做后端处理配置"></a>nginx 做后端处理配置</h4><pre><code>user  www www;
+worker_processes  8;
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
+
+error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+pid        logs/nginx.pid;
+worker_rlimit_nofile  65535;
+
+
+events {
+    use epoll;
+    worker_connections  65535;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;
+    #                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
+    #                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
+
+    #log_format short &apos;[$time_local] | $status | $host | $request | $remote_addr | $http_user_agent | $http_referer | $http_cookie&apos;;
+    log_format  short &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos; &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos; &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot; $request_body $host &quot;$http_cookie&quot; &apos; &apos;$upstream_response_time $request_time &apos;;
+    #access_log  logs/access.log  short;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server_tokens off;
+
+    charset     UTF-8;
+    server_names_hash_bucket_size       128;
+    client_header_buffer_size           4k;
+    large_client_header_buffers  4      32k;
+    client_max_body_size 30m;
+    client_body_buffer_size 128k;
+    fastcgi_connect_timeout 300;
+    fastcgi_read_timeout 300;
+    fastcgi_send_timeout 300;
+    fastcgi_buffer_size 64k;
+    fastcgi_buffers   4 32k;
+    fastcgi_busy_buffers_size 64k;
+    fastcgi_temp_file_write_size 64k;
+    ####open_file_cache
+    open_file_cache max=65536  inactive=60s;
+    open_file_cache_valid      80s;
+    open_file_cache_min_uses   1;
+
+    include ./vhost/*.conf;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2017/02/19/nginx标准配置/" data-id="cj4gn2lyx0014ngjtl6svi979" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/标准配置/">标准配置</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/11/awk使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          awk 高级使用技巧
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/17/install_supervisor/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">centos7 安装supervisor</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

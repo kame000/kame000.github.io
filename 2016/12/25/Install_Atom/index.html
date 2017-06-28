@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>linux下安装 Atom | kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="linux安装使用Atom 及使用命令集合">
+<meta name="keywords" content="开发环境,Atom,软件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下安装 Atom">
+<meta property="og:url" content="http://www.wokoweb.com/2016/12/25/Install_Atom/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="linux安装使用Atom 及使用命令集合">
+<meta property="og:updated_time" content="2017-06-28T06:47:28.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux下安装 Atom">
+<meta name="twitter:description" content="linux安装使用Atom 及使用命令集合">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Install_Atom" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/25/Install_Atom/" class="article-date">
+  <time datetime="2016-12-25T00:00:00.000Z" itemprop="datePublished">2016-12-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux下安装 Atom
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="linux下安装atom"><a href="#linux下安装atom" class="headerlink" title="linux下安装atom"></a>linux下安装atom</h1><p>在你的Ubuntu/Linux Mint上安装文本编辑器：Atom</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>sudo add-apt-repository ppa:webupd8team/atom
+sudo apt-get update
+sudo apt-get install atom
+</code></pre><h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><pre><code>sudo apt-get remove atom
+sudo add-apt-repository --remove ppa:webupd8team/atom
+以上只会卸载该软件，要卸载附加的一些软件包，请使用以下命令卸载多余的软件包：
+
+sudo apt-get autoremove
+</code></pre><h2 id="常用命令集合"><a href="#常用命令集合" class="headerlink" title="常用命令集合"></a>常用命令集合</h2><h3 id="文件切换"><a href="#文件切换" class="headerlink" title="文件切换"></a>文件切换</h3><pre><code>ctrl-shift-s 保存所有打开的文件
+cmd-shift-o 打开目录
+cmd-\ 显示或隐藏目录树
+ctrl-0 焦点移到目录树
+目录树下，使用a，m，delete来增加，修改和删除
+cmd-t或cmd-p 查找文件
+cmd-b 在打开的文件之间切换
+cmd-shift-b 只搜索从上次git commit后修改或者新增的文件
+</code></pre><h3 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h3><pre><code>（等价于上下左右）
+ctrl-p 前一行
+ctrl-n 后一行
+ctrl-f 前一个字符
+ctrl-b 后一个字符
+
+alt-B, alt-left 移动到单词开始
+alt-F, alt-right 移动到单词末尾
+
+cmd-right, ctrl-E 移动到一行结束
+cmd-left, ctrl-A 移动到一行开始
+
+cmd-up 移动到文件开始
+cmd-down 移动到文件结束
+
+ctrl-g 移动到指定行 row:column 处
+
+cmd-r 在方法之间跳转
+</code></pre><h3 id="目录树操作"><a href="#目录树操作" class="headerlink" title="目录树操作"></a>目录树操作</h3><pre><code>cmd-\ 或者 cmd-k cmd-b 显示(隐藏)目录树
+ctrl-0 焦点切换到目录树(再按一次或者Esc退出目录树)
+a 添加文件
+d 将当前文件另存为(duplicate)
+i 显示(隐藏)版本控制忽略的文件
+alt-right 和 alt-left 展开(隐藏)所有目录
+ctrl-al-] 和 ctrl-al-[ 同上
+ctrl-[ 和 ctrl-] 展开(隐藏)当前目录
+ctrl-f 和 ctrl-b 同上
+cmd-k h 或者 cmd-k left 在左半视图中打开文件
+cmd-k j 或者 cmd-k down 在下半视图中打开文件
+cmd-k k 或者 cmd-k up 在上半视图中打开文件
+cmd-k l 或者 cmd-k right 在右半视图中打开文件
+ctrl-shift-C 复制当前文件绝对路径
+</code></pre><h3 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h3><pre><code>cmd-F2 在本行增加书签
+F2 跳到当前文件的下一条书签
+shift-F2 跳到当前文件的上一条书签
+ctrl-F2 列出当前工程所有书签
+</code></pre><h3 id="选取"><a href="#选取" class="headerlink" title="选取"></a>选取</h3><pre><code>大部分和导航一致，只不过加上shift
+ctrl-shift-P 选取至上一行
+ctrl-shift-N 选取至下一样
+ctrl-shift-B 选取至前一个字符
+ctrl-shift-F 选取至后一个字符
+alt-shift-B, alt-shift-left 选取至字符开始
+alt-shift-F, alt-shift-right 选取至字符结束
+ctrl-shift-E, cmd-shift-right 选取至本行结束
+ctrl-shift-A, cmd-shift-left 选取至本行开始
+cmd-shift-up 选取至文件开始
+cmd-shift-down 选取至文件结尾
+cmd-A 全选
+cmd-L 选取一行，继续按回选取下一行
+ctrl-shift-W 选取当前单词
+</code></pre><h3 id="编辑和删除文本"><a href="#编辑和删除文本" class="headerlink" title="编辑和删除文本"></a>编辑和删除文本</h3><p>基本操作</p>
+<pre><code>ctrl-T 使光标前后字符交换
+cmd-J 将下一行与当前行合并
+ctrl-cmd-up, ctrl-cmd-down 使当前行向上或者向下移动
+cmd-shift-D 复制当前行到下一行
+cmd-K, cmd-U 使当前字符大写
+cmd-K, cmd-L 使当前字符小写
+cmd-shift-P 搜索命令
+</code></pre><h3 id="删除和剪切"><a href="#删除和剪切" class="headerlink" title="删除和剪切"></a>删除和剪切</h3><pre><code>ctrl-shift-K 删除当前行
+cmd-backspace 删除到当前行开始
+cmd-fn-backspace 删除到当前行结束
+ctrl-K 剪切到当前行结束
+alt-backspace 或 alt-H 删除到当前单词开始
+alt-delete 或 alt-D 删除到当前单词结束
+</code></pre><h3 id="多光标和多处选取"><a href="#多光标和多处选取" class="headerlink" title="多光标和多处选取"></a>多光标和多处选取</h3><pre><code>cmd-click 增加新光标
+cmd-shift-L 将多行选取改为多行光标
+ctrl-shift-up, ctrl-shift-down 增加上（下）一行光标
+cmd-D 选取文档中和当前单词相同的下一处
+ctrl-cmd-G 选取文档中所有和当前光标单词相同的位置
+</code></pre><h3 id="括号跳转"><a href="#括号跳转" class="headerlink" title="括号跳转"></a>括号跳转</h3><pre><code>ctrl-m 相应括号之间，html tag之间等跳转
+ctrl-cmd-m 括号(tag)之间文本选取
+alt-cmd-. 关闭当前XML/HTML tag
+</code></pre><h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><pre><code>ctrl-shift-U 调出切换编码选项
+</code></pre><h3 id="查找和替换"><a href="#查找和替换" class="headerlink" title="查找和替换"></a>查找和替换</h3><pre><code>cmd-F 在buffer中查找
+cmd-shift-f 在整个工程中查找
+</code></pre><h3 id="代码片段"><a href="#代码片段" class="headerlink" title="代码片段"></a>代码片段</h3><pre><code>alt-shift-S 查看当前可用代码片段
+
+在~/.atom目录下snippets.cson文件中存放了你定制的snippets
+定制说明
+</code></pre><h3 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h3><pre><code>ctrl-space 提示补全信息
+</code></pre><h3 id="折叠"><a href="#折叠" class="headerlink" title="折叠"></a>折叠</h3><pre><code>alt-cmd-[ 折叠
+alt-cmd-] 展开
+alt-cmd-shift-{ 折叠全部
+alt-cmd-shift-} 展开全部
+cmd-k cmd-N 指定折叠层级 N为层级数
+</code></pre><h3 id="文件语法高亮"><a href="#文件语法高亮" class="headerlink" title="文件语法高亮"></a>文件语法高亮</h3><pre><code>ctrl-shift-L 选择文本类型
+
+使用Atom进行写作
+
+ctrl-shift-M Markdown预览
+可用代码片段
+
+b, legal, img, l, i, code, t, table
+git操作
+
+cmd-alt-Z checkout HEAD 版本
+cmd-shift-B 弹出untracked 和 modified文件列表
+alt-g down alt-g up 在修改处跳转
+alt-G D 弹出diff列表
+alt-G O 在github上打开文件
+alt-G G 在github上打开项目地址
+alt-G B 在github上打开文件blame
+alt-G H 在github上打开文件history
+alt-G I 在github上打开issues
+alt-G R 在github打开分支比较
+alt-G C 拷贝当前文件在gihub上的网址
+</code></pre><h3 id="推荐一些好用的插件"><a href="#推荐一些好用的插件" class="headerlink" title="推荐一些好用的插件"></a>推荐一些好用的插件</h3><pre><code>主题
+atom-material-ui 好看到爆
+atom-material-syntax
+美化
+atom-beautify 一键代码美化
+file-icons 给文件加上好看的图标
+atom-minimap 方便美观的缩略滚动图
+pretty-json json格式化工具
+activate-power-mode 炫酷的打字特效
+git
+atomatigit 可视化git操作
+git-time-machine git版本对比工具，可视化选择每一个commit
+merge-conflicts 合并冲突可视化工具
+代码提示
+emmet 这个不用介绍了吧
+atom-ternjs js代码提示很强大，高度定制化
+docblockr jsdoc 给js添加注释
+autoclose-html 闭合html标签
+color-picker 取色器 必备插件
+pigments 颜色显示插件 必装
+terminal-panel 直接在atom里面写命令了
+svg-preview svg预览
+便捷操作
+advanced-open-file 快速打开、切换文件
+project-folder 快速打开、切换项目
+script 立即执行当前js文件
+高亮
+language-vue vue框架代码高亮
+终端
+platformio-atom-ide-terminal 终端插件，支持显示、隐藏及多窗口
+就这些了，欢迎pull更多好用的插件！
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/12/25/Install_Atom/" data-id="cj4gn2ly70006ngjtedwp9qdu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Atom/">Atom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件/">软件</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/29/ansible优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ansible 优化配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/25/ansible常用命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ansible 常用命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

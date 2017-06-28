@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>nginx 配置技巧汇总 | kame</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nginx 配置汇总学习篇">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx 配置技巧汇总">
+<meta property="og:url" content="http://www.wokoweb.com/2016/05/19/nginx配置技巧汇总/index.html">
+<meta property="og:site_name" content="kame">
+<meta property="og:description" content="nginx 配置汇总学习篇">
+<meta property="og:updated_time" content="2017-06-28T06:47:28.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx 配置技巧汇总">
+<meta name="twitter:description" content="nginx 配置汇总学习篇">
+  
+    <link rel="alternate" href="/atom.xml" title="kame" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">kame</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.wokoweb.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nginx配置技巧汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/19/nginx配置技巧汇总/" class="article-date">
+  <time datetime="2016-05-19T00:00:00.000Z" itemprop="datePublished">2016-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nginx 配置技巧汇总
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="nginx配置技巧汇总"><a href="#nginx配置技巧汇总" class="headerlink" title="nginx配置技巧汇总"></a>nginx配置技巧汇总</h1><p>本文记录了一些nginx作为反向代理和文件服务器的配置技巧和解决方案，持续更新</p>
+<h2 id="Nginx作为文件服务"><a href="#Nginx作为文件服务" class="headerlink" title="Nginx作为文件服务"></a>Nginx作为文件服务</h2><blockquote>
+<p>避免浏览器自动播放文件<br>有时对于图片、视频，浏览器会视能力，自动为用户显示或播放。这主要是由于Web服务器在返回文件本身数据的同时，返回了一些特殊的MIME类型，比如：image/jpeg（JPEG图像）,application/pdf（PDF文档）,video/mpeg（MPEG动画）。这些MIMIE类型实际上是告诉浏览器，文件数据到底是什么，这样浏览器就能更好的为用户展示数据。现在像图片、pdf、甚至是视频基本都是可以直接在浏览器中展示和播放的。但是有时，我们需要浏览器为用户下载文件而不是直接播放，而Nginx在默认配置下，会根据文件的后缀来匹配相应的MIME类型，并写入Response header，导致浏览器播放文件而不是下载，这时需要通过配置让Nginx返回的MIME类型为下面这个类型：</p>
+</blockquote>
+<pre><code>application/octet-stream
+</code></pre><p>这个类型会让浏览器认为响应是普通的文件流，并提示用户下载文件。可以通过在Nginx的配置文件中做如下配置达到这样的目的：</p>
+<pre><code>location /download/ {
+    types        { }
+    default_type application/octet-stream;
+}
+</code></pre><p>这样当Url路径中包含/download/时，MIME类型会被重置为application/octet-stream。另外，nginx自带的MIME类型映射表保存在conf/mime.types中。</p>
+<h2 id="文件上传大小限制放开"><a href="#文件上传大小限制放开" class="headerlink" title="文件上传大小限制放开"></a>文件上传大小限制放开</h2><p>有的时候后端的Web-Server提供文件上传的服务，但是如果前端使用Nginx做反向代理时，会出现文件无法上传的问题，这可能是由于Ngxin默认对客户端请求的body的限制。因为，默认情况下Nginx对客户端请求的大小限制是1m，而上传的文件往往超过1m。可以通过修改如下配置项，来放宽这个限制：</p>
+<pre><code>client_max_body_size 10m;
+</code></pre><p>将这个值设置为0，可以取消这个限制。这个配置项可以用在http, server, location配置节中。详见client_max_body_size</p>
+<h2 id="下载文件重命名"><a href="#下载文件重命名" class="headerlink" title="下载文件重命名"></a>下载文件重命名</h2><p>通常情况下，为了保证用户上传的文件在服务器的文件系统中不至于重名，一般会将文件名修改成guid后保存，并在数据库中保持guid与文件名的映射。此时，如果使用Nginx来提供对这些用户文件的下载功能的话，文件下载到用户浏览器，会以文件的guid名作为文件名，这显然是用户不想看到的。可以考虑用这个方案。 假设我们有一个文件的原始文件名为test.txt，对应的guid文件名是21EC2020-3AEA-1069-A2DD-08002B30309D.txt，文件的虚拟路径是/download/</p>
+<p>使用服务器端编程语言，在输出的html中使用如下链接提供文件的下载：</p>
+<pre><code>&lt;a href=&quot;/download/21EC2020-3AEA-1069-A2DD-08002B30309D.txt?n=test.txt&quot; target=&apos;_blank&apos;&gt;下载test.txt&lt;/a&gt;
+可以看到，将原始文件名以QueryString的方式带在请求中，这样可以在Nginx端，利用$arg_name变量来取到这个QueryString的值，从而重写response header：
+
+add_header Content-Disposition &quot;attachment; filename=$arg_n&quot;;
+这会在response header中加入如下键值：
+
+Content-Disposition: &quot;attachment; filename=test.txt&quot;;
+经测试，无论是IE还是Chrome都可以支持这个header。
+
+关于Content-Disposition，详见这里
+</code></pre><p>关于Nginx的标准http模块的嵌入变量，详见这里</p>
+<h2 id="提供flv视频播放"><a href="#提供flv视频播放" class="headerlink" title="提供flv视频播放"></a>提供flv视频播放</h2><p>使用jwplayer+Nginx能够实现视频在线播放，视频格式为flv。Nginx有一个flv模块ngx_http_flv_module，能够支持flv视频的快进播放。在安装Nginx的时候可能需要手动添加–with-http_flv_module，不过笔者使用的yum安装，自动带上了这个模块。</p>
+<p>其实从这个模块的文档中可以看到，它只是能够处理start的带参数http请求，需要像下面这样配置：</p>
+<pre><code>location ~ \.flv {
+    root /var/video;
+    flv;
+}
+</code></pre><p>从客户端播放器的角度看，还需要配置播放器的一些参数，以jwplayer为例：</p>
+<pre><code>jwplayer(&quot;flashContent&quot;).setup({
+    flashplayer: &quot;/jwplayer/player.swf&quot;,
+    height: 270,
+    width: 480,
+    file: &quot;${file_url}.flv&quot;, //flv文件路径
+    image:&quot;${file_url}.jpg&quot;, //缩略图
+    streamer:&quot;start&quot;,
+    provider: &quot;http&quot;, //有时可能是type:&quot;http&quot;
+});
+</code></pre><p>这里的关键参数是provider，用来告诉jwplayer使用http方式请求视频(还有其他协议，比如RTSP)，streamer参数是配合Nginx支持的start参数来设置的。</p>
+<p>如果想要实现快进播放的话，还有一个关键点，就是视频需要包含有关键帧信息。关键帧信息其实就是一系列时间点+byte位。可以用yamdi为flv注入关键帧:</p>
+<pre><code>yamdi -i a_without_meta.flv -o b_with_meta.flv
+</code></pre><p>这样jwplayer能够根据快进的时间从关键帧信息中找到最近的关键帧的起始二进制点，并将这个byte作为start参数回传给Nginx。如果关键帧信息越密集的话，越占空间，但是快进也能够越精确：</p>
+<p>//刚开始播放的时候，产生的http：<br>…/b_with_meta.flv?start=0<br>//用户快进后，产生的http：<br>…/b_with_meta.flv?start=37682252<br>附件批量打包下载<br>利用第三方模块mod_zip。详见利用Nginx第三方模块，实现附件打包下载</p>
+<h2 id="Nginx作为反向代理"><a href="#Nginx作为反向代理" class="headerlink" title="Nginx作为反向代理"></a>Nginx作为反向代理</h2><p>一个IP多个域名<br>如果只有一个公网IP，但是网站功能需要划分为多个不同的子网站或者子域名，可以用Nginx来搭建反向代理来“复用”IP资源。假设有如下几个域名都是abc.com这个主域的：</p>
+<pre><code>www.abc.com
+image.abc.com
+video.abc.com
+</code></pre><p>首先在DNS出注册这3个域名同时指向同一个IP，Nginx作为前端的web服务器，让所有访问这个IP地址80端口的请求全部指向Nginx<br>然后，配置Nginx，根据域名将请求转发转发给内网的上游服务器，例如下面的配置：<br>      server {<br>          listen 80;<br>          server_name www.abc.com;<br>          location / {<br>                  proxy_pass <a href="http://192.168.1.100" target="_blank" rel="external">http://192.168.1.100</a>;<br>          }<br>       }</p>
+<pre><code>server {
+    listen 80;
+    server_name image.abc.com;
+    location / {
+            alias /var/www/image;
+    }
+ }
+
+server {
+    listen 80;
+    server_name video.abc.com;
+    location / {
+            proxy_pass http://192.168.1.100:8081/video;
+    }
+ }
+</code></pre><p>在上述配置中，将三个域名分发给了不同的模块处理：</p>
+<p>www.abc.com 分发给上游的<a href="http://192.168.1.100服务器处理" target="_blank" rel="external">http://192.168.1.100服务器处理</a><br>image.abc.com 则直接映射到了Nginx本机的一个目录<br>video.abc.com 分发给上游的<a href="http://192.168.1.100:8081/video服务器处理（video是上游web-server的某虚拟目录" target="_blank" rel="external">http://192.168.1.100:8081/video服务器处理（video是上游web-server的某虚拟目录</a>)</p>
+<h2 id="上游服务器超时"><a href="#上游服务器超时" class="headerlink" title="上游服务器超时"></a>上游服务器超时</h2><blockquote>
+<p>Nginx作为反向代理的时候，如果上游服务器处理时间过长的话，有时会返回504网关超时，从nginx的错误日志看出如果是upstream timed out，就表示是上游服务器处理时间过长，Nginx认为服务超时。Nginx在请求上游服务器时默认的超时时间为1分钟，可以通过调整proxy_read_timeout属性增加这个超时时间</p>
+</blockquote>
+<pre><code>proxy_read_timeout    180s;
+</code></pre><p>默认的header过滤<br>Nginx默认对客户端的http请求进行很多验证，其中容易忽视的是header的验证，默认由下面两个配置节控制：</p>
+<pre><code>underscores_in_headers on|off;
+ignore_invalid_headers on|off;
+underscores_in_headers off表示对包含有下划线(_)的header认为是不合法的，而ignore_invalid_headers on则表示对于不合法的header都过滤掉（无视掉）。如果在客户端自定义header的话，要注意尽量不要包含下划线，否则会碰到被Nginx过滤掉的问题。如果不可避免的要使用下划线的话，就考虑配置成这样的组合：
+
+underscores_in_headers on;
+ignore_invalid_headers off;
+</code></pre><p>可以把上面的配置节设置在http或者server段中。</p>
+<p>对于排查这个问题，可以通过将错误日志的告警级别调整到debug，并查看error日志，一般错误日志里面会包含有类似这样的信息</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.wokoweb.com/2016/05/19/nginx配置技巧汇总/" data-id="cj4gn2lz10017ngjthqcln60g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/19/tomcat安装与配置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          tomcat 安装配置使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/05/redis集群架构/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">redis 集群搭建</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Centos/">Centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ELK/">ELK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FTP/">FTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NFS/">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NOSQL/">NOSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NetWork/">NetWork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSL证书/">SSL证书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/">VPN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bacula/">bacula</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cachefilesd/">cachefilesd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glusterfs/">glusterfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-内核优化/">linux 内核优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logs/">logs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pptpd/">pptpd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xtraback/">xtraback</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式存储/">分布式存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/快捷键/">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术汇总/">技术汇总</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据提取/">数据提取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/标准配置/">标准配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/硬盘/">硬盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/端口转发/">端口转发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络存储/">网络存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件/">软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集中备份软件/">集中备份软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/静态文件/">静态文件</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/Centos/" style="font-size: 10px;">Centos</a> <a href="/tags/ELK/" style="font-size: 10px;">ELK</a> <a href="/tags/FTP/" style="font-size: 10px;">FTP</a> <a href="/tags/NFS/" style="font-size: 15px;">NFS</a> <a href="/tags/NOSQL/" style="font-size: 10px;">NOSQL</a> <a href="/tags/NetWork/" style="font-size: 10px;">NetWork</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SSL证书/" style="font-size: 10px;">SSL证书</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ansible/" style="font-size: 12.5px;">ansible</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/bacula/" style="font-size: 10px;">bacula</a> <a href="/tags/cachefilesd/" style="font-size: 10px;">cachefilesd</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/glusterfs/" style="font-size: 12.5px;">glusterfs</a> <a href="/tags/iptables/" style="font-size: 12.5px;">iptables</a> <a href="/tags/linux-内核优化/" style="font-size: 10px;">linux 内核优化</a> <a href="/tags/logs/" style="font-size: 10px;">logs</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pptpd/" style="font-size: 10px;">pptpd</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/shell/" style="font-size: 17.5px;">shell</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tmux/" style="font-size: 12.5px;">tmux</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/xtraback/" style="font-size: 12.5px;">xtraback</a> <a href="/tags/分布式存储/" style="font-size: 10px;">分布式存储</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/技术汇总/" style="font-size: 10px;">技术汇总</a> <a href="/tags/数据库/" style="font-size: 12.5px;">数据库</a> <a href="/tags/数据提取/" style="font-size: 10px;">数据提取</a> <a href="/tags/标准配置/" style="font-size: 10px;">标准配置</a> <a href="/tags/硬盘/" style="font-size: 10px;">硬盘</a> <a href="/tags/端口转发/" style="font-size: 10px;">端口转发</a> <a href="/tags/网络存储/" style="font-size: 12.5px;">网络存储</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/软件/" style="font-size: 10px;">软件</a> <a href="/tags/集中备份软件/" style="font-size: 10px;">集中备份软件</a> <a href="/tags/静态文件/" style="font-size: 10px;">静态文件</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/06/28/mysql备份机制/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/29/suibi/">suibi</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/glusterfs详解/">glusterfs 详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/19/tmux/">tmux 使用配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/11/glusterfs集群搭建/">glusterfs集群搭建</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kame<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
