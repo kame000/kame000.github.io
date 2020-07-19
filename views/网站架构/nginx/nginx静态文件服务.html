@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>nginx静态文件服务 | 奇哥</title>
+    <meta name="description" content="个人博客，技术笔记整理">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.f3fddc9c.css" as="style"><link rel="preload" href="/assets/js/app.bd57e9ac.js" as="script"><link rel="preload" href="/assets/js/4.cf47d3bf.js" as="script"><link rel="preload" href="/assets/js/1.2ae96b85.js" as="script"><link rel="preload" href="/assets/js/158.867715fb.js" as="script"><link rel="prefetch" href="/assets/js/10.816b0153.js"><link rel="prefetch" href="/assets/js/100.a03fb444.js"><link rel="prefetch" href="/assets/js/101.d92e5f36.js"><link rel="prefetch" href="/assets/js/102.c696f09e.js"><link rel="prefetch" href="/assets/js/103.ce3c3f6a.js"><link rel="prefetch" href="/assets/js/104.502b38a6.js"><link rel="prefetch" href="/assets/js/105.8ff7fab8.js"><link rel="prefetch" href="/assets/js/106.d12a2a32.js"><link rel="prefetch" href="/assets/js/107.e585a5b6.js"><link rel="prefetch" href="/assets/js/108.72bc7fee.js"><link rel="prefetch" href="/assets/js/109.c794a8c2.js"><link rel="prefetch" href="/assets/js/11.b378d47c.js"><link rel="prefetch" href="/assets/js/110.2c2d0721.js"><link rel="prefetch" href="/assets/js/111.104c000c.js"><link rel="prefetch" href="/assets/js/112.a9f6a2ea.js"><link rel="prefetch" href="/assets/js/113.06d8aa1d.js"><link rel="prefetch" href="/assets/js/114.51211731.js"><link rel="prefetch" href="/assets/js/115.e854479d.js"><link rel="prefetch" href="/assets/js/116.66196725.js"><link rel="prefetch" href="/assets/js/117.38c8a3bb.js"><link rel="prefetch" href="/assets/js/118.0da4677e.js"><link rel="prefetch" href="/assets/js/119.67397043.js"><link rel="prefetch" href="/assets/js/12.5f65f189.js"><link rel="prefetch" href="/assets/js/120.6fde943d.js"><link rel="prefetch" href="/assets/js/121.2062356d.js"><link rel="prefetch" href="/assets/js/122.4738aa5b.js"><link rel="prefetch" href="/assets/js/123.e2d00381.js"><link rel="prefetch" href="/assets/js/124.eeb983d9.js"><link rel="prefetch" href="/assets/js/125.f8c5ff44.js"><link rel="prefetch" href="/assets/js/126.42a2902a.js"><link rel="prefetch" href="/assets/js/127.c1d66f24.js"><link rel="prefetch" href="/assets/js/128.7933581c.js"><link rel="prefetch" href="/assets/js/129.fe280f18.js"><link rel="prefetch" href="/assets/js/13.53265072.js"><link rel="prefetch" href="/assets/js/130.5796bc49.js"><link rel="prefetch" href="/assets/js/131.72a70116.js"><link rel="prefetch" href="/assets/js/132.fba186d3.js"><link rel="prefetch" href="/assets/js/133.a038b6e3.js"><link rel="prefetch" href="/assets/js/134.b979fc39.js"><link rel="prefetch" href="/assets/js/135.ab58fa4d.js"><link rel="prefetch" href="/assets/js/136.3946e1b7.js"><link rel="prefetch" href="/assets/js/137.d506d848.js"><link rel="prefetch" href="/assets/js/138.b737062e.js"><link rel="prefetch" href="/assets/js/139.80f8ffc8.js"><link rel="prefetch" href="/assets/js/14.9b50c038.js"><link rel="prefetch" href="/assets/js/140.a8efede8.js"><link rel="prefetch" href="/assets/js/141.88912078.js"><link rel="prefetch" href="/assets/js/142.002ec337.js"><link rel="prefetch" href="/assets/js/143.1a9fed6a.js"><link rel="prefetch" href="/assets/js/144.15e56ee3.js"><link rel="prefetch" href="/assets/js/145.859b8d00.js"><link rel="prefetch" href="/assets/js/146.c0b30a80.js"><link rel="prefetch" href="/assets/js/147.86c03071.js"><link rel="prefetch" href="/assets/js/148.86bdb637.js"><link rel="prefetch" href="/assets/js/149.68ae3de2.js"><link rel="prefetch" href="/assets/js/15.b327be7e.js"><link rel="prefetch" href="/assets/js/150.078f5953.js"><link rel="prefetch" href="/assets/js/151.3925086c.js"><link rel="prefetch" href="/assets/js/152.b2656742.js"><link rel="prefetch" href="/assets/js/153.94c79fa9.js"><link rel="prefetch" href="/assets/js/154.6f668cdc.js"><link rel="prefetch" href="/assets/js/155.26d16d88.js"><link rel="prefetch" href="/assets/js/156.4dac7439.js"><link rel="prefetch" href="/assets/js/157.134c9a36.js"><link rel="prefetch" href="/assets/js/159.5b790836.js"><link rel="prefetch" href="/assets/js/16.b23402c5.js"><link rel="prefetch" href="/assets/js/160.7bb54d30.js"><link rel="prefetch" href="/assets/js/161.32842b78.js"><link rel="prefetch" href="/assets/js/162.2d8da748.js"><link rel="prefetch" href="/assets/js/163.285ec7ff.js"><link rel="prefetch" href="/assets/js/164.0c6dfe94.js"><link rel="prefetch" href="/assets/js/165.251b2dd6.js"><link rel="prefetch" href="/assets/js/166.61a13c62.js"><link rel="prefetch" href="/assets/js/167.0b8940f1.js"><link rel="prefetch" href="/assets/js/168.18e24cb7.js"><link rel="prefetch" href="/assets/js/169.b10c1569.js"><link rel="prefetch" href="/assets/js/17.32bbe36c.js"><link rel="prefetch" href="/assets/js/170.cc30d6db.js"><link rel="prefetch" href="/assets/js/171.e5a5db17.js"><link rel="prefetch" href="/assets/js/172.3d6df5cc.js"><link rel="prefetch" href="/assets/js/173.ec48230a.js"><link rel="prefetch" href="/assets/js/174.8f356df8.js"><link rel="prefetch" href="/assets/js/175.5205cd09.js"><link rel="prefetch" href="/assets/js/176.4ad613ab.js"><link rel="prefetch" href="/assets/js/177.99280429.js"><link rel="prefetch" href="/assets/js/178.adbbe2e3.js"><link rel="prefetch" href="/assets/js/179.8b44b7d3.js"><link rel="prefetch" href="/assets/js/18.e647e6b1.js"><link rel="prefetch" href="/assets/js/180.74a473ac.js"><link rel="prefetch" href="/assets/js/181.0c334e0b.js"><link rel="prefetch" href="/assets/js/182.2110f34a.js"><link rel="prefetch" href="/assets/js/183.afd7150e.js"><link rel="prefetch" href="/assets/js/184.1e1d16b0.js"><link rel="prefetch" href="/assets/js/185.17877986.js"><link rel="prefetch" href="/assets/js/186.eb391c2e.js"><link rel="prefetch" href="/assets/js/187.018edf4f.js"><link rel="prefetch" href="/assets/js/188.3736d840.js"><link rel="prefetch" href="/assets/js/19.a387f27c.js"><link rel="prefetch" href="/assets/js/20.49236671.js"><link rel="prefetch" href="/assets/js/21.9ec91369.js"><link rel="prefetch" href="/assets/js/22.95b2e77b.js"><link rel="prefetch" href="/assets/js/23.8f4d7414.js"><link rel="prefetch" href="/assets/js/24.e2b213c5.js"><link rel="prefetch" href="/assets/js/25.7f3f3c17.js"><link rel="prefetch" href="/assets/js/26.266189df.js"><link rel="prefetch" href="/assets/js/27.eef9b2a9.js"><link rel="prefetch" href="/assets/js/28.ffdbc4d2.js"><link rel="prefetch" href="/assets/js/29.4590fa49.js"><link rel="prefetch" href="/assets/js/30.85c4cbe9.js"><link rel="prefetch" href="/assets/js/31.390dd215.js"><link rel="prefetch" href="/assets/js/32.ce4d57de.js"><link rel="prefetch" href="/assets/js/33.2ac3bdd7.js"><link rel="prefetch" href="/assets/js/34.a27a7564.js"><link rel="prefetch" href="/assets/js/35.133a359a.js"><link rel="prefetch" href="/assets/js/36.85c206d7.js"><link rel="prefetch" href="/assets/js/37.ea3cf6be.js"><link rel="prefetch" href="/assets/js/38.c7802045.js"><link rel="prefetch" href="/assets/js/39.49f00421.js"><link rel="prefetch" href="/assets/js/40.45af2466.js"><link rel="prefetch" href="/assets/js/41.6dbd80a6.js"><link rel="prefetch" href="/assets/js/42.ff01c005.js"><link rel="prefetch" href="/assets/js/43.59f5c9d2.js"><link rel="prefetch" href="/assets/js/44.9441ae9c.js"><link rel="prefetch" href="/assets/js/45.5ae7af1e.js"><link rel="prefetch" href="/assets/js/46.d9707d2d.js"><link rel="prefetch" href="/assets/js/47.b36bd6b1.js"><link rel="prefetch" href="/assets/js/48.506449fa.js"><link rel="prefetch" href="/assets/js/49.f9bcc647.js"><link rel="prefetch" href="/assets/js/5.7f309e4b.js"><link rel="prefetch" href="/assets/js/50.6b1e5e40.js"><link rel="prefetch" href="/assets/js/51.577a7b71.js"><link rel="prefetch" href="/assets/js/52.9bc6a38b.js"><link rel="prefetch" href="/assets/js/53.efd30e13.js"><link rel="prefetch" href="/assets/js/54.6f18dec7.js"><link rel="prefetch" href="/assets/js/55.345e85aa.js"><link rel="prefetch" href="/assets/js/56.2bf86eed.js"><link rel="prefetch" href="/assets/js/57.23bf8a7b.js"><link rel="prefetch" href="/assets/js/58.52c35f14.js"><link rel="prefetch" href="/assets/js/59.b1efec4a.js"><link rel="prefetch" href="/assets/js/6.63fe1bf6.js"><link rel="prefetch" href="/assets/js/60.be3df253.js"><link rel="prefetch" href="/assets/js/61.e1b7fc3c.js"><link rel="prefetch" href="/assets/js/62.4ff81144.js"><link rel="prefetch" href="/assets/js/63.a121bb0a.js"><link rel="prefetch" href="/assets/js/64.25e8d49e.js"><link rel="prefetch" href="/assets/js/65.ca67439d.js"><link rel="prefetch" href="/assets/js/66.87c9e36a.js"><link rel="prefetch" href="/assets/js/67.738a9a01.js"><link rel="prefetch" href="/assets/js/68.22a175ca.js"><link rel="prefetch" href="/assets/js/69.0a00dc4c.js"><link rel="prefetch" href="/assets/js/7.ebbb4af9.js"><link rel="prefetch" href="/assets/js/70.ddfebdd6.js"><link rel="prefetch" href="/assets/js/71.303161f4.js"><link rel="prefetch" href="/assets/js/72.f23ccb75.js"><link rel="prefetch" href="/assets/js/73.1b49404e.js"><link rel="prefetch" href="/assets/js/74.97b665aa.js"><link rel="prefetch" href="/assets/js/75.f9d7fe05.js"><link rel="prefetch" href="/assets/js/76.6d96dcb9.js"><link rel="prefetch" href="/assets/js/77.b4048a6e.js"><link rel="prefetch" href="/assets/js/78.0e3ef83a.js"><link rel="prefetch" href="/assets/js/79.3260ac1d.js"><link rel="prefetch" href="/assets/js/8.213a8416.js"><link rel="prefetch" href="/assets/js/80.cb879212.js"><link rel="prefetch" href="/assets/js/81.1d66e67c.js"><link rel="prefetch" href="/assets/js/82.f449b53f.js"><link rel="prefetch" href="/assets/js/83.2e981570.js"><link rel="prefetch" href="/assets/js/84.96f1d92b.js"><link rel="prefetch" href="/assets/js/85.53132c5f.js"><link rel="prefetch" href="/assets/js/86.5fb0652b.js"><link rel="prefetch" href="/assets/js/87.17c99baa.js"><link rel="prefetch" href="/assets/js/88.cbdef4cf.js"><link rel="prefetch" href="/assets/js/89.c23ebd83.js"><link rel="prefetch" href="/assets/js/9.396bac1c.js"><link rel="prefetch" href="/assets/js/90.b51e75c8.js"><link rel="prefetch" href="/assets/js/91.a86d5282.js"><link rel="prefetch" href="/assets/js/92.f4f2ca2f.js"><link rel="prefetch" href="/assets/js/93.7f8fcb29.js"><link rel="prefetch" href="/assets/js/94.c6ac1bfa.js"><link rel="prefetch" href="/assets/js/95.11bdac6e.js"><link rel="prefetch" href="/assets/js/96.f6acc813.js"><link rel="prefetch" href="/assets/js/97.d418109b.js"><link rel="prefetch" href="/assets/js/98.8e84bf17.js"><link rel="prefetch" href="/assets/js/99.d68c1a72.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1a6a828a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f3fddc9c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container"><div><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="奇哥" class="logo"> <span class="site-name">奇哥</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="theme-options"><!----> <div class="dark-theme-options toggle-option"><label for="dark-theme-toggle">Enable Dark Theme?</label> <input id="dark-theme-toggle" type="checkbox" checked="checked"></div></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>nginx静态文件服务</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1.html#文件缓存漫谈" class="sidebar-link">文件缓存漫谈</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1.html#如何安装和配置基础缓存" class="sidebar-link">如何安装和配置基础缓存</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1.html#陈旧总比没有强" class="sidebar-link">陈旧总比没有强</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1.html#缓存微调" class="sidebar-link">缓存微调</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1.html#跨多硬盘分割缓存" class="sidebar-link">跨多硬盘分割缓存</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <div><main class="page reco-hide"> <div class="page-title"><h1>nginx静态文件服务</h1> <hr> <div data-v-362e684e><i class="iconfont reco-account" data-v-362e684e><span data-v-362e684e>刘文奇</span></i> <i class="iconfont reco-date" data-v-362e684e><span data-v-362e684e>2017-1-22</span></i> <span id="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-2e99e05a data-v-362e684e><i class="iconfont reco-eye" style="margin-right: .5rem" data-v-2e99e05a></i> <a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;" data-v-2e99e05a></a></span> <i class="iconfont reco-tag tags" data-v-362e684e><span class="tag-item" data-v-362e684e>
+      nginx
+    </span></i></div></div> <div class="content__default"><h1 id="nginx-静态文件服务"><a href="#nginx-静态文件服务" aria-hidden="true" class="header-anchor">#</a> Nginx 静态文件服务</h1> <p>我们先来看看最简单的本地静态文件服务配置示例：</p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>    server <span class="token punctuation">{</span>
+            listen       80;
+            server_name www.test.com;
+            charset utf<span class="token punctuation">-</span>8;
+            root   /data/www.test.com;
+            index  index.html index.htm;
+           <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>就这些？恩，就这些！如果只是提供简单的对外静态文件，它真的就可以用了。可是他不完美，远远没有发挥 Nginx 的半成功力，为什么这么说呢，看看下面的配置吧，为了大家看着方便，我们把每一项的作用都做了注释。</p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>      http <span class="token punctuation">{</span>
+      <span class="token comment"># 这个将为打开文件指定缓存，默认是没有启用的，max 指定缓存数量，</span>
+      <span class="token comment"># 建议和打开文件数一致，inactive 是指经过多长时间文件没被请求后删除缓存。</span>
+      open_file_cache max=204800 inactive=20s;
+
+      <span class="token comment"># open_file_cache 指令中的inactive 参数时间内文件的最少使用次数，</span>
+      <span class="token comment"># 如果超过这个数字，文件描述符一直是在缓存中打开的，如上例，如果有一个</span>
+      <span class="token comment"># 文件在inactive 时间内一次没被使用，它将被移除。</span>
+      open_file_cache_min_uses 1;
+
+      <span class="token comment"># 这个是指多长时间检查一次缓存的有效信息</span>
+      open_file_cache_valid 30s;
+
+      <span class="token comment"># 默认情况下，Nginx的gzip压缩是关闭的， gzip压缩功能就是可以让你节省不</span>
+      <span class="token comment"># 少带宽，但是会增加服务器CPU的开销哦，Nginx默认只对text/html进行压缩 ，</span>
+      <span class="token comment"># 如果要对html之外的内容进行压缩传输，我们需要手动来设置。</span>
+      gzip on;
+      gzip_min_length 1k;
+      gzip_buffers 4 16k;
+      gzip_http_version 1.0;
+      gzip_comp_level 2;
+      gzip_types text/plain application/x<span class="token punctuation">-</span>javascript text/css application/xml;
+
+      server <span class="token punctuation">{</span>
+              listen       80;
+              server_name www.test.com;
+              charset utf<span class="token punctuation">-</span>8;
+              root   /data/www.test.com;
+              index  index.html index.htm;
+             <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><p>我们都知道，应用程序和网站一样，其性能关乎生存。但如何使你的应用程序或者网站性能更好，并没有一个明确的答案。代码质量和架构是其中的一个原因，但是在很多例子中我们看到，你可以通过关注一些十分基础的应用内容分发技术（<code>basic application delivery techniques）</code>，来提高终端用户的体验。其中一个例子就是实现和调整应用栈<code>（application stack）</code>的缓存。</p> <h2 id="文件缓存漫谈"><a href="#文件缓存漫谈" aria-hidden="true" class="header-anchor">#</a> 文件缓存漫谈</h2> <p>一个 web 缓存坐落于客户端和原始服务器（origin server）中间，它保留了所有可见内容的拷贝。如果一个客户端请求的内容在缓存中存储，则可以直接在缓存中获得该内容而不需要与服务器通信。这样一来，由于web缓存距离客户端“更近”，就可以提高响应性能，并更有效率的使用应用服务器，因为服务器不用每次请求都进行页面生成工作。</p> <p>在浏览器和应用服务器之间，存在多种潜在缓存，如：客户端浏览器缓存、中间缓存、内容分发网络（CDN）和服务器上的负载平衡和反向代理。缓存，仅在反向代理和负载均衡的层面，就对性能提高有很大的帮助。</p> <p>举个例子说明，去年，我接手了一项任务，这项任务的内容是对一个加载缓慢的网站进行性能优化。首先引起我注意的事情是，这个网站差不多花费了超过1秒钟才生成了主页。经过一系列调试，我发现加载缓慢的原因在于页面被标记为不可缓存，即为了响应每一个请求，页面都是动态生成的。由于页面本身并不需要经常性的变更，并且不涉及个性化，那么这样做其实并没有必要。为了验证一下我的结论，我将页面标记为每5秒缓存一次，仅仅做了这一个调整，就能明显的感受到性能的提升。第一个字节到达的时间降低到几毫秒，同时页面的加载明显要更快。</p> <p>并不是只有大规模的内容分发网络（CDN）可以在使用缓存中受益——缓存还可以提高负载平衡器、反向代理和应用服务器前端web服务的性能。通过上面的例子，我们看到，缓存内容结果，可以更高效的使用应用服务器，因为不需要每次都去做重复的页面生成工作。此外，Web缓存还可以用来提高网站可靠性。当服务器宕机或者繁忙时，比起返回错误信息给用户，不如通过配置Nginx将已经缓存下来的内容发送给用户。这意味着，网站在应用服务器或者数据库故障的情况下，可以保持部分甚至全部的功能运转。</p> <p>下面讨论如何安装和配置 Nginx 的基础缓存（Basic Caching）。</p> <h2 id="如何安装和配置基础缓存"><a href="#如何安装和配置基础缓存" aria-hidden="true" class="header-anchor">#</a> 如何安装和配置基础缓存</h2> <p>我们只需要两个命令就可以启用基础缓存： proxy_cache_path 和 proxy_cache 。proxy_cache_path 用来设置缓存的路径和配置，proxy_cache 用来启用缓存。</p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>      proxy_cache_path/path/to/cache levels=1<span class="token punctuation">:</span>2 keys_zone=my_cache<span class="token punctuation">:</span>10m max_size=10g inactive=60m
+      use_temp_path=off;
+
+      server <span class="token punctuation">{</span>
+          <span class="token punctuation">...</span>
+          location / <span class="token punctuation">{</span>
+              proxy_cache my_cache;
+              proxy_pass http<span class="token punctuation">:</span>//my_upstream;
+          <span class="token punctuation">}</span>
+
+      <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><code>proxy_cache_path</code> 命令中的参数及对应配置说明如下：</p> <p>用于缓存的本地磁盘目录是 /path/to/cache/</p> <ul><li><p><code>levels</code> 在 /path/to/cache/ 设置了一个两级层次结构的目录。将大量的文件放置在单个目录中会导致文件访问缓慢，所以针对大多数部署，我们推荐使用两级目录层次结构。如果 levels 参数没有配置，则 Nginx 会将所有的文件放到同一个目录中。</p></li> <li><p><code>keys_zone</code> 设置一个共享内存区，该内存区用于存储缓存键和元数据，有些类似计时器的用途。将键的拷贝放入内存可以使 Nginx 在不检索磁盘的情况下快速决定一个请求是HIT还是MISS，这样大大提高了检索速度。一个 1MB 的内存空间可以存储大约 8000个key，那么上面配置的 10MB 内存空间可以存储差不多 80000 个 key。</p></li> <li><p><code>max_size</code> 设置了缓存的上限（在上面的例子中是 10G）。这是一个可选项；如果不指定具体值，那就是允许缓存不断增长，占用所有可用的磁盘空间。当缓存达到这个上线，处理器便调用 cache manager 来移除最近最少被使用的文件，这样把缓存的空间降低至这个限制之下。</p></li> <li><p><code>inactive</code>指定了项目在不被访问的情况下能够在内存中保持的时间。在上面的例子中，如果一个文件在 60 分钟之内没有被请求，则缓存管理将会自动将其在内存中删除，不管该文件是否过期。该参数默认值为 10 分钟（10m）。注意，非活动内容有别于过期内容。 Nginx 不会自动删除由缓存控制头部指定的过期内容（本例中 Cache-Control:max-age=120）。过期内容只有在 inactive 指定时间内没有被访问的情况下才会被删除。如果过期内容被访问了，那么 Nginx 就会将其从原服务器上刷新，并更新对应的inactive计时器。</p></li></ul> <p>Nginx 最初会将注定写入缓存的文件先放入一个临时存储区域，<code>use_temp_path=off</code>命令指示 Nginx 将在缓存这些文件时将它们写入同一个目录下。我们强烈建议你将参数设置为off来避免在文件系统中不必要的数据拷贝。use_temp_path在 Nginx 1.7版本和 Nginx Plus R6中有所介绍。
+最终，<code>proxy_cache</code>命令启动缓存那些URL与location部分匹配的内容（本例中，为/）。你同样可以将proxy_cache命令添加到server部分，这将会将缓存应用到所有的那些location中未指定自己的proxy_cache命令的服务中。</p> <h2 id="陈旧总比没有强"><a href="#陈旧总比没有强" aria-hidden="true" class="header-anchor">#</a> 陈旧总比没有强</h2> <p>Nginx 内容缓存的一个非常强大的特性是：当无法从原始服务器获取最新的内容时， Nginx 可以分发缓存中的陈旧（stale，编者注：即过期内容）内容。这种情况一般发生在关联缓存内容的原始服务器宕机或者繁忙时。比起对客户端传达错误信息， Nginx 可发送在其内存中的陈旧的文件。 Nginx 的这种代理方式，为服务器提供额外级别的容错能力，并确保了在服务器故障或流量峰值的情况下的正常运行。为了开启该功能，只需要添加 proxy_cache_use_stale 命令即可：</p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>      location / <span class="token punctuation">{</span>
+          <span class="token punctuation">...</span>
+          proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
+      <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>按照上面例子中的配置，当 Nginx 收到服务器返回的error，timeout或者其他指定的5xx错误，并且在其缓存中有请求文件的陈旧版本，则会将这些陈旧版本的文件而不是错误信息发送给客户端。</p> <h2 id="缓存微调"><a href="#缓存微调" aria-hidden="true" class="header-anchor">#</a> 缓存微调</h2> <p>Nginx 提供了丰富的可选项配置用于缓存性能的微调。下面是使用了几个配置的例子：</p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>    proxy_cache_path /path/to/cache levels=1<span class="token punctuation">:</span>2 keys_zone=my_cache<span class="token punctuation">:</span>10m max_size=10g inactive=60m
+    use_temp_path=off;
+    server <span class="token punctuation">{</span>
+        <span class="token punctuation">...</span>
+        location / <span class="token punctuation">{</span>
+            proxy_cache my_cache;
+            proxy_cache_revalidate on;
+            proxy_cache_min_uses 3;
+            proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+            proxy_cache_lock on;
+            proxy_pass http<span class="token punctuation">:</span>//my_upstream;
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>这些命令配置了下列的行为：</p> <ul><li><code>proxy_cache_revalidate</code> 指示 Nginx 在刷新来自服务器的内容时使用 GET 请求。如果客户端的请求项已经被缓存过了，但是在缓存控制头部中定义为过期，那么 Nginx 就会在 GET 请求中包含 If-Modified-Since 字段，发送至服务器端。这项配置可以节约带宽，因为对于 Nginx 已经缓存过的文件，服务器只会在该文件请求头中 Last-Modified 记录的时间内被修改时才将全部文件一起发送。</li> <li><code>proxy_cache_min_uses</code> 该指令设置同一链接请求达到几次即被缓存，默认值为 1 。当缓存不断被填满时，这项设置便十分有用，因为这确保了只有那些被经常访问的内容会被缓存。</li> <li><code>proxy_cache_use_stale</code> 中的 updating 参数告知 Nginx 在客户端请求的项目的更新正在原服务器中下载时发送旧内容，而不是向服务器转发重复的请求。第一个请求陈旧文件的用户不得不等待文件在原服务器中更新完毕。陈旧的文件会返回给随后的请求直到更新后的文件被全部下载。
+当 <code>proxy_cache_lock</code>被启用时，当多个客户端请求一个缓存中不存在的文件（或称之为一个 MISS），只有这些请求中的第一个被允许发送至服务器。其他请求在第一个请求得到满意结果之后在缓存中得到文件。如果不启用 proxy_cache_lock，则所有在缓存中找不到文件的请求都会直接与服务器通信。</li></ul> <h2 id="跨多硬盘分割缓存"><a href="#跨多硬盘分割缓存" aria-hidden="true" class="header-anchor">#</a> 跨多硬盘分割缓存</h2> <p>使用 Nginx 不需要建立一个RAID（磁盘阵列）。如果有多个硬盘， Nginx 可以用来在多个硬盘之间分割缓存。下面是一个基于请求 URI 跨越两个硬盘之间均分缓存的例子：</p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>      proxy_cache_path /path/to/hdd1 levels=1<span class="token punctuation">:</span>2 keys_zone=my_cache_hdd1<span class="token punctuation">:</span>10m max_size=10g
+
+      inactive=60m use_temp_path=off;
+      proxy_cache_path /path/to/hdd2 levels=1<span class="token punctuation">:</span>2 keys_zone=my_cache_hdd2<span class="token punctuation">:</span>10m max_size=10g inactive=60m use_temp_path=off;
+      split_clients $request_uri $my_cache <span class="token punctuation">{</span>
+          50% &quot;my_cache_hdd1&quot;;
+          50% &quot;my_cache_hdd2&quot;;
+      <span class="token punctuation">}</span>
+
+      server <span class="token punctuation">{</span>
+          <span class="token punctuation">...</span>
+          location / <span class="token punctuation">{</span>
+              proxy_cache $my_cache;
+              proxy_pass http<span class="token punctuation">:</span>//my_upstream;
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div></div> <!----> <footer class="page-edit"><!----> <!----></footer> <!----> </main> <div class="valine-wrapper" data-v-5029e45b><div id="valine" data-v-5029e45b></div></div></div> <div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;background-color:rgba(231, 234, 241,.5);display:none;" data-v-cd623d78 data-v-cd623d78><i class="iconfont reco-up" data-v-cd623d78></i></div></div></div></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="/assets/js/app.bd57e9ac.js" defer></script><script src="/assets/js/4.cf47d3bf.js" defer></script><script src="/assets/js/1.2ae96b85.js" defer></script><script src="/assets/js/158.867715fb.js" defer></script>
+  </body>
+</html>

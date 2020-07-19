@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>mysql优化相关 | 奇哥</title>
+    <meta name="description" content="个人博客，技术笔记整理">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.f3fddc9c.css" as="style"><link rel="preload" href="/assets/js/app.bd57e9ac.js" as="script"><link rel="preload" href="/assets/js/4.cf47d3bf.js" as="script"><link rel="preload" href="/assets/js/1.2ae96b85.js" as="script"><link rel="preload" href="/assets/js/110.2c2d0721.js" as="script"><link rel="prefetch" href="/assets/js/10.816b0153.js"><link rel="prefetch" href="/assets/js/100.a03fb444.js"><link rel="prefetch" href="/assets/js/101.d92e5f36.js"><link rel="prefetch" href="/assets/js/102.c696f09e.js"><link rel="prefetch" href="/assets/js/103.ce3c3f6a.js"><link rel="prefetch" href="/assets/js/104.502b38a6.js"><link rel="prefetch" href="/assets/js/105.8ff7fab8.js"><link rel="prefetch" href="/assets/js/106.d12a2a32.js"><link rel="prefetch" href="/assets/js/107.e585a5b6.js"><link rel="prefetch" href="/assets/js/108.72bc7fee.js"><link rel="prefetch" href="/assets/js/109.c794a8c2.js"><link rel="prefetch" href="/assets/js/11.b378d47c.js"><link rel="prefetch" href="/assets/js/111.104c000c.js"><link rel="prefetch" href="/assets/js/112.a9f6a2ea.js"><link rel="prefetch" href="/assets/js/113.06d8aa1d.js"><link rel="prefetch" href="/assets/js/114.51211731.js"><link rel="prefetch" href="/assets/js/115.e854479d.js"><link rel="prefetch" href="/assets/js/116.66196725.js"><link rel="prefetch" href="/assets/js/117.38c8a3bb.js"><link rel="prefetch" href="/assets/js/118.0da4677e.js"><link rel="prefetch" href="/assets/js/119.67397043.js"><link rel="prefetch" href="/assets/js/12.5f65f189.js"><link rel="prefetch" href="/assets/js/120.6fde943d.js"><link rel="prefetch" href="/assets/js/121.2062356d.js"><link rel="prefetch" href="/assets/js/122.4738aa5b.js"><link rel="prefetch" href="/assets/js/123.e2d00381.js"><link rel="prefetch" href="/assets/js/124.eeb983d9.js"><link rel="prefetch" href="/assets/js/125.f8c5ff44.js"><link rel="prefetch" href="/assets/js/126.42a2902a.js"><link rel="prefetch" href="/assets/js/127.c1d66f24.js"><link rel="prefetch" href="/assets/js/128.7933581c.js"><link rel="prefetch" href="/assets/js/129.fe280f18.js"><link rel="prefetch" href="/assets/js/13.53265072.js"><link rel="prefetch" href="/assets/js/130.5796bc49.js"><link rel="prefetch" href="/assets/js/131.72a70116.js"><link rel="prefetch" href="/assets/js/132.fba186d3.js"><link rel="prefetch" href="/assets/js/133.a038b6e3.js"><link rel="prefetch" href="/assets/js/134.b979fc39.js"><link rel="prefetch" href="/assets/js/135.ab58fa4d.js"><link rel="prefetch" href="/assets/js/136.3946e1b7.js"><link rel="prefetch" href="/assets/js/137.d506d848.js"><link rel="prefetch" href="/assets/js/138.b737062e.js"><link rel="prefetch" href="/assets/js/139.80f8ffc8.js"><link rel="prefetch" href="/assets/js/14.9b50c038.js"><link rel="prefetch" href="/assets/js/140.a8efede8.js"><link rel="prefetch" href="/assets/js/141.88912078.js"><link rel="prefetch" href="/assets/js/142.002ec337.js"><link rel="prefetch" href="/assets/js/143.1a9fed6a.js"><link rel="prefetch" href="/assets/js/144.15e56ee3.js"><link rel="prefetch" href="/assets/js/145.859b8d00.js"><link rel="prefetch" href="/assets/js/146.c0b30a80.js"><link rel="prefetch" href="/assets/js/147.86c03071.js"><link rel="prefetch" href="/assets/js/148.86bdb637.js"><link rel="prefetch" href="/assets/js/149.68ae3de2.js"><link rel="prefetch" href="/assets/js/15.b327be7e.js"><link rel="prefetch" href="/assets/js/150.078f5953.js"><link rel="prefetch" href="/assets/js/151.3925086c.js"><link rel="prefetch" href="/assets/js/152.b2656742.js"><link rel="prefetch" href="/assets/js/153.94c79fa9.js"><link rel="prefetch" href="/assets/js/154.6f668cdc.js"><link rel="prefetch" href="/assets/js/155.26d16d88.js"><link rel="prefetch" href="/assets/js/156.4dac7439.js"><link rel="prefetch" href="/assets/js/157.134c9a36.js"><link rel="prefetch" href="/assets/js/158.867715fb.js"><link rel="prefetch" href="/assets/js/159.5b790836.js"><link rel="prefetch" href="/assets/js/16.b23402c5.js"><link rel="prefetch" href="/assets/js/160.7bb54d30.js"><link rel="prefetch" href="/assets/js/161.32842b78.js"><link rel="prefetch" href="/assets/js/162.2d8da748.js"><link rel="prefetch" href="/assets/js/163.285ec7ff.js"><link rel="prefetch" href="/assets/js/164.0c6dfe94.js"><link rel="prefetch" href="/assets/js/165.251b2dd6.js"><link rel="prefetch" href="/assets/js/166.61a13c62.js"><link rel="prefetch" href="/assets/js/167.0b8940f1.js"><link rel="prefetch" href="/assets/js/168.18e24cb7.js"><link rel="prefetch" href="/assets/js/169.b10c1569.js"><link rel="prefetch" href="/assets/js/17.32bbe36c.js"><link rel="prefetch" href="/assets/js/170.cc30d6db.js"><link rel="prefetch" href="/assets/js/171.e5a5db17.js"><link rel="prefetch" href="/assets/js/172.3d6df5cc.js"><link rel="prefetch" href="/assets/js/173.ec48230a.js"><link rel="prefetch" href="/assets/js/174.8f356df8.js"><link rel="prefetch" href="/assets/js/175.5205cd09.js"><link rel="prefetch" href="/assets/js/176.4ad613ab.js"><link rel="prefetch" href="/assets/js/177.99280429.js"><link rel="prefetch" href="/assets/js/178.adbbe2e3.js"><link rel="prefetch" href="/assets/js/179.8b44b7d3.js"><link rel="prefetch" href="/assets/js/18.e647e6b1.js"><link rel="prefetch" href="/assets/js/180.74a473ac.js"><link rel="prefetch" href="/assets/js/181.0c334e0b.js"><link rel="prefetch" href="/assets/js/182.2110f34a.js"><link rel="prefetch" href="/assets/js/183.afd7150e.js"><link rel="prefetch" href="/assets/js/184.1e1d16b0.js"><link rel="prefetch" href="/assets/js/185.17877986.js"><link rel="prefetch" href="/assets/js/186.eb391c2e.js"><link rel="prefetch" href="/assets/js/187.018edf4f.js"><link rel="prefetch" href="/assets/js/188.3736d840.js"><link rel="prefetch" href="/assets/js/19.a387f27c.js"><link rel="prefetch" href="/assets/js/20.49236671.js"><link rel="prefetch" href="/assets/js/21.9ec91369.js"><link rel="prefetch" href="/assets/js/22.95b2e77b.js"><link rel="prefetch" href="/assets/js/23.8f4d7414.js"><link rel="prefetch" href="/assets/js/24.e2b213c5.js"><link rel="prefetch" href="/assets/js/25.7f3f3c17.js"><link rel="prefetch" href="/assets/js/26.266189df.js"><link rel="prefetch" href="/assets/js/27.eef9b2a9.js"><link rel="prefetch" href="/assets/js/28.ffdbc4d2.js"><link rel="prefetch" href="/assets/js/29.4590fa49.js"><link rel="prefetch" href="/assets/js/30.85c4cbe9.js"><link rel="prefetch" href="/assets/js/31.390dd215.js"><link rel="prefetch" href="/assets/js/32.ce4d57de.js"><link rel="prefetch" href="/assets/js/33.2ac3bdd7.js"><link rel="prefetch" href="/assets/js/34.a27a7564.js"><link rel="prefetch" href="/assets/js/35.133a359a.js"><link rel="prefetch" href="/assets/js/36.85c206d7.js"><link rel="prefetch" href="/assets/js/37.ea3cf6be.js"><link rel="prefetch" href="/assets/js/38.c7802045.js"><link rel="prefetch" href="/assets/js/39.49f00421.js"><link rel="prefetch" href="/assets/js/40.45af2466.js"><link rel="prefetch" href="/assets/js/41.6dbd80a6.js"><link rel="prefetch" href="/assets/js/42.ff01c005.js"><link rel="prefetch" href="/assets/js/43.59f5c9d2.js"><link rel="prefetch" href="/assets/js/44.9441ae9c.js"><link rel="prefetch" href="/assets/js/45.5ae7af1e.js"><link rel="prefetch" href="/assets/js/46.d9707d2d.js"><link rel="prefetch" href="/assets/js/47.b36bd6b1.js"><link rel="prefetch" href="/assets/js/48.506449fa.js"><link rel="prefetch" href="/assets/js/49.f9bcc647.js"><link rel="prefetch" href="/assets/js/5.7f309e4b.js"><link rel="prefetch" href="/assets/js/50.6b1e5e40.js"><link rel="prefetch" href="/assets/js/51.577a7b71.js"><link rel="prefetch" href="/assets/js/52.9bc6a38b.js"><link rel="prefetch" href="/assets/js/53.efd30e13.js"><link rel="prefetch" href="/assets/js/54.6f18dec7.js"><link rel="prefetch" href="/assets/js/55.345e85aa.js"><link rel="prefetch" href="/assets/js/56.2bf86eed.js"><link rel="prefetch" href="/assets/js/57.23bf8a7b.js"><link rel="prefetch" href="/assets/js/58.52c35f14.js"><link rel="prefetch" href="/assets/js/59.b1efec4a.js"><link rel="prefetch" href="/assets/js/6.63fe1bf6.js"><link rel="prefetch" href="/assets/js/60.be3df253.js"><link rel="prefetch" href="/assets/js/61.e1b7fc3c.js"><link rel="prefetch" href="/assets/js/62.4ff81144.js"><link rel="prefetch" href="/assets/js/63.a121bb0a.js"><link rel="prefetch" href="/assets/js/64.25e8d49e.js"><link rel="prefetch" href="/assets/js/65.ca67439d.js"><link rel="prefetch" href="/assets/js/66.87c9e36a.js"><link rel="prefetch" href="/assets/js/67.738a9a01.js"><link rel="prefetch" href="/assets/js/68.22a175ca.js"><link rel="prefetch" href="/assets/js/69.0a00dc4c.js"><link rel="prefetch" href="/assets/js/7.ebbb4af9.js"><link rel="prefetch" href="/assets/js/70.ddfebdd6.js"><link rel="prefetch" href="/assets/js/71.303161f4.js"><link rel="prefetch" href="/assets/js/72.f23ccb75.js"><link rel="prefetch" href="/assets/js/73.1b49404e.js"><link rel="prefetch" href="/assets/js/74.97b665aa.js"><link rel="prefetch" href="/assets/js/75.f9d7fe05.js"><link rel="prefetch" href="/assets/js/76.6d96dcb9.js"><link rel="prefetch" href="/assets/js/77.b4048a6e.js"><link rel="prefetch" href="/assets/js/78.0e3ef83a.js"><link rel="prefetch" href="/assets/js/79.3260ac1d.js"><link rel="prefetch" href="/assets/js/8.213a8416.js"><link rel="prefetch" href="/assets/js/80.cb879212.js"><link rel="prefetch" href="/assets/js/81.1d66e67c.js"><link rel="prefetch" href="/assets/js/82.f449b53f.js"><link rel="prefetch" href="/assets/js/83.2e981570.js"><link rel="prefetch" href="/assets/js/84.96f1d92b.js"><link rel="prefetch" href="/assets/js/85.53132c5f.js"><link rel="prefetch" href="/assets/js/86.5fb0652b.js"><link rel="prefetch" href="/assets/js/87.17c99baa.js"><link rel="prefetch" href="/assets/js/88.cbdef4cf.js"><link rel="prefetch" href="/assets/js/89.c23ebd83.js"><link rel="prefetch" href="/assets/js/9.396bac1c.js"><link rel="prefetch" href="/assets/js/90.b51e75c8.js"><link rel="prefetch" href="/assets/js/91.a86d5282.js"><link rel="prefetch" href="/assets/js/92.f4f2ca2f.js"><link rel="prefetch" href="/assets/js/93.7f8fcb29.js"><link rel="prefetch" href="/assets/js/94.c6ac1bfa.js"><link rel="prefetch" href="/assets/js/95.11bdac6e.js"><link rel="prefetch" href="/assets/js/96.f6acc813.js"><link rel="prefetch" href="/assets/js/97.d418109b.js"><link rel="prefetch" href="/assets/js/98.8e84bf17.js"><link rel="prefetch" href="/assets/js/99.d68c1a72.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1a6a828a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f3fddc9c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container"><div><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="奇哥" class="logo"> <span class="site-name">奇哥</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="theme-options"><!----> <div class="dark-theme-options toggle-option"><label for="dark-theme-toggle">Enable Dark Theme?</label> <input id="dark-theme-toggle" type="checkbox" checked="checked"></div></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>mysql优化相关</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#一、优化的哲学" class="sidebar-link">一、优化的哲学</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_1-优化可能带来的问题？" class="sidebar-link">1. 优化可能带来的问题？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_2-优化的需求？" class="sidebar-link">2. 优化的需求？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_3-优化由谁参与？" class="sidebar-link">3. 优化由谁参与？</a></li></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#二、优化思路" class="sidebar-link">二、优化思路</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_1-优化什么？" class="sidebar-link">1. 优化什么？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_2-优化的范围有哪些？" class="sidebar-link">2. 优化的范围有哪些？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_3-优化维度？" class="sidebar-link">3. 优化维度？</a></li></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#三、优化工具有啥？" class="sidebar-link">三、优化工具有啥？</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_1-数据库层面？" class="sidebar-link">1. 数据库层面？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_2-数据库层面问题解决思路？" class="sidebar-link">2. 数据库层面问题解决思路？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_3-系统层面？" class="sidebar-link">3. 系统层面？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_4-系统层面问题解决办法？" class="sidebar-link">4. 系统层面问题解决办法？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_3-服务器硬件优化？" class="sidebar-link">3. 服务器硬件优化？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_4-系统优化？" class="sidebar-link">4. 系统优化？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_5-系统参数调整？" class="sidebar-link">5. 系统参数调整？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_6-应用优化？" class="sidebar-link">6. 应用优化？</a></li></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#五、数据库优化" class="sidebar-link">五、数据库优化</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_1、数据库参数优化？" class="sidebar-link">1、数据库参数优化？</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html#_2、存储引擎层（innodb基础优化参数）？" class="sidebar-link">2、存储引擎层（innodb基础优化参数）？</a></li></ul></li></ul></section></li></ul> </aside> <div><main class="page reco-hide"> <div class="page-title"><h1>mysql优化相关</h1> <hr> <div data-v-362e684e><i class="iconfont reco-account" data-v-362e684e><span data-v-362e684e>刘文奇</span></i> <i class="iconfont reco-date" data-v-362e684e><span data-v-362e684e>2018-2-23</span></i> <span id="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BC%98%E5%8C%96%E7%9B%B8%E5%85%B3.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-2e99e05a data-v-362e684e><i class="iconfont reco-eye" style="margin-right: .5rem" data-v-2e99e05a></i> <a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;" data-v-2e99e05a></a></span> <i class="iconfont reco-tag tags" data-v-362e684e><span class="tag-item" data-v-362e684e>
+      mysql
+    </span></i></div></div> <div class="content__default"><h1 id="mysql-优化"><a href="#mysql-优化" aria-hidden="true" class="header-anchor">#</a> mysql 优化</h1> <blockquote><p>在进行MySQL的优化之前，必须要了解的就是MySQL的查询过程，很多查询优化工作实际上就是遵循一些原则，让MySQL的优化器能够按照预想的合理方式运行而已。</p></blockquote> <p><img src="http://img.liuwenqi.com/blog/2019-08-29-073716.jpg" alt=""></p> <p>图-MySQL查询过程</p> <h2 id="一、优化的哲学"><a href="#一、优化的哲学" aria-hidden="true" class="header-anchor">#</a> 一、优化的哲学</h2> <p>注：优化有风险，涉足需谨慎</p> <h3 id="_1-优化可能带来的问题？"><a href="#_1-优化可能带来的问题？" aria-hidden="true" class="header-anchor">#</a> 1. 优化可能带来的问题？</h3> <ul><li><p>优化不总是对一个单纯的环境进行，还很可能是一个复杂的已投产的系统；</p></li> <li><p>优化手段本来就有很大的风险，只不过你没能力意识到和预见到；</p></li> <li><p>任何的技术可以解决一个问题，但必然存在带来一个问题的风险；</p></li> <li><p>对于优化来说解决问题而带来的问题，控制在可接受的范围内才是有成果；</p></li> <li><p>保持现状或出现更差的情况都是失败</p></li></ul> <h3 id="_2-优化的需求？"><a href="#_2-优化的需求？" aria-hidden="true" class="header-anchor">#</a> 2. 优化的需求？</h3> <ul><li><p>稳定性和业务可持续性，通常比性能更重要；</p></li> <li><p>优化不可避免涉及到变更，变更就有风险；</p></li> <li><p>优化使性能变好，维持和变差是等概率事件；</p></li> <li><p>切记优化，应该是各部门协同，共同参与的工作，任何单一部门都不能对数据库进行优化！</p></li></ul> <p>所以优化工作，是由业务需要驱使的！</p> <h3 id="_3-优化由谁参与？"><a href="#_3-优化由谁参与？" aria-hidden="true" class="header-anchor">#</a> 3. 优化由谁参与？</h3> <p>在进行数据库优化时，应由数据库管理员、业务部门代表、应用程序架构师、应用程序设计人员、应用程序开发人员、硬件及系统管理员、存储管理员等，业务相关人员共同参与。</p> <h2 id="二、优化思路"><a href="#二、优化思路" aria-hidden="true" class="header-anchor">#</a> <strong>二、优化思路</strong></h2> <h3 id="_1-优化什么？"><a href="#_1-优化什么？" aria-hidden="true" class="header-anchor">#</a> 1. 优化什么？</h3> <p>在数据库优化上有两个主要方面：即安全与性能。</p> <ul><li><p>安全-&gt;数据可持续性；</p></li> <li><p>性能-&gt;数据的高性能访问。</p></li></ul> <h3 id="_2-优化的范围有哪些？"><a href="#_2-优化的范围有哪些？" aria-hidden="true" class="header-anchor">#</a> 2. 优化的范围有哪些？</h3> <h4 id="存储、主机和操作系统方面："><a href="#存储、主机和操作系统方面：" aria-hidden="true" class="header-anchor">#</a> <strong>存储、主机和操作系统方面：</strong></h4> <ul><li><p>主机架构稳定性；</p></li> <li><p>I/O规划及配置；</p></li> <li><p>Swap交换分区；</p></li> <li><p>OS内核参数和网络问题。</p></li></ul> <h4 id="应用程序方面："><a href="#应用程序方面：" aria-hidden="true" class="header-anchor">#</a> <strong>应用程序方面：</strong></h4> <ul><li><p>应用程序稳定性；</p></li> <li><p>SQL语句性能；</p></li> <li><p>串行访问资源；</p></li> <li><p>性能欠佳会话管理；</p></li> <li><p>这个应用适不适合用MySQL。</p></li></ul> <h4 id="数据库优化方面："><a href="#数据库优化方面：" aria-hidden="true" class="header-anchor">#</a> <strong>数据库优化方面：</strong></h4> <ul><li><p>内存；</p></li> <li><p>数据库结构（物理&amp;逻辑）；</p></li> <li><p>实例配置。</p></li></ul> <p>说明：不管是设计系统、定位问题还是优化，都可以按照这个顺序执行。</p> <h3 id="_3-优化维度？"><a href="#_3-优化维度？" aria-hidden="true" class="header-anchor">#</a> 3. 优化维度？</h3> <p><strong>数据库优化维度有四个：</strong></p> <p>硬件、系统配置、数据库表结构、SQL及索引。</p> <p><img src="http://img.liuwenqi.com/blog/2019-08-29-073741.jpg" alt=""></p> <p><strong>优化选择：</strong></p> <ul><li><p>优化成本：硬件&gt;系统配置&gt;数据库表结构&gt;SQL及索引。</p></li> <li><p>优化效果：硬件&lt;系统配置&lt;数据库表结构&lt;SQL及索引。</p></li></ul> <h2 id="三、优化工具有啥？"><a href="#三、优化工具有啥？" aria-hidden="true" class="header-anchor">#</a> <strong>三、优化工具有啥？</strong></h2> <h3 id="_1-数据库层面？"><a href="#_1-数据库层面？" aria-hidden="true" class="header-anchor">#</a> 1. 数据库层面？</h3> <p>检查问题常用工具：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>*  MySQL
+
+* msyqladmin：MySQL客户端，可进行管理操作
+
+* mysqlshow：功能强大的查看shell命令
+
+*  show [SESSION | GLOBAL] variables：查看数据库参数信息
+
+* SHOW [SESSION | GLOBAL] STATUS：查看数据库的状态信息
+
+* information_schema：获取元数据的方法
+
+* SHOW ENGINE INNODB STATUS：Innodb引擎的所有状态
+
+* SHOW PROCESSLIST：查看当前所有连接session状态
+
+* explain：获取查询语句的执行计划
+
+* show index：查看表的索引信息
+
+* slow-log：记录慢查询语句
+
+* mysqldumpslow：分析slowlog文件的
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>不常用但好用的工具：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1）Zabbix：监控主机、系统、数据库（部署zabbix监控平台）
+
+2）pt-query-digest：分析慢日志
+
+3）MySQL slap：分析慢日志
+
+4）sysbench：压力测试工具
+
+5）MySQL profiling：统计数据库整体状态工具    
+
+6）Performance Schema：MySQL性能状态统计的数据
+
+7）workbench：管理、备份、监控、分析、优化工具（比较费资源）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>关于Zabbix参考：</p> <p><code>http://www.cnblogs.com/clsn/p/7885990.html</code></p> <h3 id="_2-数据库层面问题解决思路？"><a href="#_2-数据库层面问题解决思路？" aria-hidden="true" class="header-anchor">#</a> 2. 数据库层面问题解决思路？</h3> <p>一般应急调优的思路：针对突然的业务办理卡顿，无法进行正常的业务处理，需要立马解决的场景。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1）show processlist；
+
+2）explain  select id ,name from stu where name='clsn'; # ALL  id name age  sex；
+
+select id,name from stu  where id=2-1 函数 结果集&gt;30；show index from table；
+
+3）通过执行计划判断，索引问题（有没有、合不合理）或者语句本身问题；
+
+4）show status  like '%lock%';    # 查询锁状态
+
+kill SESSION_ID;   # 杀掉有问题的session。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><code>常规调优思路</code>：针对业务周期性的卡顿，例如在每天10-11点业务特别慢，但是还能够使用，过了这段时间就好了。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1）查看slowlog，分析slowlog，分析出查询慢的语句；
+
+2）按照一定优先级，一个一个排查所有慢语句；
+
+3）分析top SQL，进行explain调试，查看语句执行时间；
+
+4）调整索引或语句本身。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="_3-系统层面？"><a href="#_3-系统层面？" aria-hidden="true" class="header-anchor">#</a> 3. 系统层面？</h3> <p><strong>Cpu方面：</strong></p> <p>vmstat、sar top、htop、nmon、mpstat；</p> <p><strong>内存：</strong></p> <p>free、ps-aux；</p> <p><strong>IO设备（磁盘、网络）</strong></p> <p>iostat、ss、netstat、iptraf、iftop、lsof；</p> <p><strong>vmstat命令说明：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1）Procs：r显示有多少进程正在等待CPU时间。b显示处于不可中断的休眠的进程数量。在等待I/O。
+
+2）Memory：swpd显示被交换到磁盘的数据块的数量。未被使用的数据块，用户缓冲数据块，用于操作系统的数据块的数量。
+
+3）Swap：操作系统每秒从磁盘上交换到内存和从内存交换到磁盘的数据块的数量。s1和s0最好是0。
+
+4）Io：每秒从设备中读入b1的写入到设备b0的数据块的数量。反映了磁盘I/O。
+
+5）System：显示了每秒发生中断的数量（in）和上下文交换（cs）的数量。
+
+6）Cpu：显示用于运行用户代码，系统代码，空闲，等待I/O的Cpu时间。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><strong>iostat命令说明：</strong></p> <p>实例命令：</p> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>iostat -dk 1 5
+iostat -d -k -x 5 （查看设备使用率（%util）和响应时间（await））
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-shell line-numbers-mode"><pre class="language-text"><code>1）tps：该设备每秒的传输次数。“一次传输”意思是“一次I/O请求”。多个逻辑请求可能会被合并为“一次I/O请求”。
+
+2）iops ：硬件出厂的时候，厂家定义的一个每秒最大的IO次数
+
+3）&quot;一次传输&quot;请求的大小是未知的。
+
+4）kB_read/s：每秒从设备（drive expressed）读取的数据量；
+
+5）KB_wrtn/s：每秒向设备（drive expressed）写入的数据量；
+
+6）kB_read：读取的总数据量；
+
+7）kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="_4-系统层面问题解决办法？"><a href="#_4-系统层面问题解决办法？" aria-hidden="true" class="header-anchor">#</a> 4. 系统层面问题解决办法？</h3> <p>你认为到底负载高好，还是低好呢？在实际的生产中，一般认为Cpu只要不超过90%都没什么问题。</p> <p>当然不排除下面这些特殊情况：</p> <p><strong>Cpu负载高，IO负载低：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>1）内存不够； 
+
+2）磁盘性能差；
+
+3）SQL问题---&gt;去数据库层，进一步排查SQL 问题；
+
+4）IO出问题了（磁盘到临界了、raid设计不好、raid降级、锁、在单位时间内tps过高）；
+
+5）tps过高：大量的小数据IO、大量的全表扫描。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p><strong>IO负载高，Cpu负载低：</strong></p> <p>1）大量小的IO写操作：</p> <p><code>autocommit</code>，产生大量小IO；IO/PS，磁盘的一个定值，硬件出厂的时候，厂家定义的一个每秒最大的IO次数。</p> <p>2）大量大的IO 写操作：SQL问题的几率比较大</p> <p><strong>IO和cpu负载都很高：</strong></p> <p>硬件不够了或SQL存在问题。<strong>四、基础优化</strong>1、优化思路？</p> <p>**定位问题点吮吸：**硬件--&gt;系统--&gt;应用--&gt;数据库--&gt;架构（高可用、读写分离、分库分表）。</p> <p>**处理方向：**明确优化目标、性能和安全的折中、防患未然。</p> <ol><li>硬件优化？</li></ol> <h4 id="主机方面："><a href="#主机方面：" aria-hidden="true" class="header-anchor">#</a> <strong>主机方面：</strong></h4> <p>根据数据库类型，主机CPU选择、内存容量选择、磁盘选择：</p> <p>1）平衡内存和磁盘资源；</p> <p>2）随机的I/O和顺序的I/O；</p> <p>3）主机 RAID卡的BBU（Battery Backup Unit）关闭。</p> <h4 id="cpu的选择："><a href="#cpu的选择：" aria-hidden="true" class="header-anchor">#</a> <strong>CPU的选择：</strong></h4> <p>CPU的两个关键因素：核数、主频</p> <p>根据不同的业务类型进行选择：</p> <p>1）CPU密集型：计算比较多，OLTP - 主频很高的cpu、核数还要多</p> <p>2）IO密集型：查询比较，OLAP - 核数要多，主频不一定高的</p> <h4 id="内存的选择："><a href="#内存的选择：" aria-hidden="true" class="header-anchor">#</a> <strong>内存的选择：</strong></h4> <p>OLAP类型数据库，需要更多内存，和数据获取量级有关。</p> <p>OLTP类型数据一般内存是Cpu核心数量的2倍到4倍，没有最佳实践。</p> <h4 id="存储方面："><a href="#存储方面：" aria-hidden="true" class="header-anchor">#</a> <strong>存储方面：</strong></h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>1）根据存储数据种类的不同，选择不同的存储设备；
+
+2）配置合理的RAID级别（raid5、raid10、热备盘）；
+
+3）对与操作系统来讲，不需要太特殊的选择，最好做好冗余（raid1）（ssd、sas、sata）。
+
+4）raid卡：
+
+       主机raid卡选择：
+
+           实现操作系统磁盘的冗余（raid1）；
+
+           平衡内存和磁盘资源；
+
+           随机的I/O和顺序的I/O；
+
+           主机raid卡的BBU（Battery Backup Unit）要关闭。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h4 id="网络设备方面："><a href="#网络设备方面：" aria-hidden="true" class="header-anchor">#</a> <strong>网络设备方面：</strong></h4> <p>使用流量支持更高的网络设备（交换机、路由器、网线、网卡、HBA卡）</p> <p>注意：以上这些规划应该在初始设计系统时就应该考虑好。</p> <h3 id="_3-服务器硬件优化？"><a href="#_3-服务器硬件优化？" aria-hidden="true" class="header-anchor">#</a> 3. 服务器硬件优化？</h3> <p>1）物理状态灯</p> <p>2）自带管理设备：远程控制卡（FENCE设备：ipmi ilo idarc）、开关机、硬件监控。</p> <p>3）第三方的监控软件、设备（snmp、agent）对物理设施进行监控。</p> <p>4）存储设备：自带的监控平台。EMC2（hp收购了）、 日立（hds）、IBM低端OEM hds、高端存储是自己技术，华为存储。</p> <h3 id="_4-系统优化？"><a href="#_4-系统优化？" aria-hidden="true" class="header-anchor">#</a> 4. 系统优化？</h3> <p><strong>Cpu：</strong></p> <p>基本不需要调整，在硬件选择方面下功夫即可。</p> <p><strong>内存：</strong></p> <p>基本不需要调整，在硬件选择方面下功夫即可。</p> <p><strong>SWAP：</strong></p> <p>MySQL尽量避免使用swap。</p> <p>阿里云的服务器中默认swap为0。</p> <p><strong>IO ：</strong></p> <p>raid、no lvm、ext4或xfs、ssd、IO调度策略。</p> <p><strong>Swap调整(不使用swap分区)</strong></p> <p><code>/proc/sys/vm/swappiness</code>的内容改成0（临时），<code>/etc/sysctl. conf上添加vm.swappiness=0（永久）</code></p> <p>这个参数决定了Linux是倾向于使用swap，还是倾向于释放文件系统cache。在内存紧张的情况下，数值越低越倾向于释放文件系统cache。</p> <p>当然，这个参数只能减少使用swap的概率，并不能避免Linux使用swap。</p> <p><strong>修改MySQL的配置参数</strong><code>innodb_flush_ method</code>，开启<code>O_DIRECT</code>模式：</p> <p>这种情况下，InnoDB的<code>buffer pool</code>会直接绕过文件系统<code>cache</code>来访问磁盘，但是redo log依旧会使用文件系统cache。</p> <p>值得注意的是，Redo log是覆写模式的，即使使用了文件系统的cache，也不会占用太多。</p> <p><strong>IO调度策略：</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>#echo deadline&gt;/sys/block/sda/queue/scheduler   临时修改为deadline
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>永久修改</p> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>vi /boot/grub/grub.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>更改到如下内容:</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>kernel /boot/vmlinuz-2.6.18-8.el5 ro root=LABEL=/ elevator=deadline rhgb quiet
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="_5-系统参数调整？"><a href="#_5-系统参数调整？" aria-hidden="true" class="header-anchor">#</a> 5. 系统参数调整？</h3> <p><strong>Linux系统内核参数优化：</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>vim/etc/sysctl.conf
+
+net.ipv4.ip_local_port_range = 1024 65535：# 用户端口范围
+
+net.ipv4.tcp_max_syn_backlog = 4096 
+
+net.ipv4.tcp_fin_timeout = 30 
+
+fs.file-max=65535：# 系统最大文件句柄，控制的是能打开文件最大数量  
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p><strong>用户限制参数（MySQL可以不设置以下配置）：</strong></p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>vim/etc/security/limits.conf 
+
+* soft nproc 65535
+
+* hard nproc 65535
+
+* soft nofile 65535
+
+* hard nofile 65535
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="_6-应用优化？"><a href="#_6-应用优化？" aria-hidden="true" class="header-anchor">#</a> 6. 应用优化？</h3> <p>业务应用和数据库应用独立；</p> <p>**防火墙：**iptables、selinux等其他无用服务（关闭）：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>   chkconfig --level 23456 acpid off
+
+    chkconfig --level 23456 anacron off
+
+    chkconfig --level 23456 autofs off
+
+    chkconfig --level 23456 avahi-daemon off
+
+    chkconfig --level 23456 bluetooth off
+
+    chkconfig --level 23456 cups off
+
+    chkconfig --level 23456 firstboot off
+
+    chkconfig --level 23456 haldaemon off
+
+    chkconfig --level 23456 hplip off
+
+    chkconfig --level 23456 ip6tables off
+
+    chkconfig --level 23456 iptables  off
+
+    chkconfig --level 23456 isdn off
+
+    chkconfig --level 23456 pcscd off
+
+    chkconfig --level 23456 sendmail  off
+
+    chkconfig --level 23456 yum-updatesd  off
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><p>安装图形界面的服务器不要启动图形界面<code>runlevel 3</code>。</p> <p>另外，思考将来我们的业务是否真的需要MySQL，还是使用其他种类的数据库。用数据库的最高境界就是不用数据库。</p> <h2 id="五、数据库优化"><a href="#五、数据库优化" aria-hidden="true" class="header-anchor">#</a> <strong>五、数据库优化</strong></h2> <p>SQL优化方向：执行计划、索引、SQL改写。</p> <p>架构优化方向：高可用架构、高性能架构、分库分表。</p> <h3 id="_1、数据库参数优化？"><a href="#_1、数据库参数优化？" aria-hidden="true" class="header-anchor">#</a> 1、数据库参数优化？</h3> <p><strong>调整</strong></p> <p>实例整体（高级优化，扩展）：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>thread_concurrency：# 并发线程数量个数
+
+sort_buffer_size：# 排序缓存
+
+read_buffer_size：# 顺序读取缓存
+
+read_rnd_buffer_size：# 随机读取缓存
+
+key_buffer_size：# 索引缓存
+
+thread_cache_size：# (1G—&gt;8, 2G—&gt;16, 3G—&gt;32, &gt;3G—&gt;64)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><strong>连接层（基础优化）</strong></p> <p>设置合理的连接客户和连接方式：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>max_connections           # 最大连接数，看交易笔数设置    
+
+max_connect_errors        # 最大错误连接数，能大则大
+
+connect_timeout           # 连接超时
+
+max_user_connections      # 最大用户连接数
+
+skip-name-resolve         # 跳过域名解析
+
+wait_timeout              # 等待超时
+
+back_log                  # 可以在堆栈中的连接数量
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><strong>SQL层（基础优化）</strong></p> <p><code>query_cache_size：</code>查询缓存  &gt;&gt;&gt;  OLAP类型数据库,需要重点加大此内存缓存，但是一般不会超过GB。</p> <p>对于经常被修改的数据，缓存会立马失效。</p> <p>我们可以实用内存数据库（redis、memecache），替代他的功能。</p> <h3 id="_2、存储引擎层（innodb基础优化参数）？"><a href="#_2、存储引擎层（innodb基础优化参数）？" aria-hidden="true" class="header-anchor">#</a> 2、存储引擎层（innodb基础优化参数）？</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>default-storage-engine
+
+innodb_buffer_pool_size       # 没有固定大小，50%测试值，看看情况再微调。但是尽量设置不要超过物理内存70%
+
+innodb_file_per_table=(1,0)
+
+innodb_flush_log_at_trx_commit=(0,1,2) # 1是最安全的，0是性能最高，2折中
+
+binlog_sync
+
+Innodb_flush_method=(O_DIRECT, fdatasync)
+
+innodb_log_buffer_size           # 100M以下
+
+innodb_log_file_size               # 100M 以下
+
+innodb_log_files_in_group       # 5个成员以下,一般2-3个够用（iblogfile0-N）
+
+innodb_max_dirty_pages_pct   # 达到百分之75的时候刷写 内存脏页到磁盘。
+
+log_bin
+
+max_binlog_cache_size                     # 可以不设置
+
+max_binlog_size                               # 可以不设置
+
+innodb_additional_mem_pool_size     #小于2G内存的机器，推荐值是20M。32G内存以上100M
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div></div> <!----> <footer class="page-edit"><!----> <!----></footer> <!----> </main> <div class="valine-wrapper" data-v-5029e45b><div id="valine" data-v-5029e45b></div></div></div> <div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;background-color:rgba(231, 234, 241,.5);display:none;" data-v-cd623d78 data-v-cd623d78><i class="iconfont reco-up" data-v-cd623d78></i></div></div></div></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="/assets/js/app.bd57e9ac.js" defer></script><script src="/assets/js/4.cf47d3bf.js" defer></script><script src="/assets/js/1.2ae96b85.js" defer></script><script src="/assets/js/110.2c2d0721.js" defer></script>
+  </body>
+</html>

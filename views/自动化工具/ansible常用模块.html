@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ansible 常用模块 | 奇哥</title>
+    <meta name="description" content="个人博客，技术笔记整理">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.f3fddc9c.css" as="style"><link rel="preload" href="/assets/js/app.bd57e9ac.js" as="script"><link rel="preload" href="/assets/js/4.cf47d3bf.js" as="script"><link rel="preload" href="/assets/js/1.2ae96b85.js" as="script"><link rel="preload" href="/assets/js/176.4ad613ab.js" as="script"><link rel="prefetch" href="/assets/js/10.816b0153.js"><link rel="prefetch" href="/assets/js/100.a03fb444.js"><link rel="prefetch" href="/assets/js/101.d92e5f36.js"><link rel="prefetch" href="/assets/js/102.c696f09e.js"><link rel="prefetch" href="/assets/js/103.ce3c3f6a.js"><link rel="prefetch" href="/assets/js/104.502b38a6.js"><link rel="prefetch" href="/assets/js/105.8ff7fab8.js"><link rel="prefetch" href="/assets/js/106.d12a2a32.js"><link rel="prefetch" href="/assets/js/107.e585a5b6.js"><link rel="prefetch" href="/assets/js/108.72bc7fee.js"><link rel="prefetch" href="/assets/js/109.c794a8c2.js"><link rel="prefetch" href="/assets/js/11.b378d47c.js"><link rel="prefetch" href="/assets/js/110.2c2d0721.js"><link rel="prefetch" href="/assets/js/111.104c000c.js"><link rel="prefetch" href="/assets/js/112.a9f6a2ea.js"><link rel="prefetch" href="/assets/js/113.06d8aa1d.js"><link rel="prefetch" href="/assets/js/114.51211731.js"><link rel="prefetch" href="/assets/js/115.e854479d.js"><link rel="prefetch" href="/assets/js/116.66196725.js"><link rel="prefetch" href="/assets/js/117.38c8a3bb.js"><link rel="prefetch" href="/assets/js/118.0da4677e.js"><link rel="prefetch" href="/assets/js/119.67397043.js"><link rel="prefetch" href="/assets/js/12.5f65f189.js"><link rel="prefetch" href="/assets/js/120.6fde943d.js"><link rel="prefetch" href="/assets/js/121.2062356d.js"><link rel="prefetch" href="/assets/js/122.4738aa5b.js"><link rel="prefetch" href="/assets/js/123.e2d00381.js"><link rel="prefetch" href="/assets/js/124.eeb983d9.js"><link rel="prefetch" href="/assets/js/125.f8c5ff44.js"><link rel="prefetch" href="/assets/js/126.42a2902a.js"><link rel="prefetch" href="/assets/js/127.c1d66f24.js"><link rel="prefetch" href="/assets/js/128.7933581c.js"><link rel="prefetch" href="/assets/js/129.fe280f18.js"><link rel="prefetch" href="/assets/js/13.53265072.js"><link rel="prefetch" href="/assets/js/130.5796bc49.js"><link rel="prefetch" href="/assets/js/131.72a70116.js"><link rel="prefetch" href="/assets/js/132.fba186d3.js"><link rel="prefetch" href="/assets/js/133.a038b6e3.js"><link rel="prefetch" href="/assets/js/134.b979fc39.js"><link rel="prefetch" href="/assets/js/135.ab58fa4d.js"><link rel="prefetch" href="/assets/js/136.3946e1b7.js"><link rel="prefetch" href="/assets/js/137.d506d848.js"><link rel="prefetch" href="/assets/js/138.b737062e.js"><link rel="prefetch" href="/assets/js/139.80f8ffc8.js"><link rel="prefetch" href="/assets/js/14.9b50c038.js"><link rel="prefetch" href="/assets/js/140.a8efede8.js"><link rel="prefetch" href="/assets/js/141.88912078.js"><link rel="prefetch" href="/assets/js/142.002ec337.js"><link rel="prefetch" href="/assets/js/143.1a9fed6a.js"><link rel="prefetch" href="/assets/js/144.15e56ee3.js"><link rel="prefetch" href="/assets/js/145.859b8d00.js"><link rel="prefetch" href="/assets/js/146.c0b30a80.js"><link rel="prefetch" href="/assets/js/147.86c03071.js"><link rel="prefetch" href="/assets/js/148.86bdb637.js"><link rel="prefetch" href="/assets/js/149.68ae3de2.js"><link rel="prefetch" href="/assets/js/15.b327be7e.js"><link rel="prefetch" href="/assets/js/150.078f5953.js"><link rel="prefetch" href="/assets/js/151.3925086c.js"><link rel="prefetch" href="/assets/js/152.b2656742.js"><link rel="prefetch" href="/assets/js/153.94c79fa9.js"><link rel="prefetch" href="/assets/js/154.6f668cdc.js"><link rel="prefetch" href="/assets/js/155.26d16d88.js"><link rel="prefetch" href="/assets/js/156.4dac7439.js"><link rel="prefetch" href="/assets/js/157.134c9a36.js"><link rel="prefetch" href="/assets/js/158.867715fb.js"><link rel="prefetch" href="/assets/js/159.5b790836.js"><link rel="prefetch" href="/assets/js/16.b23402c5.js"><link rel="prefetch" href="/assets/js/160.7bb54d30.js"><link rel="prefetch" href="/assets/js/161.32842b78.js"><link rel="prefetch" href="/assets/js/162.2d8da748.js"><link rel="prefetch" href="/assets/js/163.285ec7ff.js"><link rel="prefetch" href="/assets/js/164.0c6dfe94.js"><link rel="prefetch" href="/assets/js/165.251b2dd6.js"><link rel="prefetch" href="/assets/js/166.61a13c62.js"><link rel="prefetch" href="/assets/js/167.0b8940f1.js"><link rel="prefetch" href="/assets/js/168.18e24cb7.js"><link rel="prefetch" href="/assets/js/169.b10c1569.js"><link rel="prefetch" href="/assets/js/17.32bbe36c.js"><link rel="prefetch" href="/assets/js/170.cc30d6db.js"><link rel="prefetch" href="/assets/js/171.e5a5db17.js"><link rel="prefetch" href="/assets/js/172.3d6df5cc.js"><link rel="prefetch" href="/assets/js/173.ec48230a.js"><link rel="prefetch" href="/assets/js/174.8f356df8.js"><link rel="prefetch" href="/assets/js/175.5205cd09.js"><link rel="prefetch" href="/assets/js/177.99280429.js"><link rel="prefetch" href="/assets/js/178.adbbe2e3.js"><link rel="prefetch" href="/assets/js/179.8b44b7d3.js"><link rel="prefetch" href="/assets/js/18.e647e6b1.js"><link rel="prefetch" href="/assets/js/180.74a473ac.js"><link rel="prefetch" href="/assets/js/181.0c334e0b.js"><link rel="prefetch" href="/assets/js/182.2110f34a.js"><link rel="prefetch" href="/assets/js/183.afd7150e.js"><link rel="prefetch" href="/assets/js/184.1e1d16b0.js"><link rel="prefetch" href="/assets/js/185.17877986.js"><link rel="prefetch" href="/assets/js/186.eb391c2e.js"><link rel="prefetch" href="/assets/js/187.018edf4f.js"><link rel="prefetch" href="/assets/js/188.3736d840.js"><link rel="prefetch" href="/assets/js/19.a387f27c.js"><link rel="prefetch" href="/assets/js/20.49236671.js"><link rel="prefetch" href="/assets/js/21.9ec91369.js"><link rel="prefetch" href="/assets/js/22.95b2e77b.js"><link rel="prefetch" href="/assets/js/23.8f4d7414.js"><link rel="prefetch" href="/assets/js/24.e2b213c5.js"><link rel="prefetch" href="/assets/js/25.7f3f3c17.js"><link rel="prefetch" href="/assets/js/26.266189df.js"><link rel="prefetch" href="/assets/js/27.eef9b2a9.js"><link rel="prefetch" href="/assets/js/28.ffdbc4d2.js"><link rel="prefetch" href="/assets/js/29.4590fa49.js"><link rel="prefetch" href="/assets/js/30.85c4cbe9.js"><link rel="prefetch" href="/assets/js/31.390dd215.js"><link rel="prefetch" href="/assets/js/32.ce4d57de.js"><link rel="prefetch" href="/assets/js/33.2ac3bdd7.js"><link rel="prefetch" href="/assets/js/34.a27a7564.js"><link rel="prefetch" href="/assets/js/35.133a359a.js"><link rel="prefetch" href="/assets/js/36.85c206d7.js"><link rel="prefetch" href="/assets/js/37.ea3cf6be.js"><link rel="prefetch" href="/assets/js/38.c7802045.js"><link rel="prefetch" href="/assets/js/39.49f00421.js"><link rel="prefetch" href="/assets/js/40.45af2466.js"><link rel="prefetch" href="/assets/js/41.6dbd80a6.js"><link rel="prefetch" href="/assets/js/42.ff01c005.js"><link rel="prefetch" href="/assets/js/43.59f5c9d2.js"><link rel="prefetch" href="/assets/js/44.9441ae9c.js"><link rel="prefetch" href="/assets/js/45.5ae7af1e.js"><link rel="prefetch" href="/assets/js/46.d9707d2d.js"><link rel="prefetch" href="/assets/js/47.b36bd6b1.js"><link rel="prefetch" href="/assets/js/48.506449fa.js"><link rel="prefetch" href="/assets/js/49.f9bcc647.js"><link rel="prefetch" href="/assets/js/5.7f309e4b.js"><link rel="prefetch" href="/assets/js/50.6b1e5e40.js"><link rel="prefetch" href="/assets/js/51.577a7b71.js"><link rel="prefetch" href="/assets/js/52.9bc6a38b.js"><link rel="prefetch" href="/assets/js/53.efd30e13.js"><link rel="prefetch" href="/assets/js/54.6f18dec7.js"><link rel="prefetch" href="/assets/js/55.345e85aa.js"><link rel="prefetch" href="/assets/js/56.2bf86eed.js"><link rel="prefetch" href="/assets/js/57.23bf8a7b.js"><link rel="prefetch" href="/assets/js/58.52c35f14.js"><link rel="prefetch" href="/assets/js/59.b1efec4a.js"><link rel="prefetch" href="/assets/js/6.63fe1bf6.js"><link rel="prefetch" href="/assets/js/60.be3df253.js"><link rel="prefetch" href="/assets/js/61.e1b7fc3c.js"><link rel="prefetch" href="/assets/js/62.4ff81144.js"><link rel="prefetch" href="/assets/js/63.a121bb0a.js"><link rel="prefetch" href="/assets/js/64.25e8d49e.js"><link rel="prefetch" href="/assets/js/65.ca67439d.js"><link rel="prefetch" href="/assets/js/66.87c9e36a.js"><link rel="prefetch" href="/assets/js/67.738a9a01.js"><link rel="prefetch" href="/assets/js/68.22a175ca.js"><link rel="prefetch" href="/assets/js/69.0a00dc4c.js"><link rel="prefetch" href="/assets/js/7.ebbb4af9.js"><link rel="prefetch" href="/assets/js/70.ddfebdd6.js"><link rel="prefetch" href="/assets/js/71.303161f4.js"><link rel="prefetch" href="/assets/js/72.f23ccb75.js"><link rel="prefetch" href="/assets/js/73.1b49404e.js"><link rel="prefetch" href="/assets/js/74.97b665aa.js"><link rel="prefetch" href="/assets/js/75.f9d7fe05.js"><link rel="prefetch" href="/assets/js/76.6d96dcb9.js"><link rel="prefetch" href="/assets/js/77.b4048a6e.js"><link rel="prefetch" href="/assets/js/78.0e3ef83a.js"><link rel="prefetch" href="/assets/js/79.3260ac1d.js"><link rel="prefetch" href="/assets/js/8.213a8416.js"><link rel="prefetch" href="/assets/js/80.cb879212.js"><link rel="prefetch" href="/assets/js/81.1d66e67c.js"><link rel="prefetch" href="/assets/js/82.f449b53f.js"><link rel="prefetch" href="/assets/js/83.2e981570.js"><link rel="prefetch" href="/assets/js/84.96f1d92b.js"><link rel="prefetch" href="/assets/js/85.53132c5f.js"><link rel="prefetch" href="/assets/js/86.5fb0652b.js"><link rel="prefetch" href="/assets/js/87.17c99baa.js"><link rel="prefetch" href="/assets/js/88.cbdef4cf.js"><link rel="prefetch" href="/assets/js/89.c23ebd83.js"><link rel="prefetch" href="/assets/js/9.396bac1c.js"><link rel="prefetch" href="/assets/js/90.b51e75c8.js"><link rel="prefetch" href="/assets/js/91.a86d5282.js"><link rel="prefetch" href="/assets/js/92.f4f2ca2f.js"><link rel="prefetch" href="/assets/js/93.7f8fcb29.js"><link rel="prefetch" href="/assets/js/94.c6ac1bfa.js"><link rel="prefetch" href="/assets/js/95.11bdac6e.js"><link rel="prefetch" href="/assets/js/96.f6acc813.js"><link rel="prefetch" href="/assets/js/97.d418109b.js"><link rel="prefetch" href="/assets/js/98.8e84bf17.js"><link rel="prefetch" href="/assets/js/99.d68c1a72.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1a6a828a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f3fddc9c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container"><div><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="奇哥" class="logo"> <span class="site-name">奇哥</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="theme-options"><!----> <div class="dark-theme-options toggle-option"><label for="dark-theme-toggle">Enable Dark Theme?</label> <input id="dark-theme-toggle" type="checkbox" checked="checked"></div></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ansible 常用模块</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#ansible-各大模块介绍" class="sidebar-link">ansible 各大模块介绍</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#ping模块" class="sidebar-link">ping模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#setup模块" class="sidebar-link">setup模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#file模块" class="sidebar-link">file模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#copy模块" class="sidebar-link">copy模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#service模块" class="sidebar-link">service模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#cron模块" class="sidebar-link">cron模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#yum模块" class="sidebar-link">yum模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#user模块与group模块" class="sidebar-link">user模块与group模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#synchronize模块" class="sidebar-link">synchronize模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#filesystem模块" class="sidebar-link">filesystem模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#get-url-模块" class="sidebar-link">get_url 模块</a></li><li class="sidebar-sub-header"><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html#unarchive模块" class="sidebar-link">unarchive模块</a></li></ul></li></ul></section></li></ul> </aside> <div><main class="page reco-hide"> <div class="page-title"><h1>ansible 常用模块</h1> <hr> <div data-v-362e684e><i class="iconfont reco-account" data-v-362e684e><span data-v-362e684e>刘文奇</span></i> <i class="iconfont reco-date" data-v-362e684e><span data-v-362e684e>2016-12-25</span></i> <span id="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/ansible%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-2e99e05a data-v-362e684e><i class="iconfont reco-eye" style="margin-right: .5rem" data-v-2e99e05a></i> <a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;" data-v-2e99e05a></a></span> <i class="iconfont reco-tag tags" data-v-362e684e><span class="tag-item" data-v-362e684e>
+      ansible
+    </span></i></div></div> <div class="content__default"><h2 id="ansible-各大模块介绍"><a href="#ansible-各大模块介绍" aria-hidden="true" class="header-anchor">#</a> ansible 各大模块介绍</h2> <h3 id="ping模块"><a href="#ping模块" aria-hidden="true" class="header-anchor">#</a> ping模块</h3> <p>测试主机是否是通的，用法很简单，不涉及参数：
+<code>ansible test -m ping</code></p> <h3 id="setup模块"><a href="#setup模块" aria-hidden="true" class="header-anchor">#</a> setup模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>setup模块，主要用于获取主机信息，在playbooks里经常会用到的一个参数gather_facts就与该模块相关。setup模块下经常使用的一个参数是filter参数，具体使用示例如下：
+    ansible 10.212.52.252 -m setup -a 'filter=ansible_*_mb'   //查看主机内存信息
+    ansible 10.212.52.252 -m setup -a 'filter=ansible_eth[0-2]'   //查看地接口为eth0-2的网卡信息
+    ansible all -m setup --tree /tmp/facts   //将所有主机的信息输入到/tmp/facts目录下，每台主机的信息输入到主机名文件中（/etc/ansible/hosts里的主机名）
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="file模块"><a href="#file模块" aria-hidden="true" class="header-anchor">#</a> file模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>file模块主要用于远程主机上的文件操作，file模块包含如下选项：
+force：需要在两种情况下强制创建软链接，一种是源文件不存在但之后会建立的情况下；另一种是目标软链接已存在,需要先取消之前的软链，然后创建新的软链，有两个选项：yes|no
+group：定义文件/目录的属组
+mode：定义文件/目录的权限
+owner：定义文件/目录的属主
+path：必选项，定义文件/目录的路径
+recurse：递归的设置文件的属性，只对目录有效
+src：要被链接的源文件的路径，只应用于state=link的情况
+dest：被链接到的路径，只应用于state=link的情况
+state：  
+directory：如果目录不存在，创建目录
+file：即使文件不存在，也不会被创建
+link：创建软链接
+hard：创建硬链接
+touch：如果文件不存在，则会创建一个新的文件，如果文件或目录已存在，则更新其最后修改时间
+absent：删除目录、文件或者取消链接文件
+使用示例：
+    ansible test -m file -a &quot;src=/etc/fstab dest=/tmp/fstab state=link&quot;
+    ansible test -m file -a &quot;path=/tmp/fstab state=absent&quot;
+    ansible test -m file -a &quot;path=/tmp/test state=touch&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h3 id="copy模块"><a href="#copy模块" aria-hidden="true" class="header-anchor">#</a> copy模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>复制文件到远程主机，copy模块包含如下选项：
+backup：在覆盖之前将原文件备份，备份文件包含时间信息。有两个选项：yes|no
+content：用于替代&quot;src&quot;,可以直接设定指定文件的值
+dest：必选项。要将源文件复制到的远程主机的绝对路径，如果源文件是一个目录，那么该路径也必须是个目录
+directory_mode：递归的设定目录的权限，默认为系统默认权限
+force：如果目标主机包含该文件，但内容不同，如果设置为yes，则强制覆盖，如果为no，则只有当目标主机的目标位置不存在该文件时，才复制。默认为yes
+others：所有的file模块里的选项都可以在这里使用
+src：要复制到远程主机的文件在本地的地址，可以是绝对路径，也可以是相对路径。如果路径是一个目录，它将递归复制。在这种情况下，如果路径使用&quot;/&quot;来结尾，则只复制目录里的内容，如果没有使用&quot;/&quot;来结尾，则包含目录在内的整个内容全部复制，类似于rsync。
+validate ：The validation command to run before copying into place. The path to the file to validate is passed in via '%s' which must be present as in the visudo example below.
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p><strong>示例如下</strong>：</p> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>    ansible test -m copy -a &quot;src=/srv/myfiles/foo.conf dest=/etc/foo.conf owner=foo group=foo mode=0644&quot;
+    ansible test -m copy -a &quot;src=/mine/ntp.conf dest=/etc/ntp.conf owner=root group=root mode=644 backup=yes&quot;
+    ansible test -m copy -a &quot;src=/mine/sudoers dest=/etc/sudoers validate='visudo -cf %s'&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="service模块"><a href="#service模块" aria-hidden="true" class="header-anchor">#</a> service模块</h3> <blockquote><p>用于管理服务</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>该模块包含如下选项：
+arguments：给命令行提供一些选项
+enabled：是否开机启动 yes|no
+name：必选项，服务名称
+pattern：定义一个模式，如果通过status指令来查看服务的状态时，没有响应，就会通过ps指令在进程中根据该模式进行查找，如果匹配到，则认为该服务依然在运行
+runlevel：运行级别
+sleep：如果执行了restarted，在则stop和start之间沉睡几秒钟
+state：对当前服务执行启动，停止、重启、重新加载等操作（started,stopped,restarted,reloaded）
+使用示例：
+ansible test -m service -a &quot;name=httpd state=started enabled=yes&quot;
+    asnible test -m service -a &quot;name=foo pattern=/usr/bin/foo state=started&quot;
+    ansible test -m service -a &quot;name=network state=restarted args=eth0&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h3 id="cron模块"><a href="#cron模块" aria-hidden="true" class="header-anchor">#</a> cron模块</h3> <blockquote><p>用于管理计划任务包含如下选项：</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>backup：对远程主机上的原任务计划内容修改之前做备份
+cron_file：如果指定该选项，则用该文件替换远程主机上的cron.d目录下的用户的任务计划
+day：日（1-31，*，*/2,……）
+hour：小时（0-23，*，*/2，……）  
+minute：分钟（0-59，*，*/2，……）
+month：月（1-12，*，*/2，……）
+weekday：周（0-7，*，……）
+job：要执行的任务，依赖于state=present
+name：该任务的描述
+special_time：指定什么时候执行，参数：reboot,yearly,annually,monthly,weekly,daily,hourly
+state：确认该任务计划是创建还是删除
+user：以哪个用户的身份执行
+示例：
+ansible test -m cron -a 'name=&quot;a job for reboot&quot; special_time=reboot job=&quot;/some/job.sh&quot;'
+    ansible test -m cron -a 'name=&quot;yum autoupdate&quot; weekday=&quot;2&quot; minute=0 hour=12 user=&quot;root
+    ansible test -m cron  -a 'backup=&quot;True&quot; name=&quot;test&quot; minute=&quot;0&quot; hour=&quot;5,2&quot; job=&quot;ls -alh &gt; /dev/null&quot;'
+    ansilbe test -m cron -a 'cron_file=ansible_yum-autoupdate state=absent'
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="yum模块"><a href="#yum模块" aria-hidden="true" class="header-anchor">#</a> yum模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>使用yum包管理器来管理软件包，其选项有：
+config_file：yum的配置文件
+disable_gpg_check：关闭gpg_check
+disablerepo：不启用某个源
+enablerepo：启用某个源
+name：要进行操作的软件包的名字，也可以传递一个url或者一个本地的rpm包的路径
+state：状态（present，absent，latest）
+示例如下：
+ansible test -m yum -a 'name=httpd state=latest'
+    ansible test -m yum -a 'name=&quot;@Development tools&quot; state=present'
+    ansible test -m yum -a 'name=http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm state=present'
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h3 id="user模块与group模块"><a href="#user模块与group模块" aria-hidden="true" class="header-anchor">#</a> user模块与group模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>user模块是请求的是useradd, userdel, usermod三个指令，goup模块请求的是groupadd, groupdel, groupmod 三个指令。
+1、user模块
+home：指定用户的家目录，需要与createhome配合使用
+groups：指定用户的属组
+uid：指定用的uid
+password：指定用户的密码
+name：指定用户名
+createhome：是否创建家目录 yes|no
+system：是否为系统用户
+remove：当state=absent时，remove=yes则表示连同家目录一起删除，等价于userdel -r
+state：是创建还是删除
+shell：指定用户的shell环境
+使用示例：
+    user: name=johnd comment=&quot;John Doe&quot; uid=1040 group=admin
+    user: name=james shell=/bin/bash groups=admins,developers append=yes user: name=johnd state=absent remove=yes
+    user: name=james18 shell=/bin/zsh groups=developers expires=1422403387
+    user: name=test generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa    #生成密钥时，只会生成公钥文件和私钥文件，和直接使用ssh-keygen指令效果相同，不会生成authorized_keys文件。
+注：指定password参数时，不能使用明文密码，因为后面这一串密码会被直接传送到被管理主机的/etc/shadow文件中，所以需要先将密码字符串进行加密处理。然后将得到的字符串放到password中即可。
+echo &quot;123456&quot; | openssl passwd -1 -salt $(&lt; /dev/urandom tr -dc '[:alnum:]' | head -c 32) -stdin
+$1$4P4PlFuE$ur9ObJiT5iHNrb9QnjaIB0
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><blockquote><p>使用上面的密码创建用户</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>ansible all -m user -a 'name=foo password=&quot;$1$4P4PlFuE$ur9ObJiT5iHNrb9QnjaIB0&quot;'
+不同的发行版默认使用的加密方式可能会有区别，具体可以查看/etc/login.defs文件确认，centos 6.5版本使用的是SHA512加密算法。
+2、group示例
+ansible all -m group -a 'name=somegroup state=present'
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="synchronize模块"><a href="#synchronize模块" aria-hidden="true" class="header-anchor">#</a> synchronize模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>使用rsync同步文件，其参数如下：
+archive: 归档，相当于同时开启recursive(递归)、links、perms、times、owner、group、-D选项都为yes ，默认该项为开启
+checksum: 跳过检测sum值，默认关闭
+compress:是否开启压缩
+copy_links：复制链接文件，默认为no ，注意后面还有一个links参数
+delete: 删除不存在的文件，默认no
+dest：目录路径
+dest_port：默认目录主机上的端口 ，默认是22，走的ssh协议
+dirs：传速目录不进行递归，默认为no，即进行目录递归
+rsync_opts：rsync参数部分
+set_remote_user：主要用于/etc/ansible/hosts中定义或默认使用的用户与rsync使用的用户不同的情况
+mode: push或pull 模块，push模的话，一般用于从本机向远程主机上传文件，pull 模式用于从远程主机上取文件
+使用示例：
+    src=some/relative/path dest=/some/absolute/path rsync_path=&quot;sudo rsync&quot;
+    src=some/relative/path dest=/some/absolute/path archive=no links=yes
+    src=some/relative/path dest=/some/absolute/path checksum=yes times=no
+    src=/tmp/helloworld dest=/var/www/helloword rsync_opts=--no-motd,--exclude=.git mode=pull
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="filesystem模块"><a href="#filesystem模块" aria-hidden="true" class="header-anchor">#</a> filesystem模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>在块设备上创建文件系统
+选项：
+dev：目标块设备
+force：在一个已有文件系统 的设备上强制创建
+fstype：文件系统的类型
+opts：传递给mkfs命令的选项
+示例：
+    ansible test -m filesystem -a 'fstype=ext2 dev=/dev/sdb1 force=yes'
+    ansible test -m filesystem -a 'fstype=ext4 dev=/dev/sdb1 opts=&quot;-cc&quot;'
+十一、mount模块
+配置挂载点
+选项：
+dump
+fstype：必选项，挂载文件的类型
+name：必选项，挂载点
+opts：传递给mount命令的参数
+src：必选项，要挂载的文件
+state：必选项
+present：只处理fstab中的配置
+absent：删除挂载点
+mounted：自动创建挂载点并挂载之
+umounted：卸载
+示例：
+    name=/mnt/dvd src=/dev/sr0 fstype=iso9660 opts=ro state=present
+    name=/srv/disk src='LABEL=SOME_LABEL' state=present
+    name=/home src='UUID=b3e48f45-f933-4c8e-a700-22a159ec9077' opts=noatime state=present
+    ansible test -a 'dd if=/dev/zero of=/disk.img bs=4k count=1024'
+    ansible test -a 'losetup /dev/loop0 /disk.img'
+    ansible test -m filesystem 'fstype=ext4 force=yes opts=-F dev=/dev/loop0'
+    ansible test -m mount 'name=/mnt src=/dev/loop0 fstype=ext4 state=mounted opts=rw'
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><h3 id="get-url-模块"><a href="#get-url-模块" aria-hidden="true" class="header-anchor">#</a> <code>get_url</code> 模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>该模块主要用于从http、ftp、https服务器上下载文件（类似于wget），主要有如下选项：
+sha256sum：下载完成后进行sha256 check；
+timeout：下载超时时间，默认10s
+url：下载的URL
+url_password、url_username：主要用于需要用户名密码进行验证的情况
+use_proxy：是事使用代理，代理需事先在环境变更中定义
+示例：
+    get_url: url=http://example.com/path/file.conf dest=/etc/foo.conf mode=0440
+    get_url: url=http://example.com/path/file.conf dest=/etc/foo.conf sha256sum=b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="unarchive模块"><a href="#unarchive模块" aria-hidden="true" class="header-anchor">#</a> unarchive模块</h3> <div class="language-shell line-numbers-mode"><pre class="language-text"><code>用于解压文件，模块包含如下选项：
+copy：在解压文件之前，是否先将文件复制到远程主机，默认为yes。若为no，则要求目标主机上压缩包必须存在。
+creates：指定一个文件名，当该文件存在时，则解压指令不执行
+dest：远程主机上的一个路径，即文件解压的路径
+grop：解压后的目录或文件的属组
+list_files：如果为yes，则会列出压缩包里的文件，默认为no，2.0版本新增的选项
+mode：解决后文件的权限
+src：如果copy为yes，则需要指定压缩文件的源路径
+owner：解压后文件或目录的属主
+示例如下：
+- unarchive: src=foo.tgz dest=/var/lib/foo
+- unarchive: src=/tmp/foo.zip dest=/usr/local/bin copy=no
+- unarchive: src=https://example.com/example.zip dest=/usr/local/bin copy=no
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div></div> <!----> <footer class="page-edit"><!----> <!----></footer> <!----> </main> <div class="valine-wrapper" data-v-5029e45b><div id="valine" data-v-5029e45b></div></div></div> <div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;background-color:rgba(231, 234, 241,.5);display:none;" data-v-cd623d78 data-v-cd623d78><i class="iconfont reco-up" data-v-cd623d78></i></div></div></div></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="/assets/js/app.bd57e9ac.js" defer></script><script src="/assets/js/4.cf47d3bf.js" defer></script><script src="/assets/js/1.2ae96b85.js" defer></script><script src="/assets/js/176.4ad613ab.js" defer></script>
+  </body>
+</html>

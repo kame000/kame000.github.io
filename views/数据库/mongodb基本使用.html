@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>mongodb  基本使用 | 奇哥</title>
+    <meta name="description" content="个人博客，技术笔记整理">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.f3fddc9c.css" as="style"><link rel="preload" href="/assets/js/app.bd57e9ac.js" as="script"><link rel="preload" href="/assets/js/4.cf47d3bf.js" as="script"><link rel="preload" href="/assets/js/1.2ae96b85.js" as="script"><link rel="preload" href="/assets/js/106.d12a2a32.js" as="script"><link rel="prefetch" href="/assets/js/10.816b0153.js"><link rel="prefetch" href="/assets/js/100.a03fb444.js"><link rel="prefetch" href="/assets/js/101.d92e5f36.js"><link rel="prefetch" href="/assets/js/102.c696f09e.js"><link rel="prefetch" href="/assets/js/103.ce3c3f6a.js"><link rel="prefetch" href="/assets/js/104.502b38a6.js"><link rel="prefetch" href="/assets/js/105.8ff7fab8.js"><link rel="prefetch" href="/assets/js/107.e585a5b6.js"><link rel="prefetch" href="/assets/js/108.72bc7fee.js"><link rel="prefetch" href="/assets/js/109.c794a8c2.js"><link rel="prefetch" href="/assets/js/11.b378d47c.js"><link rel="prefetch" href="/assets/js/110.2c2d0721.js"><link rel="prefetch" href="/assets/js/111.104c000c.js"><link rel="prefetch" href="/assets/js/112.a9f6a2ea.js"><link rel="prefetch" href="/assets/js/113.06d8aa1d.js"><link rel="prefetch" href="/assets/js/114.51211731.js"><link rel="prefetch" href="/assets/js/115.e854479d.js"><link rel="prefetch" href="/assets/js/116.66196725.js"><link rel="prefetch" href="/assets/js/117.38c8a3bb.js"><link rel="prefetch" href="/assets/js/118.0da4677e.js"><link rel="prefetch" href="/assets/js/119.67397043.js"><link rel="prefetch" href="/assets/js/12.5f65f189.js"><link rel="prefetch" href="/assets/js/120.6fde943d.js"><link rel="prefetch" href="/assets/js/121.2062356d.js"><link rel="prefetch" href="/assets/js/122.4738aa5b.js"><link rel="prefetch" href="/assets/js/123.e2d00381.js"><link rel="prefetch" href="/assets/js/124.eeb983d9.js"><link rel="prefetch" href="/assets/js/125.f8c5ff44.js"><link rel="prefetch" href="/assets/js/126.42a2902a.js"><link rel="prefetch" href="/assets/js/127.c1d66f24.js"><link rel="prefetch" href="/assets/js/128.7933581c.js"><link rel="prefetch" href="/assets/js/129.fe280f18.js"><link rel="prefetch" href="/assets/js/13.53265072.js"><link rel="prefetch" href="/assets/js/130.5796bc49.js"><link rel="prefetch" href="/assets/js/131.72a70116.js"><link rel="prefetch" href="/assets/js/132.fba186d3.js"><link rel="prefetch" href="/assets/js/133.a038b6e3.js"><link rel="prefetch" href="/assets/js/134.b979fc39.js"><link rel="prefetch" href="/assets/js/135.ab58fa4d.js"><link rel="prefetch" href="/assets/js/136.3946e1b7.js"><link rel="prefetch" href="/assets/js/137.d506d848.js"><link rel="prefetch" href="/assets/js/138.b737062e.js"><link rel="prefetch" href="/assets/js/139.80f8ffc8.js"><link rel="prefetch" href="/assets/js/14.9b50c038.js"><link rel="prefetch" href="/assets/js/140.a8efede8.js"><link rel="prefetch" href="/assets/js/141.88912078.js"><link rel="prefetch" href="/assets/js/142.002ec337.js"><link rel="prefetch" href="/assets/js/143.1a9fed6a.js"><link rel="prefetch" href="/assets/js/144.15e56ee3.js"><link rel="prefetch" href="/assets/js/145.859b8d00.js"><link rel="prefetch" href="/assets/js/146.c0b30a80.js"><link rel="prefetch" href="/assets/js/147.86c03071.js"><link rel="prefetch" href="/assets/js/148.86bdb637.js"><link rel="prefetch" href="/assets/js/149.68ae3de2.js"><link rel="prefetch" href="/assets/js/15.b327be7e.js"><link rel="prefetch" href="/assets/js/150.078f5953.js"><link rel="prefetch" href="/assets/js/151.3925086c.js"><link rel="prefetch" href="/assets/js/152.b2656742.js"><link rel="prefetch" href="/assets/js/153.94c79fa9.js"><link rel="prefetch" href="/assets/js/154.6f668cdc.js"><link rel="prefetch" href="/assets/js/155.26d16d88.js"><link rel="prefetch" href="/assets/js/156.4dac7439.js"><link rel="prefetch" href="/assets/js/157.134c9a36.js"><link rel="prefetch" href="/assets/js/158.867715fb.js"><link rel="prefetch" href="/assets/js/159.5b790836.js"><link rel="prefetch" href="/assets/js/16.b23402c5.js"><link rel="prefetch" href="/assets/js/160.7bb54d30.js"><link rel="prefetch" href="/assets/js/161.32842b78.js"><link rel="prefetch" href="/assets/js/162.2d8da748.js"><link rel="prefetch" href="/assets/js/163.285ec7ff.js"><link rel="prefetch" href="/assets/js/164.0c6dfe94.js"><link rel="prefetch" href="/assets/js/165.251b2dd6.js"><link rel="prefetch" href="/assets/js/166.61a13c62.js"><link rel="prefetch" href="/assets/js/167.0b8940f1.js"><link rel="prefetch" href="/assets/js/168.18e24cb7.js"><link rel="prefetch" href="/assets/js/169.b10c1569.js"><link rel="prefetch" href="/assets/js/17.32bbe36c.js"><link rel="prefetch" href="/assets/js/170.cc30d6db.js"><link rel="prefetch" href="/assets/js/171.e5a5db17.js"><link rel="prefetch" href="/assets/js/172.3d6df5cc.js"><link rel="prefetch" href="/assets/js/173.ec48230a.js"><link rel="prefetch" href="/assets/js/174.8f356df8.js"><link rel="prefetch" href="/assets/js/175.5205cd09.js"><link rel="prefetch" href="/assets/js/176.4ad613ab.js"><link rel="prefetch" href="/assets/js/177.99280429.js"><link rel="prefetch" href="/assets/js/178.adbbe2e3.js"><link rel="prefetch" href="/assets/js/179.8b44b7d3.js"><link rel="prefetch" href="/assets/js/18.e647e6b1.js"><link rel="prefetch" href="/assets/js/180.74a473ac.js"><link rel="prefetch" href="/assets/js/181.0c334e0b.js"><link rel="prefetch" href="/assets/js/182.2110f34a.js"><link rel="prefetch" href="/assets/js/183.afd7150e.js"><link rel="prefetch" href="/assets/js/184.1e1d16b0.js"><link rel="prefetch" href="/assets/js/185.17877986.js"><link rel="prefetch" href="/assets/js/186.eb391c2e.js"><link rel="prefetch" href="/assets/js/187.018edf4f.js"><link rel="prefetch" href="/assets/js/188.3736d840.js"><link rel="prefetch" href="/assets/js/19.a387f27c.js"><link rel="prefetch" href="/assets/js/20.49236671.js"><link rel="prefetch" href="/assets/js/21.9ec91369.js"><link rel="prefetch" href="/assets/js/22.95b2e77b.js"><link rel="prefetch" href="/assets/js/23.8f4d7414.js"><link rel="prefetch" href="/assets/js/24.e2b213c5.js"><link rel="prefetch" href="/assets/js/25.7f3f3c17.js"><link rel="prefetch" href="/assets/js/26.266189df.js"><link rel="prefetch" href="/assets/js/27.eef9b2a9.js"><link rel="prefetch" href="/assets/js/28.ffdbc4d2.js"><link rel="prefetch" href="/assets/js/29.4590fa49.js"><link rel="prefetch" href="/assets/js/30.85c4cbe9.js"><link rel="prefetch" href="/assets/js/31.390dd215.js"><link rel="prefetch" href="/assets/js/32.ce4d57de.js"><link rel="prefetch" href="/assets/js/33.2ac3bdd7.js"><link rel="prefetch" href="/assets/js/34.a27a7564.js"><link rel="prefetch" href="/assets/js/35.133a359a.js"><link rel="prefetch" href="/assets/js/36.85c206d7.js"><link rel="prefetch" href="/assets/js/37.ea3cf6be.js"><link rel="prefetch" href="/assets/js/38.c7802045.js"><link rel="prefetch" href="/assets/js/39.49f00421.js"><link rel="prefetch" href="/assets/js/40.45af2466.js"><link rel="prefetch" href="/assets/js/41.6dbd80a6.js"><link rel="prefetch" href="/assets/js/42.ff01c005.js"><link rel="prefetch" href="/assets/js/43.59f5c9d2.js"><link rel="prefetch" href="/assets/js/44.9441ae9c.js"><link rel="prefetch" href="/assets/js/45.5ae7af1e.js"><link rel="prefetch" href="/assets/js/46.d9707d2d.js"><link rel="prefetch" href="/assets/js/47.b36bd6b1.js"><link rel="prefetch" href="/assets/js/48.506449fa.js"><link rel="prefetch" href="/assets/js/49.f9bcc647.js"><link rel="prefetch" href="/assets/js/5.7f309e4b.js"><link rel="prefetch" href="/assets/js/50.6b1e5e40.js"><link rel="prefetch" href="/assets/js/51.577a7b71.js"><link rel="prefetch" href="/assets/js/52.9bc6a38b.js"><link rel="prefetch" href="/assets/js/53.efd30e13.js"><link rel="prefetch" href="/assets/js/54.6f18dec7.js"><link rel="prefetch" href="/assets/js/55.345e85aa.js"><link rel="prefetch" href="/assets/js/56.2bf86eed.js"><link rel="prefetch" href="/assets/js/57.23bf8a7b.js"><link rel="prefetch" href="/assets/js/58.52c35f14.js"><link rel="prefetch" href="/assets/js/59.b1efec4a.js"><link rel="prefetch" href="/assets/js/6.63fe1bf6.js"><link rel="prefetch" href="/assets/js/60.be3df253.js"><link rel="prefetch" href="/assets/js/61.e1b7fc3c.js"><link rel="prefetch" href="/assets/js/62.4ff81144.js"><link rel="prefetch" href="/assets/js/63.a121bb0a.js"><link rel="prefetch" href="/assets/js/64.25e8d49e.js"><link rel="prefetch" href="/assets/js/65.ca67439d.js"><link rel="prefetch" href="/assets/js/66.87c9e36a.js"><link rel="prefetch" href="/assets/js/67.738a9a01.js"><link rel="prefetch" href="/assets/js/68.22a175ca.js"><link rel="prefetch" href="/assets/js/69.0a00dc4c.js"><link rel="prefetch" href="/assets/js/7.ebbb4af9.js"><link rel="prefetch" href="/assets/js/70.ddfebdd6.js"><link rel="prefetch" href="/assets/js/71.303161f4.js"><link rel="prefetch" href="/assets/js/72.f23ccb75.js"><link rel="prefetch" href="/assets/js/73.1b49404e.js"><link rel="prefetch" href="/assets/js/74.97b665aa.js"><link rel="prefetch" href="/assets/js/75.f9d7fe05.js"><link rel="prefetch" href="/assets/js/76.6d96dcb9.js"><link rel="prefetch" href="/assets/js/77.b4048a6e.js"><link rel="prefetch" href="/assets/js/78.0e3ef83a.js"><link rel="prefetch" href="/assets/js/79.3260ac1d.js"><link rel="prefetch" href="/assets/js/8.213a8416.js"><link rel="prefetch" href="/assets/js/80.cb879212.js"><link rel="prefetch" href="/assets/js/81.1d66e67c.js"><link rel="prefetch" href="/assets/js/82.f449b53f.js"><link rel="prefetch" href="/assets/js/83.2e981570.js"><link rel="prefetch" href="/assets/js/84.96f1d92b.js"><link rel="prefetch" href="/assets/js/85.53132c5f.js"><link rel="prefetch" href="/assets/js/86.5fb0652b.js"><link rel="prefetch" href="/assets/js/87.17c99baa.js"><link rel="prefetch" href="/assets/js/88.cbdef4cf.js"><link rel="prefetch" href="/assets/js/89.c23ebd83.js"><link rel="prefetch" href="/assets/js/9.396bac1c.js"><link rel="prefetch" href="/assets/js/90.b51e75c8.js"><link rel="prefetch" href="/assets/js/91.a86d5282.js"><link rel="prefetch" href="/assets/js/92.f4f2ca2f.js"><link rel="prefetch" href="/assets/js/93.7f8fcb29.js"><link rel="prefetch" href="/assets/js/94.c6ac1bfa.js"><link rel="prefetch" href="/assets/js/95.11bdac6e.js"><link rel="prefetch" href="/assets/js/96.f6acc813.js"><link rel="prefetch" href="/assets/js/97.d418109b.js"><link rel="prefetch" href="/assets/js/98.8e84bf17.js"><link rel="prefetch" href="/assets/js/99.d68c1a72.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1a6a828a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f3fddc9c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container"><div><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="奇哥" class="logo"> <span class="site-name">奇哥</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="theme-options"><!----> <div class="dark-theme-options toggle-option"><label for="dark-theme-toggle">Enable Dark Theme?</label> <input id="dark-theme-toggle" type="checkbox" checked="checked"></div></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>mongodb  基本使用</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#数据库常用命令" class="sidebar-link">数据库常用命令</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#collection聚集集合" class="sidebar-link">Collection聚集集合</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#用户相关" class="sidebar-link">用户相关</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#其他" class="sidebar-link">其他</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#查看聚集集合基本信息" class="sidebar-link">查看聚集集合基本信息</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#聚集集合查询" class="sidebar-link">聚集集合查询</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#索引" class="sidebar-link">索引</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html#修改、添加、删除集合数据" class="sidebar-link">修改、添加、删除集合数据</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <div><main class="page reco-hide"> <div class="page-title"><h1>mongodb  基本使用</h1> <hr> <div data-v-362e684e><i class="iconfont reco-account" data-v-362e684e><span data-v-362e684e>刘文奇</span></i> <i class="iconfont reco-date" data-v-362e684e><span data-v-362e684e>2017-4-9</span></i> <span id="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-2e99e05a data-v-362e684e><i class="iconfont reco-eye" style="margin-right: .5rem" data-v-2e99e05a></i> <a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;" data-v-2e99e05a></a></span> <i class="iconfont reco-tag tags" data-v-362e684e><span class="tag-item" data-v-362e684e>
+      mongodb
+    </span></i></div></div> <div class="content__default"><h1 id="mongodb基本使用"><a href="#mongodb基本使用" aria-hidden="true" class="header-anchor">#</a> MongoDB基本使用</h1> <p>成功启动MongoDB后，再打开一个命令行窗口输入mongo，就可以进行数据库的一些操作。</p> <blockquote><p>输入help可以看到基本操作命令：</p></blockquote> <pre><code>show dbs:显示数据库列表
+show collections：显示当前数据库中的集合（类似关系数据库中的表）
+show users：显示用户
+
+use &lt;db name&gt;：切换当前数据库，这和MS-SQL里面的意思一样
+db.help()：显示数据库操作命令，里面有很多的命令
+db.foo.help()：显示集合操作命令，同样有很多的命令，foo指的是当前数据库下，一个叫foo的集合，并非真正意义上的命令
+db.foo.find()：对于当前数据库中的foo集合进行数据查找（由于没有条件，会列出所有数据）
+db.foo.find( { a : 1 } )：对于当前数据库中的foo集合进行查找，条件是数据中有一个属性叫a，且a的值为1
+</code></pre> <p>MongoDB没有创建数据库的命令，但有类似的命令。</p> <p>如：如果你想创建一个“myTest”的数据库，先运行use myTest命令，之后就做一些操作（如：db.createCollection('user')）,这样就可以创建一个名叫“myTest”的数据库。</p> <h2 id="数据库常用命令"><a href="#数据库常用命令" aria-hidden="true" class="header-anchor">#</a> 数据库常用命令</h2> <ul><li><p>Help查看命令提示</p> <pre><code>help
+
+db.help();
+
+db.yourColl.help();
+
+db.youColl.find().help();
+
+rs.help();
+</code></pre></li> <li><p>切换/创建数据库</p> <p>use yourDB;  当创建一个集合(table)的时候会自动创建当前数据库</p></li> <li><p>查询所有数据库</p> <p>show dbs;</p></li> <li><p>删除当前使用数据库</p></li></ul> <p>db.dropDatabase();</p> <ul><li>从指定主机上克隆数据库</li></ul> <p>db.cloneDatabase(“127.0.0.1”); 将指定机器上的数据库的数据克隆到当前数据库</p> <ul><li>从指定的机器上复制指定数据库数据到某个数据库</li></ul> <p>db.copyDatabase(&quot;mydb&quot;, &quot;temp&quot;, &quot;127.0.0.1&quot;);将本机的mydb的数据复制到temp数据库中</p> <ul><li>修复当前数据库</li></ul> <p>db.repairDatabase();</p> <ul><li>查看当前使用的数据库</li></ul> <p>db.getName();</p> <p>db; db和getName方法是一样的效果，都可以查询当前使用的数据库</p> <ul><li>显示当前db状态</li></ul> <p>db.stats();</p> <ul><li>当前db版本</li></ul> <p>db.version();</p> <ul><li>查看当前db的链接机器地址</li></ul> <p>db.getMongo();</p> <h2 id="collection聚集集合"><a href="#collection聚集集合" aria-hidden="true" class="header-anchor">#</a> Collection聚集集合</h2> <ul><li>创建一个聚集集合（table）</li></ul> <p>db.createCollection(“collName”, {size: 20, capped: 5, max: 100});</p> <ul><li>得到指定名称的聚集集合（table）</li></ul> <p>db.getCollection(&quot;account&quot;);</p> <ul><li>得到当前db的所有聚集集合</li></ul> <p>db.getCollectionNames();</p> <ul><li>显示当前db所有聚集索引的状态</li></ul> <p>db.printCollectionStats();</p> <h2 id="用户相关"><a href="#用户相关" aria-hidden="true" class="header-anchor">#</a> 用户相关</h2> <ul><li>添加一个用户</li></ul> <p>db.addUser(&quot;name&quot;);</p> <p>db.addUser(&quot;userName&quot;, &quot;pwd123&quot;, true); 添加用户、设置密码、是否只读</p> <ul><li>数据库认证、安全模式</li></ul> <p>db.auth(&quot;userName&quot;, &quot;123123&quot;);</p> <ul><li>显示当前所有用户</li></ul> <p>show users;</p> <ul><li>删除用户</li></ul> <p>db.removeUser(&quot;userName&quot;);</p> <h2 id="其他"><a href="#其他" aria-hidden="true" class="header-anchor">#</a> 其他</h2> <ul><li>查询之前的错误信息
+db.getPrevError();</li> <li>清除错误记录
+db.resetError();</li></ul> <h2 id="查看聚集集合基本信息"><a href="#查看聚集集合基本信息" aria-hidden="true" class="header-anchor">#</a> 查看聚集集合基本信息</h2> <ul><li>查看帮助<br>
+db.yourColl.help();</li> <li>查询当前集合的数据条数
+db.yourColl.count();</li> <li>查看数据空间大小
+db.userInfo.dataSize();</li> <li>得到当前聚集集合所在的db
+db.userInfo.getDB();</li> <li>得到当前聚集的状态
+db.userInfo.stats();</li> <li>得到聚集集合总大小
+db.userInfo.totalSize();</li> <li>聚集集合储存空间大小
+db.userInfo.storageSize();</li> <li>Shard版本信息
+db.userInfo.getShardVersion()</li> <li>聚集集合重命名
+db.userInfo.renameCollection(&quot;users&quot;); 将userInfo重命名为users</li> <li>删除当前聚集集合 db.userInfo.drop();</li></ul> <h2 id="聚集集合查询"><a href="#聚集集合查询" aria-hidden="true" class="header-anchor">#</a> 聚集集合查询</h2> <ul><li>查询所有记录</li></ul> <p>db.userInfo.find();
+相当于：select* from userInfo;
+默认每页显示20条记录，当显示不下的情况下，可以用it迭代命令查询下一页数据。注意：键入it命令不能带“；”
+但是你可以设置每页显示数据的大小，用DBQuery.shellBatchSize= 50;这样每页就显示50条记录了。</p> <ul><li>查询去掉后的当前聚集集合中的某列的重复数据</li></ul> <p>db.userInfo.distinct(&quot;name&quot;);
+会过滤掉name中的相同数据
+相当于：select distict name from userInfo;</p> <ul><li>查询age = 22的记录</li></ul> <p>db.userInfo.find({&quot;age&quot;: 22});
+相当于： select * from userInfo where age = 22;</p> <ul><li>查询age &gt; 22的记录</li></ul> <p>db.userInfo.find({age: {$gt: 22}});
+相当于：select * from userInfo where age &gt;22;</p> <ul><li>查询age &lt; 22的记录</li></ul> <p>db.userInfo.find({age: {$lt: 22}});
+相当于：select * from userInfo where age &lt;22;</p> <ul><li>查询age &gt;= 25的记录</li></ul> <p>db.userInfo.find({age: {$gte: 25}});
+相当于：select * from userInfo where age &gt;= 25;</p> <ul><li>查询age &lt;= 25的记录</li></ul> <p>db.userInfo.find({age: {$lte: 25}});</p> <ul><li>查询age &gt;= 23 并且 age &lt;= 26</li></ul> <p>db.userInfo.find({age: {$gte: 23, $lte: 26}});</p> <ul><li>查询name中包含 mongo的数据</li></ul> <p>db.userInfo.find({name: /mongo/});
+//相当于%%
+select * from userInfo where name like ‘%mongo%’;</p> <ul><li>查询name中以mongo开头的</li></ul> <p>db.userInfo.find({name: /^mongo/});
+select * from userInfo where name like ‘mongo%’;</p> <ul><li>查询指定列name、age数据</li></ul> <p>db.userInfo.find({}, {name: 1, age: 1});
+相当于：select name, age from userInfo;
+当然name也可以用true或false,当用ture的情况下河name:1效果一样，如果用false就是排除name，显示name以外的列信息。</p> <ul><li>查询指定列name、age数据, age &gt; 25</li></ul> <p>db.userInfo.find({age: {$gt: 25}}, {name: 1, age: 1});
+相当于：select name, age from userInfo where age &gt;25;</p> <ul><li>按照年龄排序</li></ul> <p>升序：db.userInfo.find().sort({age: 1});
+降序：db.userInfo.find().sort({age: -1});</p> <ul><li><p>查询name = zhangsan, age = 22的数据
+db.userInfo.find({name: 'zhangsan', age: 22});
+相当于：select * from userInfo where name = ‘zhangsan’ and age = ‘22’;</p></li> <li><p>查询前5条数据</p></li></ul> <p>db.userInfo.find().limit(5);
+相当于：selecttop 5 * from userInfo;</p> <ul><li>查询10条以后的数据</li></ul> <p>db.userInfo.find().skip(10);
+相当于：select * from userInfo where id not in (
+selecttop 10 * from userInfo
+);</p> <ul><li>查询在5-10之间的数据</li></ul> <p>db.userInfo.find().limit(10).skip(5);
+可用于分页，limit是pageSize，skip是第几页*pageSize</p> <ul><li>or与 查询</li></ul> <p>db.userInfo.find({$or: [{age: 22}, {age: 25}]});
+相当于：select * from userInfo where age = 22 or age = 25;</p> <ul><li>查询第一条数据</li></ul> <p>db.userInfo.findOne();
+相当于：selecttop 1 * from userInfo;
+db.userInfo.find().limit(1);</p> <ul><li>查询某个结果集的记录条数</li></ul> <p>db.userInfo.find({age: {$gte: 25}}).count();
+相当于：select count(*) from userInfo where age &gt;= 20;</p> <ul><li>按照某列进行排序</li></ul> <p>db.userInfo.find({sex: {$exists: true}}).count();
+相当于：select count(sex) from userInfo;</p> <h2 id="索引"><a href="#索引" aria-hidden="true" class="header-anchor">#</a> 索引</h2> <ul><li>创建索引</li></ul> <p>db.userInfo.ensureIndex({name: 1});
+db.userInfo.ensureIndex({name: 1, ts: -1});</p> <ul><li>查询当前聚集集合所有索引</li></ul> <p>db.userInfo.getIndexes();</p> <ul><li>查看总索引记录大小</li></ul> <p>db.userInfo.totalIndexSize();</p> <ul><li>读取当前集合的所有index信息</li></ul> <p>db.users.reIndex();</p> <ul><li>删除指定索引</li></ul> <p>db.users.dropIndex(&quot;name_1&quot;);</p> <ul><li>删除所有索引索引</li></ul> <p>db.users.dropIndexes();</p> <h2 id="修改、添加、删除集合数据"><a href="#修改、添加、删除集合数据" aria-hidden="true" class="header-anchor">#</a> 修改、添加、删除集合数据</h2> <ul><li>添加</li></ul> <p>db.users.save({name: ‘zhangsan’, age: 25, sex: true});
+添加的数据的数据列，没有固定，根据添加的数据为准</p> <ul><li><p>修改
+db.users.update({age: 25}, {$set: {name: 'changeName'}}, false, true);
+相当于：update users set name = ‘changeName’ where age = 25;</p> <pre><code>db.users.update({name: 'Lisi'}, {$inc: {age: 50}}, false, true);
+相当于：update users set age = age + 50 where name = ‘Lisi’;
+
+db.users.update({name: 'Lisi'}, {$inc: {age: 50}, $set: {name: 'hoho'}}, false, true);
+相当于：update users set age = age + 50, name = ‘hoho’ where name = ‘Lisi’;
+</code></pre></li> <li><p>删除
+db.users.remove({age: 132});</p></li> <li><p>查询修改删除</p></li></ul> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>      db.users.findAndModify(<span class="token punctuation">{</span>
+          <span class="token key atrule">query</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">age</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">$gte</span><span class="token punctuation">:</span> <span class="token number">25</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token key atrule">sort</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">age</span><span class="token punctuation">:</span> <span class="token number">-1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token key atrule">update</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">$set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">'a2'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token key atrule">$inc</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">age</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token key atrule">remove</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+      <span class="token punctuation">}</span>);
+
+      db.runCommand(<span class="token punctuation">{</span> <span class="token key atrule">findandmodify</span> <span class="token punctuation">:</span> <span class="token string">&quot;users&quot;</span><span class="token punctuation">,</span>
+          <span class="token key atrule">query</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">age</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">$gte</span><span class="token punctuation">:</span> <span class="token number">25</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token key atrule">sort</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">age</span><span class="token punctuation">:</span> <span class="token number">-1</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token key atrule">update</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">$set</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token string">'a2'</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token key atrule">$inc</span><span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token key atrule">age</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token key atrule">remove</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+      <span class="token punctuation">}</span>);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><pre><code>update 或 remove 其中一个是必须的参数; 其他参数可选。
+
+参数
+
+详解
+
+默认值
+
+query
+
+查询过滤条件
+
+{}
+
+sort
+
+如果多个文档符合查询过滤条件，将以该参数指定的排列方式选择出排在首位的对象，该对象将被操作
+
+{}
+
+remove
+
+若为true，被选中对象将在返回前被删除
+
+N/A
+
+update
+
+一个 修改器对象
+
+N/A
+
+new
+
+若为true，将返回修改后的对象而不是原始对象。在删除操作中，该参数被忽略。
+
+false
+
+fields
+
+参见Retrieving a Subset of Fields (1.5.0+)
+
+All fields
+
+upsert
+
+创建新对象若查询结果为空。 示例 (1.5.4+)
+
+false
+</code></pre> <p>语句块操作
+1、简单Hello World</p> <pre><code>print(&quot;Hello World!&quot;);
+这种写法调用了print函数，和直接写入&quot;Hello World!&quot;的效果是一样的；
+</code></pre> <p>2、将一个对象转换成json</p> <pre><code>tojson(new Object());
+tojson(new Object('a'));
+</code></pre> <p>3、循环添加数据</p> <pre><code>&gt; for (var i = 0; i &lt; 30; i++) {
+... db.users.save({name: &quot;u_&quot; + i, age: 22 + i, sex: i % 2});
+... };
+</code></pre> <p>这样就循环添加了30条数据，同样也可以省略括号的写法</p> <blockquote><p>for (var i = 0; i &lt; 30; i++) db.users.save({name: &quot;u_&quot; + i, age: 22 + i, sex: i % 2});
+也是可以的，当你用db.users.find()查询的时候，显示多条数据而无法一页显示的情况下，可以用it查看下一页的信息；</p></blockquote> <p>4、find 游标查询</p> <pre><code>&gt;var cursor = db.users.find();
+&gt; while (cursor.hasNext()) {
+    printjson(cursor.next());
+}
+</code></pre> <p>这样就查询所有的users信息，同样可以这样写
+var cursor = db.users.find();
+while (cursor.hasNext()) { printjson(cursor.next); }
+同样可以省略{}号</p> <p>5、forEach迭代循环</p> <pre><code>db.users.find().forEach(printjson);
+forEach中必须传递一个函数来处理每条迭代的数据信息
+</code></pre> <p>6、将find游标当数组处理</p> <pre><code>var cursor = db.users.find();
+cursor[4];
+取得下标索引为4的那条数据
+既然可以当做数组处理，那么就可以获得它的长度：cursor.length();或者cursor.count();
+那样我们也可以用循环显示数据
+for (var i = 0, len = c.length(); i &lt; len; i++) printjson(c[i]);
+</code></pre> <p>7、将find游标转换成数组</p> <pre><code>&gt; var arr = db.users.find().toArray();
+&gt; printjson(arr[2]);
+用toArray方法将其转换为数组
+</code></pre> <p>8、定制我们自己的查询结果</p> <pre><code>只显示age &lt;= 28的并且只显示age这列数据
+db.users.find({age: {$lte: 28}}, {age: 1}).forEach(printjson);
+db.users.find({age: {$lte: 28}}, {age: true}).forEach(printjson);
+排除age的列
+db.users.find({age: {$lte: 28}}, {age: false}).forEach(printjson);
+</code></pre> <p>9、forEach传递函数显示信息</p> <pre><code>db.things.find({x:4}).forEach(function(x) {print(tojson(x));});
+</code></pre></div> <!----> <footer class="page-edit"><!----> <!----></footer> <!----> </main> <div class="valine-wrapper" data-v-5029e45b><div id="valine" data-v-5029e45b></div></div></div> <div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;background-color:rgba(231, 234, 241,.5);display:none;" data-v-cd623d78 data-v-cd623d78><i class="iconfont reco-up" data-v-cd623d78></i></div></div></div></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="/assets/js/app.bd57e9ac.js" defer></script><script src="/assets/js/4.cf47d3bf.js" defer></script><script src="/assets/js/1.2ae96b85.js" defer></script><script src="/assets/js/106.d12a2a32.js" defer></script>
+  </body>
+</html>

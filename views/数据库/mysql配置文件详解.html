@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>mysql 配置文件详解　摘自网络及自己的理解 | 奇哥</title>
+    <meta name="description" content="个人博客，技术笔记整理">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.f3fddc9c.css" as="style"><link rel="preload" href="/assets/js/app.bd57e9ac.js" as="script"><link rel="preload" href="/assets/js/4.cf47d3bf.js" as="script"><link rel="preload" href="/assets/js/1.2ae96b85.js" as="script"><link rel="preload" href="/assets/js/113.06d8aa1d.js" as="script"><link rel="prefetch" href="/assets/js/10.816b0153.js"><link rel="prefetch" href="/assets/js/100.a03fb444.js"><link rel="prefetch" href="/assets/js/101.d92e5f36.js"><link rel="prefetch" href="/assets/js/102.c696f09e.js"><link rel="prefetch" href="/assets/js/103.ce3c3f6a.js"><link rel="prefetch" href="/assets/js/104.502b38a6.js"><link rel="prefetch" href="/assets/js/105.8ff7fab8.js"><link rel="prefetch" href="/assets/js/106.d12a2a32.js"><link rel="prefetch" href="/assets/js/107.e585a5b6.js"><link rel="prefetch" href="/assets/js/108.72bc7fee.js"><link rel="prefetch" href="/assets/js/109.c794a8c2.js"><link rel="prefetch" href="/assets/js/11.b378d47c.js"><link rel="prefetch" href="/assets/js/110.2c2d0721.js"><link rel="prefetch" href="/assets/js/111.104c000c.js"><link rel="prefetch" href="/assets/js/112.a9f6a2ea.js"><link rel="prefetch" href="/assets/js/114.51211731.js"><link rel="prefetch" href="/assets/js/115.e854479d.js"><link rel="prefetch" href="/assets/js/116.66196725.js"><link rel="prefetch" href="/assets/js/117.38c8a3bb.js"><link rel="prefetch" href="/assets/js/118.0da4677e.js"><link rel="prefetch" href="/assets/js/119.67397043.js"><link rel="prefetch" href="/assets/js/12.5f65f189.js"><link rel="prefetch" href="/assets/js/120.6fde943d.js"><link rel="prefetch" href="/assets/js/121.2062356d.js"><link rel="prefetch" href="/assets/js/122.4738aa5b.js"><link rel="prefetch" href="/assets/js/123.e2d00381.js"><link rel="prefetch" href="/assets/js/124.eeb983d9.js"><link rel="prefetch" href="/assets/js/125.f8c5ff44.js"><link rel="prefetch" href="/assets/js/126.42a2902a.js"><link rel="prefetch" href="/assets/js/127.c1d66f24.js"><link rel="prefetch" href="/assets/js/128.7933581c.js"><link rel="prefetch" href="/assets/js/129.fe280f18.js"><link rel="prefetch" href="/assets/js/13.53265072.js"><link rel="prefetch" href="/assets/js/130.5796bc49.js"><link rel="prefetch" href="/assets/js/131.72a70116.js"><link rel="prefetch" href="/assets/js/132.fba186d3.js"><link rel="prefetch" href="/assets/js/133.a038b6e3.js"><link rel="prefetch" href="/assets/js/134.b979fc39.js"><link rel="prefetch" href="/assets/js/135.ab58fa4d.js"><link rel="prefetch" href="/assets/js/136.3946e1b7.js"><link rel="prefetch" href="/assets/js/137.d506d848.js"><link rel="prefetch" href="/assets/js/138.b737062e.js"><link rel="prefetch" href="/assets/js/139.80f8ffc8.js"><link rel="prefetch" href="/assets/js/14.9b50c038.js"><link rel="prefetch" href="/assets/js/140.a8efede8.js"><link rel="prefetch" href="/assets/js/141.88912078.js"><link rel="prefetch" href="/assets/js/142.002ec337.js"><link rel="prefetch" href="/assets/js/143.1a9fed6a.js"><link rel="prefetch" href="/assets/js/144.15e56ee3.js"><link rel="prefetch" href="/assets/js/145.859b8d00.js"><link rel="prefetch" href="/assets/js/146.c0b30a80.js"><link rel="prefetch" href="/assets/js/147.86c03071.js"><link rel="prefetch" href="/assets/js/148.86bdb637.js"><link rel="prefetch" href="/assets/js/149.68ae3de2.js"><link rel="prefetch" href="/assets/js/15.b327be7e.js"><link rel="prefetch" href="/assets/js/150.078f5953.js"><link rel="prefetch" href="/assets/js/151.3925086c.js"><link rel="prefetch" href="/assets/js/152.b2656742.js"><link rel="prefetch" href="/assets/js/153.94c79fa9.js"><link rel="prefetch" href="/assets/js/154.6f668cdc.js"><link rel="prefetch" href="/assets/js/155.26d16d88.js"><link rel="prefetch" href="/assets/js/156.4dac7439.js"><link rel="prefetch" href="/assets/js/157.134c9a36.js"><link rel="prefetch" href="/assets/js/158.867715fb.js"><link rel="prefetch" href="/assets/js/159.5b790836.js"><link rel="prefetch" href="/assets/js/16.b23402c5.js"><link rel="prefetch" href="/assets/js/160.7bb54d30.js"><link rel="prefetch" href="/assets/js/161.32842b78.js"><link rel="prefetch" href="/assets/js/162.2d8da748.js"><link rel="prefetch" href="/assets/js/163.285ec7ff.js"><link rel="prefetch" href="/assets/js/164.0c6dfe94.js"><link rel="prefetch" href="/assets/js/165.251b2dd6.js"><link rel="prefetch" href="/assets/js/166.61a13c62.js"><link rel="prefetch" href="/assets/js/167.0b8940f1.js"><link rel="prefetch" href="/assets/js/168.18e24cb7.js"><link rel="prefetch" href="/assets/js/169.b10c1569.js"><link rel="prefetch" href="/assets/js/17.32bbe36c.js"><link rel="prefetch" href="/assets/js/170.cc30d6db.js"><link rel="prefetch" href="/assets/js/171.e5a5db17.js"><link rel="prefetch" href="/assets/js/172.3d6df5cc.js"><link rel="prefetch" href="/assets/js/173.ec48230a.js"><link rel="prefetch" href="/assets/js/174.8f356df8.js"><link rel="prefetch" href="/assets/js/175.5205cd09.js"><link rel="prefetch" href="/assets/js/176.4ad613ab.js"><link rel="prefetch" href="/assets/js/177.99280429.js"><link rel="prefetch" href="/assets/js/178.adbbe2e3.js"><link rel="prefetch" href="/assets/js/179.8b44b7d3.js"><link rel="prefetch" href="/assets/js/18.e647e6b1.js"><link rel="prefetch" href="/assets/js/180.74a473ac.js"><link rel="prefetch" href="/assets/js/181.0c334e0b.js"><link rel="prefetch" href="/assets/js/182.2110f34a.js"><link rel="prefetch" href="/assets/js/183.afd7150e.js"><link rel="prefetch" href="/assets/js/184.1e1d16b0.js"><link rel="prefetch" href="/assets/js/185.17877986.js"><link rel="prefetch" href="/assets/js/186.eb391c2e.js"><link rel="prefetch" href="/assets/js/187.018edf4f.js"><link rel="prefetch" href="/assets/js/188.3736d840.js"><link rel="prefetch" href="/assets/js/19.a387f27c.js"><link rel="prefetch" href="/assets/js/20.49236671.js"><link rel="prefetch" href="/assets/js/21.9ec91369.js"><link rel="prefetch" href="/assets/js/22.95b2e77b.js"><link rel="prefetch" href="/assets/js/23.8f4d7414.js"><link rel="prefetch" href="/assets/js/24.e2b213c5.js"><link rel="prefetch" href="/assets/js/25.7f3f3c17.js"><link rel="prefetch" href="/assets/js/26.266189df.js"><link rel="prefetch" href="/assets/js/27.eef9b2a9.js"><link rel="prefetch" href="/assets/js/28.ffdbc4d2.js"><link rel="prefetch" href="/assets/js/29.4590fa49.js"><link rel="prefetch" href="/assets/js/30.85c4cbe9.js"><link rel="prefetch" href="/assets/js/31.390dd215.js"><link rel="prefetch" href="/assets/js/32.ce4d57de.js"><link rel="prefetch" href="/assets/js/33.2ac3bdd7.js"><link rel="prefetch" href="/assets/js/34.a27a7564.js"><link rel="prefetch" href="/assets/js/35.133a359a.js"><link rel="prefetch" href="/assets/js/36.85c206d7.js"><link rel="prefetch" href="/assets/js/37.ea3cf6be.js"><link rel="prefetch" href="/assets/js/38.c7802045.js"><link rel="prefetch" href="/assets/js/39.49f00421.js"><link rel="prefetch" href="/assets/js/40.45af2466.js"><link rel="prefetch" href="/assets/js/41.6dbd80a6.js"><link rel="prefetch" href="/assets/js/42.ff01c005.js"><link rel="prefetch" href="/assets/js/43.59f5c9d2.js"><link rel="prefetch" href="/assets/js/44.9441ae9c.js"><link rel="prefetch" href="/assets/js/45.5ae7af1e.js"><link rel="prefetch" href="/assets/js/46.d9707d2d.js"><link rel="prefetch" href="/assets/js/47.b36bd6b1.js"><link rel="prefetch" href="/assets/js/48.506449fa.js"><link rel="prefetch" href="/assets/js/49.f9bcc647.js"><link rel="prefetch" href="/assets/js/5.7f309e4b.js"><link rel="prefetch" href="/assets/js/50.6b1e5e40.js"><link rel="prefetch" href="/assets/js/51.577a7b71.js"><link rel="prefetch" href="/assets/js/52.9bc6a38b.js"><link rel="prefetch" href="/assets/js/53.efd30e13.js"><link rel="prefetch" href="/assets/js/54.6f18dec7.js"><link rel="prefetch" href="/assets/js/55.345e85aa.js"><link rel="prefetch" href="/assets/js/56.2bf86eed.js"><link rel="prefetch" href="/assets/js/57.23bf8a7b.js"><link rel="prefetch" href="/assets/js/58.52c35f14.js"><link rel="prefetch" href="/assets/js/59.b1efec4a.js"><link rel="prefetch" href="/assets/js/6.63fe1bf6.js"><link rel="prefetch" href="/assets/js/60.be3df253.js"><link rel="prefetch" href="/assets/js/61.e1b7fc3c.js"><link rel="prefetch" href="/assets/js/62.4ff81144.js"><link rel="prefetch" href="/assets/js/63.a121bb0a.js"><link rel="prefetch" href="/assets/js/64.25e8d49e.js"><link rel="prefetch" href="/assets/js/65.ca67439d.js"><link rel="prefetch" href="/assets/js/66.87c9e36a.js"><link rel="prefetch" href="/assets/js/67.738a9a01.js"><link rel="prefetch" href="/assets/js/68.22a175ca.js"><link rel="prefetch" href="/assets/js/69.0a00dc4c.js"><link rel="prefetch" href="/assets/js/7.ebbb4af9.js"><link rel="prefetch" href="/assets/js/70.ddfebdd6.js"><link rel="prefetch" href="/assets/js/71.303161f4.js"><link rel="prefetch" href="/assets/js/72.f23ccb75.js"><link rel="prefetch" href="/assets/js/73.1b49404e.js"><link rel="prefetch" href="/assets/js/74.97b665aa.js"><link rel="prefetch" href="/assets/js/75.f9d7fe05.js"><link rel="prefetch" href="/assets/js/76.6d96dcb9.js"><link rel="prefetch" href="/assets/js/77.b4048a6e.js"><link rel="prefetch" href="/assets/js/78.0e3ef83a.js"><link rel="prefetch" href="/assets/js/79.3260ac1d.js"><link rel="prefetch" href="/assets/js/8.213a8416.js"><link rel="prefetch" href="/assets/js/80.cb879212.js"><link rel="prefetch" href="/assets/js/81.1d66e67c.js"><link rel="prefetch" href="/assets/js/82.f449b53f.js"><link rel="prefetch" href="/assets/js/83.2e981570.js"><link rel="prefetch" href="/assets/js/84.96f1d92b.js"><link rel="prefetch" href="/assets/js/85.53132c5f.js"><link rel="prefetch" href="/assets/js/86.5fb0652b.js"><link rel="prefetch" href="/assets/js/87.17c99baa.js"><link rel="prefetch" href="/assets/js/88.cbdef4cf.js"><link rel="prefetch" href="/assets/js/89.c23ebd83.js"><link rel="prefetch" href="/assets/js/9.396bac1c.js"><link rel="prefetch" href="/assets/js/90.b51e75c8.js"><link rel="prefetch" href="/assets/js/91.a86d5282.js"><link rel="prefetch" href="/assets/js/92.f4f2ca2f.js"><link rel="prefetch" href="/assets/js/93.7f8fcb29.js"><link rel="prefetch" href="/assets/js/94.c6ac1bfa.js"><link rel="prefetch" href="/assets/js/95.11bdac6e.js"><link rel="prefetch" href="/assets/js/96.f6acc813.js"><link rel="prefetch" href="/assets/js/97.d418109b.js"><link rel="prefetch" href="/assets/js/98.8e84bf17.js"><link rel="prefetch" href="/assets/js/99.d68c1a72.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1a6a828a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f3fddc9c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container"><div><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="奇哥" class="logo"> <span class="site-name">奇哥</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="theme-options"><!----> <div class="dark-theme-options toggle-option"><label for="dark-theme-toggle">Enable Dark Theme?</label> <input id="dark-theme-toggle" type="checkbox" checked="checked"></div></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>mysql 配置文件详解　摘自网络及自己的理解</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3.html#bdb-相关选项" class="sidebar-link">BDB 相关选项</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3.html#系统参数变量使用" class="sidebar-link">系统参数变量使用</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3.html#innodb-相关" class="sidebar-link">innodb 相关</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <div><main class="page reco-hide"> <div class="page-title"><h1>mysql 配置文件详解　摘自网络及自己的理解</h1> <hr> <div data-v-362e684e><i class="iconfont reco-account" data-v-362e684e><span data-v-362e684e>刘文奇</span></i> <i class="iconfont reco-date" data-v-362e684e><span data-v-362e684e>2017-2-23</span></i> <span id="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-2e99e05a data-v-362e684e><i class="iconfont reco-eye" style="margin-right: .5rem" data-v-2e99e05a></i> <a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;" data-v-2e99e05a></a></span> <i class="iconfont reco-tag tags" data-v-362e684e><span class="tag-item" data-v-362e684e>
+      mysql
+    </span></i></div></div> <div class="content__default"><h1 id="mysql配置文件my-cnf配置及配置参数详解"><a href="#mysql配置文件my-cnf配置及配置参数详解" aria-hidden="true" class="header-anchor">#</a> Mysql配置文件my.cnf配置及配置参数详解</h1> <blockquote><p>以下是Mysql主配文件my.cnf参数和详解：</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment"># Example MySQL config file for very large systems.</span>
+<span class="token comment">#</span>
+<span class="token comment">#下面的配置参数适用于512M内存的服务器。</span>
+<span class="token comment">#</span>
+<span class="token comment"># You can copy this file to</span>
+<span class="token comment"># /etc/my.cnf to set global options,</span>
+<span class="token comment"># mysql-data-dir/my.cnf to set server-specific options (in this</span>
+<span class="token comment"># installation this directory is /data/mysql/data) or</span>
+<span class="token comment"># ~/.my.cnf to set user-specific options.</span>
+<span class="token comment">#</span>
+<span class="token comment"># In this file, you can use all long options that a program supports.</span>
+<span class="token comment"># If you want to know which options a program supports, run the program</span>
+<span class="token comment"># with the &quot;--help&quot; option.</span>
+
+<span class="token comment"># The following options will be passed to all MySQL clients</span>
+<span class="token punctuation">[</span>client<span class="token punctuation">]</span>
+<span class="token comment">#password = your_password</span>
+port  = 3306
+socket  = /tmp/mysql.sock
+
+<span class="token comment"># Here follows entries for some specific programs</span>
+
+<span class="token comment"># The MySQL server</span>
+<span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
+user            = mysql
+port            = 3306
+socket          = /tmp/mysql.sock
+basedir         = /usr/local/webserver/mysql
+datadir         = /data/mysqldata/database
+log<span class="token punctuation">-</span>error       = /data/mysqldata/log/mysql_error.log
+pid<span class="token punctuation">-</span>file        = /data/mysqldata/pid/mysql.pid
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><h2 id="bdb-相关选项"><a href="#bdb-相关选项" aria-hidden="true" class="header-anchor">#</a> BDB 相关选项</h2> <blockquote><p>如果你运行的MySQL服务有BDB支持但是你不准备使用的时候使用此选项. 这会节省内存并且可能加速一些事.</p></blockquote> <p>skip-bdb</p> <blockquote><p>避免MySQL的外部锁定，减少出错几率增强稳定性。</p></blockquote> <p>skip-locking</p> <blockquote><p>禁止MySQL对外部连接进行DNS解析，使用这一选项可以消除MySQL进行DNS解析的时间。但需要注意，如果开启该选项，则所有远程主机连接授权都要使用IP地址方式，否则MySQL将无法正常处理连接请求!</p></blockquote> <p>skip-name-resolve</p> <blockquote><p>当创建新表时作为默认使用的表类型, 如果在创建表示没有特别执行表类型,将会使用此值
+mysql是默认支持4种存储引擎：CSV,MRG_MYISAM,MEMORY,MyISAM,默认不支持InnoDB存储引擎（消耗内存比较大）.由于内存很小,推荐使用MyISAM存储引擎.</p></blockquote> <p>default_table_type = MyISAM</p> <blockquote><p>设定默认的事务隔离级别,可用的级别:READ-UNCOMMITTED, READ-COMMITTED, REPEATABLE-READ, SERIALIZABLE</p></blockquote> <p>transaction_isolation = READ-UNCOMMITTED</p> <blockquote><p>限制mysqld能打开文件的最大个数,取值：max_connections<em>5 或者 max_connections + table_cache</em>2</p></blockquote> <p>open_files_limit = 600</p> <blockquote><p>back_log 是操作系统在监听队列中所能保持的连接数,队列保存了在MySQL连接管理器线程处理之前的连接.如果你有非常高的连接率并且出现”connection refused” 报错,你就应该增加此处的值.检查你的操作系统文档来获取这个变量的最大值.如果将back_log设定到比你操作系统限制更高的值,将会没有效果。</p></blockquote> <h2 id="系统参数变量使用"><a href="#系统参数变量使用" aria-hidden="true" class="header-anchor">#</a> 系统参数变量使用</h2> <p>back_log = 40</p> <blockquote><p>关键词缓冲的大小, 一般用来缓冲MyISAM表的索引块.不要将其设置大于你可用内存的30%,因为一部分内存同样被OS用来缓冲行数据，甚至在你并不使用MyISAM 表的情况下, 你也需要仍旧设置起 8-64M 内存由于它同样会被内部临时磁盘表使用.</p></blockquote> <p>key_buffer_size = 32M</p> <blockquote><p>服务所能处理的请求包的最大大小以及服务所能处理的最大的请求大小(当与大的BLOB字段一起工作时相当必要)，每个连接独立的大小.大小动态增加</p></blockquote> <p>max_allowed_packet = 16M</p> <blockquote><p>线程使用的堆大小。此容量的内存在每次连接时被预留.MySQL 本身常不会需要超过64K的内存，如果你使用你自己的需要大量堆的UDF函数，或者你的操作系统对于某些操作需要更多的堆，你也许需要将其设置的更高一点。</p></blockquote> <p>thread_stack = 192K</p> <blockquote><p>所有线程所打开表的数量。增加此值就增加了mysqld所需要的文件描述符的数量。这样你需要确认在[mysqld_safe]中 “open-files-limit” 变量设置打开文件数量允许至少4096。</p></blockquote> <p>table_cache = 60</p> <blockquote><p>允许外部文件级别的锁。打开文件锁会对性能造成负面影响。所以只有在你在同样的文件上运行多个数据库实例时才使用此选项(注意仍会有其他约束!)。或者你在文件层面上使用了其他一些软件依赖来锁定MyISAM表</p></blockquote> <p>external-locking = FALSE</p> <blockquote><p>排序缓冲被用来处理类似ORDER BY以及GROUP BY队列所引起的排序，如果排序后的数据无法放入排序缓冲， 一个用来替代的基于磁盘的合并分类会被使用，查看 “Sort_merge_passes” 状态变量。在排序发生时由每个线程分配。</p></blockquote> <p>sort_buffer_size = 256K</p> <blockquote><p>用来做MyISAM表全表扫描的缓冲大小。当全表扫描需要时,在对应线程中分配。</p></blockquote> <p>read_buffer_size = 1M</p> <blockquote><p>此缓冲被使用来优化全联合(full JOINs 不带索引的联合)，类似的联合在极大多数情况下有非常糟糕的性能表现。但是将此值设大能够减轻性能影响。通过 “Select_full_join” 状态变量查看全联合的数量。当全联合发生时,在每个线程中分配</p></blockquote> <p>join_buffer_size = 256K</p> <blockquote><p>当在排序之后,从一个已经排序好的序列中读取行时,行数据将从这个缓冲中读取来防止磁盘寻道。如果你增高此值,可以提高很多ORDER BY的性能。当需要时由每个线程分配。</p></blockquote> <p>read_rnd_buffer_size = 4M</p> <blockquote><p>MyISAM 使用特殊的类似树的cache来使得突发插入 (这些插入是,INSERT … SELECT, INSERT … VALUES (…), (…), …, 以及 LOAD DATA INFILE) 更快。此变量限制每个进程中缓冲树的字节数。设置为 0 会关闭此优化。为了最优化不要将此值设置大于 “key_buffer_size”。当突发插入被检测到时此缓冲将被分配。</p></blockquote> <p>bulk_insert_buffer_size = 2M</p> <blockquote><p>此缓冲当MySQL需要在 REPAIR, OPTIMIZE, ALTER 以及 LOAD DATA INFILE 到一个空表中引起重建索引时被分配。这在每个线程中被分配.所以在设置大值时需要小心。</p></blockquote> <p>myisam_sort_buffer_size = 4M</p> <blockquote><p>MySQL重建索引时所允许的最大临时文件的大小 (当 REPAIR, ALTER TABLE 或者 LOAD DATA INFILE)。如果文件大小比此值更大,索引会通过键值缓冲创建(更慢)</p></blockquote> <p>myisam_max_sort_file_size = 10G</p> <blockquote><p>如果被用来更快的索引创建索引所使用临时文件大于制定的值,那就使用键值缓冲方法。这主要用来强制在大表中长字串键去使用慢速的键值缓冲方法来创建索引。</p></blockquote> <p>myisam_max_extra_sort_file_size = 10G</p> <blockquote><p>如果一个表拥有超过一个索引, MyISAM 可以通过并行排序使用超过一个线程去修复他们。这对于拥有多个CPU以及大量内存情况的用户,是一个很好的选择。</p></blockquote> <p>myisam_repair_threads = 1</p> <blockquote><p>自动检查和修复没有适当关闭的 MyISAM 表.</p></blockquote> <p>myisam_recover</p> <p>thread_cache = 128</p> <blockquote><p>我们在cache中保留多少线程用于重用，当一个客户端断开连接后,如果cache中的线程还少于thread_cache_size。则客户端线程被放入cache中。这可以在你需要大量新连接的时候极大的减少线程创建的开销。(一般来说如果你有好的线程模型的话,这不会有明显的性能提升.)</p></blockquote> <p>thread_cache_size = 10</p> <blockquote><p>查询缓冲常被用来缓冲 SELECT 的结果并且在下一次同样查询的时候不再执行直接返回结果。打开查询缓冲可以极大的提高服务器速度, 如果你有大量的相同的查询并且很少修改表。查看 “Qcache_lowmem_prunes” 状态变量来检查是否当前值对于你的负载来说是否足够高。注意: 在你表经常变化的情况下或者如果你的查询原文每次都不同。查询缓冲也许引起性能下降而不是性能提升。</p></blockquote> <p>query_cache_size = 0M</p> <blockquote><p>只有小于此设定值的结果才会被缓冲，此设置用来保护查询缓冲,防止一个极大的结果集将其他所有的查询结果都覆盖.</p></blockquote> <p>query_cache_limit = 2M</p> <p>query_cache_min_res_unit = 4K</p> <blockquote><p>内部(内存中)临时表的最大大小，如果一个表增长到比此值更大,将会自动转换为基于磁盘的表。此限制是针对单个表的,而不是总和.</p></blockquote> <p>tmp_table_size = 512K</p> <blockquote><p>独立的内存表所允许的最大容量。此选项为了防止意外创建一个超大的内存表导致永尽所有的内存资源.</p></blockquote> <p>max_heap_table_size = 32M</p> <blockquote><p>所有的使用了比这个时间(以秒为单位)更多的查询会被认为是慢速查询。不要在这里使用”1″, 否则会导致所有的查询,甚至非常快的查询页被记录下来(由于MySQL 目前时间的精确度只能达到秒的级别)。</p></blockquote> <p>ong_query_time = 1</p> <blockquote><p>在慢速日志中记录更多的信息。一般此项最好打开。打开此项会记录使得那些没有使用索引的查询也被作为到慢速查询附加到慢速日志里</p></blockquote> <p>log_long_format</p> <blockquote><p>MySQL 服务所允许的同时会话数的上限，其中一个连接将被SUPER权限保留作为管理员登录。 即便已经达到了连接数的上限.</p></blockquote> <p>max_connections = 200</p> <blockquote><p>指定一个请求的最大连接时间。</p></blockquote> <p>wait_timeout = 30</p> <blockquote><p>每个客户端连接最大的错误允许数量,如果达到了此限制。这个客户端将会被MySQL服务阻止直到执行了”FLUSH HOSTS” 或者服务重启，非法的密码以及其他在链接时的错误会增加此值。查看 “Aborted_connects” 状态来获取全局计数器.</p></blockquote> <p>max_connect_errors = 200</p> <p>expire_logs_days = 7</p> <blockquote><p>Try number of CPU's<em>2 for thread_concurrency
+此允许应用程序给予线程系统一个提示在同一时间给予渴望被运行的线程的数量。此值只对于支持 thread_concurrency() 函数的系统有意义( 例如Sun Solaris)。你可可以尝试使用 [CPU数量]</em>(2..4) 来作为thread_concurrency的值*</p></blockquote> <p>thread_concurrency = 8</p> <blockquote><p>Don't listen on a TCP/IP port at all. This can be a security enhancement,</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment"># if all processes that need to connect to mysqld run on the same host.</span>
+<span class="token comment"># All interaction with mysqld must be made via Unix sockets or named pipes.</span>
+<span class="token comment"># Note that using this option without enabling named pipes on Windows</span>
+<span class="token comment"># (via the &quot;enable-named-pipe&quot; option) will render mysqld useless!</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>skip-networking</p> <blockquote><p>默认关闭 Federated</p></blockquote> <p>skip-federated</p> <blockquote><p>Replication Master Server (default)</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment"># binary logging is required for replication</span>
+<span class="token comment">#log-bin=mysql-bin</span>
+<span class="token comment">#在一个事务中binlog为了记录SQL状态所持有的cache大小，如果你经常使用大的,多声明的事务,你可以增加此值来获取更大的性能。所有从事务来的状态都将被缓冲在binlog缓冲中然后在提交后一次性写入到binlog中。如果事务比此值大, 会使用磁盘上的临时文件来替代。此缓冲在每个连接的事务第一次更新状态时被创建</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>binlog_cache_size = 2M</p> <p>max_binlog_cache_size = 4M
+max_binlog_size = 512M</p> <blockquote><p>唯一的服务辨识号,数值位于 1 到 2^32-1之间。此值在master和slave上都需要设置。如果 “master-host” 没有被设置,则默认为1, 但是如果忽略此选项,MySQL不会作为master生效.</p></blockquote> <p>server-id = 1</p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code> Replication Slave (comment out master section to use this)
+<span class="token comment"># To configure this host as a replication slave, you can choose between</span>
+<span class="token comment"># two methods :</span>
+<span class="token comment">#</span>
+<span class="token comment"># 1) Use the CHANGE MASTER TO command (fully described in our manual) -</span>
+<span class="token comment">#    the syntax is:</span>
+<span class="token comment">#</span>
+<span class="token comment">#    CHANGE MASTER TO MASTER_HOST=&lt;host&gt;, MASTER_PORT=&lt;port&gt;,</span>
+<span class="token comment">#    MASTER_USER=&lt;user&gt;, MASTER_PASSWORD=&lt;password&gt; ;</span>
+<span class="token comment">#</span>
+<span class="token comment">#    where you replace &lt;host&gt;, &lt;user&gt;, &lt;password&gt; by quoted strings and</span>
+<span class="token comment">#    &lt;port&gt; by the master's port number (3306 by default).</span>
+<span class="token comment">#</span>
+<span class="token comment">#    Example:</span>
+<span class="token comment">#</span>
+<span class="token comment">#    CHANGE MASTER TO MASTER_HOST='125.564.12.1', MASTER_PORT=3306,</span>
+<span class="token comment">#    MASTER_USER='joe', MASTER_PASSWORD='secret';</span>
+<span class="token comment">#</span>
+<span class="token comment"># OR</span>
+<span class="token comment">#</span>
+<span class="token comment"># 2) Set the variables below. However, in case you choose this method, then</span>
+<span class="token comment">#    start replication for the first time (even unsuccessfully, for example</span>
+<span class="token comment">#    if you mistyped the password in master-password and the slave fails to</span>
+<span class="token comment">#    connect), the slave will create a master.info file, and any later</span>
+<span class="token comment">#    change in this file to the variables' values below will be ignored and</span>
+<span class="token comment">#    overridden by the content of the master.info file, unless you shutdown</span>
+<span class="token comment">#    the slave server, delete master.info and restart the slaver server.</span>
+<span class="token comment">#    For that reason, you may want to leave the lines below untouched</span>
+<span class="token comment">#    (commented) and instead use CHANGE MASTER TO (see above)</span>
+<span class="token comment">#</span>
+<span class="token comment"># required unique id between 2 and 2^32 - 1</span>
+<span class="token comment"># (and different from the master)</span>
+<span class="token comment"># defaults to 2 if master-host is set</span>
+<span class="token comment"># but will not function as a slave if omitted</span>
+<span class="token comment">#server-id       = 2</span>
+<span class="token comment">#</span>
+<span class="token comment"># The replication master for this slave - required</span>
+<span class="token comment">#master-host     =   &lt;hostname&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># The username the slave will use for authentication when connecting</span>
+<span class="token comment"># to the master - required</span>
+<span class="token comment">#master-user     =   &lt;username&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># The password the slave will authenticate with when connecting to</span>
+<span class="token comment"># the master - required</span>
+<span class="token comment">#master-password =   &lt;password&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># The port the master is listening on.</span>
+<span class="token comment"># optional - defaults to 3306</span>
+<span class="token comment">#master-port     =  &lt;port&gt;</span>
+<span class="token comment">#</span>
+<span class="token comment"># binary logging - not required for slaves, but recommended</span>
+<span class="token comment">#log-bin=mysql-bin</span>
+<span class="token comment">#</span>
+<span class="token comment"># binary logging format - mixed recommended</span>
+<span class="token comment">#binlog_format=mixed</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br></div></div><blockquote><p>Point the following paths to different dedicated disks</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment">#tmpdir  = /tmp/</span>
+<span class="token comment">#log-update  = /path-to-dedicated-directory/hostname</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h2 id="innodb-相关"><a href="#innodb-相关" aria-hidden="true" class="header-anchor">#</a> innodb 相关</h2> <blockquote><p>Uncomment the following if you are using InnoDB tables</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment">#innodb_data_home_dir = /data/mysql/data/</span>
+<span class="token comment">#innodb_data_file_path = ibdata1:2000M;ibdata2:10M:autoextend</span>
+<span class="token comment">#innodb_log_group_home_dir = /data/mysql/data/</span>
+<span class="token comment">#innodb_log_arch_dir = /data/mysql/data/</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><blockquote><p>You can set .._buffer_pool_size up to 50 - 80 %
+of RAM but beware of setting memory usage too high</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>innodb_buffer_pool_size = 384M
+innodb_additional_mem_pool_size = 20M
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><blockquote><p>Set .._log_file_size to 25 % of buffer pool size</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment">#innodb_log_file_size = 100M</span>
+<span class="token comment">#innodb_log_buffer_size = 8M</span>
+<span class="token comment">#innodb_flush_log_at_trx_commit = 1</span>
+<span class="token comment">#innodb_lock_wait_timeout = 50</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>[mysqldump]</p> <blockquote><p>不要在将内存中的整个结果写入磁盘之前缓存. 在导出非常巨大的表时需要此项</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>quick
+max_allowed_packet = 16M
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>[mysql]
+no-auto-rehash</p> <blockquote><p>根据需求修改参数值，然后保存为/etc/my.cnf文件。
+初始化mysql数据库</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code> /usr/local/webserver/mysql/bin/mysql_install_db \
+<span class="token punctuation">-</span><span class="token punctuation">-</span>basedir=/usr/local/webserver/mysql \
+<span class="token punctuation">-</span><span class="token punctuation">-</span>datadir=/data/mysqldata/database \
+<span class="token punctuation">-</span><span class="token punctuation">-</span>user=mysql
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><blockquote><p>最后在说下启动和关闭mysql服务器</p></blockquote> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment"># /usr/local/webserver/mysql/bin/mysqld_safe --user=mysql &amp; //启动服务</span>
+<span class="token comment"># /usr/local/webserver/mysql/bin/mysqladmin -u root -p shutdown //停止服务</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></div> <!----> <footer class="page-edit"><!----> <!----></footer> <!----> </main> <div class="valine-wrapper" data-v-5029e45b><div id="valine" data-v-5029e45b></div></div></div> <div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;background-color:rgba(231, 234, 241,.5);display:none;" data-v-cd623d78 data-v-cd623d78><i class="iconfont reco-up" data-v-cd623d78></i></div></div></div></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="/assets/js/app.bd57e9ac.js" defer></script><script src="/assets/js/4.cf47d3bf.js" defer></script><script src="/assets/js/1.2ae96b85.js" defer></script><script src="/assets/js/113.06d8aa1d.js" defer></script>
+  </body>
+</html>

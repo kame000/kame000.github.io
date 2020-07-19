@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>FastDFS 原理篇 | 奇哥</title>
+    <meta name="description" content="个人博客，技术笔记整理">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.f3fddc9c.css" as="style"><link rel="preload" href="/assets/js/app.bd57e9ac.js" as="script"><link rel="preload" href="/assets/js/4.cf47d3bf.js" as="script"><link rel="preload" href="/assets/js/1.2ae96b85.js" as="script"><link rel="preload" href="/assets/js/86.5fb0652b.js" as="script"><link rel="prefetch" href="/assets/js/10.816b0153.js"><link rel="prefetch" href="/assets/js/100.a03fb444.js"><link rel="prefetch" href="/assets/js/101.d92e5f36.js"><link rel="prefetch" href="/assets/js/102.c696f09e.js"><link rel="prefetch" href="/assets/js/103.ce3c3f6a.js"><link rel="prefetch" href="/assets/js/104.502b38a6.js"><link rel="prefetch" href="/assets/js/105.8ff7fab8.js"><link rel="prefetch" href="/assets/js/106.d12a2a32.js"><link rel="prefetch" href="/assets/js/107.e585a5b6.js"><link rel="prefetch" href="/assets/js/108.72bc7fee.js"><link rel="prefetch" href="/assets/js/109.c794a8c2.js"><link rel="prefetch" href="/assets/js/11.b378d47c.js"><link rel="prefetch" href="/assets/js/110.2c2d0721.js"><link rel="prefetch" href="/assets/js/111.104c000c.js"><link rel="prefetch" href="/assets/js/112.a9f6a2ea.js"><link rel="prefetch" href="/assets/js/113.06d8aa1d.js"><link rel="prefetch" href="/assets/js/114.51211731.js"><link rel="prefetch" href="/assets/js/115.e854479d.js"><link rel="prefetch" href="/assets/js/116.66196725.js"><link rel="prefetch" href="/assets/js/117.38c8a3bb.js"><link rel="prefetch" href="/assets/js/118.0da4677e.js"><link rel="prefetch" href="/assets/js/119.67397043.js"><link rel="prefetch" href="/assets/js/12.5f65f189.js"><link rel="prefetch" href="/assets/js/120.6fde943d.js"><link rel="prefetch" href="/assets/js/121.2062356d.js"><link rel="prefetch" href="/assets/js/122.4738aa5b.js"><link rel="prefetch" href="/assets/js/123.e2d00381.js"><link rel="prefetch" href="/assets/js/124.eeb983d9.js"><link rel="prefetch" href="/assets/js/125.f8c5ff44.js"><link rel="prefetch" href="/assets/js/126.42a2902a.js"><link rel="prefetch" href="/assets/js/127.c1d66f24.js"><link rel="prefetch" href="/assets/js/128.7933581c.js"><link rel="prefetch" href="/assets/js/129.fe280f18.js"><link rel="prefetch" href="/assets/js/13.53265072.js"><link rel="prefetch" href="/assets/js/130.5796bc49.js"><link rel="prefetch" href="/assets/js/131.72a70116.js"><link rel="prefetch" href="/assets/js/132.fba186d3.js"><link rel="prefetch" href="/assets/js/133.a038b6e3.js"><link rel="prefetch" href="/assets/js/134.b979fc39.js"><link rel="prefetch" href="/assets/js/135.ab58fa4d.js"><link rel="prefetch" href="/assets/js/136.3946e1b7.js"><link rel="prefetch" href="/assets/js/137.d506d848.js"><link rel="prefetch" href="/assets/js/138.b737062e.js"><link rel="prefetch" href="/assets/js/139.80f8ffc8.js"><link rel="prefetch" href="/assets/js/14.9b50c038.js"><link rel="prefetch" href="/assets/js/140.a8efede8.js"><link rel="prefetch" href="/assets/js/141.88912078.js"><link rel="prefetch" href="/assets/js/142.002ec337.js"><link rel="prefetch" href="/assets/js/143.1a9fed6a.js"><link rel="prefetch" href="/assets/js/144.15e56ee3.js"><link rel="prefetch" href="/assets/js/145.859b8d00.js"><link rel="prefetch" href="/assets/js/146.c0b30a80.js"><link rel="prefetch" href="/assets/js/147.86c03071.js"><link rel="prefetch" href="/assets/js/148.86bdb637.js"><link rel="prefetch" href="/assets/js/149.68ae3de2.js"><link rel="prefetch" href="/assets/js/15.b327be7e.js"><link rel="prefetch" href="/assets/js/150.078f5953.js"><link rel="prefetch" href="/assets/js/151.3925086c.js"><link rel="prefetch" href="/assets/js/152.b2656742.js"><link rel="prefetch" href="/assets/js/153.94c79fa9.js"><link rel="prefetch" href="/assets/js/154.6f668cdc.js"><link rel="prefetch" href="/assets/js/155.26d16d88.js"><link rel="prefetch" href="/assets/js/156.4dac7439.js"><link rel="prefetch" href="/assets/js/157.134c9a36.js"><link rel="prefetch" href="/assets/js/158.867715fb.js"><link rel="prefetch" href="/assets/js/159.5b790836.js"><link rel="prefetch" href="/assets/js/16.b23402c5.js"><link rel="prefetch" href="/assets/js/160.7bb54d30.js"><link rel="prefetch" href="/assets/js/161.32842b78.js"><link rel="prefetch" href="/assets/js/162.2d8da748.js"><link rel="prefetch" href="/assets/js/163.285ec7ff.js"><link rel="prefetch" href="/assets/js/164.0c6dfe94.js"><link rel="prefetch" href="/assets/js/165.251b2dd6.js"><link rel="prefetch" href="/assets/js/166.61a13c62.js"><link rel="prefetch" href="/assets/js/167.0b8940f1.js"><link rel="prefetch" href="/assets/js/168.18e24cb7.js"><link rel="prefetch" href="/assets/js/169.b10c1569.js"><link rel="prefetch" href="/assets/js/17.32bbe36c.js"><link rel="prefetch" href="/assets/js/170.cc30d6db.js"><link rel="prefetch" href="/assets/js/171.e5a5db17.js"><link rel="prefetch" href="/assets/js/172.3d6df5cc.js"><link rel="prefetch" href="/assets/js/173.ec48230a.js"><link rel="prefetch" href="/assets/js/174.8f356df8.js"><link rel="prefetch" href="/assets/js/175.5205cd09.js"><link rel="prefetch" href="/assets/js/176.4ad613ab.js"><link rel="prefetch" href="/assets/js/177.99280429.js"><link rel="prefetch" href="/assets/js/178.adbbe2e3.js"><link rel="prefetch" href="/assets/js/179.8b44b7d3.js"><link rel="prefetch" href="/assets/js/18.e647e6b1.js"><link rel="prefetch" href="/assets/js/180.74a473ac.js"><link rel="prefetch" href="/assets/js/181.0c334e0b.js"><link rel="prefetch" href="/assets/js/182.2110f34a.js"><link rel="prefetch" href="/assets/js/183.afd7150e.js"><link rel="prefetch" href="/assets/js/184.1e1d16b0.js"><link rel="prefetch" href="/assets/js/185.17877986.js"><link rel="prefetch" href="/assets/js/186.eb391c2e.js"><link rel="prefetch" href="/assets/js/187.018edf4f.js"><link rel="prefetch" href="/assets/js/188.3736d840.js"><link rel="prefetch" href="/assets/js/19.a387f27c.js"><link rel="prefetch" href="/assets/js/20.49236671.js"><link rel="prefetch" href="/assets/js/21.9ec91369.js"><link rel="prefetch" href="/assets/js/22.95b2e77b.js"><link rel="prefetch" href="/assets/js/23.8f4d7414.js"><link rel="prefetch" href="/assets/js/24.e2b213c5.js"><link rel="prefetch" href="/assets/js/25.7f3f3c17.js"><link rel="prefetch" href="/assets/js/26.266189df.js"><link rel="prefetch" href="/assets/js/27.eef9b2a9.js"><link rel="prefetch" href="/assets/js/28.ffdbc4d2.js"><link rel="prefetch" href="/assets/js/29.4590fa49.js"><link rel="prefetch" href="/assets/js/30.85c4cbe9.js"><link rel="prefetch" href="/assets/js/31.390dd215.js"><link rel="prefetch" href="/assets/js/32.ce4d57de.js"><link rel="prefetch" href="/assets/js/33.2ac3bdd7.js"><link rel="prefetch" href="/assets/js/34.a27a7564.js"><link rel="prefetch" href="/assets/js/35.133a359a.js"><link rel="prefetch" href="/assets/js/36.85c206d7.js"><link rel="prefetch" href="/assets/js/37.ea3cf6be.js"><link rel="prefetch" href="/assets/js/38.c7802045.js"><link rel="prefetch" href="/assets/js/39.49f00421.js"><link rel="prefetch" href="/assets/js/40.45af2466.js"><link rel="prefetch" href="/assets/js/41.6dbd80a6.js"><link rel="prefetch" href="/assets/js/42.ff01c005.js"><link rel="prefetch" href="/assets/js/43.59f5c9d2.js"><link rel="prefetch" href="/assets/js/44.9441ae9c.js"><link rel="prefetch" href="/assets/js/45.5ae7af1e.js"><link rel="prefetch" href="/assets/js/46.d9707d2d.js"><link rel="prefetch" href="/assets/js/47.b36bd6b1.js"><link rel="prefetch" href="/assets/js/48.506449fa.js"><link rel="prefetch" href="/assets/js/49.f9bcc647.js"><link rel="prefetch" href="/assets/js/5.7f309e4b.js"><link rel="prefetch" href="/assets/js/50.6b1e5e40.js"><link rel="prefetch" href="/assets/js/51.577a7b71.js"><link rel="prefetch" href="/assets/js/52.9bc6a38b.js"><link rel="prefetch" href="/assets/js/53.efd30e13.js"><link rel="prefetch" href="/assets/js/54.6f18dec7.js"><link rel="prefetch" href="/assets/js/55.345e85aa.js"><link rel="prefetch" href="/assets/js/56.2bf86eed.js"><link rel="prefetch" href="/assets/js/57.23bf8a7b.js"><link rel="prefetch" href="/assets/js/58.52c35f14.js"><link rel="prefetch" href="/assets/js/59.b1efec4a.js"><link rel="prefetch" href="/assets/js/6.63fe1bf6.js"><link rel="prefetch" href="/assets/js/60.be3df253.js"><link rel="prefetch" href="/assets/js/61.e1b7fc3c.js"><link rel="prefetch" href="/assets/js/62.4ff81144.js"><link rel="prefetch" href="/assets/js/63.a121bb0a.js"><link rel="prefetch" href="/assets/js/64.25e8d49e.js"><link rel="prefetch" href="/assets/js/65.ca67439d.js"><link rel="prefetch" href="/assets/js/66.87c9e36a.js"><link rel="prefetch" href="/assets/js/67.738a9a01.js"><link rel="prefetch" href="/assets/js/68.22a175ca.js"><link rel="prefetch" href="/assets/js/69.0a00dc4c.js"><link rel="prefetch" href="/assets/js/7.ebbb4af9.js"><link rel="prefetch" href="/assets/js/70.ddfebdd6.js"><link rel="prefetch" href="/assets/js/71.303161f4.js"><link rel="prefetch" href="/assets/js/72.f23ccb75.js"><link rel="prefetch" href="/assets/js/73.1b49404e.js"><link rel="prefetch" href="/assets/js/74.97b665aa.js"><link rel="prefetch" href="/assets/js/75.f9d7fe05.js"><link rel="prefetch" href="/assets/js/76.6d96dcb9.js"><link rel="prefetch" href="/assets/js/77.b4048a6e.js"><link rel="prefetch" href="/assets/js/78.0e3ef83a.js"><link rel="prefetch" href="/assets/js/79.3260ac1d.js"><link rel="prefetch" href="/assets/js/8.213a8416.js"><link rel="prefetch" href="/assets/js/80.cb879212.js"><link rel="prefetch" href="/assets/js/81.1d66e67c.js"><link rel="prefetch" href="/assets/js/82.f449b53f.js"><link rel="prefetch" href="/assets/js/83.2e981570.js"><link rel="prefetch" href="/assets/js/84.96f1d92b.js"><link rel="prefetch" href="/assets/js/85.53132c5f.js"><link rel="prefetch" href="/assets/js/87.17c99baa.js"><link rel="prefetch" href="/assets/js/88.cbdef4cf.js"><link rel="prefetch" href="/assets/js/89.c23ebd83.js"><link rel="prefetch" href="/assets/js/9.396bac1c.js"><link rel="prefetch" href="/assets/js/90.b51e75c8.js"><link rel="prefetch" href="/assets/js/91.a86d5282.js"><link rel="prefetch" href="/assets/js/92.f4f2ca2f.js"><link rel="prefetch" href="/assets/js/93.7f8fcb29.js"><link rel="prefetch" href="/assets/js/94.c6ac1bfa.js"><link rel="prefetch" href="/assets/js/95.11bdac6e.js"><link rel="prefetch" href="/assets/js/96.f6acc813.js"><link rel="prefetch" href="/assets/js/97.d418109b.js"><link rel="prefetch" href="/assets/js/98.8e84bf17.js"><link rel="prefetch" href="/assets/js/99.d68c1a72.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1a6a828a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f3fddc9c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container"><div><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="奇哥" class="logo"> <span class="site-name">奇哥</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="theme-options"><!----> <div class="dark-theme-options toggle-option"><label for="dark-theme-toggle">Enable Dark Theme?</label> <input id="dark-theme-toggle" type="checkbox" checked="checked"></div></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>FastDFS 原理篇</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#分布式存储选型" class="sidebar-link">分布式存储选型</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#fastdfs" class="sidebar-link">FastDFS</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#介绍" class="sidebar-link">介绍</a></li></ul></li><li><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#架构" class="sidebar-link">架构</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#选择-tracker-server" class="sidebar-link">选择 tracker server</a></li><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#选择存储-group" class="sidebar-link">选择存储 group</a></li><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#选择-storage-server" class="sidebar-link">选择 storage server</a></li><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#选择-storage-path-磁盘或者挂载点" class="sidebar-link">选择 storage path(磁盘或者挂载点)</a></li><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#选择下载服务器" class="sidebar-link">选择下载服务器</a></li><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#生成-file-id" class="sidebar-link">生成 file_id</a></li></ul></li><li><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#同步机制" class="sidebar-link">同步机制</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#新增-tracker-服务器数据同步问题" class="sidebar-link">新增 tracker 服务器数据同步问题</a></li><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#新增-storage-服务器数据同步问题" class="sidebar-link">新增 storage 服务器数据同步问题</a></li><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#组内-storage-数据同步问题" class="sidebar-link">组内 storage 数据同步问题</a></li><li class="sidebar-sub-header"><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#组内增加-storage-servera-状态变化过程" class="sidebar-link">组内增加 storage serverA 状态变化过程</a></li></ul></li><li><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#下载" class="sidebar-link">下载</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E5%AD%98%E5%82%A8/FastDFS.html#文件合并原理" class="sidebar-link">文件合并原理</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <div><main class="page reco-hide"> <div class="page-title"><h1>FastDFS 原理篇</h1> <hr> <div data-v-362e684e><i class="iconfont reco-account" data-v-362e684e><span data-v-362e684e>刘文奇</span></i> <i class="iconfont reco-date" data-v-362e684e><span data-v-362e684e>2017-8-1</span></i> <span id="/views/%E5%AD%98%E5%82%A8/FastDFS.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-2e99e05a data-v-362e684e><i class="iconfont reco-eye" style="margin-right: .5rem" data-v-2e99e05a></i> <a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;" data-v-2e99e05a></a></span> <i class="iconfont reco-tag tags" data-v-362e684e><span class="tag-item" data-v-362e684e>
+      分布式存储
+    </span><span class="tag-item" data-v-362e684e>
+      FastDFS
+    </span></i></div></div> <div class="content__default"><h2 id="分布式存储选型"><a href="#分布式存储选型" aria-hidden="true" class="header-anchor">#</a> 分布式存储选型</h2> <blockquote><p>这里主要说下按需求选取和使用</p></blockquote> <p>在这之前使用过glusterfs 分布式存储,使用过程中部署比较简单,也容易上手.但是存在如下几个问题:</p> <ul><li>使用glusterfs 主要走的是网络带宽,内网使用率问题.客户端挂载存在单点问题.我曾经尝试过使用内网搭建一套DNS服务器,做负载均衡使用.解决单点问题.但是由于使用的服务器厂商,
+无法自己单间一套DNS轮训的机制.</li></ul> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>如果想要深入了解,请移步
+
+<span class="token punctuation">[</span>glusterfs详解<span class="token punctuation">]</span><span class="token punctuation">(</span>http://www.liuwq.com/2017/04/20/glusterfs%E8%AF%A6%E8%A7%A3/<span class="token punctuation">)</span>
+<span class="token punctuation">[</span>glusterfs集群搭建<span class="token punctuation">]</span><span class="token punctuation">(</span>http://www.liuwq.com/2017/04/11/glusterfs%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/<span class="token punctuation">)</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><ul><li>开源的东西,大家都知道肯定存在一些BUG,以及使用和配置的东西.</li> <li>总结下:如果对于客户端挂载单点问题,不是很在意的,可以使用这个分布式存储,廉价\简单易于维护.</li></ul> <p><strong>主要介绍下Glusterfs与FastDFS对比</strong></p> <table><thead><tr><th>指标</th> <th>FastDFS</th> <th>Glusterfs</th></tr></thead> <tbody><tr><td>适合类型</td> <td>建议4KB - 500MB</td> <td>适合大文件存储</td></tr> <tr><td>文件分布</td> <td>小文件合并存储  不分片处理</td> <td>AFR (raid1)<br> Stripe( raid0 ) <br> DHT(弹性哈希)</td></tr> <tr><td>系统性能</td> <td>1.很高(未使用数据库),文件访问点对点不经过 tracker中转 <br> 2.无法动态调整磁盘空间负载.<br>3.客户端需要记录存储信息</td> <td>无元数据服务器</td></tr> <tr><td>复杂度</td> <td>简单( tracker和 storage两个角色)</td> <td>简单</td></tr> <tr><td>是否支持 FUSE</td> <td>不支持</td> <td>支持</td></tr> <tr><td>是否支持POSIX</td> <td>不支持</td> <td>支持</td></tr> <tr><td>备份机制</td> <td>分组组内备份</td> <td>镜像</td></tr> <tr><td>通讯协议接口</td> <td>原生API\HTTP</td> <td>IP/RDMA</td></tr> <tr><td>活跃度</td> <td>国内使用比较多</td> <td>使用较多</td></tr></tbody></table> <h2 id="fastdfs"><a href="#fastdfs" aria-hidden="true" class="header-anchor">#</a> FastDFS</h2> <h3 id="介绍"><a href="#介绍" aria-hidden="true" class="header-anchor">#</a> 介绍</h3> <p>FastDFS 是一个 C 语言实现的开源轻量级分布式文件系统,作者余庆(happyfish100),支持
+Linux、 FreeBSD、 AID 等 Unix 系统,解决了大数据存储和读写负载均衡等问题,适合存储 4KB~500MB
+之间的小文件,如图片网站、短视频网站、文档、app 下载站等,UC、京东、支付宝、迅雷、酷狗
+等都有使用,其中 UC 基于 FastDFS 向用户提供网盘、广告和应用下载的业务的存储服务 FastDFS
+与 MogileFS、HDFS、TFS 等都不是系统级的分布式文件系统,而是应用级的分布式文件存储服务.</p> <p><a href="https://github.com/happyfish100/fastdfs/" target="_blank" rel="noopener noreferrer">开源地址:<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="https://code.google.com/p/fastdfs/" target="_blank" rel="noopener noreferrer">旧地址:<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="http://www.csource.org" target="_blank" rel="noopener noreferrer">相关文档:<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="架构"><a href="#架构" aria-hidden="true" class="header-anchor">#</a> 架构</h2> <p><code>FastDFS</code> 服务有三个角色:跟踪服务器(<code>tracker server</code>)、存储服务器(<code>storage server</code>)和
+客户端(<code>client</code>)</p> <p><code>tracker server:</code>跟踪服务器,主要做调度工作,起到均衡的作用;负责管理所有的 storage server
+和 group,每个 storage 在启动后会连接 Tracker,
+告知自己所属 group 等信息,并保持周期性心跳,
+<code>Tracker</code> 根据 storage 心跳信息,建立 group---&gt;[storage server list]的映射表;tracker 管理
+的元数据很少,会直接存放在内存;tracker 上的元信息都是由 storage 汇报的信息生成的,本身
+不需要持久化任何数据,tracker 之间是对等关系,因此扩展 tracker 服务非常容易,之间增加
+<code>tracker</code> 服务器即可,所有 tracker 都接受 stroage 心跳信息,生成元数据信息来提供读写服务(与
+其他 Master-Slave 架构的优势是没有单点,tracker 也不会成为瓶颈,最终数据是和一个可用的
+Storage Server 进行传输的)</p> <p><code>storage server</code>:存储服务器,主要提供容量和备份服务;以 group 为单位,每个 group 内可以包
+含多台 storage server,数据互为备份,存储容量空间以 group 内容量最小的 storage 为准;建
+议 group 内的 storage server 配置相同;以 group 为单位组织存储能够方便的进行应用隔离、负
+载均衡和副本数定制;<strong>缺点是 group 的容量受单机存储容量的限制,同时 group 内机器坏掉,数据
+恢复只能依赖 group 内其他机器重新同步(坏盘替换,重新挂载重启 fdfs_storaged 即可)</strong></p> <p>多个 group 之间的存储方式有 3 种策略:round robin(轮询)、load balance(选择最大剩余空
+间的组上传文件)、specify group(指定 group 上传)</p> <p><code>group</code> 中 storage 存储依赖本地文件系统,
+<code>storage</code> 可配置多个数据存储目录,
+磁盘不做 raid,
+直接分别挂载到多个目录,将这些目录配置为 storage 的数据目录即可</p> <p><code>storage</code>接受写请求时,会根据配置好的规则,选择其中一个存储目录来存储文件;为避免单
+个目录下的文件过多,storage 第一次启时,会在每个数据存储目录里创建 2 级子目录,每级 256
+个,总共 65536 个,新写的文件会以 hash 的方式被路由到其中某个子目录下,然后将文件数据直
+接作为一个本地文件存储到该目录中</p> <p><img src="http://img.liuwenqi.com/blog/2019-08-24-fastdfs.jpg" alt=""></p> <blockquote><p>总结:1.高可靠性:无单点故障 2.高吞吐性:只要 Group 足够多,数据流量是足够分散的</p></blockquote> <p><img src="http://img.liuwenqi.com/blog/2019-08-24-fastdfs_down.jpg" alt=""></p> <blockquote><p>FastDFS 提供基本的文件访问接口,如 upload、download、append、delete 等</p></blockquote> <h3 id="选择-tracker-server"><a href="#选择-tracker-server" aria-hidden="true" class="header-anchor">#</a> 选择 tracker server</h3> <p>集群中 tracker 之间是对等关系,客户端在上传文件时可用任意选择一个 tracker</p> <h3 id="选择存储-group"><a href="#选择存储-group" aria-hidden="true" class="header-anchor">#</a> 选择存储 group</h3> <p>当 tracker 接收到 upload file 的请求时,会为该文件分配一个可以存储文件的 group,目前
+支持选择 group 的规则为:</p> <ul><li>Round robin,所有 group 轮询使用</li> <li>Specified group,指定某个确定的 group</li> <li>Load balance,剩余存储空间较多的 group 优先</li></ul> <h3 id="选择-storage-server"><a href="#选择-storage-server" aria-hidden="true" class="header-anchor">#</a> 选择 storage server</h3> <p>当选定 group 后,tracker 会在 group 内选择一个 storage server 给客户端,目前支持选择
+server 的规则为:</p> <ul><li>Round robin,所有 server 轮询使用(默认)</li> <li>根据 IP 地址进行排序选择第一个服务器(IP 地址最小者)</li> <li>根据优先级进行排序(上传优先级由 storage server 来设置,参数为 upload_priority)</li></ul> <h3 id="选择-storage-path-磁盘或者挂载点"><a href="#选择-storage-path-磁盘或者挂载点" aria-hidden="true" class="header-anchor">#</a> 选择 storage path(磁盘或者挂载点)</h3> <p>当分配好 storage server 后,客户端将向 storage 发送写文件请求,storage 会将文件分配一
+个数据存储目录,目前支持选择存储路径的规则为:</p> <ul><li><code>round robin</code>,轮询(默认)</li> <li><code>load balance</code>,选择使用剩余空间最大的存储路径</li></ul> <h3 id="选择下载服务器"><a href="#选择下载服务器" aria-hidden="true" class="header-anchor">#</a> 选择下载服务器</h3> <p>目前支持的规则为:</p> <ul><li>轮询方式,可以下载当前文件的任一 storage server</li> <li>从源 storage server 下载</li></ul> <h3 id="生成-file-id"><a href="#生成-file-id" aria-hidden="true" class="header-anchor">#</a> 生成 file_id</h3> <p>选择存储目录后,storage 会生成一个 file_id,采用 Base64 编码,包含字段包括:storage
+server ip、文件创建时间、文件大小、文件 CRC32 校验码和随机数;每个存储目录下有两个 256*256
+个子目录,storage 会按文件 file_id 进行两次 hash,路由到其中一个子目录,,然后将文件已
+file_id 为文件名存储到该子目录下,最后生成文件路径:group 名称、虚拟磁盘路径、数据两级
+目录、file_id</p> <p><img src="http://img.liuwenqi.com/blog/2019-08-24-fastdfs_fileid.jpg" alt=""></p> <p>其中,组名:文件上传后所在的存储组的名称,在文件上传成功后由存储服务器返回,需要客户端
+自行保存</p> <p><strong>虚拟磁盘路径</strong>:存储服务器配置的虚拟路径,与磁盘选项 store_path*参数对应</p> <p><strong>数据两级目录</strong>:存储服务器在每个虚拟磁盘路径下创建的两级目录,用于存储数据文件</p> <h2 id="同步机制"><a href="#同步机制" aria-hidden="true" class="header-anchor">#</a> 同步机制</h2> <h3 id="新增-tracker-服务器数据同步问题"><a href="#新增-tracker-服务器数据同步问题" aria-hidden="true" class="header-anchor">#</a> 新增 tracker 服务器数据同步问题</h3> <p>由于 storage server 上配置了所有的 tracker server,storage server 和 tracker
+server 之间的通信是由 storage server 主动发起的,storage server 为每个 tracker
+server 启动一个线程进行通信;在通信过程中,若发现该 tracker server 返回的本组
+storage server 列表比本机记录少,就会将该 tracker server 上没有的 storage server
+同步给该 tracker,这样的机制使得 tracker 之间是对等关系,数据保持一致</p> <h3 id="新增-storage-服务器数据同步问题"><a href="#新增-storage-服务器数据同步问题" aria-hidden="true" class="header-anchor">#</a> 新增 storage 服务器数据同步问题</h3> <p>若新增 storage server 或者其状态发生变化,tracker server 都会将 storage server
+列表同步给该组内所有 storage server;以新增 storage server 为例,因为新加入的
+storage server 会主动连接 tracker server,tracker server 发现有新的 storage server
+加入,就会将该组内所有的 storage server 返回给新加入的 storage server,并重新将
+该组的 storage server 列表返回给该组内的其他 storage server;</p> <h3 id="组内-storage-数据同步问题"><a href="#组内-storage-数据同步问题" aria-hidden="true" class="header-anchor">#</a> 组内 storage 数据同步问题</h3> <p>组内 storage server 之间是对等的,
+文件上传、
+删除等操作可以在组内任意一台 storage
+server 上进行。文件同步只能在同组内的 storage server 之间进行,采用 push 方式,
+即源服务器同步到目标服务器</p> <ul><li>只在同组内的 storage server 之间进行同步</li> <li>源数据才需要同步,备份数据不再同步</li> <li>特例:新增 storage server 时,由其中一台将已有所有数据(包括源数据和备份数</li></ul> <p>据)同步到新增服务器</p> <p>storage server 的 7 种状态:
+通过命令 fdfs_monitor /etc/fdfs/client.conf 可以查看 ip_addr 选项显示 storage
+<code>server</code>当前状态
+<code>INIT</code>: 初始化,尚未得到同步已有数据的源服务器
+<code>WAIT_SYNC</code> :等待同步,已得到同步已有数据的源服务器
+<code>SYNCING</code>  : 同步中
+<code>DELETED</code> : 已删除,该服务器从本组中摘除
+<code>OFFLINE</code> : 离线
+<code>ONLINE</code>  : 在线,尚不能提供服务
+<code>ACTIVE</code> : 在线,可以提供服务</p> <h3 id="组内增加-storage-servera-状态变化过程"><a href="#组内增加-storage-servera-状态变化过程" aria-hidden="true" class="header-anchor">#</a> 组内增加 storage serverA 状态变化过程</h3> <ul><li><code>storage server A</code>主动连接 tracker server,此时 tracker server 将 storage serverA 状态设置为 INIT</li> <li><code>storage server A</code> 向 tracker server 询问追加同步的源服务器和追加同步截止时间点(当前时间),若组内只有 storage server A 或者上传文件数为 0,则告诉新机器不需要数据同步,storage server A 状态设置为 ONLINE ;若组内没有 active状态机器,就返回错误给新机器,新机器睡眠尝试;否则 tracker 将其状态设置为WAIT_SYNC</li> <li>假如分配了 storage server B 为同步源服务器和截至时间点,那么 storage server B 会将截至时间点之前的所有数据同步给 storage server A,并请求 tracker 设置 storage server A 状态为 SYNCING;到了截至时间点后, storage server B 向 storage server A 的同步将由追加同步切换为正常 binlog 增量同步,当取不到更多的 binlog 时,请求 tracker 将 storage server A 设置为 OFFLINE 状态,此时源同步完成</li> <li><code>storage server B</code> 向 storage server A 同步完所有数据,暂时没有数据要同步时,storage server B 请求 tracker server 将 storage server A 的状态设置为 ONLINE</li> <li>当 storage server A 向 tracker server 发起心跳时,tracker sercer 将其状态更改为 ACTIVE,之后就是增量同步(binlog)</li></ul> <p><img src="http://img.liuwenqi.com/blog/2019-08-24-fastdfs_back.jpg" alt=""></p> <blockquote><p>注释:</p></blockquote> <ul><li>整个源同步过程是源机器启动一个同步线程,将数据 push 到新机器,最大达到一个磁盘的 IO,不能并发</li> <li>由于源同步截止条件是取不到 binlog,系统繁忙,不断有新数据写入的情况,将会导致一直无法完成源同步过程</li></ul> <h2 id="下载"><a href="#下载" aria-hidden="true" class="header-anchor">#</a> 下载</h2> <p><img src="http://img.liuwenqi.com/blog/2019-08-24-fastdfs_down.jpg" alt=""></p> <p>client 发送下载请求给某个 tracker,必须带上文件名信息,tracker 从文件名中解析出文件的
+group、大小、创建时间等信息,然后为该请求选择一个 storage 用于读请求;由于 group 内的文
+件同步在后台是异步进行的,可能出现文件没有同步到其他 storage server 上或者延迟的问题,
+后面我们在使用 nginx_fastdfs_module 模块可以很好解决这一问题</p> <p><img src="http://img.liuwenqi.com/blog/2019-08-24-fastdfs_down2.jpg" alt=""></p> <h2 id="文件合并原理"><a href="#文件合并原理" aria-hidden="true" class="header-anchor">#</a> 文件合并原理</h2> <p>小文件合并存储主要解决的问题:</p> <ul><li>本地文件系统 inode 数量有限,存储小文件的数量受到限制</li> <li>多级目录+目录里很多文件,导致访问文件的开销很大(可能导致很多次 IO)</li> <li>按小文件存储,备份和恢复效率低</li></ul> <p>海量小文件存储问题请参考:
+<a href="http://blog.csdn.net/liuaigui/article/details/9981135" target="_blank" rel="noopener noreferrer">地址1<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> <a href="http://blog.csdn.net/kidd_3/article/details/6909097" target="_blank" rel="noopener noreferrer">地址2<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><code>FastDFS</code> 提供合并存储功能,默认创建的大文件为 64MB,然后在该大文件中存储很多小文件;
+大文件中容纳一个小文件的空间称作一个 Slot,规定 Slot 最小值为 256 字节,最大为 16MB,即小于 256 字节的文件也要占用 256 字节,超过 16MB 的文件独立存储;</p> <p>为了支持文件合并机制, FastDFS 生成的文件 file_id 需要额外增加 16 个字节;
+每个 trunk file
+由一个 id 唯一标识,trunk file 由 group 内的 trunk server 负责创建(trunk server 是 tracker
+选出来的),并同步到 group 内其他的 storage,文件存储合并存储到 trunk file 后,根据其文件
+偏移量就能从 trunk file 中读取文件</p> <p><a href="http://blog.csdn.net/hfty290/article/details/42026215#comments" target="_blank" rel="noopener noreferrer">FastDFS 文件合并原理细节请参考:<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <!----> <footer class="page-edit"><!----> <!----></footer> <!----> </main> <div class="valine-wrapper" data-v-5029e45b><div id="valine" data-v-5029e45b></div></div></div> <div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;background-color:rgba(231, 234, 241,.5);display:none;" data-v-cd623d78 data-v-cd623d78><i class="iconfont reco-up" data-v-cd623d78></i></div></div></div></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="/assets/js/app.bd57e9ac.js" defer></script><script src="/assets/js/4.cf47d3bf.js" defer></script><script src="/assets/js/1.2ae96b85.js" defer></script><script src="/assets/js/86.5fb0652b.js" defer></script>
+  </body>
+</html>

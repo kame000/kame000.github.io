@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>redis基本操作 | 奇哥</title>
+    <meta name="description" content="个人博客，技术笔记整理">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.f3fddc9c.css" as="style"><link rel="preload" href="/assets/js/app.bd57e9ac.js" as="script"><link rel="preload" href="/assets/js/4.cf47d3bf.js" as="script"><link rel="preload" href="/assets/js/1.2ae96b85.js" as="script"><link rel="preload" href="/assets/js/116.66196725.js" as="script"><link rel="prefetch" href="/assets/js/10.816b0153.js"><link rel="prefetch" href="/assets/js/100.a03fb444.js"><link rel="prefetch" href="/assets/js/101.d92e5f36.js"><link rel="prefetch" href="/assets/js/102.c696f09e.js"><link rel="prefetch" href="/assets/js/103.ce3c3f6a.js"><link rel="prefetch" href="/assets/js/104.502b38a6.js"><link rel="prefetch" href="/assets/js/105.8ff7fab8.js"><link rel="prefetch" href="/assets/js/106.d12a2a32.js"><link rel="prefetch" href="/assets/js/107.e585a5b6.js"><link rel="prefetch" href="/assets/js/108.72bc7fee.js"><link rel="prefetch" href="/assets/js/109.c794a8c2.js"><link rel="prefetch" href="/assets/js/11.b378d47c.js"><link rel="prefetch" href="/assets/js/110.2c2d0721.js"><link rel="prefetch" href="/assets/js/111.104c000c.js"><link rel="prefetch" href="/assets/js/112.a9f6a2ea.js"><link rel="prefetch" href="/assets/js/113.06d8aa1d.js"><link rel="prefetch" href="/assets/js/114.51211731.js"><link rel="prefetch" href="/assets/js/115.e854479d.js"><link rel="prefetch" href="/assets/js/117.38c8a3bb.js"><link rel="prefetch" href="/assets/js/118.0da4677e.js"><link rel="prefetch" href="/assets/js/119.67397043.js"><link rel="prefetch" href="/assets/js/12.5f65f189.js"><link rel="prefetch" href="/assets/js/120.6fde943d.js"><link rel="prefetch" href="/assets/js/121.2062356d.js"><link rel="prefetch" href="/assets/js/122.4738aa5b.js"><link rel="prefetch" href="/assets/js/123.e2d00381.js"><link rel="prefetch" href="/assets/js/124.eeb983d9.js"><link rel="prefetch" href="/assets/js/125.f8c5ff44.js"><link rel="prefetch" href="/assets/js/126.42a2902a.js"><link rel="prefetch" href="/assets/js/127.c1d66f24.js"><link rel="prefetch" href="/assets/js/128.7933581c.js"><link rel="prefetch" href="/assets/js/129.fe280f18.js"><link rel="prefetch" href="/assets/js/13.53265072.js"><link rel="prefetch" href="/assets/js/130.5796bc49.js"><link rel="prefetch" href="/assets/js/131.72a70116.js"><link rel="prefetch" href="/assets/js/132.fba186d3.js"><link rel="prefetch" href="/assets/js/133.a038b6e3.js"><link rel="prefetch" href="/assets/js/134.b979fc39.js"><link rel="prefetch" href="/assets/js/135.ab58fa4d.js"><link rel="prefetch" href="/assets/js/136.3946e1b7.js"><link rel="prefetch" href="/assets/js/137.d506d848.js"><link rel="prefetch" href="/assets/js/138.b737062e.js"><link rel="prefetch" href="/assets/js/139.80f8ffc8.js"><link rel="prefetch" href="/assets/js/14.9b50c038.js"><link rel="prefetch" href="/assets/js/140.a8efede8.js"><link rel="prefetch" href="/assets/js/141.88912078.js"><link rel="prefetch" href="/assets/js/142.002ec337.js"><link rel="prefetch" href="/assets/js/143.1a9fed6a.js"><link rel="prefetch" href="/assets/js/144.15e56ee3.js"><link rel="prefetch" href="/assets/js/145.859b8d00.js"><link rel="prefetch" href="/assets/js/146.c0b30a80.js"><link rel="prefetch" href="/assets/js/147.86c03071.js"><link rel="prefetch" href="/assets/js/148.86bdb637.js"><link rel="prefetch" href="/assets/js/149.68ae3de2.js"><link rel="prefetch" href="/assets/js/15.b327be7e.js"><link rel="prefetch" href="/assets/js/150.078f5953.js"><link rel="prefetch" href="/assets/js/151.3925086c.js"><link rel="prefetch" href="/assets/js/152.b2656742.js"><link rel="prefetch" href="/assets/js/153.94c79fa9.js"><link rel="prefetch" href="/assets/js/154.6f668cdc.js"><link rel="prefetch" href="/assets/js/155.26d16d88.js"><link rel="prefetch" href="/assets/js/156.4dac7439.js"><link rel="prefetch" href="/assets/js/157.134c9a36.js"><link rel="prefetch" href="/assets/js/158.867715fb.js"><link rel="prefetch" href="/assets/js/159.5b790836.js"><link rel="prefetch" href="/assets/js/16.b23402c5.js"><link rel="prefetch" href="/assets/js/160.7bb54d30.js"><link rel="prefetch" href="/assets/js/161.32842b78.js"><link rel="prefetch" href="/assets/js/162.2d8da748.js"><link rel="prefetch" href="/assets/js/163.285ec7ff.js"><link rel="prefetch" href="/assets/js/164.0c6dfe94.js"><link rel="prefetch" href="/assets/js/165.251b2dd6.js"><link rel="prefetch" href="/assets/js/166.61a13c62.js"><link rel="prefetch" href="/assets/js/167.0b8940f1.js"><link rel="prefetch" href="/assets/js/168.18e24cb7.js"><link rel="prefetch" href="/assets/js/169.b10c1569.js"><link rel="prefetch" href="/assets/js/17.32bbe36c.js"><link rel="prefetch" href="/assets/js/170.cc30d6db.js"><link rel="prefetch" href="/assets/js/171.e5a5db17.js"><link rel="prefetch" href="/assets/js/172.3d6df5cc.js"><link rel="prefetch" href="/assets/js/173.ec48230a.js"><link rel="prefetch" href="/assets/js/174.8f356df8.js"><link rel="prefetch" href="/assets/js/175.5205cd09.js"><link rel="prefetch" href="/assets/js/176.4ad613ab.js"><link rel="prefetch" href="/assets/js/177.99280429.js"><link rel="prefetch" href="/assets/js/178.adbbe2e3.js"><link rel="prefetch" href="/assets/js/179.8b44b7d3.js"><link rel="prefetch" href="/assets/js/18.e647e6b1.js"><link rel="prefetch" href="/assets/js/180.74a473ac.js"><link rel="prefetch" href="/assets/js/181.0c334e0b.js"><link rel="prefetch" href="/assets/js/182.2110f34a.js"><link rel="prefetch" href="/assets/js/183.afd7150e.js"><link rel="prefetch" href="/assets/js/184.1e1d16b0.js"><link rel="prefetch" href="/assets/js/185.17877986.js"><link rel="prefetch" href="/assets/js/186.eb391c2e.js"><link rel="prefetch" href="/assets/js/187.018edf4f.js"><link rel="prefetch" href="/assets/js/188.3736d840.js"><link rel="prefetch" href="/assets/js/19.a387f27c.js"><link rel="prefetch" href="/assets/js/20.49236671.js"><link rel="prefetch" href="/assets/js/21.9ec91369.js"><link rel="prefetch" href="/assets/js/22.95b2e77b.js"><link rel="prefetch" href="/assets/js/23.8f4d7414.js"><link rel="prefetch" href="/assets/js/24.e2b213c5.js"><link rel="prefetch" href="/assets/js/25.7f3f3c17.js"><link rel="prefetch" href="/assets/js/26.266189df.js"><link rel="prefetch" href="/assets/js/27.eef9b2a9.js"><link rel="prefetch" href="/assets/js/28.ffdbc4d2.js"><link rel="prefetch" href="/assets/js/29.4590fa49.js"><link rel="prefetch" href="/assets/js/30.85c4cbe9.js"><link rel="prefetch" href="/assets/js/31.390dd215.js"><link rel="prefetch" href="/assets/js/32.ce4d57de.js"><link rel="prefetch" href="/assets/js/33.2ac3bdd7.js"><link rel="prefetch" href="/assets/js/34.a27a7564.js"><link rel="prefetch" href="/assets/js/35.133a359a.js"><link rel="prefetch" href="/assets/js/36.85c206d7.js"><link rel="prefetch" href="/assets/js/37.ea3cf6be.js"><link rel="prefetch" href="/assets/js/38.c7802045.js"><link rel="prefetch" href="/assets/js/39.49f00421.js"><link rel="prefetch" href="/assets/js/40.45af2466.js"><link rel="prefetch" href="/assets/js/41.6dbd80a6.js"><link rel="prefetch" href="/assets/js/42.ff01c005.js"><link rel="prefetch" href="/assets/js/43.59f5c9d2.js"><link rel="prefetch" href="/assets/js/44.9441ae9c.js"><link rel="prefetch" href="/assets/js/45.5ae7af1e.js"><link rel="prefetch" href="/assets/js/46.d9707d2d.js"><link rel="prefetch" href="/assets/js/47.b36bd6b1.js"><link rel="prefetch" href="/assets/js/48.506449fa.js"><link rel="prefetch" href="/assets/js/49.f9bcc647.js"><link rel="prefetch" href="/assets/js/5.7f309e4b.js"><link rel="prefetch" href="/assets/js/50.6b1e5e40.js"><link rel="prefetch" href="/assets/js/51.577a7b71.js"><link rel="prefetch" href="/assets/js/52.9bc6a38b.js"><link rel="prefetch" href="/assets/js/53.efd30e13.js"><link rel="prefetch" href="/assets/js/54.6f18dec7.js"><link rel="prefetch" href="/assets/js/55.345e85aa.js"><link rel="prefetch" href="/assets/js/56.2bf86eed.js"><link rel="prefetch" href="/assets/js/57.23bf8a7b.js"><link rel="prefetch" href="/assets/js/58.52c35f14.js"><link rel="prefetch" href="/assets/js/59.b1efec4a.js"><link rel="prefetch" href="/assets/js/6.63fe1bf6.js"><link rel="prefetch" href="/assets/js/60.be3df253.js"><link rel="prefetch" href="/assets/js/61.e1b7fc3c.js"><link rel="prefetch" href="/assets/js/62.4ff81144.js"><link rel="prefetch" href="/assets/js/63.a121bb0a.js"><link rel="prefetch" href="/assets/js/64.25e8d49e.js"><link rel="prefetch" href="/assets/js/65.ca67439d.js"><link rel="prefetch" href="/assets/js/66.87c9e36a.js"><link rel="prefetch" href="/assets/js/67.738a9a01.js"><link rel="prefetch" href="/assets/js/68.22a175ca.js"><link rel="prefetch" href="/assets/js/69.0a00dc4c.js"><link rel="prefetch" href="/assets/js/7.ebbb4af9.js"><link rel="prefetch" href="/assets/js/70.ddfebdd6.js"><link rel="prefetch" href="/assets/js/71.303161f4.js"><link rel="prefetch" href="/assets/js/72.f23ccb75.js"><link rel="prefetch" href="/assets/js/73.1b49404e.js"><link rel="prefetch" href="/assets/js/74.97b665aa.js"><link rel="prefetch" href="/assets/js/75.f9d7fe05.js"><link rel="prefetch" href="/assets/js/76.6d96dcb9.js"><link rel="prefetch" href="/assets/js/77.b4048a6e.js"><link rel="prefetch" href="/assets/js/78.0e3ef83a.js"><link rel="prefetch" href="/assets/js/79.3260ac1d.js"><link rel="prefetch" href="/assets/js/8.213a8416.js"><link rel="prefetch" href="/assets/js/80.cb879212.js"><link rel="prefetch" href="/assets/js/81.1d66e67c.js"><link rel="prefetch" href="/assets/js/82.f449b53f.js"><link rel="prefetch" href="/assets/js/83.2e981570.js"><link rel="prefetch" href="/assets/js/84.96f1d92b.js"><link rel="prefetch" href="/assets/js/85.53132c5f.js"><link rel="prefetch" href="/assets/js/86.5fb0652b.js"><link rel="prefetch" href="/assets/js/87.17c99baa.js"><link rel="prefetch" href="/assets/js/88.cbdef4cf.js"><link rel="prefetch" href="/assets/js/89.c23ebd83.js"><link rel="prefetch" href="/assets/js/9.396bac1c.js"><link rel="prefetch" href="/assets/js/90.b51e75c8.js"><link rel="prefetch" href="/assets/js/91.a86d5282.js"><link rel="prefetch" href="/assets/js/92.f4f2ca2f.js"><link rel="prefetch" href="/assets/js/93.7f8fcb29.js"><link rel="prefetch" href="/assets/js/94.c6ac1bfa.js"><link rel="prefetch" href="/assets/js/95.11bdac6e.js"><link rel="prefetch" href="/assets/js/96.f6acc813.js"><link rel="prefetch" href="/assets/js/97.d418109b.js"><link rel="prefetch" href="/assets/js/98.8e84bf17.js"><link rel="prefetch" href="/assets/js/99.d68c1a72.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1a6a828a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f3fddc9c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container"><div><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="奇哥" class="logo"> <span class="site-name">奇哥</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="theme-options"><!----> <div class="dark-theme-options toggle-option"><label for="dark-theme-toggle">Enable Dark Theme?</label> <input id="dark-theme-toggle" type="checkbox" checked="checked"></div></div></div></div> <div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/category/Django.html" class="nav-link"><i class="iconfont undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/category/docker.html" class="nav-link"><i class="iconfont undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/category/Python基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/go_base.html" class="nav-link"><i class="iconfont undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/category/linux基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/tools.html" class="nav-link"><i class="iconfont undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/category/网络基础.html" class="nav-link"><i class="iconfont undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/category/代码管理.html" class="nav-link"><i class="iconfont undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/category/前端.html" class="nav-link"><i class="iconfont undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/category/存储.html" class="nav-link"><i class="iconfont undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/category/安全.html" class="nav-link"><i class="iconfont undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/category/数据库.html" class="nav-link"><i class="iconfont undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/category/ELK.html" class="nav-link"><i class="iconfont undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/category/杂文.html" class="nav-link"><i class="iconfont undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/category/系统.html" class="nav-link"><i class="iconfont undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/category/生产事故.html" class="nav-link"><i class="iconfont undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/category/监控.html" class="nav-link"><i class="iconfont undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/category/负载均衡.html" class="nav-link"><i class="iconfont undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/category/消息队列.html" class="nav-link"><i class="iconfont undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/category/架构.html" class="nav-link"><i class="iconfont undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/category/自动化.html" class="nav-link"><i class="iconfont undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/category/面试题.html" class="nav-link"><i class="iconfont undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/kame-97-24" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>redis基本操作</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#redis基本操作" class="sidebar-link">redis基本操作</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_1-预备知识" class="sidebar-link">1. 预备知识</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_2-全局命令" class="sidebar-link">2. 全局命令</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_2-1-查看所有键" class="sidebar-link">2.1. 查看所有键</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_2-2-键总数" class="sidebar-link">2.2. 键总数</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_2-3-检查键是否存在" class="sidebar-link">2.3. 检查键是否存在</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_2-4-删除键" class="sidebar-link">2.4. 删除键</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_2-5-键过期" class="sidebar-link">2.5. 键过期</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_2-6-键的数据结构类型" class="sidebar-link">2.6. 键的数据结构类型</a></li></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_3-数据结构和内部编码" class="sidebar-link">3. 数据结构和内部编码</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_4-单线程架构" class="sidebar-link">4. 单线程架构</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_4-1-纯内存访问" class="sidebar-link">4.1. 纯内存访问</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_4-2-非阻塞i-o" class="sidebar-link">4.2. 非阻塞I/O</a></li><li class="sidebar-sub-header"><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html#_4-3-单线程避免线程切换和竞态产生的消耗" class="sidebar-link">4.3. 单线程避免线程切换和竞态产生的消耗</a></li></ul></li></ul></section></li></ul> </aside> <div><main class="page reco-hide"> <div class="page-title"><h1>redis基本操作</h1> <hr> <div data-v-362e684e><i class="iconfont reco-account" data-v-362e684e><span data-v-362e684e>刘文奇</span></i> <i class="iconfont reco-date" data-v-362e684e><span data-v-362e684e>2016-5-6</span></i> <span id="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-2e99e05a data-v-362e684e><i class="iconfont reco-eye" style="margin-right: .5rem" data-v-2e99e05a></i> <a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;" data-v-2e99e05a></a></span> <i class="iconfont reco-tag tags" data-v-362e684e><span class="tag-item" data-v-362e684e>
+      redis
+    </span></i></div></div> <div class="content__default"><h2 id="redis基本操作"><a href="#redis基本操作" aria-hidden="true" class="header-anchor">#</a> redis基本操作</h2> <h2 id="_1-预备知识"><a href="#_1-预备知识" aria-hidden="true" class="header-anchor">#</a> 1. 预备知识</h2> <p>在介绍 <code>5</code> 种 <strong>数据结构</strong> 之前，需要先了解 <code>Redis</code> 的一些 <strong>全局命令</strong>、<strong>数据结构</strong> 和 <strong>内部编码</strong>、<strong>单线程命令处理机制</strong>。</p> <ol><li><code>Redis</code> 的命令有 <strong>上百个</strong>，理解 <code>Redis</code> 的一些机制，会发现这些命令有很强的 <strong>通用性</strong>。</li> <li><code>Redis</code> 不是万金油，有些 <strong>数据结构</strong> 和 <strong>命令</strong> 必须在 <strong>特定场景</strong> 下使用，一旦 <strong>使用不当</strong> 可能对 <code>Redis</code> <strong>本身</strong> 或者 <strong>应用本身</strong> 造成致命伤害。</li></ol> <h2 id="_2-全局命令"><a href="#_2-全局命令" aria-hidden="true" class="header-anchor">#</a> 2. 全局命令</h2> <p><code>Redis</code> 有 <code>5</code> 种 <strong>数据结构</strong>，它们是 <strong>键值对</strong> 中的 <strong>值</strong>，对于 <strong>键</strong> 来说有一些通用的命令。</p> <h3 id="_2-1-查看所有键"><a href="#_2-1-查看所有键" aria-hidden="true" class="header-anchor">#</a> 2.1. 查看所有键</h3> <blockquote><p>keys *</p></blockquote> <p>下面插入了 <code>3</code> 对字符串类型的键值对：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set hello world
+OK
+127.0.0.1:6379&gt; set java jedis
+OK
+127.0.0.1:6379&gt; set python redis-py
+OK
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>命令会将所有的键输出：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; keys *
+1) &quot;python&quot;
+2) &quot;java&quot;
+3) &quot;hello&quot;
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_2-2-键总数"><a href="#_2-2-键总数" aria-hidden="true" class="header-anchor">#</a> 2.2. 键总数</h3> <blockquote><p>dbsize</p></blockquote> <p>下面插入一个 <strong>列表类型</strong> 的 <strong>键值对</strong>（值是 <strong>多个元素</strong> 组成）：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; rpush mylist a b c d e f g
+(integer) 7
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><code>dbsize</code> 命令会返回当前数据库中 <strong>键的总数</strong>。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; dbsize
+(integer) 4
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><code>dbsize</code> 命令在 <strong>计算键总数</strong> 时 <strong>不会遍历</strong> 所有键，而是直接获取 <code>Redis</code> <strong>内置的键总数变量</strong>，所以 <code>dbsize</code> 命令的 <strong>时间复杂度</strong> 是 <code>O（1）</code>。而 <code>keys</code> 命令会 <strong>遍历</strong> 所有键，所以它的 <strong>时间复杂度</strong> 是 <code>O（n）</code>，当 <code>Redis</code> 保存了 <strong>大量键</strong> 时，线上环境 <strong>禁止</strong> 使用。</p> <h3 id="_2-3-检查键是否存在"><a href="#_2-3-检查键是否存在" aria-hidden="true" class="header-anchor">#</a> 2.3. 检查键是否存在</h3> <blockquote><p>exists key</p></blockquote> <p>如果键存在则返回 <code>1</code>，不存在则返回 <code>0</code>：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; exists java
+(integer) 1
+127.0.0.1:6379&gt; exists not_exist_key
+(integer) 0
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_2-4-删除键"><a href="#_2-4-删除键" aria-hidden="true" class="header-anchor">#</a> 2.4. 删除键</h3> <blockquote><p>del key</p></blockquote> <p><code>del</code> 是一个 <strong>通用命令</strong>，无论值是什么 <strong>数据结构</strong> 类型，<code>del</code> 命令都可以将其 <strong>删除</strong>。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; del java
+(integer) 1
+127.0.0.1:6379&gt; exists java
+(integer) 0
+127.0.0.1:6379&gt; del not_exist_key
+(integer) 0
+127.0.0.1:6379&gt; exists not_exist_key
+(integer) 0
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>返回结果为 <strong>成功删除</strong> 的 <strong>键的个数</strong>，假设删除一个 <strong>不存在</strong> 的键，就会返回 <code>0</code>。</p> <h3 id="_2-5-键过期"><a href="#_2-5-键过期" aria-hidden="true" class="header-anchor">#</a> 2.5. 键过期</h3> <blockquote><p>expire key seconds</p></blockquote> <p><code>Redis</code> 支持对 <strong>键</strong> 添加 <strong>过期时间</strong>，当超过过期时间后，会 <strong>自动删除键</strong>，例如为键 <code>hello</code> 设置 <code>10</code> 秒过期时间：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set hello world
+OK
+127.0.0.1:6379&gt; expire hello 10 
+(integer) 0
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p><code>ttl</code> 命令会返回键的 <strong>剩余过期时间</strong>，它有 <code>3</code> 种返回值：</p> <ul><li>大于等于 <code>0</code> 的整数：表示键 <strong>剩余</strong> 的 <strong>过期时间</strong>。</li> <li>返回 <code>-1</code>：<strong>键</strong> 没设置 <strong>过期时间</strong>。</li> <li>返回 <code>-2</code>：<strong>键</strong> 不存在。</li></ul> <p>可以通过 <code>ttl</code> 命令观察 <strong>键</strong> <code>hello</code> 的 <strong>剩余过期时间</strong>：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># 还剩7秒
+127.0.0.1:6379&gt; ttl hello(integer) 
+(integer) 7
+...
+# 还剩1秒
+127.0.0.1:6379&gt; ttl hello(integer) 
+(integer) 1
+# 返回结果为-2，说明键hello已经被删除
+127.0.0.1:6379&gt; ttl hello(integer) 
+(integer) -2
+127.0.0.1:6379&gt; get hello
+(nil)
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h3 id="_2-6-键的数据结构类型"><a href="#_2-6-键的数据结构类型" aria-hidden="true" class="header-anchor">#</a> 2.6. 键的数据结构类型</h3> <blockquote><p>type key</p></blockquote> <p>例如键 <code>hello</code> 是的值 <strong>字符串类型</strong>，返回结果为 <code>string</code>。键 <code>mylist</code> 的值是 <strong>列表类型</strong>，返回结果为 <code>list</code>。如果键不存在，则返回 <code>none</code>。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; set a b
+OK
+127.0.0.1:6379&gt; type a
+string
+127.0.0.1:6379&gt; rpush mylist a b c d e f g
+(integer) 7
+127.0.0.1:6379&gt; type mylist
+list
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="_3-数据结构和内部编码"><a href="#_3-数据结构和内部编码" aria-hidden="true" class="header-anchor">#</a> 3. 数据结构和内部编码</h2> <p><code>type</code> 命令实际返回的就是当前 <strong>键</strong> 的 <strong>数据结构类型</strong>，它们分别是：<code>string</code>（<strong>字符串</strong>）、<code>hash</code>（<strong>哈希</strong>）、<code>list</code>（<strong>列表</strong>）、<code>set</code>（<strong>集合</strong>）、<code>zset</code>（<strong>有序集合</strong>），但这些只是 <code>Redis</code> 对外的 <strong>数据结构</strong>。如图所示：</p> <p><img src="http://img.sharkyun.com/blog/2019-07-19-001345.png" alt="img"></p> <p>对于每种 <strong>数据结构</strong>，实际上都有自己底层的 <strong>内部编码</strong> 实现，而且是 <strong>多种实现</strong>。这样 <code>Redis</code> 会在合适的 <strong>场景</strong> 选择合适的 <strong>内部编码</strong>，如图所示：</p> <p><img src="http://img.sharkyun.com/blog/2019-07-19-001359.png" alt="img"></p> <p>可以看到，每种 <strong>数据结构</strong> 都有 <strong>两种以上</strong> 的 <strong>内部编码实现</strong>。例如 <code>list</code> <strong>数据结构</strong> 包含了 <code>linkedlist</code> 和 <code>ziplist</code> 两种 <strong>内部编码</strong>。同时有些 <strong>内部编码</strong>，例如 <code>ziplist</code>，可以作为 <strong>多种外部数据结构</strong> 的内部实现，可以通过 <code>object encoding</code> 命令查询 <strong>内部编码</strong>：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>127.0.0.1:6379&gt; object encoding hello
+&quot;embstr&quot;
+127.0.0.1:6379&gt; object encoding mylist
+&quot;quicklist&quot;
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>可以看到键 <code>hello</code> 对应值的 <strong>内部编码</strong> 是 <code>embstr</code>，键 <code>mylist</code> 对应值的 <strong>内部编码</strong> 是 <code>ziplist</code>。</p> <p><code>Redis</code> 这样设计有两个好处：</p> <ul><li><strong>其一</strong>：可以改进 <strong>内部编码</strong>，而对外的 <strong>数据结构</strong> 和 <strong>命令</strong> 没有影响。例如 <code>Redis3.2</code> 提供的 <code>quicklist</code>，结合了 <code>ziplist</code> 和 <code>linkedlist</code> 两者的优势，为 <strong>列表类型</strong> 提供了一种 <strong>更加高效</strong> 的 <strong>内部编码实现</strong>。</li> <li><strong>其二</strong>：不同 <strong>内部编码</strong> 可以在 <strong>不同场景</strong> 下发挥各自的 <strong>优势</strong>。例如 <code>ziplist</code> 比较 <strong>节省内存</strong>，但是在列表 <strong>元素比较多</strong> 的情况下，<strong>性能</strong> 会有所 <strong>下降</strong>，这时候 <code>Redis</code> 会根据 <strong>配置</strong>，将列表类型的 <strong>内部实现</strong> 转换为 <code>linkedlist</code>。</li></ul> <h2 id="_4-单线程架构"><a href="#_4-单线程架构" aria-hidden="true" class="header-anchor">#</a> 4. 单线程架构</h2> <p><code>Redis</code> 使用了 <strong>单线程架构</strong> 和 <code>I/O</code> <strong>多路复用模型</strong> 来实现 <strong>高性能</strong> 的 <strong>内存数据库服务</strong>。那为什么 <strong>单线程</strong> 还能这么快，下面分析原因：</p> <h3 id="_4-1-纯内存访问"><a href="#_4-1-纯内存访问" aria-hidden="true" class="header-anchor">#</a> 4.1. 纯内存访问</h3> <p><code>Redis</code> 将所有数据放在 <strong>内存</strong> 中，内存的 <strong>响应时长</strong> 大约为 <code>100</code> <strong>纳秒</strong>，这是 <code>Redis</code> 达到 <strong>每秒万级别</strong> 访问的重要基础。</p> <h3 id="_4-2-非阻塞i-o"><a href="#_4-2-非阻塞i-o" aria-hidden="true" class="header-anchor">#</a> 4.2. 非阻塞I/O</h3> <p><code>Redis</code> 使用 <code>epoll</code> 作为 <code>I/O</code> <strong>多路复用技术</strong> 的实现，再加上 <code>Redis</code> 自身的 <strong>事件处理模型</strong> 将 <code>epoll</code> 中的 <strong>连接</strong>、<strong>读写</strong>、<strong>关闭</strong> 都转换为 <strong>事件</strong>，从而不用不在 <strong>网络</strong> <code>I/O</code> 上浪费过多的时间，如图所示：</p> <p><img src="http://img.liuwenqi.com/blog/2019-08-21-094922.jpg" alt=""></p> <h3 id="_4-3-单线程避免线程切换和竞态产生的消耗"><a href="#_4-3-单线程避免线程切换和竞态产生的消耗" aria-hidden="true" class="header-anchor">#</a> 4.3. 单线程避免线程切换和竞态产生的消耗</h3> <p>采用 <strong>单线程</strong> 就能达到如此 <strong>高的性能</strong>，那么不失为一种不错的选择，因为 <strong>单线程</strong> 能带来几个好处：</p> <ul><li><strong>单线程</strong> 可以简化 <strong>数据结构和算法</strong> 的实现，开发人员不需要了解复杂的 <strong>并发数据结构</strong>。</li> <li><strong>单线程</strong> 避免了 <strong>线程切换</strong> 和 <strong>竞态</strong> 产生的消耗，对于服务端开发来说，<strong>锁和线程切换</strong> 通常是性能杀手。</li></ul> <div class="warning custom-block"><p><strong>单线程</strong> 的问题：对于 <strong>每个命令</strong> 的 <strong>执行时间</strong> 是有要求的。如果某个命令 <strong>执行过长</strong>，会造成其他命令的 <strong>阻塞</strong>，对于 <code>Redis</code> 这种 <strong>高性能</strong> 的服务来说是致命的，所以 <code>Redis</code> 是面向 <strong>快速执行</strong> 场景的数据库。</p></div> <h1 id="小结"><a href="#小结" aria-hidden="true" class="header-anchor">#</a> 小结</h1> <p>本文堆 <code>Redis</code> 的几种 <strong>数据结构</strong> 进行了概述，介绍了几个简单的 <strong>全局命令</strong>，<strong>数据结构</strong> 和 <strong>内部编码</strong> 以及 <strong>单线程命令</strong> 处理机制分析。</p></div> <!----> <footer class="page-edit"><!----> <!----></footer> <!----> </main> <div class="valine-wrapper" data-v-5029e45b><div id="valine" data-v-5029e45b></div></div></div> <div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;background-color:rgba(231, 234, 241,.5);display:none;" data-v-cd623d78 data-v-cd623d78><i class="iconfont reco-up" data-v-cd623d78></i></div></div></div></div><div class="global-ui"><SWUpdatePopup></SWUpdatePopup></div></div>
+    <script src="/assets/js/app.bd57e9ac.js" defer></script><script src="/assets/js/4.cf47d3bf.js" defer></script><script src="/assets/js/1.2ae96b85.js" defer></script><script src="/assets/js/116.66196725.js" defer></script>
+  </body>
+</html>
