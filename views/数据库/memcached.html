@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>缓存选型 | 刘文奇</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="个人博客，技术笔记整理">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.402024e5.js" as="script"><link rel="preload" href="/assets/js/3.35889db3.js" as="script"><link rel="preload" href="/assets/js/1.98e71d3a.js" as="script"><link rel="preload" href="/assets/js/104.6ef1e09a.js" as="script"><link rel="prefetch" href="/assets/js/10.d70328f8.js"><link rel="prefetch" href="/assets/js/100.bdfeee98.js"><link rel="prefetch" href="/assets/js/101.0f0aa0e3.js"><link rel="prefetch" href="/assets/js/102.8810b363.js"><link rel="prefetch" href="/assets/js/103.018076eb.js"><link rel="prefetch" href="/assets/js/105.ef045d33.js"><link rel="prefetch" href="/assets/js/106.3aafc27c.js"><link rel="prefetch" href="/assets/js/107.f3da675e.js"><link rel="prefetch" href="/assets/js/108.6a197ffd.js"><link rel="prefetch" href="/assets/js/109.9bdef9f9.js"><link rel="prefetch" href="/assets/js/11.8a566d2b.js"><link rel="prefetch" href="/assets/js/110.57ebc428.js"><link rel="prefetch" href="/assets/js/111.b5447738.js"><link rel="prefetch" href="/assets/js/112.c716f5e7.js"><link rel="prefetch" href="/assets/js/113.557f7376.js"><link rel="prefetch" href="/assets/js/114.61a54316.js"><link rel="prefetch" href="/assets/js/115.6d0b291a.js"><link rel="prefetch" href="/assets/js/116.8c93c654.js"><link rel="prefetch" href="/assets/js/117.07743f06.js"><link rel="prefetch" href="/assets/js/118.d1774c94.js"><link rel="prefetch" href="/assets/js/119.05fc2356.js"><link rel="prefetch" href="/assets/js/12.f6bcfd1f.js"><link rel="prefetch" href="/assets/js/120.2444fe97.js"><link rel="prefetch" href="/assets/js/121.ca03cbf1.js"><link rel="prefetch" href="/assets/js/122.4fea1a12.js"><link rel="prefetch" href="/assets/js/123.0e2b6ebe.js"><link rel="prefetch" href="/assets/js/124.61410c00.js"><link rel="prefetch" href="/assets/js/125.98a05a32.js"><link rel="prefetch" href="/assets/js/126.f734fc8e.js"><link rel="prefetch" href="/assets/js/127.e9acb272.js"><link rel="prefetch" href="/assets/js/128.d4b47285.js"><link rel="prefetch" href="/assets/js/129.aa6f2614.js"><link rel="prefetch" href="/assets/js/13.fa622aa3.js"><link rel="prefetch" href="/assets/js/130.244a3895.js"><link rel="prefetch" href="/assets/js/131.86c3a012.js"><link rel="prefetch" href="/assets/js/132.fe1b85d2.js"><link rel="prefetch" href="/assets/js/133.e238c5c4.js"><link rel="prefetch" href="/assets/js/134.1b5b832b.js"><link rel="prefetch" href="/assets/js/135.6468c4f0.js"><link rel="prefetch" href="/assets/js/136.19775bf4.js"><link rel="prefetch" href="/assets/js/137.c6d0ed15.js"><link rel="prefetch" href="/assets/js/138.230a86e2.js"><link rel="prefetch" href="/assets/js/139.64f42c07.js"><link rel="prefetch" href="/assets/js/14.3c87d1f8.js"><link rel="prefetch" href="/assets/js/140.607b2c0d.js"><link rel="prefetch" href="/assets/js/141.224b1c65.js"><link rel="prefetch" href="/assets/js/142.0d0fc6e0.js"><link rel="prefetch" href="/assets/js/143.c78f7a17.js"><link rel="prefetch" href="/assets/js/144.5f6b6fe2.js"><link rel="prefetch" href="/assets/js/145.d9203869.js"><link rel="prefetch" href="/assets/js/146.ac383aae.js"><link rel="prefetch" href="/assets/js/147.5ad44c9c.js"><link rel="prefetch" href="/assets/js/148.4f051907.js"><link rel="prefetch" href="/assets/js/149.ba645a2b.js"><link rel="prefetch" href="/assets/js/15.527a7f7a.js"><link rel="prefetch" href="/assets/js/150.ac4e4278.js"><link rel="prefetch" href="/assets/js/151.0a2827cd.js"><link rel="prefetch" href="/assets/js/152.7a554168.js"><link rel="prefetch" href="/assets/js/153.af52f866.js"><link rel="prefetch" href="/assets/js/154.2ce71126.js"><link rel="prefetch" href="/assets/js/155.7154dc6f.js"><link rel="prefetch" href="/assets/js/156.3d24250b.js"><link rel="prefetch" href="/assets/js/157.59ac5226.js"><link rel="prefetch" href="/assets/js/158.2d506491.js"><link rel="prefetch" href="/assets/js/159.92262746.js"><link rel="prefetch" href="/assets/js/16.aebd5e39.js"><link rel="prefetch" href="/assets/js/160.63210a31.js"><link rel="prefetch" href="/assets/js/161.9b44e7a4.js"><link rel="prefetch" href="/assets/js/162.5b61f2c7.js"><link rel="prefetch" href="/assets/js/163.7589d833.js"><link rel="prefetch" href="/assets/js/164.b5c15ecb.js"><link rel="prefetch" href="/assets/js/165.a5f5cd29.js"><link rel="prefetch" href="/assets/js/166.767b9987.js"><link rel="prefetch" href="/assets/js/167.1ffc72bf.js"><link rel="prefetch" href="/assets/js/168.515eab1b.js"><link rel="prefetch" href="/assets/js/169.dcc68995.js"><link rel="prefetch" href="/assets/js/17.bac8416c.js"><link rel="prefetch" href="/assets/js/170.64bfe5e6.js"><link rel="prefetch" href="/assets/js/171.5ad45642.js"><link rel="prefetch" href="/assets/js/172.b6d37b2e.js"><link rel="prefetch" href="/assets/js/173.19619648.js"><link rel="prefetch" href="/assets/js/174.eaff3157.js"><link rel="prefetch" href="/assets/js/175.2dffa431.js"><link rel="prefetch" href="/assets/js/176.3096d3a7.js"><link rel="prefetch" href="/assets/js/177.6d911d1f.js"><link rel="prefetch" href="/assets/js/178.a8b4f936.js"><link rel="prefetch" href="/assets/js/179.3003a50e.js"><link rel="prefetch" href="/assets/js/18.38c2d3ff.js"><link rel="prefetch" href="/assets/js/180.a03fd18b.js"><link rel="prefetch" href="/assets/js/181.62ce609e.js"><link rel="prefetch" href="/assets/js/182.00b6356e.js"><link rel="prefetch" href="/assets/js/183.6adc62eb.js"><link rel="prefetch" href="/assets/js/184.b11447af.js"><link rel="prefetch" href="/assets/js/185.6a9556de.js"><link rel="prefetch" href="/assets/js/186.5b458a07.js"><link rel="prefetch" href="/assets/js/187.a9bd8543.js"><link rel="prefetch" href="/assets/js/188.627a76f3.js"><link rel="prefetch" href="/assets/js/19.62378543.js"><link rel="prefetch" href="/assets/js/20.31bf256b.js"><link rel="prefetch" href="/assets/js/21.dd768b7c.js"><link rel="prefetch" href="/assets/js/22.f270cfbc.js"><link rel="prefetch" href="/assets/js/23.652c5b0a.js"><link rel="prefetch" href="/assets/js/24.d8a77731.js"><link rel="prefetch" href="/assets/js/25.f4efa277.js"><link rel="prefetch" href="/assets/js/26.775d7d00.js"><link rel="prefetch" href="/assets/js/27.a42e7481.js"><link rel="prefetch" href="/assets/js/28.c81142a3.js"><link rel="prefetch" href="/assets/js/29.104d30bb.js"><link rel="prefetch" href="/assets/js/30.eeaa063e.js"><link rel="prefetch" href="/assets/js/31.c08c3cc6.js"><link rel="prefetch" href="/assets/js/32.96914904.js"><link rel="prefetch" href="/assets/js/33.b5e70d92.js"><link rel="prefetch" href="/assets/js/34.f72f363f.js"><link rel="prefetch" href="/assets/js/35.8e461891.js"><link rel="prefetch" href="/assets/js/36.a3887f60.js"><link rel="prefetch" href="/assets/js/37.f8ac624a.js"><link rel="prefetch" href="/assets/js/38.f9e3dfe7.js"><link rel="prefetch" href="/assets/js/39.00c6dac4.js"><link rel="prefetch" href="/assets/js/4.4a2913bc.js"><link rel="prefetch" href="/assets/js/40.0431cb0b.js"><link rel="prefetch" href="/assets/js/41.a0b96bac.js"><link rel="prefetch" href="/assets/js/42.81504763.js"><link rel="prefetch" href="/assets/js/43.a2f1e577.js"><link rel="prefetch" href="/assets/js/44.c6e577c7.js"><link rel="prefetch" href="/assets/js/45.e19251cb.js"><link rel="prefetch" href="/assets/js/46.2736b4a4.js"><link rel="prefetch" href="/assets/js/47.74eb52c3.js"><link rel="prefetch" href="/assets/js/48.e175852f.js"><link rel="prefetch" href="/assets/js/49.470cd3e4.js"><link rel="prefetch" href="/assets/js/5.894dfcfd.js"><link rel="prefetch" href="/assets/js/50.aa07f64f.js"><link rel="prefetch" href="/assets/js/51.7491ccca.js"><link rel="prefetch" href="/assets/js/52.ede9d894.js"><link rel="prefetch" href="/assets/js/53.f4ec39bc.js"><link rel="prefetch" href="/assets/js/54.11693e63.js"><link rel="prefetch" href="/assets/js/55.6158a230.js"><link rel="prefetch" href="/assets/js/56.d30bcbf8.js"><link rel="prefetch" href="/assets/js/57.7a28a471.js"><link rel="prefetch" href="/assets/js/58.f0c30984.js"><link rel="prefetch" href="/assets/js/59.ab16feee.js"><link rel="prefetch" href="/assets/js/6.71d47490.js"><link rel="prefetch" href="/assets/js/60.1c81418c.js"><link rel="prefetch" href="/assets/js/61.1dd5070d.js"><link rel="prefetch" href="/assets/js/62.7f7ce997.js"><link rel="prefetch" href="/assets/js/63.2cb3686d.js"><link rel="prefetch" href="/assets/js/64.18048f56.js"><link rel="prefetch" href="/assets/js/65.87291046.js"><link rel="prefetch" href="/assets/js/66.a7a7575d.js"><link rel="prefetch" href="/assets/js/67.ca181b91.js"><link rel="prefetch" href="/assets/js/68.4a9df39d.js"><link rel="prefetch" href="/assets/js/69.4a2661f5.js"><link rel="prefetch" href="/assets/js/7.6ba3ae87.js"><link rel="prefetch" href="/assets/js/70.0613e6ac.js"><link rel="prefetch" href="/assets/js/71.b092300b.js"><link rel="prefetch" href="/assets/js/72.25f9363b.js"><link rel="prefetch" href="/assets/js/73.be14e0d3.js"><link rel="prefetch" href="/assets/js/74.02d90af1.js"><link rel="prefetch" href="/assets/js/75.effffafd.js"><link rel="prefetch" href="/assets/js/76.c53ee55b.js"><link rel="prefetch" href="/assets/js/77.4aa1108d.js"><link rel="prefetch" href="/assets/js/78.672c6170.js"><link rel="prefetch" href="/assets/js/79.caf6aebe.js"><link rel="prefetch" href="/assets/js/8.89bc7f6d.js"><link rel="prefetch" href="/assets/js/80.39b1897d.js"><link rel="prefetch" href="/assets/js/81.7cce90fa.js"><link rel="prefetch" href="/assets/js/82.5be4879f.js"><link rel="prefetch" href="/assets/js/83.b47ca97a.js"><link rel="prefetch" href="/assets/js/84.93b6da79.js"><link rel="prefetch" href="/assets/js/85.97f70ae7.js"><link rel="prefetch" href="/assets/js/86.aa40b1cc.js"><link rel="prefetch" href="/assets/js/87.2a9e64ba.js"><link rel="prefetch" href="/assets/js/88.960c348f.js"><link rel="prefetch" href="/assets/js/89.81c8200d.js"><link rel="prefetch" href="/assets/js/9.31afac8d.js"><link rel="prefetch" href="/assets/js/90.313a5e05.js"><link rel="prefetch" href="/assets/js/91.dfb38398.js"><link rel="prefetch" href="/assets/js/92.7eac20c9.js"><link rel="prefetch" href="/assets/js/93.cb7e9ce1.js"><link rel="prefetch" href="/assets/js/94.7ae95a84.js"><link rel="prefetch" href="/assets/js/95.7f792a23.js"><link rel="prefetch" href="/assets/js/96.596eb777.js"><link rel="prefetch" href="/assets/js/97.06b96fe1.js"><link rel="prefetch" href="/assets/js/98.7c50f666.js"><link rel="prefetch" href="/assets/js/99.a5d107f2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>刘文奇</h3> <p class="description" data-v-59e6cb88>个人博客，技术笔记整理</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="刘文奇" class="logo"> <span class="site-name">刘文奇</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><!----> <h3 class="name" data-v-1fad0c41>
+    刘文奇
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>178</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>107</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>缓存选型</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">缓存选型</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>刘文奇</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>9/4/2016</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/memcached.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>缓存</span><span class="tag-item" data-v-8a445198>memcached</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="memchached-还是-redis"><a href="#memchached-还是-redis" class="header-anchor">#</a> Memchached 还是 Redis?</h1> <p>该用哪一个？当我们讨论改进性能的时候，这是每次技术讨论中最常见的一个问题。每当性能需要改善时，采用缓存常常是迈出的第一步。与此同时，选择Memcached 或者 Redis 通常是第一个需要考虑的地方。哪个能给我们提供更佳的性能？它们的优点和缺点又是什么？</p> <blockquote><p>在设计任何缓存系统时，我们考虑如下几点：</p></blockquote> <ul><li>读/写速度</li> <li>内存使用情况</li> <li>磁盘 I/O 转储.</li> <li>伸缩性.</li></ul> <h2 id="redis-memchached-之间的相似之处"><a href="#redis-memchached-之间的相似之处" class="header-anchor">#</a> Redis &amp; Memchached 之间的相似之处:</h2> <p>Memcached/Redis 两者都提供基于内存的、键-值数据存储，尽管Redis更准确的说是结构化数据存储。Redis是内存中的结构化数据存储器，用于数据库、缓存、消息代理。两者（Memcached/Redis）都属于数据管理方案中的NoSQL家族，都是基于键-值存储的。它们都在内存中保存数据，当然使它们作为缓存层特别有用。</p> <p>截至今日，<code>Memcached提供的每项主要功能及其优势，都是Redis功能和特性的子集</code>。<code>任何用例中可能使用Memcached的地方都可以对等的使用Redis</code>。它们都是闪电般快速的高速缓存。Memcached提供的只是Redis拥有功能的冰山一角。Memcached是一个基于易失性内存的键-值存储器。Redis一样可以做到（跟Memcached做得一样好），但是它还是一个结构化数据服务器。</p> <h3 id="为什么选-memcached"><a href="#为什么选-memcached" class="header-anchor">#</a> 为什么选 Memcached?</h3> <p>当缓存相对较小和使用静态的数据时候，比如HTML代码片段，Memcached可能更为可取。Memcached内部的内存管理在最简单的用例中更为有效，因为它的元数据消耗相对更少的内存资源。</p> <p>当数据尺寸是动态的时候，Memcached的内存管理效率下降的很快，此时Memcached的内存会变成碎片。而且，大的数据集经常牵扯到数据序列化，总是需要更多的空间来存储。如果你使用Memcached，数据会随着重启动而丢失，重建缓存是个代价高昂的过程。</p> <p>Memcached比Redis更具优势的另一个场景在伸缩性。</p> <p>因为Memcached是多线程的，所以你可以通过给它更多计算资源让它轻松扩展。</p> <p>Redis是单线程的，可以通过集群无损水平扩展。集群是一个有效的扩展方案，但是相对来说配置、操作复杂。Memcached不支持复制功能（数据从一台机器自动复制到另外一台）。</p> <p>Memcached 非常适合处理高流量的网站。它可以一次性读取大量的信息，并在优秀的反应时间内返回。Redis不但能处理高流量的读，还能处理繁重的写入。</p> <h3 id="为什么选-redis"><a href="#为什么选-redis" class="header-anchor">#</a> 为什么选 Redis?</h3> <p>Redis有五种主要的数据结构可以选择。通过对缓存数据智能化的缓存和处理，它为应用程序开发人员打开了存在各种可能的新世界。由于其数据结构（使用多种格式存储数据：列表、数组、集合、有序集合）特性，Redis作为缓存系统提供了更多的能力和总体上更好的效率。缓存使用一种称为“数据回收”的机制，通过从内存中删除旧数据为新数据腾出空间。Memcached的数据回收机制使用了LRU（Least Recently Used-最近最少使用）算法，但回收与新数据近似大小的数据时有点随意性。</p> <p>Redis允许对回收进行细粒度的控制，让你选择六种不同的回收策略。Redis同时支持惰性（被动）和主动回收，只有在需要更多空间或主动激活时才回收数据。另一方面，Memcached只支持惰性回收。</p> <p>以下是redis提供的一些功能，可以用于“真实”数据存储，而不仅仅是缓存。</p> <p>强大的数据类型和可利用它们的强大命令支持。哈希、有序集合、列表等。
+默认的磁盘持久化支持
+使用乐观锁的事务支持 (WATCH/MULTI/EXEC)
+发布/订阅功能，速度极快
+高达512MB的键值尺寸上限（Memcached每个键值限于1MB大小）
+Lua 脚本支持 (2.6及以上版本)
+内置集群支持 (3.0及以上版本)
+一切都极快
+强大的数据类型尤为重要。它们允许Redis提供一个出色的共享队列（list），一个很棒的消息传递解决方案（pub/sub），一个存储会话信息（hashes）的好地方，还有一个引人注目的高分值追踪区域（sorted sets）。它们仅仅是简单探讨就能得到的使用样例。</p> <p>结论
+Redis与Memcached相比，性能和内存使用情况相当相似。除非你已经在Memcached上投入了大笔资金，否则向前推进使用Redis是显而易见的解决方案。不仅Redis是更好的选择，它还支持全新类型的用例和使用模式。</p> <p>Redis可能会非常有用的一些示例应用程序：</p> <p>电子商务应用：大多数的电子商务应用量级比较重，Redis可以提升你的页面加载速度。你可以存储所有的配置文件到Redis，从内存中读取这些配置信息速度会非常快速。你也可以在Redis中存储完整的页面缓存，因为它的键值容量很大。你也可以存储会话信息到Redis。</p> <p>物联网应用：在物联网应用中，物联网设备非常频繁的发送数据到服务器，比如每秒钟数千条。在把它们存储到任何持久性存储器之前，你可以先把这些高容量的原始数据推送到Redis。</p> <p>实时分析：可以在Memcached上实现一个实时的分析引擎，以数据库为后盾。但是Redis非常擅长统计列表和一系列事物。在所有的Redis功能特性中，它对键值进行排序的能力超过了Memcached，还有计算一组页面的点击次数等数据，然后将这些数字汇总进入分析系统。这些数据可通过工作人员输入到更大的分析引擎，在这些应用场合选择Redis是正确的决定之一。</p> <p>最后一件事：不管你选择什么，缓存系统都不是数据库。你不能光靠缓存，系统同时需要缓存和数据库。</p> <h1 id="memcached安装与部署"><a href="#memcached安装与部署" class="header-anchor">#</a> Memcached安装与部署</h1> <p>一. 检查是否安装libevent</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">rpm</span> -qa<span class="token operator">|</span><span class="token function">grep</span> libevent  
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>如果已经安装libevent，需要查看libevent的安装路径，后面需要使用</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">rpm</span> <span class="token parameter variable">-ql</span> libevent 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>二. 安装livevent(已安装忽略此步)</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">wget</span> https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
+
+<span class="token function">tar</span> <span class="token parameter variable">-zxvf</span>  libevent-2.1.8-stable.tar.gz
+
+<span class="token builtin class-name">cd</span> libevent-2.1.8-stable
+
+./configure <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/usr/local/libevent
+
+<span class="token function">make</span> <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>三、安装memcache</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> memcached-1.5.7.tar.gz 
+
+<span class="token builtin class-name">cd</span> memcached-1.5.7/ 
+
+./configure -with-libevent<span class="token operator">=</span>/usr/local/libevent/ <span class="token parameter variable">-prefix</span><span class="token operator">=</span>/usr/local/memcached
+
+<span class="token function">make</span> <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token function">install</span> 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>开启memcache，并连接测试</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>以守护进程模式启动memcached
+/usr/local/memcached/bin/memcached <span class="token parameter variable">-d</span> <span class="token parameter variable">-l</span> <span class="token number">192.168</span>.189.129 <span class="token parameter variable">-p</span> <span class="token number">11211</span> <span class="token parameter variable">-m</span> <span class="token number">2048</span> <span class="token parameter variable">-u</span> root
+
+查看memcache是否开启
+<span class="token function">netstat</span> <span class="token parameter variable">-ntpl</span> <span class="token operator">|</span> <span class="token function">grep</span> memcache
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>客户端连接测试（使用telnet）</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>telnet <span class="token number">192</span>.XXX.XXX.XXX <span class="token number">11211</span>
+能连接上说明安装成功
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>四、启动参数
+查看memcache的启动参数</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>/usr/local/memcached/bin/memcached <span class="token parameter variable">-h</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>常用的如下：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token parameter variable">-d</span> 以守护进程（daemon）方式运行memcached
+<span class="token parameter variable">-m</span> 设置memcached可以使用的内存大小，单位MB
+<span class="token parameter variable">-l</span>  设置可以监听的IP地址，本机通常不设置此参数
+<span class="token parameter variable">-p</span> 设置监听端口，默认11211，也可以不设置此参数
+<span class="token parameter variable">-n</span>  指定用户，如果当前为root，需要使用此参数指定用户
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>五、安装Memcached客户端</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">wget</span> http://pecl.php.net/get/memcache-2.2.5.tgz
+<span class="token function">tar</span> <span class="token parameter variable">-zxvf</span> memcache-2.2.5.tgz
+<span class="token builtin class-name">cd</span> memcache-2.2.5.tgz
+phpize
+./configure <span class="token parameter variable">--enable</span> <span class="token parameter variable">-memcache</span> <span class="token parameter variable">--with</span> <span class="token parameter variable">-php</span> <span class="token parameter variable">-config</span><span class="token operator">=</span>/usr/local/php/bin/php <span class="token parameter variable">-config</span> --with-zlib-dir
+<span class="token function">make</span>
+<span class="token function">make</span> <span class="token function">install</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>在php配置文件里加入一下配置</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>extension <span class="token operator">=</span> /usr/local/php/lib/php/extensions/no-debug-non-zts-20180326/memcache.so
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>重启web服务器，查看<code>phpinfo（）；</code></p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/memcached.html#redis-memchached-之间的相似之处" class="sidebar-link reco-side-redis-memchached-之间的相似之处" data-v-b57cc07c>Redis &amp; Memchached 之间的相似之处:</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/memcached.html#为什么选-memcached" class="sidebar-link reco-side-为什么选-memcached" data-v-b57cc07c>为什么选 Memcached?</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/memcached.html#为什么选-redis" class="sidebar-link reco-side-为什么选-redis" data-v-b57cc07c>为什么选 Redis?</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.402024e5.js" defer></script><script src="/assets/js/3.35889db3.js" defer></script><script src="/assets/js/1.98e71d3a.js" defer></script><script src="/assets/js/104.6ef1e09a.js" defer></script>
+  </body>
+</html>

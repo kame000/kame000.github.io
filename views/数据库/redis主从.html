@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>redis主从 | 刘文奇</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="个人博客，技术笔记整理">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.402024e5.js" as="script"><link rel="preload" href="/assets/js/3.35889db3.js" as="script"><link rel="preload" href="/assets/js/1.98e71d3a.js" as="script"><link rel="preload" href="/assets/js/115.6d0b291a.js" as="script"><link rel="prefetch" href="/assets/js/10.d70328f8.js"><link rel="prefetch" href="/assets/js/100.bdfeee98.js"><link rel="prefetch" href="/assets/js/101.0f0aa0e3.js"><link rel="prefetch" href="/assets/js/102.8810b363.js"><link rel="prefetch" href="/assets/js/103.018076eb.js"><link rel="prefetch" href="/assets/js/104.6ef1e09a.js"><link rel="prefetch" href="/assets/js/105.ef045d33.js"><link rel="prefetch" href="/assets/js/106.3aafc27c.js"><link rel="prefetch" href="/assets/js/107.f3da675e.js"><link rel="prefetch" href="/assets/js/108.6a197ffd.js"><link rel="prefetch" href="/assets/js/109.9bdef9f9.js"><link rel="prefetch" href="/assets/js/11.8a566d2b.js"><link rel="prefetch" href="/assets/js/110.57ebc428.js"><link rel="prefetch" href="/assets/js/111.b5447738.js"><link rel="prefetch" href="/assets/js/112.c716f5e7.js"><link rel="prefetch" href="/assets/js/113.557f7376.js"><link rel="prefetch" href="/assets/js/114.61a54316.js"><link rel="prefetch" href="/assets/js/116.8c93c654.js"><link rel="prefetch" href="/assets/js/117.07743f06.js"><link rel="prefetch" href="/assets/js/118.d1774c94.js"><link rel="prefetch" href="/assets/js/119.05fc2356.js"><link rel="prefetch" href="/assets/js/12.f6bcfd1f.js"><link rel="prefetch" href="/assets/js/120.2444fe97.js"><link rel="prefetch" href="/assets/js/121.ca03cbf1.js"><link rel="prefetch" href="/assets/js/122.4fea1a12.js"><link rel="prefetch" href="/assets/js/123.0e2b6ebe.js"><link rel="prefetch" href="/assets/js/124.61410c00.js"><link rel="prefetch" href="/assets/js/125.98a05a32.js"><link rel="prefetch" href="/assets/js/126.f734fc8e.js"><link rel="prefetch" href="/assets/js/127.e9acb272.js"><link rel="prefetch" href="/assets/js/128.d4b47285.js"><link rel="prefetch" href="/assets/js/129.aa6f2614.js"><link rel="prefetch" href="/assets/js/13.fa622aa3.js"><link rel="prefetch" href="/assets/js/130.244a3895.js"><link rel="prefetch" href="/assets/js/131.86c3a012.js"><link rel="prefetch" href="/assets/js/132.fe1b85d2.js"><link rel="prefetch" href="/assets/js/133.e238c5c4.js"><link rel="prefetch" href="/assets/js/134.1b5b832b.js"><link rel="prefetch" href="/assets/js/135.6468c4f0.js"><link rel="prefetch" href="/assets/js/136.19775bf4.js"><link rel="prefetch" href="/assets/js/137.c6d0ed15.js"><link rel="prefetch" href="/assets/js/138.230a86e2.js"><link rel="prefetch" href="/assets/js/139.64f42c07.js"><link rel="prefetch" href="/assets/js/14.3c87d1f8.js"><link rel="prefetch" href="/assets/js/140.607b2c0d.js"><link rel="prefetch" href="/assets/js/141.224b1c65.js"><link rel="prefetch" href="/assets/js/142.0d0fc6e0.js"><link rel="prefetch" href="/assets/js/143.c78f7a17.js"><link rel="prefetch" href="/assets/js/144.5f6b6fe2.js"><link rel="prefetch" href="/assets/js/145.d9203869.js"><link rel="prefetch" href="/assets/js/146.ac383aae.js"><link rel="prefetch" href="/assets/js/147.5ad44c9c.js"><link rel="prefetch" href="/assets/js/148.4f051907.js"><link rel="prefetch" href="/assets/js/149.ba645a2b.js"><link rel="prefetch" href="/assets/js/15.527a7f7a.js"><link rel="prefetch" href="/assets/js/150.ac4e4278.js"><link rel="prefetch" href="/assets/js/151.0a2827cd.js"><link rel="prefetch" href="/assets/js/152.7a554168.js"><link rel="prefetch" href="/assets/js/153.af52f866.js"><link rel="prefetch" href="/assets/js/154.2ce71126.js"><link rel="prefetch" href="/assets/js/155.7154dc6f.js"><link rel="prefetch" href="/assets/js/156.3d24250b.js"><link rel="prefetch" href="/assets/js/157.59ac5226.js"><link rel="prefetch" href="/assets/js/158.2d506491.js"><link rel="prefetch" href="/assets/js/159.92262746.js"><link rel="prefetch" href="/assets/js/16.aebd5e39.js"><link rel="prefetch" href="/assets/js/160.63210a31.js"><link rel="prefetch" href="/assets/js/161.9b44e7a4.js"><link rel="prefetch" href="/assets/js/162.5b61f2c7.js"><link rel="prefetch" href="/assets/js/163.7589d833.js"><link rel="prefetch" href="/assets/js/164.b5c15ecb.js"><link rel="prefetch" href="/assets/js/165.a5f5cd29.js"><link rel="prefetch" href="/assets/js/166.767b9987.js"><link rel="prefetch" href="/assets/js/167.1ffc72bf.js"><link rel="prefetch" href="/assets/js/168.515eab1b.js"><link rel="prefetch" href="/assets/js/169.dcc68995.js"><link rel="prefetch" href="/assets/js/17.bac8416c.js"><link rel="prefetch" href="/assets/js/170.64bfe5e6.js"><link rel="prefetch" href="/assets/js/171.5ad45642.js"><link rel="prefetch" href="/assets/js/172.b6d37b2e.js"><link rel="prefetch" href="/assets/js/173.19619648.js"><link rel="prefetch" href="/assets/js/174.eaff3157.js"><link rel="prefetch" href="/assets/js/175.2dffa431.js"><link rel="prefetch" href="/assets/js/176.3096d3a7.js"><link rel="prefetch" href="/assets/js/177.6d911d1f.js"><link rel="prefetch" href="/assets/js/178.a8b4f936.js"><link rel="prefetch" href="/assets/js/179.3003a50e.js"><link rel="prefetch" href="/assets/js/18.38c2d3ff.js"><link rel="prefetch" href="/assets/js/180.a03fd18b.js"><link rel="prefetch" href="/assets/js/181.62ce609e.js"><link rel="prefetch" href="/assets/js/182.00b6356e.js"><link rel="prefetch" href="/assets/js/183.6adc62eb.js"><link rel="prefetch" href="/assets/js/184.b11447af.js"><link rel="prefetch" href="/assets/js/185.6a9556de.js"><link rel="prefetch" href="/assets/js/186.5b458a07.js"><link rel="prefetch" href="/assets/js/187.a9bd8543.js"><link rel="prefetch" href="/assets/js/188.627a76f3.js"><link rel="prefetch" href="/assets/js/19.62378543.js"><link rel="prefetch" href="/assets/js/20.31bf256b.js"><link rel="prefetch" href="/assets/js/21.dd768b7c.js"><link rel="prefetch" href="/assets/js/22.f270cfbc.js"><link rel="prefetch" href="/assets/js/23.652c5b0a.js"><link rel="prefetch" href="/assets/js/24.d8a77731.js"><link rel="prefetch" href="/assets/js/25.f4efa277.js"><link rel="prefetch" href="/assets/js/26.775d7d00.js"><link rel="prefetch" href="/assets/js/27.a42e7481.js"><link rel="prefetch" href="/assets/js/28.c81142a3.js"><link rel="prefetch" href="/assets/js/29.104d30bb.js"><link rel="prefetch" href="/assets/js/30.eeaa063e.js"><link rel="prefetch" href="/assets/js/31.c08c3cc6.js"><link rel="prefetch" href="/assets/js/32.96914904.js"><link rel="prefetch" href="/assets/js/33.b5e70d92.js"><link rel="prefetch" href="/assets/js/34.f72f363f.js"><link rel="prefetch" href="/assets/js/35.8e461891.js"><link rel="prefetch" href="/assets/js/36.a3887f60.js"><link rel="prefetch" href="/assets/js/37.f8ac624a.js"><link rel="prefetch" href="/assets/js/38.f9e3dfe7.js"><link rel="prefetch" href="/assets/js/39.00c6dac4.js"><link rel="prefetch" href="/assets/js/4.4a2913bc.js"><link rel="prefetch" href="/assets/js/40.0431cb0b.js"><link rel="prefetch" href="/assets/js/41.a0b96bac.js"><link rel="prefetch" href="/assets/js/42.81504763.js"><link rel="prefetch" href="/assets/js/43.a2f1e577.js"><link rel="prefetch" href="/assets/js/44.c6e577c7.js"><link rel="prefetch" href="/assets/js/45.e19251cb.js"><link rel="prefetch" href="/assets/js/46.2736b4a4.js"><link rel="prefetch" href="/assets/js/47.74eb52c3.js"><link rel="prefetch" href="/assets/js/48.e175852f.js"><link rel="prefetch" href="/assets/js/49.470cd3e4.js"><link rel="prefetch" href="/assets/js/5.894dfcfd.js"><link rel="prefetch" href="/assets/js/50.aa07f64f.js"><link rel="prefetch" href="/assets/js/51.7491ccca.js"><link rel="prefetch" href="/assets/js/52.ede9d894.js"><link rel="prefetch" href="/assets/js/53.f4ec39bc.js"><link rel="prefetch" href="/assets/js/54.11693e63.js"><link rel="prefetch" href="/assets/js/55.6158a230.js"><link rel="prefetch" href="/assets/js/56.d30bcbf8.js"><link rel="prefetch" href="/assets/js/57.7a28a471.js"><link rel="prefetch" href="/assets/js/58.f0c30984.js"><link rel="prefetch" href="/assets/js/59.ab16feee.js"><link rel="prefetch" href="/assets/js/6.71d47490.js"><link rel="prefetch" href="/assets/js/60.1c81418c.js"><link rel="prefetch" href="/assets/js/61.1dd5070d.js"><link rel="prefetch" href="/assets/js/62.7f7ce997.js"><link rel="prefetch" href="/assets/js/63.2cb3686d.js"><link rel="prefetch" href="/assets/js/64.18048f56.js"><link rel="prefetch" href="/assets/js/65.87291046.js"><link rel="prefetch" href="/assets/js/66.a7a7575d.js"><link rel="prefetch" href="/assets/js/67.ca181b91.js"><link rel="prefetch" href="/assets/js/68.4a9df39d.js"><link rel="prefetch" href="/assets/js/69.4a2661f5.js"><link rel="prefetch" href="/assets/js/7.6ba3ae87.js"><link rel="prefetch" href="/assets/js/70.0613e6ac.js"><link rel="prefetch" href="/assets/js/71.b092300b.js"><link rel="prefetch" href="/assets/js/72.25f9363b.js"><link rel="prefetch" href="/assets/js/73.be14e0d3.js"><link rel="prefetch" href="/assets/js/74.02d90af1.js"><link rel="prefetch" href="/assets/js/75.effffafd.js"><link rel="prefetch" href="/assets/js/76.c53ee55b.js"><link rel="prefetch" href="/assets/js/77.4aa1108d.js"><link rel="prefetch" href="/assets/js/78.672c6170.js"><link rel="prefetch" href="/assets/js/79.caf6aebe.js"><link rel="prefetch" href="/assets/js/8.89bc7f6d.js"><link rel="prefetch" href="/assets/js/80.39b1897d.js"><link rel="prefetch" href="/assets/js/81.7cce90fa.js"><link rel="prefetch" href="/assets/js/82.5be4879f.js"><link rel="prefetch" href="/assets/js/83.b47ca97a.js"><link rel="prefetch" href="/assets/js/84.93b6da79.js"><link rel="prefetch" href="/assets/js/85.97f70ae7.js"><link rel="prefetch" href="/assets/js/86.aa40b1cc.js"><link rel="prefetch" href="/assets/js/87.2a9e64ba.js"><link rel="prefetch" href="/assets/js/88.960c348f.js"><link rel="prefetch" href="/assets/js/89.81c8200d.js"><link rel="prefetch" href="/assets/js/9.31afac8d.js"><link rel="prefetch" href="/assets/js/90.313a5e05.js"><link rel="prefetch" href="/assets/js/91.dfb38398.js"><link rel="prefetch" href="/assets/js/92.7eac20c9.js"><link rel="prefetch" href="/assets/js/93.cb7e9ce1.js"><link rel="prefetch" href="/assets/js/94.7ae95a84.js"><link rel="prefetch" href="/assets/js/95.7f792a23.js"><link rel="prefetch" href="/assets/js/96.596eb777.js"><link rel="prefetch" href="/assets/js/97.06b96fe1.js"><link rel="prefetch" href="/assets/js/98.7c50f666.js"><link rel="prefetch" href="/assets/js/99.a5d107f2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>刘文奇</h3> <p class="description" data-v-59e6cb88>个人博客，技术笔记整理</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="刘文奇" class="logo"> <span class="site-name">刘文奇</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><!----> <h3 class="name" data-v-1fad0c41>
+    刘文奇
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>178</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>107</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>redis主从</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">redis主从</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>刘文奇</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>5/6/2016</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>redis</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="redis-主从"><a href="#redis-主从" class="header-anchor">#</a> redis 主从</h2> <p><code>Redis</code> 是一个使用 <code>ANSI C</code> 编写的开源、支持 <strong>网络</strong>、基于 <strong>内存</strong>、<strong>单线程模型</strong>、<strong>可选持久性</strong> 的 <strong>键值对存储数据库</strong>。</p> <h2 id="_1-redis的特性"><a href="#_1-redis的特性" class="header-anchor">#</a> 1. Redis的特性</h2> <ol><li>速度快，最快可达到 <code>10w QPS</code>（基于 <strong>内存</strong>，<code>C</code> 语言，<strong>单线程</strong> 架构）；</li> <li>基于 <strong>键值对</strong> (<code>key/value</code>) 的数据结构服务器。全称 <code>Remote Dictionary Server</code>。包括 <code>string</code>(<strong>字符串</strong>)、<code>hash</code>(<strong>哈希</strong>)、<code>list</code>(<strong>列表</strong>)、<code>set</code>(<strong>集合</strong>)、<code>zset</code>(<strong>有序集合</strong>)、<code>bitmap</code>(<strong>位图</strong>)。同时在 <strong>字符串</strong> 的基础上演变出 <strong>位图</strong>（<code>BitMaps</code>）和 <code>HyperLogLog</code> 两种数据结构。<code>3.2</code> 版本中加入 <code>GEO</code>（<strong>地理信息位置</strong>）。</li> <li>丰富的功能。例如：<strong>键过期</strong>（缓存），<strong>发布订阅</strong>（消息队列）， <code>Lua</code> 脚本（自己实现 <code>Redis</code> 命令），<strong>事务</strong>，<strong>流水线</strong>（<code>Pipeline</code>，用于减少网络开销）。</li> <li>简单稳定。无外部库依赖，单线程模型。</li> <li>客户端语言多。</li> <li><strong>持久化</strong>（支持两种 <strong>持久化</strong> 方式 <code>RDB</code> 和 <code>AOF</code>）。</li> <li><strong>主从复制</strong>（分布式的基础）。</li> <li><strong>高可用</strong>（<code>Redis Sentinel</code>），<strong>分布式</strong>（<code>Redis Cluster</code>）和 <strong>水平扩容</strong>。</li></ol> <h2 id="_2-redis的应用场景"><a href="#_2-redis的应用场景" class="header-anchor">#</a> 2. Redis的应用场景</h2> <h3 id="_2-1-缓存"><a href="#_2-1-缓存" class="header-anchor">#</a> 2.1. 缓存</h3> <p>合理的使用 <strong>缓存</strong> 能够明显加快访问的速度，同时降低数据源的压力。这也是 <code>Redis</code> 最常用的功能。<code>Redis</code> 提供了 <strong>键值过期时间</strong>（<code>EXPIRE key seconds</code>）设置，并且也提供了灵活控制 <strong>最大内存</strong> 和 <strong>内存溢出</strong> 后的 <strong>淘汰策略</strong>。</p> <h3 id="_2-2-排行榜"><a href="#_2-2-排行榜" class="header-anchor">#</a> 2.2. 排行榜</h3> <p>每个网站都有自己的排行榜，例如按照 <strong>热度排名</strong> 的排行榜，<strong>发布时间</strong> 的排行榜，<strong>答题排行榜</strong> 等等。<code>Redis</code> 提供了 <strong>列表</strong>（<code>list</code>）和 <strong>有序集合</strong>（<code>zset</code>）数据结构，合理的使用这些数据结构，可以很方便的构建各种排行榜系统。</p> <h3 id="_2-3-计数器"><a href="#_2-3-计数器" class="header-anchor">#</a> 2.3. 计数器</h3> <p><strong>计数器</strong> 在网站应用中非常重要。例如：<strong>点赞数</strong>加 <code>1</code>，<strong>浏览数</strong> 加 <code>1</code>。还有常用的 <strong>限流操作</strong>，限制每个用户每秒 <strong>访问系统的次数</strong> 等等。<code>Redis</code> 支持 <strong>计数功能</strong>（<code>INCR key</code>），而且计数的 <strong>性能</strong> 也非常好，计数的同时也可以设置 <strong>超时时间</strong>，这样就可以 <strong>实现限流</strong>。</p> <h3 id="_2-4-社交网络"><a href="#_2-4-社交网络" class="header-anchor">#</a> 2.4. 社交网络</h3> <p>赞/踩，粉丝，共同好友/喜好，推送，下拉刷新等是社交网站必备的功能。由于社交网站 <strong>访问量通常比较大</strong>，而且 <strong>传统的数据库</strong> 不太适合保存这类数据，<code>Redis</code> 提供的 <strong>数据结构</strong> 可以相对比较容易实现这些功能。</p> <h3 id="_2-5-消息队列"><a href="#_2-5-消息队列" class="header-anchor">#</a> 2.5. 消息队列</h3> <p><code>Redis</code> 提供的 <strong>发布订阅</strong>（<code>PUB/SUB</code>）和 <strong>阻塞队列</strong> 的功能，虽然和专业的消息队列比，还 <strong>不够强大</strong>，但对于一般的消息队列功能基本满足。</p> <h2 id="_3-redis的安装配置"><a href="#_3-redis的安装配置" class="header-anchor">#</a> 3. Redis的安装配置</h2> <p>下面介绍一下 <code>Redis</code> 的安装流程。我会按照如下的顺序，逐步搭建出 <strong>高可用</strong> 的 <code>Redis</code> 缓存服务器集群。</p> <ul><li><code>Redis</code> <strong>单机服务器</strong> 搭建</li> <li><code>Redis</code> <strong>主从复制</strong> 搭建</li> <li><code>Redis-Sentinel</code> <strong>高可用</strong> 搭建</li></ul> <h3 id="_3-1-redis单机服务器安装"><a href="#_3-1-redis单机服务器安装" class="header-anchor">#</a> 3.1. Redis单机服务器安装</h3> <h4 id="_3-1-1-下载并解压"><a href="#_3-1-1-下载并解压" class="header-anchor">#</a> 3.1.1. 下载并解压</h4> <p>首先从 <code>Redis</code> 官网下载 <code>Redis</code> 源代码并解压，这里使用的是 <strong>最新稳定版本</strong> <code>4.0.11</code>。依次执行如下命令：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>cd /usr/local/
+wget http://download.redis.io/releases/redis-4.0.11.tar.gz
+tar -zxvf redis-4.0.2.tar.gz
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h4 id="_3-1-2-编译并安装"><a href="#_3-1-2-编译并安装" class="header-anchor">#</a> 3.1.2. 编译并安装</h4> <p>下载并解压完毕后，则对 <strong>源码包</strong> 进行 <strong>编译安装</strong>，这里 <code>Redis</code> 安装路径为 <code>/usr/local/redis</code>。</p> <blockquote><p><strong>注意</strong>：<code>make install PREFIX</code>=目标安装路径</p></blockquote> <div class="language- line-numbers-mode"><pre class="language-text"><code>cd /usr/local/redis-4.0.11
+make MALLOC=libc
+make install PREFIX=/usr/local/redis
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>安装完成时，<code>/usr/local/redis/bin</code> 目录下会生成的几个可执行的文件。</p> <table><thead><tr><th style="text-align:left;">可执行文件</th> <th style="text-align:left;">作用</th></tr></thead> <tbody><tr><td style="text-align:left;">redis-server</td> <td style="text-align:left;">启动 redis 服务</td></tr> <tr><td style="text-align:left;">redis-cli	redis</td> <td style="text-align:left;">命令行客户端</td></tr> <tr><td style="text-align:left;">redis-benchmark</td> <td style="text-align:left;">redis 基准测试工具</td></tr> <tr><td style="text-align:left;">redis-check-aof</td> <td style="text-align:left;">redis AOF 持久化文件检测和修复工具</td></tr> <tr><td style="text-align:left;">redis-check-dump</td> <td style="text-align:left;">redis RDB 持久化文件检测和修复工具</td></tr> <tr><td style="text-align:left;">redis-sentinel</td> <td style="text-align:left;">启动 redis sentinel</td></tr></tbody></table> <p>复制 <code>Redis</code> 相关命令到 <code>/usr/local/bin</code> 目录下，这样就可以直接执行这些命令，不用写全路径。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ cd /usr/local/redis/bin/
+$ sudocp redis-cli redis-server redis-sentinel /usr/local/bin
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="_3-1-3-修改redis配置文件"><a href="#_3-1-3-修改redis配置文件" class="header-anchor">#</a> 3.1.3. 修改Redis配置文件</h4> <p>安装完成之后将 <code>Redis</code> 配置文件拷贝到 <code>/usr/local</code> 下，<code>redis.conf</code> 是 <code>Redis</code> 的配置文件，<code>redis.conf</code> 在 <code>Redis</code> 源码目录，<code>port</code> 默认是 <code>6379</code>。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ sudo cp /usr/local/redis-4.0.11/redis.conf /usr/local/
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><code>Redis</code> 配置文件主要参数解析参考：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># redis进程是否以守护进程的方式运行，yes为是，no为否(不以守护进程的方式运行会占用一个终端)。
+daemonize no
+# 指定redis进程的PID文件存放位置
+pidfile /var/run/redis.pid
+# redis进程的端口号
+port 6379
+# 绑定的主机地址
+bind 127.0.0.1
+# 客户端闲置多长时间后关闭连接，默认此参数为0即关闭此功能
+timeout 300
+# redis日志级别，可用的级别有debug.verbose.notice.warning
+loglevel verbose
+# log文件输出位置，如果进程以守护进程的方式运行，此处又将输出文件设置为stdout的话，就会将日志信息输出到/dev/null里面去了
+logfile stdout
+# 设置数据库的数量，默认为0可以使用select &lt;dbid&gt;命令在连接上指定数据库id
+databases 16
+# 指定在多少时间内刷新次数达到多少的时候会将数据同步到数据文件
+save &lt;seconds&gt; &lt;changes&gt;
+# 指定存储至本地数据库时是否压缩文件，默认为yes即启用存储
+rdbcompression yes
+# 指定本地数据库文件名
+dbfilename dump.db
+# 指定本地数据问就按存放位置
+dir ./
+# 指定当本机为slave服务时，设置master服务的IP地址及端口，在redis启动的时候他会自动跟master进行数据同步
+slaveof &lt;masterip&gt; &lt;masterport&gt;
+# 当master设置了密码保护时，slave服务连接master的密码
+masterauth &lt;master-password&gt;
+# 设置redis连接密码，如果配置了连接密码，客户端在连接redis是需要通过AUTH&lt;password&gt;命令提供密码，默认关闭
+requirepass footbared
+# 设置同一时间最大客户连接数，默认无限制。redis可以同时连接的客户端数为redis程序可以打开的最大文件描述符，如果设置 maxclients 0，表示不作限制。当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回 max number of clients reached 错误信息
+maxclients 128
+# 指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key。当此方法处理后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。Redis新的vm机制，会把Key存放内存，Value会存放在swap区
+maxmemory&lt;bytes&gt;
+# 指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为redis本身同步数据文件是按上面save条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为no。
+appendonly no
+# 指定跟新日志文件名默认为appendonly.aof
+appendfilename appendonly.aof
+# 指定更新日志的条件，有三个可选参数 - no：表示等操作系统进行数据缓存同步到磁盘(快)，always：表示每次更新操作后手动调用fsync()将数据写到磁盘(慢，安全)， everysec：表示每秒同步一次(折衷，默认值)；
+appendfsync everysec
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br></div></div><ul><li>设置后台启动</li></ul> <p>由于 <code>Redis</code> 默认是 <strong>前台启动</strong>，不建议使用。修改 <code>Redis</code> 配置文件，把 <code>daemonize no</code> 改为 <code>daemonize yes</code>。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>daemonize yes
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>设置远程访问</li></ul> <p><code>Redis</code> 默认只允许 <strong>本机访问</strong>，把 <code>bind</code> 修改为 <code>bind 0.0.0.0</code> 此设置会变成 <strong>允许所有远程访问</strong>。如果想指定限制访问，可设置对应的 <code>IP</code>。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>bind 0.0.0.0
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>配置 <code>Redis</code> 日志记录</li></ul> <p>找到 <code>logfile</code> 配置，默认是：<code>logfile &quot;&quot;</code>，改为自定义日志文件路径。</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>logfile /var/log/redis_6379.log
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>设置 <code>Redis</code> 请求密码</li></ul> <p>把 <code>requirepass</code> 修改为 <code>123456</code>，修改之后重启下服务</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>requirepass &quot;123456&quot;
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>有了密码之后，进入客户端，就得这样访问：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ redis-cli -h 127.0.0.1 -p 6379 -a 123456
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="_3-1-4-redis的常用命令"><a href="#_3-1-4-redis的常用命令" class="header-anchor">#</a> 3.1.4. Redis的常用命令</h4> <ul><li>启动命令</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ redis-server /usr/local/redis.conf
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>关闭命令</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ redis-cli -h 127.0.0.1 -p 6379 shutdown
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>查看是否启动</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ ps -ef | grep redis
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>进入客户端</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ redis-cli
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>关闭客户端</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ redis-cli shutdown
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><blockquote><p><strong>注意</strong>：不建议使用 <code>kill -9</code>，这种方式不但不会做持久化操作，还会造成缓冲区等资源不能优雅关闭。极端情况下造成 <code>AOF</code> 和 <strong>复制丢失数据</strong> 的情况。<code>shutdown</code> 还有一个参数，代表是否在关闭 <code>redis</code> 前，生成 <strong>持久化文件</strong>，命令为 <code>redis-cli shutdown nosave|save</code>。</p></blockquote> <ul><li>设置为开机自动启动</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ echo &quot;redis-server /usr/local/redis.conf&quot; &gt;&gt; /etc/rc.local
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>开放防火墙端口</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code># 添加规则
+iptables -I INPUT -p tcp -m tcp --dport 6379 -j ACCEPT
+# 保存规则
+service iptables save
+# 重启iptables
+service iptables restart
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h4 id="_3-1-5-注册redis为系统服务"><a href="#_3-1-5-注册redis为系统服务" class="header-anchor">#</a> 3.1.5. 注册Redis为系统服务</h4> <p>在 <code>/etc/init.d</code> 目录下添加 <code>Redis</code> 服务的 <strong>启动</strong>，<strong>暂停</strong> 和 <strong>重启</strong> 脚本：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ sudo /etc/init.d/redis
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>脚本的内容如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>#!/bin/sh  
+#  
+# redis - this script starts and stops the redis-server daemon  
+#  
+# chkconfig:   - 85 15  
+# description:  Redis is a persistent key-value database  
+# processname: redis-server  
+# config:      /usr/local/redis/bin/redis-server
+# config:      /etc/redis.conf  
+# Source function library.  
+. /etc/rc.d/init.d/functions  
+# Source networking configuration.  
+. /etc/sysconfig/network  
+# Check that networking is up.  
+[ &quot;$NETWORKING&quot; = &quot;no&quot; ] &amp;&amp; exit 0  
+redis=&quot;/usr/local/redis/bin/redis-server&quot; 
+prog=$(basename $redis)  
+REDIS_CONF_FILE=&quot;/etc/redis.conf&quot; 
+[ -f /etc/sysconfig/redis ] &amp;&amp; . /etc/sysconfig/redis  
+lockfile=/var/lock/subsys/redis  
+start() {  
+    [ -x $redis ] || exit 5  
+    [ -f $REDIS_CONF_FILE ] || exit 6  
+    echo -n $&quot;Starting $prog: &quot;  
+    daemon $redis $REDIS_CONF_FILE  
+    retval=$?  
+    echo  
+    [ $retval -eq 0 ] &amp;&amp; touch $lockfile  
+    return $retval  
+}  
+stop() {  
+    echo -n $&quot;Stopping $prog: &quot;  
+    killproc $prog -QUIT  
+    retval=$?  
+    echo  
+    [ $retval -eq 0 ] &amp;&amp; rm -f $lockfile  
+    return $retval  
+}  
+restart() {  
+    stop  
+    start  
+}  
+reload() {  
+    echo -n $&quot;Reloading $prog: &quot;  
+    killproc $redis -HUP  
+    RETVAL=$?  
+    echo  
+}  
+force_reload() {  
+    restart  
+}  
+rh_status() {  
+    status $prog  
+}  
+rh_status_q() {  
+    rh_status &gt;/dev/null 2&gt;&amp;1  
+}  
+case &quot;$1&quot; in  
+    start)  
+        rh_status_q &amp;&amp; exit 0  
+        $1  
+        ;;  
+    stop)  
+        rh_status_q || exit 0  
+        $1  
+        ;;  
+    restart|configtest)  
+        $1  
+        ;;  
+    reload)  
+        rh_status_q || exit 7  
+        $1  
+        ;;  
+    force-reload)  
+        force_reload  
+        ;;  
+    status)  
+        rh_status  
+        ;;  
+    condrestart|try-restart)  
+        rh_status_q || exit 0  
+    ;;  
+    *)  
+        echo $&quot;Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|orce-reload}&quot;  
+        exit 2  
+esac
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br></div></div><p>赋予脚本文件可执行权限：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ chmod 755 /etc/init.d/redis
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>启动、停止和重启 <code>redis</code> 服务：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>service redis start
+service redis stop
+service redis restart
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="_3-2-redis主从复制集群安装"><a href="#_3-2-redis主从复制集群安装" class="header-anchor">#</a> 3.2. Redis主从复制集群安装</h3> <h4 id="_3-2-1-redis-server配置说明"><a href="#_3-2-1-redis-server配置说明" class="header-anchor">#</a> 3.2.1. Redis-Server配置说明</h4> <table><thead><tr><th style="text-align:left;">角色</th> <th style="text-align:left;">IP地址</th> <th style="text-align:left;">端口号</th></tr></thead> <tbody><tr><td style="text-align:left;">Redis Master</td> <td style="text-align:left;">10.206.20.231</td> <td style="text-align:left;">16379</td></tr> <tr><td style="text-align:left;">Redis Slave</td> <td style="text-align:left;">10.206.20.231</td> <td style="text-align:left;">26379</td></tr></tbody></table> <h4 id="_3-2-2-redis主从架构配置"><a href="#_3-2-2-redis主从架构配置" class="header-anchor">#</a> 3.2.2. Redis主从架构配置</h4> <ul><li>编辑 <strong>从机</strong> 的 <code>Redis</code> 配置文件，找到 <code>210</code> 行（大概）- <code>#slaveof &lt;masterip&gt; &lt;masterport&gt;</code> 。去掉该注释，填写 <strong>主服务器</strong> 的 <code>IP</code> 和 <strong>端口</strong>。</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>slaveof 10.206.20.231 16379
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>如果 <strong>主服务器</strong> 设置了密码，还需要找到 <code>masterauth &lt;master-password&gt;</code> 这一行，去掉注释，改为 <code>masterauth</code> 的主机密码。</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>masterauth 123456
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>配置完成后重启 <strong>从服务器</strong> 的 <code>Redis</code> 服务。</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>$ service redis restart
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>重启完成之后，进入 <strong>主服务器</strong> 的 <code>redis-cli</code> 模式下，命令为 <code>redis-cli -h 127.0.0.1 -p 16379 -a 123456</code>。输入 <code>INFO replication</code> 查询到 <strong>当前主机</strong> 的 <code>Redis</code> 的状态，连接上 <strong>主服务器</strong> 的 <strong>从服务器</strong>。</li></ul> <p><code>Redis</code> <strong>主服务器</strong> 的配置文件：</p> <ul><li>redis.conf</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>daemonize yes
+pidfile /var/run/redis-16379.pid
+logfile /var/log/redis/redis-16379.log
+port 16379
+bind 0.0.0.0
+timeout 300
+databases 16
+dbfilename dump-16379.db
+dir ./redis-workdir
+masterauth 123456
+requirepass 123456
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p><code>Redis</code> <strong>从服务器</strong> 的配置文件：</p> <ul><li>redis.conf</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>daemonize yes
+pidfile /var/run/redis-26379.pid
+logfile /var/log/redis/redis-26379.log
+port 26379
+bind 0.0.0.0
+timeout 300
+databases 16
+dbfilename dump-26379.db
+dir ./redis-workdir
+masterauth 123456
+requirepass 123456
+slaveof 127.0.0.1 16379
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><code>Redis</code> <strong>主服务器</strong> 的状态如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># Replication
+role:master
+connected_slaves:1
+slave0:ip=10.206.20.231,port=16379,state=online,offset=28,lag=1
+master_replid:625ae9f362643da5337835beaeabfdca426198c7
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:28
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:28
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p><code>Redis</code> <strong>从服务器</strong> 的状态如下：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># Replication
+role:slave
+master_host:10.206.20.231
+master_port:26379
+master_link_status:up
+master_last_io_seconds_ago:3
+master_sync_in_progress:0
+slave_repl_offset:210
+slave_priority:100
+slave_read_only:1
+connected_slaves:0
+master_replid:625ae9f362643da5337835beaeabfdca426198c7
+master_replid2:0000000000000000000000000000000000000000
+master_repl_offset:210
+second_repl_offset:-1
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:1
+repl_backlog_histlen:210
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h4 id="_3-2-3-redis主从配置验证"><a href="#_3-2-3-redis主从配置验证" class="header-anchor">#</a> 3.2.3. Redis主从配置验证</h4> <p>上面完成了基本的 <strong>主从配置</strong>，可以简单的测试一下效果：</p> <ul><li>进入 <strong>主服务器</strong> 的 <code>redis-cli</code> 模式，然后 <code>set</code> 一个值，比如：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>&gt; set master_port &quot;16379&quot;
+OK
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><ul><li>切换进入 <strong>从服务器</strong> 的 <code>redis-cli</code> 的模式，查询刚刚设置的值看是否存在：</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>&gt; get master_port
+&quot;16379&quot;
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>此时，我们可以发现是可以获取到值的，<code>Redis</code> 的 <strong>主从模式</strong> 正常工作。</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#redis-主从" class="sidebar-link reco-side-redis-主从" data-v-b57cc07c>redis 主从</a></li><li class="level-2" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_1-redis的特性" class="sidebar-link reco-side-_1-redis的特性" data-v-b57cc07c>1. Redis的特性</a></li><li class="level-2" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_2-redis的应用场景" class="sidebar-link reco-side-_2-redis的应用场景" data-v-b57cc07c>2. Redis的应用场景</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_2-1-缓存" class="sidebar-link reco-side-_2-1-缓存" data-v-b57cc07c>2.1. 缓存</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_2-2-排行榜" class="sidebar-link reco-side-_2-2-排行榜" data-v-b57cc07c>2.2. 排行榜</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_2-3-计数器" class="sidebar-link reco-side-_2-3-计数器" data-v-b57cc07c>2.3. 计数器</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_2-4-社交网络" class="sidebar-link reco-side-_2-4-社交网络" data-v-b57cc07c>2.4. 社交网络</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_2-5-消息队列" class="sidebar-link reco-side-_2-5-消息队列" data-v-b57cc07c>2.5. 消息队列</a></li><li class="level-2" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_3-redis的安装配置" class="sidebar-link reco-side-_3-redis的安装配置" data-v-b57cc07c>3. Redis的安装配置</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_3-1-redis单机服务器安装" class="sidebar-link reco-side-_3-1-redis单机服务器安装" data-v-b57cc07c>3.1. Redis单机服务器安装</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/redis%E4%B8%BB%E4%BB%8E.html#_3-2-redis主从复制集群安装" class="sidebar-link reco-side-_3-2-redis主从复制集群安装" data-v-b57cc07c>3.2. Redis主从复制集群安装</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.402024e5.js" defer></script><script src="/assets/js/3.35889db3.js" defer></script><script src="/assets/js/1.98e71d3a.js" defer></script><script src="/assets/js/115.6d0b291a.js" defer></script>
+  </body>
+</html>

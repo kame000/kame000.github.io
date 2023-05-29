@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>nginx 标准配置 | 刘文奇</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="个人博客，技术笔记整理">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.402024e5.js" as="script"><link rel="preload" href="/assets/js/3.35889db3.js" as="script"><link rel="preload" href="/assets/js/1.98e71d3a.js" as="script"><link rel="preload" href="/assets/js/156.3d24250b.js" as="script"><link rel="prefetch" href="/assets/js/10.d70328f8.js"><link rel="prefetch" href="/assets/js/100.bdfeee98.js"><link rel="prefetch" href="/assets/js/101.0f0aa0e3.js"><link rel="prefetch" href="/assets/js/102.8810b363.js"><link rel="prefetch" href="/assets/js/103.018076eb.js"><link rel="prefetch" href="/assets/js/104.6ef1e09a.js"><link rel="prefetch" href="/assets/js/105.ef045d33.js"><link rel="prefetch" href="/assets/js/106.3aafc27c.js"><link rel="prefetch" href="/assets/js/107.f3da675e.js"><link rel="prefetch" href="/assets/js/108.6a197ffd.js"><link rel="prefetch" href="/assets/js/109.9bdef9f9.js"><link rel="prefetch" href="/assets/js/11.8a566d2b.js"><link rel="prefetch" href="/assets/js/110.57ebc428.js"><link rel="prefetch" href="/assets/js/111.b5447738.js"><link rel="prefetch" href="/assets/js/112.c716f5e7.js"><link rel="prefetch" href="/assets/js/113.557f7376.js"><link rel="prefetch" href="/assets/js/114.61a54316.js"><link rel="prefetch" href="/assets/js/115.6d0b291a.js"><link rel="prefetch" href="/assets/js/116.8c93c654.js"><link rel="prefetch" href="/assets/js/117.07743f06.js"><link rel="prefetch" href="/assets/js/118.d1774c94.js"><link rel="prefetch" href="/assets/js/119.05fc2356.js"><link rel="prefetch" href="/assets/js/12.f6bcfd1f.js"><link rel="prefetch" href="/assets/js/120.2444fe97.js"><link rel="prefetch" href="/assets/js/121.ca03cbf1.js"><link rel="prefetch" href="/assets/js/122.4fea1a12.js"><link rel="prefetch" href="/assets/js/123.0e2b6ebe.js"><link rel="prefetch" href="/assets/js/124.61410c00.js"><link rel="prefetch" href="/assets/js/125.98a05a32.js"><link rel="prefetch" href="/assets/js/126.f734fc8e.js"><link rel="prefetch" href="/assets/js/127.e9acb272.js"><link rel="prefetch" href="/assets/js/128.d4b47285.js"><link rel="prefetch" href="/assets/js/129.aa6f2614.js"><link rel="prefetch" href="/assets/js/13.fa622aa3.js"><link rel="prefetch" href="/assets/js/130.244a3895.js"><link rel="prefetch" href="/assets/js/131.86c3a012.js"><link rel="prefetch" href="/assets/js/132.fe1b85d2.js"><link rel="prefetch" href="/assets/js/133.e238c5c4.js"><link rel="prefetch" href="/assets/js/134.1b5b832b.js"><link rel="prefetch" href="/assets/js/135.6468c4f0.js"><link rel="prefetch" href="/assets/js/136.19775bf4.js"><link rel="prefetch" href="/assets/js/137.c6d0ed15.js"><link rel="prefetch" href="/assets/js/138.230a86e2.js"><link rel="prefetch" href="/assets/js/139.64f42c07.js"><link rel="prefetch" href="/assets/js/14.3c87d1f8.js"><link rel="prefetch" href="/assets/js/140.607b2c0d.js"><link rel="prefetch" href="/assets/js/141.224b1c65.js"><link rel="prefetch" href="/assets/js/142.0d0fc6e0.js"><link rel="prefetch" href="/assets/js/143.c78f7a17.js"><link rel="prefetch" href="/assets/js/144.5f6b6fe2.js"><link rel="prefetch" href="/assets/js/145.d9203869.js"><link rel="prefetch" href="/assets/js/146.ac383aae.js"><link rel="prefetch" href="/assets/js/147.5ad44c9c.js"><link rel="prefetch" href="/assets/js/148.4f051907.js"><link rel="prefetch" href="/assets/js/149.ba645a2b.js"><link rel="prefetch" href="/assets/js/15.527a7f7a.js"><link rel="prefetch" href="/assets/js/150.ac4e4278.js"><link rel="prefetch" href="/assets/js/151.0a2827cd.js"><link rel="prefetch" href="/assets/js/152.7a554168.js"><link rel="prefetch" href="/assets/js/153.af52f866.js"><link rel="prefetch" href="/assets/js/154.2ce71126.js"><link rel="prefetch" href="/assets/js/155.7154dc6f.js"><link rel="prefetch" href="/assets/js/157.59ac5226.js"><link rel="prefetch" href="/assets/js/158.2d506491.js"><link rel="prefetch" href="/assets/js/159.92262746.js"><link rel="prefetch" href="/assets/js/16.aebd5e39.js"><link rel="prefetch" href="/assets/js/160.63210a31.js"><link rel="prefetch" href="/assets/js/161.9b44e7a4.js"><link rel="prefetch" href="/assets/js/162.5b61f2c7.js"><link rel="prefetch" href="/assets/js/163.7589d833.js"><link rel="prefetch" href="/assets/js/164.b5c15ecb.js"><link rel="prefetch" href="/assets/js/165.a5f5cd29.js"><link rel="prefetch" href="/assets/js/166.767b9987.js"><link rel="prefetch" href="/assets/js/167.1ffc72bf.js"><link rel="prefetch" href="/assets/js/168.515eab1b.js"><link rel="prefetch" href="/assets/js/169.dcc68995.js"><link rel="prefetch" href="/assets/js/17.bac8416c.js"><link rel="prefetch" href="/assets/js/170.64bfe5e6.js"><link rel="prefetch" href="/assets/js/171.5ad45642.js"><link rel="prefetch" href="/assets/js/172.b6d37b2e.js"><link rel="prefetch" href="/assets/js/173.19619648.js"><link rel="prefetch" href="/assets/js/174.eaff3157.js"><link rel="prefetch" href="/assets/js/175.2dffa431.js"><link rel="prefetch" href="/assets/js/176.3096d3a7.js"><link rel="prefetch" href="/assets/js/177.6d911d1f.js"><link rel="prefetch" href="/assets/js/178.a8b4f936.js"><link rel="prefetch" href="/assets/js/179.3003a50e.js"><link rel="prefetch" href="/assets/js/18.38c2d3ff.js"><link rel="prefetch" href="/assets/js/180.a03fd18b.js"><link rel="prefetch" href="/assets/js/181.62ce609e.js"><link rel="prefetch" href="/assets/js/182.00b6356e.js"><link rel="prefetch" href="/assets/js/183.6adc62eb.js"><link rel="prefetch" href="/assets/js/184.b11447af.js"><link rel="prefetch" href="/assets/js/185.6a9556de.js"><link rel="prefetch" href="/assets/js/186.5b458a07.js"><link rel="prefetch" href="/assets/js/187.a9bd8543.js"><link rel="prefetch" href="/assets/js/188.627a76f3.js"><link rel="prefetch" href="/assets/js/19.62378543.js"><link rel="prefetch" href="/assets/js/20.31bf256b.js"><link rel="prefetch" href="/assets/js/21.dd768b7c.js"><link rel="prefetch" href="/assets/js/22.f270cfbc.js"><link rel="prefetch" href="/assets/js/23.652c5b0a.js"><link rel="prefetch" href="/assets/js/24.d8a77731.js"><link rel="prefetch" href="/assets/js/25.f4efa277.js"><link rel="prefetch" href="/assets/js/26.775d7d00.js"><link rel="prefetch" href="/assets/js/27.a42e7481.js"><link rel="prefetch" href="/assets/js/28.c81142a3.js"><link rel="prefetch" href="/assets/js/29.104d30bb.js"><link rel="prefetch" href="/assets/js/30.eeaa063e.js"><link rel="prefetch" href="/assets/js/31.c08c3cc6.js"><link rel="prefetch" href="/assets/js/32.96914904.js"><link rel="prefetch" href="/assets/js/33.b5e70d92.js"><link rel="prefetch" href="/assets/js/34.f72f363f.js"><link rel="prefetch" href="/assets/js/35.8e461891.js"><link rel="prefetch" href="/assets/js/36.a3887f60.js"><link rel="prefetch" href="/assets/js/37.f8ac624a.js"><link rel="prefetch" href="/assets/js/38.f9e3dfe7.js"><link rel="prefetch" href="/assets/js/39.00c6dac4.js"><link rel="prefetch" href="/assets/js/4.4a2913bc.js"><link rel="prefetch" href="/assets/js/40.0431cb0b.js"><link rel="prefetch" href="/assets/js/41.a0b96bac.js"><link rel="prefetch" href="/assets/js/42.81504763.js"><link rel="prefetch" href="/assets/js/43.a2f1e577.js"><link rel="prefetch" href="/assets/js/44.c6e577c7.js"><link rel="prefetch" href="/assets/js/45.e19251cb.js"><link rel="prefetch" href="/assets/js/46.2736b4a4.js"><link rel="prefetch" href="/assets/js/47.74eb52c3.js"><link rel="prefetch" href="/assets/js/48.e175852f.js"><link rel="prefetch" href="/assets/js/49.470cd3e4.js"><link rel="prefetch" href="/assets/js/5.894dfcfd.js"><link rel="prefetch" href="/assets/js/50.aa07f64f.js"><link rel="prefetch" href="/assets/js/51.7491ccca.js"><link rel="prefetch" href="/assets/js/52.ede9d894.js"><link rel="prefetch" href="/assets/js/53.f4ec39bc.js"><link rel="prefetch" href="/assets/js/54.11693e63.js"><link rel="prefetch" href="/assets/js/55.6158a230.js"><link rel="prefetch" href="/assets/js/56.d30bcbf8.js"><link rel="prefetch" href="/assets/js/57.7a28a471.js"><link rel="prefetch" href="/assets/js/58.f0c30984.js"><link rel="prefetch" href="/assets/js/59.ab16feee.js"><link rel="prefetch" href="/assets/js/6.71d47490.js"><link rel="prefetch" href="/assets/js/60.1c81418c.js"><link rel="prefetch" href="/assets/js/61.1dd5070d.js"><link rel="prefetch" href="/assets/js/62.7f7ce997.js"><link rel="prefetch" href="/assets/js/63.2cb3686d.js"><link rel="prefetch" href="/assets/js/64.18048f56.js"><link rel="prefetch" href="/assets/js/65.87291046.js"><link rel="prefetch" href="/assets/js/66.a7a7575d.js"><link rel="prefetch" href="/assets/js/67.ca181b91.js"><link rel="prefetch" href="/assets/js/68.4a9df39d.js"><link rel="prefetch" href="/assets/js/69.4a2661f5.js"><link rel="prefetch" href="/assets/js/7.6ba3ae87.js"><link rel="prefetch" href="/assets/js/70.0613e6ac.js"><link rel="prefetch" href="/assets/js/71.b092300b.js"><link rel="prefetch" href="/assets/js/72.25f9363b.js"><link rel="prefetch" href="/assets/js/73.be14e0d3.js"><link rel="prefetch" href="/assets/js/74.02d90af1.js"><link rel="prefetch" href="/assets/js/75.effffafd.js"><link rel="prefetch" href="/assets/js/76.c53ee55b.js"><link rel="prefetch" href="/assets/js/77.4aa1108d.js"><link rel="prefetch" href="/assets/js/78.672c6170.js"><link rel="prefetch" href="/assets/js/79.caf6aebe.js"><link rel="prefetch" href="/assets/js/8.89bc7f6d.js"><link rel="prefetch" href="/assets/js/80.39b1897d.js"><link rel="prefetch" href="/assets/js/81.7cce90fa.js"><link rel="prefetch" href="/assets/js/82.5be4879f.js"><link rel="prefetch" href="/assets/js/83.b47ca97a.js"><link rel="prefetch" href="/assets/js/84.93b6da79.js"><link rel="prefetch" href="/assets/js/85.97f70ae7.js"><link rel="prefetch" href="/assets/js/86.aa40b1cc.js"><link rel="prefetch" href="/assets/js/87.2a9e64ba.js"><link rel="prefetch" href="/assets/js/88.960c348f.js"><link rel="prefetch" href="/assets/js/89.81c8200d.js"><link rel="prefetch" href="/assets/js/9.31afac8d.js"><link rel="prefetch" href="/assets/js/90.313a5e05.js"><link rel="prefetch" href="/assets/js/91.dfb38398.js"><link rel="prefetch" href="/assets/js/92.7eac20c9.js"><link rel="prefetch" href="/assets/js/93.cb7e9ce1.js"><link rel="prefetch" href="/assets/js/94.7ae95a84.js"><link rel="prefetch" href="/assets/js/95.7f792a23.js"><link rel="prefetch" href="/assets/js/96.596eb777.js"><link rel="prefetch" href="/assets/js/97.06b96fe1.js"><link rel="prefetch" href="/assets/js/98.7c50f666.js"><link rel="prefetch" href="/assets/js/99.a5d107f2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>刘文奇</h3> <p class="description" data-v-59e6cb88>个人博客，技术笔记整理</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="刘文奇" class="logo"> <span class="site-name">刘文奇</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><!----> <h3 class="name" data-v-1fad0c41>
+    刘文奇
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>178</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>107</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>nginx 标准配置</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">nginx 标准配置</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>刘文奇</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>2/19/2017</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E6%A0%87%E5%87%86%E9%85%8D%E7%BD%AE.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>nginx</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="nginx-版本"><a href="#nginx-版本" class="header-anchor">#</a> nginx  版本</h1> <h2 id="nginx-官方版本"><a href="#nginx-官方版本" class="header-anchor">#</a> nginx 官方版本</h2> <h3 id="安装与配置"><a href="#安装与配置" class="header-anchor">#</a> 安装与配置</h3> <h4 id="源码包安装"><a href="#源码包安装" class="header-anchor">#</a> 源码包安装</h4> <ul><li>下载nginx对应版本源码包</li> <li>安装编译参数</li></ul> <p><code>./configure --user=www --group=www --prefix=/app/nginx --with-http_stub_status_module --with-http_ssl_module</code></p> <h4 id="yum-安装"><a href="#yum-安装" class="header-anchor">#</a> yum 安装</h4> <p><code>yum install nginx</code></p> <h2 id="使用方向"><a href="#使用方向" class="header-anchor">#</a> 使用方向</h2> <h3 id="tengine-做前端负载及缓存"><a href="#tengine-做前端负载及缓存" class="header-anchor">#</a> tengine 做前端负载及缓存</h3> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>        http <span class="token punctuation">{</span>
+        include       mime.types;
+        default_type  application/octet<span class="token punctuation">-</span>stream;
+        autoindex     off;
+
+        <span class="token comment">##linux 2.4+   network optimize</span>
+        sendfile        on;
+        tcp_nopush     on;
+        tcp_nodelay    on;
+
+        <span class="token comment">## tengine</span>
+        server_info     off;
+        server_tag    off;
+        server_tokens off;
+        access_log    off;
+
+        keepalive_timeout  60;
+        <span class="token comment">### 限制header clien_body 大小等参数</span>
+        server_names_hash_bucket_size 128;
+        client_header_buffer_size 32k;
+        large_client_header_buffers 4 32k;
+        client_max_body_size 10m;
+        client_body_buffer_size 256k;
+
+
+        <span class="token comment">##cache_buff_tmp</span>
+
+          <span class="token comment">#  fastcgi_intercept_errors on;</span>
+          <span class="token comment">#  fastcgi_hide_header X-Powered-By;</span>
+          <span class="token comment">#  fastcgi_connect_timeout 180;</span>
+          <span class="token comment">#  fastcgi_send_timeout 180;</span>
+          <span class="token comment">#  fastcgi_read_timeout 180;</span>
+          <span class="token comment">#  fastcgi_buffer_size 128k;</span>
+          <span class="token comment">#  fastcgi_buffers 4 128K;</span>
+          <span class="token comment">#  fastcgi_busy_buffers_size 128k;</span>
+          <span class="token comment">#  fastcgi_temp_file_write_size 128k;</span>
+          <span class="token comment">#  fastcgi_temp_path /home/cache_php;</span>
+
+
+        <span class="token comment">#gzip  on;</span>
+        gzip on;
+        gzip_min_length 1k;
+        gzip_buffers 4 16k;
+        gzip_http_version 1.0;
+        gzip_comp_level 4;
+        gzip_disable &quot;MSIE <span class="token punctuation">[</span>1<span class="token punctuation">-</span><span class="token number">6</span><span class="token punctuation">]</span>.&quot;;
+        gzip_types text/plain application/x<span class="token punctuation">-</span>javascript text/css  text/javascript application/json application/x<span class="token punctuation">-</span>httpd<span class="token punctuation">-</span>php application/xml;
+        gzip_vary on;
+
+
+        <span class="token comment">### lua  moty   add</span>
+        lua_package_path &quot;/opt/nginx/conf/waf/<span class="token punctuation">?</span>.lua&quot;;
+        lua_shared_dict limit 10m;
+        init_by_lua_file  /opt/nginx/conf/waf/init.lua;
+        access_by_lua_file /opt/nginx/conf/waf/waf.lua;
+
+
+        <span class="token comment">###  upstream     </span>
+        include vhost/upstream.conf ;
+
+        log_format access '$remote_addr <span class="token punctuation">-</span> $remote_user <span class="token punctuation">[</span>$time_local<span class="token punctuation">]</span> &quot;$request&quot;'
+            '$status $body_bytes_sent &quot;$http_referer&quot;'
+            '&quot;$http_user_agent&quot; $http_x_forwarded_for';
+
+        <span class="token comment">### whiteIPlist</span>
+        geo $whiteiplist  <span class="token punctuation">{</span>
+            default 1;
+            192.168.6.0/24 0;
+        <span class="token punctuation">}</span>
+            map $whiteiplist  $limit <span class="token punctuation">{</span>
+            1 $binary_remote_addr;
+            0 &quot;&quot;;
+        <span class="token punctuation">}</span>
+
+
+        <span class="token comment">### limite  session</span>
+
+        limit_req_zone $cookie_token zone=session_limit<span class="token punctuation">:</span>20m rate=10r/s;
+        limit_req_zone $binary_remote_addr $uri zone=auth_limit<span class="token punctuation">:</span>20m rate=10r/m;
+
+        <span class="token comment">###  proxy_buffer   </span>
+        proxy_connect_timeout 600;
+        proxy_read_timeout 600;
+        proxy_send_timeout 600;
+        proxy_buffer_size 128k;
+        proxy_buffers 4 128k;
+        proxy_busy_buffers_size 256k;
+        proxy_temp_file_write_size 256k;
+        proxy_headers_hash_max_size 1024;
+        proxy_headers_hash_bucket_size 128;
+
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X<span class="token punctuation">-</span>Real<span class="token punctuation">-</span>IP $remote_addr;
+        proxy_set_header X<span class="token punctuation">-</span>Forwarded<span class="token punctuation">-</span>For $proxy_add_x_forwarded_for;
+
+        proxy_temp_path /home/data/nginx/nginx_temp;
+        proxy_cache_path /home/data/nginx/nginx_cache levels=1<span class="token punctuation">:</span>2 keys_zone=cache_one<span class="token punctuation">:</span>2048m inactive=30m max_size=60g;
+
+
+           <span class="token comment"># proxy_temp_path   /home/cache/nginx/proxy_temp;</span>
+           <span class="token comment"># proxy_cache_path  /home/cache/nginx/proxy_cache_www levels=1:2   keys_zone=cache_www:3000m inactive=1d max_size=20g;</span>
+
+            include  vhost/ap18game.com.conf;
+        <span class="token punctuation">}</span>
+
+
+        <span class="token comment">## 创建 负载均衡配置文件</span>
+        upstream webserver <span class="token punctuation">{</span>
+        consistent_hash $request_uri;
+        server web1<span class="token punctuation">:</span>80 weight=1;
+        server web2<span class="token punctuation">:</span>80 weight=1;
+        session_sticky;
+
+
+        check interval=3000 rise=2 fall=5 timeout=1000 type=http;
+        check_http_send &quot;GET / HTTP/1.0\r\n\r\n&quot;;
+        check_http_expect_alive http_2xx http_3xx;
+        <span class="token punctuation">}</span>
+
+
+
+        server <span class="token punctuation">{</span>
+        listen       80;
+        server_name  webserver;
+        root         /home/data/nginx/nginx_cache;
+        index        index.php index.html index.htm;
+        <span class="token comment">#charset koi8-r;</span>
+
+        <span class="token comment">##access_log</span>
+        access_log  /home/data/nginx/logs/webserver.access.log  access;
+
+        <span class="token comment">#trim on;</span>
+        <span class="token comment">#trim_jscss on;</span>
+        <span class="token comment">#location / {</span>
+        <span class="token comment">#    root   html;</span>
+        <span class="token comment">#    index  index.html index.htm;</span>
+        <span class="token comment">#}</span>
+
+        location / <span class="token punctuation">{</span>
+        proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;
+
+        <span class="token comment">#if (-d $request_filename) {</span>
+        <span class="token comment">#    rewrite ^/(.*)$ http://$host/index.html break;</span>
+        <span class="token comment">#}</span>
+
+            <span class="token comment">##  defend   CC    lua简单防CC</span>
+            limit_req zone=session_limit burst=5;
+             rewrite_by_lua '
+             local random = ngx.var.cookie_random
+             if (random == nil) then
+                return ngx.redirect(&quot;/auth<span class="token punctuation">?</span>url=&quot; .. ngx.var.request_uri)
+             end
+            local token = ngx.md5(&quot;opencdn&quot; .. ngx.var.remote_addr .. random)
+            if (ngx.var.cookie_token ~= token) then
+                  return ngx.redirect(&quot;/auth<span class="token punctuation">?</span>url=&quot;.. ngx.var.request_uri)
+            end
+        ';
+            <span class="token comment">### 负载均衡</span>
+            proxy_redirect         off;
+            proxy_set_header Host $host;
+            proxy_set_header X<span class="token punctuation">-</span>Real<span class="token punctuation">-</span>IP $remote_addr;
+            proxy_set_header  X<span class="token punctuation">-</span>Forwarded<span class="token punctuation">-</span>For $proxy_add_x_forwarded_for;
+            proxy_pass http<span class="token punctuation">:</span>//webserver;
+       <span class="token punctuation">}</span>
+
+        <span class="token comment">###  defend  CC</span>
+        location /auth <span class="token punctuation">{</span>
+        limit_req zone=auth_limit burst=1;
+        if ($arg_url = &quot;&quot;) <span class="token punctuation">{</span>
+            return 403;
+        <span class="token punctuation">}</span>
+        access_by_lua '
+            local random = math.random(9999)
+            local token = ngx.md5(&quot;opencdn&quot; .. ngx.var.remote_addr .. random)
+            if (ngx.var.cookie_token ~= token) then
+                ngx.header<span class="token punctuation">[</span><span class="token string">&quot;Set-Cookie&quot;</span><span class="token punctuation">]</span> = <span class="token punctuation">{</span>&quot;token=&quot; .. token<span class="token punctuation">,</span> &quot;random=&quot; .. random<span class="token punctuation">}</span>
+                return ngx.redirect(ngx.var.arg_url)
+            end
+        ';
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">#location ~ .*\. (php)?$ {</span>
+        <span class="token comment">#       proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;</span>
+        <span class="token comment">#       proxy_pass http://webserver;</span>
+        <span class="token comment">#}</span>
+
+        <span class="token comment">###  前端缓存</span>
+        location ~ .<span class="token important">*\.(htm|html|js|css|gif|jpg|jpeg|png|bmp|ico|swf|flv|otf)$</span> <span class="token punctuation">{</span>
+                proxy_next_upstream http_500 http_502 http_503 http_504 error timeout invalid_header;
+                proxy_cache cache_one;
+                proxy_cache_valid 200 304 15m;
+                proxy_cache_valid 301 302 10m;
+                proxy_cache_valid any 1m;
+                proxy_cache_key $host$uri$is_args$args;
+                add_header Ten<span class="token punctuation">-</span>webcache '$upstream_cache_status from $host';
+                proxy_pass http<span class="token punctuation">:</span>//webserver;
+                expires 30m;
+        <span class="token punctuation">}</span>
+
+
+
+        <span class="token comment">##  test lua</span>
+        location /lua <span class="token punctuation">{</span>
+                default_type 'text/plain';
+                content_by_lua 'ngx.say(&quot;hello<span class="token punctuation">,</span> lua&quot;)';
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">#error_page  404              /404.html;</span>
+
+        <span class="token comment"># redirect server error pages to the static page /50x.html</span>
+        <span class="token comment">#</span>
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html <span class="token punctuation">{</span>
+            root   html;
+        <span class="token punctuation">}</span>
+        location /nstatus <span class="token punctuation">{</span>
+                check_status;
+                access_log off;
+                allow 182.52.236.240;
+                deny all;
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br><span class="line-number">162</span><br><span class="line-number">163</span><br><span class="line-number">164</span><br><span class="line-number">165</span><br><span class="line-number">166</span><br><span class="line-number">167</span><br><span class="line-number">168</span><br><span class="line-number">169</span><br><span class="line-number">170</span><br><span class="line-number">171</span><br><span class="line-number">172</span><br><span class="line-number">173</span><br><span class="line-number">174</span><br><span class="line-number">175</span><br><span class="line-number">176</span><br><span class="line-number">177</span><br><span class="line-number">178</span><br><span class="line-number">179</span><br><span class="line-number">180</span><br><span class="line-number">181</span><br><span class="line-number">182</span><br><span class="line-number">183</span><br><span class="line-number">184</span><br><span class="line-number">185</span><br><span class="line-number">186</span><br><span class="line-number">187</span><br><span class="line-number">188</span><br><span class="line-number">189</span><br><span class="line-number">190</span><br><span class="line-number">191</span><br><span class="line-number">192</span><br><span class="line-number">193</span><br><span class="line-number">194</span><br><span class="line-number">195</span><br><span class="line-number">196</span><br><span class="line-number">197</span><br><span class="line-number">198</span><br><span class="line-number">199</span><br><span class="line-number">200</span><br><span class="line-number">201</span><br><span class="line-number">202</span><br><span class="line-number">203</span><br><span class="line-number">204</span><br><span class="line-number">205</span><br><span class="line-number">206</span><br><span class="line-number">207</span><br><span class="line-number">208</span><br><span class="line-number">209</span><br><span class="line-number">210</span><br><span class="line-number">211</span><br><span class="line-number">212</span><br><span class="line-number">213</span><br><span class="line-number">214</span><br><span class="line-number">215</span><br><span class="line-number">216</span><br><span class="line-number">217</span><br><span class="line-number">218</span><br><span class="line-number">219</span><br><span class="line-number">220</span><br><span class="line-number">221</span><br><span class="line-number">222</span><br><span class="line-number">223</span><br></div></div><h3 id="nginx-做网站防火墙"><a href="#nginx-做网站防火墙" class="header-anchor">#</a> nginx 做网站防火墙</h3> <p><strong>主要使用使用lua   waf模块.</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>
+<span class="token function">git</span> clone http://luajit.org/git/luajit-2.0.git
+<span class="token function">wget</span> http://tengine.taobao.org/download/tengine-2.1.0.tar.gz
+<span class="token function">git</span> clone https://github.com/loveshell/ngx_lua_waf
+<span class="token builtin class-name">cd</span> luajit-2.0 <span class="token operator">&amp;&amp;</span> <span class="token function">git</span> checkout v2.1
+<span class="token function">make</span>
+<span class="token function">make</span> <span class="token function">install</span> <span class="token assign-left variable">PREFIX</span><span class="token operator">=</span>/usr/local/luajit
+解压安装tengine
+ ./configure <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/opt/nginx --with-http_lua_module --with-luajit-lib<span class="token operator">=</span>/usr/local/luajit/lib/ --with-luajit-inc<span class="token operator">=</span>/usr/local/luajit/include/luajit-2.1/ --with-ld-opt<span class="token operator">=</span>-Wl,-rpath,/usr/local/luajit/lib
+
+<span class="token function">make</span> <span class="token operator">&amp;&amp;</span> <span class="token function">make</span> <span class="token function">install</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><h4 id="测试"><a href="#测试" class="header-anchor">#</a> 测试</h4> <p>在nginx.conf中添加一个location</p> <div class="language-lua line-numbers-mode"><pre class="language-lua"><code>location <span class="token operator">/</span><span class="token function">lua</span> <span class="token punctuation">{</span>
+     default_type <span class="token string">'text/plain'</span><span class="token punctuation">;</span>
+    content_by_lua <span class="token string">'ngx.say(&quot;hello, lua&quot;)'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h4 id="配置ngx-lua-waf"><a href="#配置ngx-lua-waf" class="header-anchor">#</a> 配置ngx_lua_waf</h4> <p>nginx下常见的<strong>开源waf</strong>有mod_security、naxsi、ngx_lua_waf这三个，mod_security是最老牌的，功能最强规则细定制性又强，但是配置最复杂高并发时性能差。naxsi是原生nginx下的waf，性能不错但是基于白名单，配置也很麻烦。ngx_lua_waf功能和规则虽然没有这两个强大，但赢在性能高和易用性强，基本上零配置，而且常见的攻击类型都能防御，是比较省心的选择。安装好ngx_lua后，把下载好的ngx_lua_waf复制到conf目录下,重命名为waf，在nginx.conf的http段添加：</p> <div class="language-lua line-numbers-mode"><pre class="language-lua"><code>lua_package_path <span class="token string">&quot;/opt/nginx/conf/waf/?.lua&quot;</span><span class="token punctuation">;</span>
+lua_shared_dict limit 10m<span class="token punctuation">;</span>
+init_by_lua_file  <span class="token operator">/</span>opt<span class="token operator">/</span>nginxconf<span class="token operator">/</span>waf<span class="token operator">/</span>init<span class="token punctuation">.</span>lua<span class="token punctuation">;</span>
+access_by_lua_file <span class="token operator">/</span>opt<span class="token operator">/</span>nginx<span class="token operator">/</span>conf<span class="token operator">/</span>waf<span class="token operator">/</span>waf<span class="token punctuation">.</span>lua<span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>修改/opt/nginx/conf/waf/config.lua文件，该文件为waf的配置文件，将RulePath和logdir改为实际的目录：</p> <div class="language-lua line-numbers-mode"><pre class="language-lua"><code>RulePath <span class="token operator">=</span> <span class="token string">&quot;/opt/nginx/conf/waf/wafconf/&quot;</span>
+logdir <span class="token operator">=</span> <span class="token string">&quot;/opt/nginx/logs/waf&quot;</span>   <span class="token operator">//</span>确保此文件夹nginx有写入权限
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>其它的安全配置，按照实际需要开启。设置好和启动nginx</p> <h3 id="nginx-做后端代理"><a href="#nginx-做后端代理" class="header-anchor">#</a> nginx 做后端代理</h3> <h4 id="nginx-做后端处理配置"><a href="#nginx-做后端处理配置" class="header-anchor">#</a> nginx 做后端处理配置</h4> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code>user  www www;
+worker_processes  8;
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
+
+error_log  logs/error.log;
+<span class="token comment">#error_log  logs/error.log  notice;</span>
+<span class="token comment">#error_log  logs/error.log  info;</span>
+
+pid        logs/nginx.pid;
+worker_rlimit_nofile  65535;
+
+
+events <span class="token punctuation">{</span>
+    use epoll;
+    worker_connections  65535;
+<span class="token punctuation">}</span>
+
+
+http <span class="token punctuation">{</span>
+    include       mime.types;
+    default_type  application/octet<span class="token punctuation">-</span>stream;
+
+    <span class="token comment">#log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '</span>
+    <span class="token comment">#                  '$status $body_bytes_sent &quot;$http_referer&quot; '</span>
+    <span class="token comment">#                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';</span>
+
+    <span class="token comment">#log_format short '[$time_local] | $status | $host | $request | $remote_addr | $http_user_agent | $http_referer | $http_cookie';</span>
+    log_format  short '$remote_addr <span class="token punctuation">-</span> $remote_user <span class="token punctuation">[</span>$time_local<span class="token punctuation">]</span> &quot;$request&quot; ' '$status $body_bytes_sent &quot;$http_referer&quot; ' '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot; $request_body $host &quot;$http_cookie&quot; ' '$upstream_response_time $request_time ';
+    <span class="token comment">#access_log  logs/access.log  short;</span>
+
+    sendfile        on;
+    <span class="token comment">#tcp_nopush     on;</span>
+
+    <span class="token comment">#keepalive_timeout  0;</span>
+    keepalive_timeout  65;
+
+    <span class="token comment">#gzip  on;</span>
+
+    server_tokens off;
+
+    charset     UTF<span class="token punctuation">-</span>8;
+    server_names_hash_bucket_size       128;
+    client_header_buffer_size           4k;
+    large_client_header_buffers  4      32k;
+    client_max_body_size 30m;
+    client_body_buffer_size 128k;
+    fastcgi_connect_timeout 300;
+    fastcgi_read_timeout 300;
+    fastcgi_send_timeout 300;
+    fastcgi_buffer_size 64k;
+    fastcgi_buffers   4 32k;
+    fastcgi_busy_buffers_size 64k;
+    fastcgi_temp_file_write_size 64k;
+    <span class="token comment">####open_file_cache</span>
+    open_file_cache max=65536  inactive=60s;
+    open_file_cache_valid      80s;
+    open_file_cache_min_uses   1;
+
+    include ./vhost/<span class="token important">*.conf;</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br></div></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E6%A0%87%E5%87%86%E9%85%8D%E7%BD%AE.html#nginx-官方版本" class="sidebar-link reco-side-nginx-官方版本" data-v-b57cc07c>nginx 官方版本</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E6%A0%87%E5%87%86%E9%85%8D%E7%BD%AE.html#安装与配置" class="sidebar-link reco-side-安装与配置" data-v-b57cc07c>安装与配置</a></li><li class="level-2" data-v-b57cc07c><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E6%A0%87%E5%87%86%E9%85%8D%E7%BD%AE.html#使用方向" class="sidebar-link reco-side-使用方向" data-v-b57cc07c>使用方向</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E6%A0%87%E5%87%86%E9%85%8D%E7%BD%AE.html#tengine-做前端负载及缓存" class="sidebar-link reco-side-tengine-做前端负载及缓存" data-v-b57cc07c>tengine 做前端负载及缓存</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E6%A0%87%E5%87%86%E9%85%8D%E7%BD%AE.html#nginx-做网站防火墙" class="sidebar-link reco-side-nginx-做网站防火墙" data-v-b57cc07c>nginx 做网站防火墙</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E7%BD%91%E7%AB%99%E6%9E%B6%E6%9E%84/nginx/nginx%E6%A0%87%E5%87%86%E9%85%8D%E7%BD%AE.html#nginx-做后端代理" class="sidebar-link reco-side-nginx-做后端代理" data-v-b57cc07c>nginx 做后端代理</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.402024e5.js" defer></script><script src="/assets/js/3.35889db3.js" defer></script><script src="/assets/js/1.98e71d3a.js" defer></script><script src="/assets/js/156.3d24250b.js" defer></script>
+  </body>
+</html>

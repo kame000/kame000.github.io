@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>NFS and AFS | 刘文奇</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="个人博客，技术笔记整理">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.402024e5.js" as="script"><link rel="preload" href="/assets/js/3.35889db3.js" as="script"><link rel="preload" href="/assets/js/1.98e71d3a.js" as="script"><link rel="preload" href="/assets/js/48.e175852f.js" as="script"><link rel="prefetch" href="/assets/js/10.d70328f8.js"><link rel="prefetch" href="/assets/js/100.bdfeee98.js"><link rel="prefetch" href="/assets/js/101.0f0aa0e3.js"><link rel="prefetch" href="/assets/js/102.8810b363.js"><link rel="prefetch" href="/assets/js/103.018076eb.js"><link rel="prefetch" href="/assets/js/104.6ef1e09a.js"><link rel="prefetch" href="/assets/js/105.ef045d33.js"><link rel="prefetch" href="/assets/js/106.3aafc27c.js"><link rel="prefetch" href="/assets/js/107.f3da675e.js"><link rel="prefetch" href="/assets/js/108.6a197ffd.js"><link rel="prefetch" href="/assets/js/109.9bdef9f9.js"><link rel="prefetch" href="/assets/js/11.8a566d2b.js"><link rel="prefetch" href="/assets/js/110.57ebc428.js"><link rel="prefetch" href="/assets/js/111.b5447738.js"><link rel="prefetch" href="/assets/js/112.c716f5e7.js"><link rel="prefetch" href="/assets/js/113.557f7376.js"><link rel="prefetch" href="/assets/js/114.61a54316.js"><link rel="prefetch" href="/assets/js/115.6d0b291a.js"><link rel="prefetch" href="/assets/js/116.8c93c654.js"><link rel="prefetch" href="/assets/js/117.07743f06.js"><link rel="prefetch" href="/assets/js/118.d1774c94.js"><link rel="prefetch" href="/assets/js/119.05fc2356.js"><link rel="prefetch" href="/assets/js/12.f6bcfd1f.js"><link rel="prefetch" href="/assets/js/120.2444fe97.js"><link rel="prefetch" href="/assets/js/121.ca03cbf1.js"><link rel="prefetch" href="/assets/js/122.4fea1a12.js"><link rel="prefetch" href="/assets/js/123.0e2b6ebe.js"><link rel="prefetch" href="/assets/js/124.61410c00.js"><link rel="prefetch" href="/assets/js/125.98a05a32.js"><link rel="prefetch" href="/assets/js/126.f734fc8e.js"><link rel="prefetch" href="/assets/js/127.e9acb272.js"><link rel="prefetch" href="/assets/js/128.d4b47285.js"><link rel="prefetch" href="/assets/js/129.aa6f2614.js"><link rel="prefetch" href="/assets/js/13.fa622aa3.js"><link rel="prefetch" href="/assets/js/130.244a3895.js"><link rel="prefetch" href="/assets/js/131.86c3a012.js"><link rel="prefetch" href="/assets/js/132.fe1b85d2.js"><link rel="prefetch" href="/assets/js/133.e238c5c4.js"><link rel="prefetch" href="/assets/js/134.1b5b832b.js"><link rel="prefetch" href="/assets/js/135.6468c4f0.js"><link rel="prefetch" href="/assets/js/136.19775bf4.js"><link rel="prefetch" href="/assets/js/137.c6d0ed15.js"><link rel="prefetch" href="/assets/js/138.230a86e2.js"><link rel="prefetch" href="/assets/js/139.64f42c07.js"><link rel="prefetch" href="/assets/js/14.3c87d1f8.js"><link rel="prefetch" href="/assets/js/140.607b2c0d.js"><link rel="prefetch" href="/assets/js/141.224b1c65.js"><link rel="prefetch" href="/assets/js/142.0d0fc6e0.js"><link rel="prefetch" href="/assets/js/143.c78f7a17.js"><link rel="prefetch" href="/assets/js/144.5f6b6fe2.js"><link rel="prefetch" href="/assets/js/145.d9203869.js"><link rel="prefetch" href="/assets/js/146.ac383aae.js"><link rel="prefetch" href="/assets/js/147.5ad44c9c.js"><link rel="prefetch" href="/assets/js/148.4f051907.js"><link rel="prefetch" href="/assets/js/149.ba645a2b.js"><link rel="prefetch" href="/assets/js/15.527a7f7a.js"><link rel="prefetch" href="/assets/js/150.ac4e4278.js"><link rel="prefetch" href="/assets/js/151.0a2827cd.js"><link rel="prefetch" href="/assets/js/152.7a554168.js"><link rel="prefetch" href="/assets/js/153.af52f866.js"><link rel="prefetch" href="/assets/js/154.2ce71126.js"><link rel="prefetch" href="/assets/js/155.7154dc6f.js"><link rel="prefetch" href="/assets/js/156.3d24250b.js"><link rel="prefetch" href="/assets/js/157.59ac5226.js"><link rel="prefetch" href="/assets/js/158.2d506491.js"><link rel="prefetch" href="/assets/js/159.92262746.js"><link rel="prefetch" href="/assets/js/16.aebd5e39.js"><link rel="prefetch" href="/assets/js/160.63210a31.js"><link rel="prefetch" href="/assets/js/161.9b44e7a4.js"><link rel="prefetch" href="/assets/js/162.5b61f2c7.js"><link rel="prefetch" href="/assets/js/163.7589d833.js"><link rel="prefetch" href="/assets/js/164.b5c15ecb.js"><link rel="prefetch" href="/assets/js/165.a5f5cd29.js"><link rel="prefetch" href="/assets/js/166.767b9987.js"><link rel="prefetch" href="/assets/js/167.1ffc72bf.js"><link rel="prefetch" href="/assets/js/168.515eab1b.js"><link rel="prefetch" href="/assets/js/169.dcc68995.js"><link rel="prefetch" href="/assets/js/17.bac8416c.js"><link rel="prefetch" href="/assets/js/170.64bfe5e6.js"><link rel="prefetch" href="/assets/js/171.5ad45642.js"><link rel="prefetch" href="/assets/js/172.b6d37b2e.js"><link rel="prefetch" href="/assets/js/173.19619648.js"><link rel="prefetch" href="/assets/js/174.eaff3157.js"><link rel="prefetch" href="/assets/js/175.2dffa431.js"><link rel="prefetch" href="/assets/js/176.3096d3a7.js"><link rel="prefetch" href="/assets/js/177.6d911d1f.js"><link rel="prefetch" href="/assets/js/178.a8b4f936.js"><link rel="prefetch" href="/assets/js/179.3003a50e.js"><link rel="prefetch" href="/assets/js/18.38c2d3ff.js"><link rel="prefetch" href="/assets/js/180.a03fd18b.js"><link rel="prefetch" href="/assets/js/181.62ce609e.js"><link rel="prefetch" href="/assets/js/182.00b6356e.js"><link rel="prefetch" href="/assets/js/183.6adc62eb.js"><link rel="prefetch" href="/assets/js/184.b11447af.js"><link rel="prefetch" href="/assets/js/185.6a9556de.js"><link rel="prefetch" href="/assets/js/186.5b458a07.js"><link rel="prefetch" href="/assets/js/187.a9bd8543.js"><link rel="prefetch" href="/assets/js/188.627a76f3.js"><link rel="prefetch" href="/assets/js/19.62378543.js"><link rel="prefetch" href="/assets/js/20.31bf256b.js"><link rel="prefetch" href="/assets/js/21.dd768b7c.js"><link rel="prefetch" href="/assets/js/22.f270cfbc.js"><link rel="prefetch" href="/assets/js/23.652c5b0a.js"><link rel="prefetch" href="/assets/js/24.d8a77731.js"><link rel="prefetch" href="/assets/js/25.f4efa277.js"><link rel="prefetch" href="/assets/js/26.775d7d00.js"><link rel="prefetch" href="/assets/js/27.a42e7481.js"><link rel="prefetch" href="/assets/js/28.c81142a3.js"><link rel="prefetch" href="/assets/js/29.104d30bb.js"><link rel="prefetch" href="/assets/js/30.eeaa063e.js"><link rel="prefetch" href="/assets/js/31.c08c3cc6.js"><link rel="prefetch" href="/assets/js/32.96914904.js"><link rel="prefetch" href="/assets/js/33.b5e70d92.js"><link rel="prefetch" href="/assets/js/34.f72f363f.js"><link rel="prefetch" href="/assets/js/35.8e461891.js"><link rel="prefetch" href="/assets/js/36.a3887f60.js"><link rel="prefetch" href="/assets/js/37.f8ac624a.js"><link rel="prefetch" href="/assets/js/38.f9e3dfe7.js"><link rel="prefetch" href="/assets/js/39.00c6dac4.js"><link rel="prefetch" href="/assets/js/4.4a2913bc.js"><link rel="prefetch" href="/assets/js/40.0431cb0b.js"><link rel="prefetch" href="/assets/js/41.a0b96bac.js"><link rel="prefetch" href="/assets/js/42.81504763.js"><link rel="prefetch" href="/assets/js/43.a2f1e577.js"><link rel="prefetch" href="/assets/js/44.c6e577c7.js"><link rel="prefetch" href="/assets/js/45.e19251cb.js"><link rel="prefetch" href="/assets/js/46.2736b4a4.js"><link rel="prefetch" href="/assets/js/47.74eb52c3.js"><link rel="prefetch" href="/assets/js/49.470cd3e4.js"><link rel="prefetch" href="/assets/js/5.894dfcfd.js"><link rel="prefetch" href="/assets/js/50.aa07f64f.js"><link rel="prefetch" href="/assets/js/51.7491ccca.js"><link rel="prefetch" href="/assets/js/52.ede9d894.js"><link rel="prefetch" href="/assets/js/53.f4ec39bc.js"><link rel="prefetch" href="/assets/js/54.11693e63.js"><link rel="prefetch" href="/assets/js/55.6158a230.js"><link rel="prefetch" href="/assets/js/56.d30bcbf8.js"><link rel="prefetch" href="/assets/js/57.7a28a471.js"><link rel="prefetch" href="/assets/js/58.f0c30984.js"><link rel="prefetch" href="/assets/js/59.ab16feee.js"><link rel="prefetch" href="/assets/js/6.71d47490.js"><link rel="prefetch" href="/assets/js/60.1c81418c.js"><link rel="prefetch" href="/assets/js/61.1dd5070d.js"><link rel="prefetch" href="/assets/js/62.7f7ce997.js"><link rel="prefetch" href="/assets/js/63.2cb3686d.js"><link rel="prefetch" href="/assets/js/64.18048f56.js"><link rel="prefetch" href="/assets/js/65.87291046.js"><link rel="prefetch" href="/assets/js/66.a7a7575d.js"><link rel="prefetch" href="/assets/js/67.ca181b91.js"><link rel="prefetch" href="/assets/js/68.4a9df39d.js"><link rel="prefetch" href="/assets/js/69.4a2661f5.js"><link rel="prefetch" href="/assets/js/7.6ba3ae87.js"><link rel="prefetch" href="/assets/js/70.0613e6ac.js"><link rel="prefetch" href="/assets/js/71.b092300b.js"><link rel="prefetch" href="/assets/js/72.25f9363b.js"><link rel="prefetch" href="/assets/js/73.be14e0d3.js"><link rel="prefetch" href="/assets/js/74.02d90af1.js"><link rel="prefetch" href="/assets/js/75.effffafd.js"><link rel="prefetch" href="/assets/js/76.c53ee55b.js"><link rel="prefetch" href="/assets/js/77.4aa1108d.js"><link rel="prefetch" href="/assets/js/78.672c6170.js"><link rel="prefetch" href="/assets/js/79.caf6aebe.js"><link rel="prefetch" href="/assets/js/8.89bc7f6d.js"><link rel="prefetch" href="/assets/js/80.39b1897d.js"><link rel="prefetch" href="/assets/js/81.7cce90fa.js"><link rel="prefetch" href="/assets/js/82.5be4879f.js"><link rel="prefetch" href="/assets/js/83.b47ca97a.js"><link rel="prefetch" href="/assets/js/84.93b6da79.js"><link rel="prefetch" href="/assets/js/85.97f70ae7.js"><link rel="prefetch" href="/assets/js/86.aa40b1cc.js"><link rel="prefetch" href="/assets/js/87.2a9e64ba.js"><link rel="prefetch" href="/assets/js/88.960c348f.js"><link rel="prefetch" href="/assets/js/89.81c8200d.js"><link rel="prefetch" href="/assets/js/9.31afac8d.js"><link rel="prefetch" href="/assets/js/90.313a5e05.js"><link rel="prefetch" href="/assets/js/91.dfb38398.js"><link rel="prefetch" href="/assets/js/92.7eac20c9.js"><link rel="prefetch" href="/assets/js/93.cb7e9ce1.js"><link rel="prefetch" href="/assets/js/94.7ae95a84.js"><link rel="prefetch" href="/assets/js/95.7f792a23.js"><link rel="prefetch" href="/assets/js/96.596eb777.js"><link rel="prefetch" href="/assets/js/97.06b96fe1.js"><link rel="prefetch" href="/assets/js/98.7c50f666.js"><link rel="prefetch" href="/assets/js/99.a5d107f2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>刘文奇</h3> <p class="description" data-v-59e6cb88>个人博客，技术笔记整理</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="刘文奇" class="logo"> <span class="site-name">刘文奇</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><!----> <h3 class="name" data-v-1fad0c41>
+    刘文奇
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>178</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>107</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>NFS and AFS</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">NFS and AFS</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>刘文奇</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>12/11/2016</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/views/linux%E5%9F%BA%E7%A1%80/AFS%E4%B8%8ENFS.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>NFS</span><span class="tag-item" data-v-8a445198>网络存储</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="简介"><a href="#简介" class="header-anchor">#</a> 简介</h1> <blockquote><p>对于像 NFS 和 AFS这种网络文件系统而言，因为受网络的影响，使得对数据访问和存储的实时性就有了一定的挑战，特别是在早期100Mb/s的网络环境下（当然10Mb/s的网络环境就是一个噩耗了）。为了解决响应实效的问题，一种被称为CacheFS的本地缓存方案被开发出来，用来提供分布式文件系统的本地缓存。
+作为内核2.6.30的一部分，一种CacheFS 实现机制 已经加入进来，当前它支持NFS和AFS，但是其他文件系统也能从中获得好处</p></blockquote> <h2 id="什么是fs-cache和cachefs"><a href="#什么是fs-cache和cachefs" class="header-anchor">#</a> 什么是FS-Cache和CacheFS</h2> <p>FS-Cache 是指在文件系统和缓存之间的接口。  CacheFS 指的则是FS-cache的缓存后端。CacheFS做实际的数据存储和检索处理，并使用块设备的分区。
+CacheFS并不能用在任何文件系统上，文件系统必须能被FS-Cache写入。FS-Cache可以使用任何一种它想要的缓存机制（使用缓存接口），文件系统本身并不关心使用何种缓存机制。AFS和NFS都能使用FSCache来修改。2.6.30核心已经包含了能够利用FS-Cache的修改版。
+一图胜千言，下图给出了使用FS-Cache和CacheFS的通用数据流图。</p> <p>图一:  FS-Cache, CacheFS, 和 CacheFiles在上图里，NFS/AFS/ISOFS?我们一般称为netfs?调用FS-Cache，而FS-Cache则调用CacheFile或者CacheFS函数，这是两种不同的数据缓存实现机制。FS-Cache都可以调用。这样因为FC-Cache的原因，左边的文件系统就可以直接使用缓存而不必知道具体的实现机制。注意：CacheFS使用的是块设备上的分区(这里是/dev/hda5)，而CacheFiles则使用缺省的/var/fscache目录来缓存文件。
+下图给出了更多的细节</p> <p>图二:  FS-Cache, CacheFS, and CacheFiles 的更多细节此图显示了netfs文件系统是如何和FS-Cache进行通讯的，以及FS-Cache是如何和CacheFS或者CacheFiles通讯的。我们也注意到netfs也需要和VFS进行通讯，这显然的，毕竟CacheFS仅仅只是用来做数据缓存，而并不是来实现一个完整的文件系统，而在当前Linux里，所有的文件系统都需要和VFS打交道，以保证应用程序对不同的文件系统保持透明。
+FS-Cache背后的关键概念是：在透过缓存访问netfs上的文件之前，FS-Cache并不要求该文件被完整的载入到缓存中。这是因为：</p> <p>没有缓存的情况下也必须能操作
+必须能够打开比大于缓存大小的文件
+所有打开的远程文件的大小不应该受到缓存大小的限制
+如果一次只是访问某个远程的某一个部分，不应该强迫用户要缓存整个文件
+所以，FS-Cache是建立在页(page)的概念上，而不是文件。否则的话，即便是读取一个字节的内容，也需要缓存整个文件的。  FS-Cache的实现提供了下面的一些特性：
+可以使用多个缓存。用标签(tag)来区分识别
+缓存可以在多个netfs之间共享。共享时，每个netfs的共享数据是相互独立的。另外，它也并不会把同一个文件的试图关联起来。比如，如果一个文件同时被NFS和CIFS读，那么在缓存里将会有两份拷贝。
+任何时刻缓存都增加或者删除
+netfs提供了一个接口，允许任何一方从文件回退缓存The netfs is provided with an interface that allows either party (netfsor FS-Cache) to withdraw caching facilities from a file
+netfs的接口应该尽可能少的返回错误，宁可让netfs无视这些The interface to the netfs returns as few errors as possible, preferring to let the netfs remain oblivious
+数据IO直接和netfs的page打交道
+尽可能异步
+使用CacheFS 或者 CacheFiles</p> <p>使用FS-Cache和CacheFS/CacheFiles 是相当简单的。首先确保内核是否支持。你可以在内核源代码目录检查.config文件.确保FS-Cache和CacheFS都被选中。 另外，确保NFS Client Caching Support 也被选中了。
+第二步是确保nfsutils 是最新的，建议你下载最新版本，并编译安装。
+第三步是编译安装最新的cachefilesd。目前最新版本是0.9,安装cachefilesd需要创建/etc/cachefilesd.conf文件，用来控制FS-Cache和CacheFS(或CacheFiles)的行为。格式很简单，详细情况，请猛击这个HOWTO文档。
+配置文件里第一步是定义缓存的位置，你可以把缓存的位置定义在系统安装分区上，当然你可以使用SD卡或者USB硬盘来作为缓存路径，不过性能上可能会差一些。当然，如果机器上有空闲的空间，使用新的分区来做存储路径也不错。如果你足够有钱，使用固态盘(SSD)会有更好的性能。
+我们这里举的例子是采取一个分区来当做存储目录。这个分区应该做成支持extended attributes (xattr)的文件系统，大部分Linux下的文件系统都支持这个特性，包括ext 2/3/4,xfs,reiserfs,jfs等，这里使用ext3文件系统。
+首先使用
+mkfs.ext3 /dev/sda1
+格式化
+然后使用
+tune2fs -o user_xattr /dev/sda1
+打开xattr特性。
+接下来，在/etc/fstab加入下面这行：
+/dev/sda1   /var/fscache   ext3   defaults,user_xattr  0   0
+以上步骤对CacheFS和CacheFiles都适合。下一步就是启动cachefilesd服务了
+% service cachefilesd start
+如果没有报错，在/var/fscache目录，你应该可以看到下面这两个新创建的目录：</p> <h2 id="cache"><a href="#cache" class="header-anchor">#</a> cache</h2> <p>graveyard
+如果你查看/var/fscache/cache目录，你会看到一些奇怪的文件名，这意味着到目前为止一切OK。但是在使用这些你看到的文件之前，你需要确保netfs使用缓存。
+比如，NFS能够使用FS-Cache 和 CacheFS/CacheFiles. 只需要一个fsc挂载参数就可以做到。就像下面这样的命令：% mount -o fsc bigserver:/group-data /mnt/group-data
+这里”bigserver”是NFS服务器的机器名，/group-data是导出的共享目录。客户端把它挂载到/mnt/group-data目录上。关键的地方就是这个-o fsc参数。
+netfs挂载后，缓存并不会自动开始工作，只有发生了读或者写的操作后，缓存才会工作，如果你在/var/fscache/cache里看到了新创建的文件，那就表示缓存功能已经激活了。
+缓存并不关心你的NFS挂载的时候使用的是哪个版本,v2,v3,v4都是支持的，但是有些区别：
+对于V2和V3,因为协议的限制，直接IO（Direct IO）和并发写是不支持的。
+而NFS v4提供较好的锁机制，使得写缓存或直接IO是支持的，因此确保你挂载时，使用的版本是v4.
+那么我如何直到CacheFS工作得如何呢？我们有一些统计和观察的方法。首先请确保使用上面的方法激活了缓存。在/proc文件系统里，有一些统计信息在里面，如果你想查看这些信息，先确保你运行的核心打开下面的两个参数：
+CONFIG_FSCACHE_STATS=y
+CONFIG_FSCACHE_HISTOGRAM=y
+那么你就可以从下面两个位置能看到一些信息了：
+/proc/fs/fscache/stats
+/proc/fs/fscache/histograms
+对这些信息的详细解释，这里就不展开了，感兴趣的可以参考相应的文档。</p> <h2 id="总结"><a href="#总结" class="header-anchor">#</a> 总结</h2> <p>这篇文档对FS-Cache和CacheFS做了一个大致的介绍。FS-Cache的目标是为本地数据缓存提供一个中心点，同时报纸原始文件系统与缓存机制的无关性。而CacheFS则是实际用来缓存文件系统，它被FS-Cache用来调用当做缓存的功能。CacheFS使用块设备的分区来存储缓存数据，当然FS-Cache也能够使用CacheFiles来当做缓存功能。
+CacheFS已经进入到了2.6.30的官方核心里，它将用在新的文件系统里。NFS和AFS都已经准备使用FS-Cache+CacheFS/CacheFiles了。
+FS-Cache另外的一个使用领域就是用来缓存本地文件系统，目前，文件系统都是依赖内核来缓存数据和调度相关IO操作，缓存不是直接受你的控制。
+FS-Cache使用非常大的缓存（比磁盘缓存大很多）时，读的性能有了非常大的提升，而且对于那些有着很好的写性能的文件系统，比如 NILFS ，使用FS-Cache和CacheFS也能显著提升读的性能。
+但是，本地系统可能需要某种关机自动备份的功能用来确保数据从缓存写入到实际的文件系统里。
+FS-Cahce和CacheFS/CacheFiles的另外一个使用领域就是对压缩文件系统?比如SquashFS?产生影响。SquashFS是压缩的文件系统，采取只读挂载的方式。因为FS-Cache的确有帮助提升读性能的能力，因此将它和SquashFS联合起来是有好处的。
+而且，SquashFS使用FS-Cache后变得可以被修改，对，就是能够被修改。
+最后，如果你在桌面，笔记本，客户端使用NFS，那么你有足够的理由来尝试FS-Cache和CacheFS/CacheFiles，它能给你性能上的提升。</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/AFS%E4%B8%8ENFS.html#什么是fs-cache和cachefs" class="sidebar-link reco-side-什么是fs-cache和cachefs" data-v-b57cc07c>什么是FS-Cache和CacheFS</a></li><li class="level-2" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/AFS%E4%B8%8ENFS.html#cache" class="sidebar-link reco-side-cache" data-v-b57cc07c>cache</a></li><li class="level-2" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/AFS%E4%B8%8ENFS.html#总结" class="sidebar-link reco-side-总结" data-v-b57cc07c>总结</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.402024e5.js" defer></script><script src="/assets/js/3.35889db3.js" defer></script><script src="/assets/js/1.98e71d3a.js" defer></script><script src="/assets/js/48.e175852f.js" defer></script>
+  </body>
+</html>

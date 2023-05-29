@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>xtraback原理及使用 | 刘文奇</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="个人博客，技术笔记整理">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.402024e5.js" as="script"><link rel="preload" href="/assets/js/3.35889db3.js" as="script"><link rel="preload" href="/assets/js/1.98e71d3a.js" as="script"><link rel="preload" href="/assets/js/119.05fc2356.js" as="script"><link rel="prefetch" href="/assets/js/10.d70328f8.js"><link rel="prefetch" href="/assets/js/100.bdfeee98.js"><link rel="prefetch" href="/assets/js/101.0f0aa0e3.js"><link rel="prefetch" href="/assets/js/102.8810b363.js"><link rel="prefetch" href="/assets/js/103.018076eb.js"><link rel="prefetch" href="/assets/js/104.6ef1e09a.js"><link rel="prefetch" href="/assets/js/105.ef045d33.js"><link rel="prefetch" href="/assets/js/106.3aafc27c.js"><link rel="prefetch" href="/assets/js/107.f3da675e.js"><link rel="prefetch" href="/assets/js/108.6a197ffd.js"><link rel="prefetch" href="/assets/js/109.9bdef9f9.js"><link rel="prefetch" href="/assets/js/11.8a566d2b.js"><link rel="prefetch" href="/assets/js/110.57ebc428.js"><link rel="prefetch" href="/assets/js/111.b5447738.js"><link rel="prefetch" href="/assets/js/112.c716f5e7.js"><link rel="prefetch" href="/assets/js/113.557f7376.js"><link rel="prefetch" href="/assets/js/114.61a54316.js"><link rel="prefetch" href="/assets/js/115.6d0b291a.js"><link rel="prefetch" href="/assets/js/116.8c93c654.js"><link rel="prefetch" href="/assets/js/117.07743f06.js"><link rel="prefetch" href="/assets/js/118.d1774c94.js"><link rel="prefetch" href="/assets/js/12.f6bcfd1f.js"><link rel="prefetch" href="/assets/js/120.2444fe97.js"><link rel="prefetch" href="/assets/js/121.ca03cbf1.js"><link rel="prefetch" href="/assets/js/122.4fea1a12.js"><link rel="prefetch" href="/assets/js/123.0e2b6ebe.js"><link rel="prefetch" href="/assets/js/124.61410c00.js"><link rel="prefetch" href="/assets/js/125.98a05a32.js"><link rel="prefetch" href="/assets/js/126.f734fc8e.js"><link rel="prefetch" href="/assets/js/127.e9acb272.js"><link rel="prefetch" href="/assets/js/128.d4b47285.js"><link rel="prefetch" href="/assets/js/129.aa6f2614.js"><link rel="prefetch" href="/assets/js/13.fa622aa3.js"><link rel="prefetch" href="/assets/js/130.244a3895.js"><link rel="prefetch" href="/assets/js/131.86c3a012.js"><link rel="prefetch" href="/assets/js/132.fe1b85d2.js"><link rel="prefetch" href="/assets/js/133.e238c5c4.js"><link rel="prefetch" href="/assets/js/134.1b5b832b.js"><link rel="prefetch" href="/assets/js/135.6468c4f0.js"><link rel="prefetch" href="/assets/js/136.19775bf4.js"><link rel="prefetch" href="/assets/js/137.c6d0ed15.js"><link rel="prefetch" href="/assets/js/138.230a86e2.js"><link rel="prefetch" href="/assets/js/139.64f42c07.js"><link rel="prefetch" href="/assets/js/14.3c87d1f8.js"><link rel="prefetch" href="/assets/js/140.607b2c0d.js"><link rel="prefetch" href="/assets/js/141.224b1c65.js"><link rel="prefetch" href="/assets/js/142.0d0fc6e0.js"><link rel="prefetch" href="/assets/js/143.c78f7a17.js"><link rel="prefetch" href="/assets/js/144.5f6b6fe2.js"><link rel="prefetch" href="/assets/js/145.d9203869.js"><link rel="prefetch" href="/assets/js/146.ac383aae.js"><link rel="prefetch" href="/assets/js/147.5ad44c9c.js"><link rel="prefetch" href="/assets/js/148.4f051907.js"><link rel="prefetch" href="/assets/js/149.ba645a2b.js"><link rel="prefetch" href="/assets/js/15.527a7f7a.js"><link rel="prefetch" href="/assets/js/150.ac4e4278.js"><link rel="prefetch" href="/assets/js/151.0a2827cd.js"><link rel="prefetch" href="/assets/js/152.7a554168.js"><link rel="prefetch" href="/assets/js/153.af52f866.js"><link rel="prefetch" href="/assets/js/154.2ce71126.js"><link rel="prefetch" href="/assets/js/155.7154dc6f.js"><link rel="prefetch" href="/assets/js/156.3d24250b.js"><link rel="prefetch" href="/assets/js/157.59ac5226.js"><link rel="prefetch" href="/assets/js/158.2d506491.js"><link rel="prefetch" href="/assets/js/159.92262746.js"><link rel="prefetch" href="/assets/js/16.aebd5e39.js"><link rel="prefetch" href="/assets/js/160.63210a31.js"><link rel="prefetch" href="/assets/js/161.9b44e7a4.js"><link rel="prefetch" href="/assets/js/162.5b61f2c7.js"><link rel="prefetch" href="/assets/js/163.7589d833.js"><link rel="prefetch" href="/assets/js/164.b5c15ecb.js"><link rel="prefetch" href="/assets/js/165.a5f5cd29.js"><link rel="prefetch" href="/assets/js/166.767b9987.js"><link rel="prefetch" href="/assets/js/167.1ffc72bf.js"><link rel="prefetch" href="/assets/js/168.515eab1b.js"><link rel="prefetch" href="/assets/js/169.dcc68995.js"><link rel="prefetch" href="/assets/js/17.bac8416c.js"><link rel="prefetch" href="/assets/js/170.64bfe5e6.js"><link rel="prefetch" href="/assets/js/171.5ad45642.js"><link rel="prefetch" href="/assets/js/172.b6d37b2e.js"><link rel="prefetch" href="/assets/js/173.19619648.js"><link rel="prefetch" href="/assets/js/174.eaff3157.js"><link rel="prefetch" href="/assets/js/175.2dffa431.js"><link rel="prefetch" href="/assets/js/176.3096d3a7.js"><link rel="prefetch" href="/assets/js/177.6d911d1f.js"><link rel="prefetch" href="/assets/js/178.a8b4f936.js"><link rel="prefetch" href="/assets/js/179.3003a50e.js"><link rel="prefetch" href="/assets/js/18.38c2d3ff.js"><link rel="prefetch" href="/assets/js/180.a03fd18b.js"><link rel="prefetch" href="/assets/js/181.62ce609e.js"><link rel="prefetch" href="/assets/js/182.00b6356e.js"><link rel="prefetch" href="/assets/js/183.6adc62eb.js"><link rel="prefetch" href="/assets/js/184.b11447af.js"><link rel="prefetch" href="/assets/js/185.6a9556de.js"><link rel="prefetch" href="/assets/js/186.5b458a07.js"><link rel="prefetch" href="/assets/js/187.a9bd8543.js"><link rel="prefetch" href="/assets/js/188.627a76f3.js"><link rel="prefetch" href="/assets/js/19.62378543.js"><link rel="prefetch" href="/assets/js/20.31bf256b.js"><link rel="prefetch" href="/assets/js/21.dd768b7c.js"><link rel="prefetch" href="/assets/js/22.f270cfbc.js"><link rel="prefetch" href="/assets/js/23.652c5b0a.js"><link rel="prefetch" href="/assets/js/24.d8a77731.js"><link rel="prefetch" href="/assets/js/25.f4efa277.js"><link rel="prefetch" href="/assets/js/26.775d7d00.js"><link rel="prefetch" href="/assets/js/27.a42e7481.js"><link rel="prefetch" href="/assets/js/28.c81142a3.js"><link rel="prefetch" href="/assets/js/29.104d30bb.js"><link rel="prefetch" href="/assets/js/30.eeaa063e.js"><link rel="prefetch" href="/assets/js/31.c08c3cc6.js"><link rel="prefetch" href="/assets/js/32.96914904.js"><link rel="prefetch" href="/assets/js/33.b5e70d92.js"><link rel="prefetch" href="/assets/js/34.f72f363f.js"><link rel="prefetch" href="/assets/js/35.8e461891.js"><link rel="prefetch" href="/assets/js/36.a3887f60.js"><link rel="prefetch" href="/assets/js/37.f8ac624a.js"><link rel="prefetch" href="/assets/js/38.f9e3dfe7.js"><link rel="prefetch" href="/assets/js/39.00c6dac4.js"><link rel="prefetch" href="/assets/js/4.4a2913bc.js"><link rel="prefetch" href="/assets/js/40.0431cb0b.js"><link rel="prefetch" href="/assets/js/41.a0b96bac.js"><link rel="prefetch" href="/assets/js/42.81504763.js"><link rel="prefetch" href="/assets/js/43.a2f1e577.js"><link rel="prefetch" href="/assets/js/44.c6e577c7.js"><link rel="prefetch" href="/assets/js/45.e19251cb.js"><link rel="prefetch" href="/assets/js/46.2736b4a4.js"><link rel="prefetch" href="/assets/js/47.74eb52c3.js"><link rel="prefetch" href="/assets/js/48.e175852f.js"><link rel="prefetch" href="/assets/js/49.470cd3e4.js"><link rel="prefetch" href="/assets/js/5.894dfcfd.js"><link rel="prefetch" href="/assets/js/50.aa07f64f.js"><link rel="prefetch" href="/assets/js/51.7491ccca.js"><link rel="prefetch" href="/assets/js/52.ede9d894.js"><link rel="prefetch" href="/assets/js/53.f4ec39bc.js"><link rel="prefetch" href="/assets/js/54.11693e63.js"><link rel="prefetch" href="/assets/js/55.6158a230.js"><link rel="prefetch" href="/assets/js/56.d30bcbf8.js"><link rel="prefetch" href="/assets/js/57.7a28a471.js"><link rel="prefetch" href="/assets/js/58.f0c30984.js"><link rel="prefetch" href="/assets/js/59.ab16feee.js"><link rel="prefetch" href="/assets/js/6.71d47490.js"><link rel="prefetch" href="/assets/js/60.1c81418c.js"><link rel="prefetch" href="/assets/js/61.1dd5070d.js"><link rel="prefetch" href="/assets/js/62.7f7ce997.js"><link rel="prefetch" href="/assets/js/63.2cb3686d.js"><link rel="prefetch" href="/assets/js/64.18048f56.js"><link rel="prefetch" href="/assets/js/65.87291046.js"><link rel="prefetch" href="/assets/js/66.a7a7575d.js"><link rel="prefetch" href="/assets/js/67.ca181b91.js"><link rel="prefetch" href="/assets/js/68.4a9df39d.js"><link rel="prefetch" href="/assets/js/69.4a2661f5.js"><link rel="prefetch" href="/assets/js/7.6ba3ae87.js"><link rel="prefetch" href="/assets/js/70.0613e6ac.js"><link rel="prefetch" href="/assets/js/71.b092300b.js"><link rel="prefetch" href="/assets/js/72.25f9363b.js"><link rel="prefetch" href="/assets/js/73.be14e0d3.js"><link rel="prefetch" href="/assets/js/74.02d90af1.js"><link rel="prefetch" href="/assets/js/75.effffafd.js"><link rel="prefetch" href="/assets/js/76.c53ee55b.js"><link rel="prefetch" href="/assets/js/77.4aa1108d.js"><link rel="prefetch" href="/assets/js/78.672c6170.js"><link rel="prefetch" href="/assets/js/79.caf6aebe.js"><link rel="prefetch" href="/assets/js/8.89bc7f6d.js"><link rel="prefetch" href="/assets/js/80.39b1897d.js"><link rel="prefetch" href="/assets/js/81.7cce90fa.js"><link rel="prefetch" href="/assets/js/82.5be4879f.js"><link rel="prefetch" href="/assets/js/83.b47ca97a.js"><link rel="prefetch" href="/assets/js/84.93b6da79.js"><link rel="prefetch" href="/assets/js/85.97f70ae7.js"><link rel="prefetch" href="/assets/js/86.aa40b1cc.js"><link rel="prefetch" href="/assets/js/87.2a9e64ba.js"><link rel="prefetch" href="/assets/js/88.960c348f.js"><link rel="prefetch" href="/assets/js/89.81c8200d.js"><link rel="prefetch" href="/assets/js/9.31afac8d.js"><link rel="prefetch" href="/assets/js/90.313a5e05.js"><link rel="prefetch" href="/assets/js/91.dfb38398.js"><link rel="prefetch" href="/assets/js/92.7eac20c9.js"><link rel="prefetch" href="/assets/js/93.cb7e9ce1.js"><link rel="prefetch" href="/assets/js/94.7ae95a84.js"><link rel="prefetch" href="/assets/js/95.7f792a23.js"><link rel="prefetch" href="/assets/js/96.596eb777.js"><link rel="prefetch" href="/assets/js/97.06b96fe1.js"><link rel="prefetch" href="/assets/js/98.7c50f666.js"><link rel="prefetch" href="/assets/js/99.a5d107f2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>刘文奇</h3> <p class="description" data-v-59e6cb88>个人博客，技术笔记整理</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="刘文奇" class="logo"> <span class="site-name">刘文奇</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><!----> <h3 class="name" data-v-1fad0c41>
+    刘文奇
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>178</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>107</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>xtraback原理及使用</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">xtraback原理及使用</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>刘文奇</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>12/23/2016</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>mysql</span><span class="tag-item" data-v-8a445198>xtraback</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="xtrabackup"><a href="#xtrabackup" class="header-anchor">#</a> xtrabackup</h1> <blockquote><p>xtrabackup 是 percona 的一个开源项目，可以热备份innodb ，XtraDB,和MyISAM（会锁表）。对MyISAM存储引擎会锁表，也是很郁闷的因为线上使用的是Innodb和MyISAM两种存储引擎，比较头疼！！ Xtrabackup是一个对InnoDB做数据备份的工具，支持在线热备份（备份时不影响数据读写），是商业备份工具InnoDB Hotbackup的一个很好的替代品。</p></blockquote> <h2 id="官方原理"><a href="#官方原理" class="header-anchor">#</a> 官方原理</h2> <blockquote><p>在InnoDB内部会维护一个redo日志文件，我们也可以叫做事务日志文件。事务日志会存储每一个InnoDB表数据的记录修改。当InnoDB启动时，InnoDB会检查数据文件和事务日志，并执行两个步骤：它应用（前滚）已经提交的事务日志到数据文件，并将修改过但没有提交的数据进行回滚操作。</p></blockquote> <p>xtrabackup在启动时会记住log sequence number（LSN），并且复制所有的数据文件。复制过程需要一些时间，所以这期间如果数据文件有改动，那么将会使数据库处于一个不同的时间点。这时，xtrabackup会运行一个后台进程，用于监视事务日志，并从事务日志复制最新的修改。xtrabackup必须持续的做这个操作，是因为事务日志是会轮转重复的写入，并且事务日志可以被重用。所以xtrabackup自启动开始，就不停的将事务日志中每个数据文件的修改都记录下来。</p> <p>上面就是xtrabackup的备份过程。接下来是准备（prepare）过程。在这个过程中，xtrabackup使用之前复制的事务日志，对各个数据文件执行灾难恢复（就像MySQL刚启动时要做的一样）。当这个过程结束后，数据库就可以做恢复还原了。 以上的过程在xtrabackup的编译二进制程序中实现。程序innobackupex可以允许我们备份MyISAM表和frm文件从而增加了便捷和功能。Innobackupex会启动xtrabackup，直到xtrabackup复制数据文件后，然后执行FLUSH TABLES WITH READ LOCK来阻止新的写入进来并把MyISAM表数据刷到硬盘上，之后复制MyISAM数据文件，最后释放锁。</p> <p>备份MyISAM和InnoDB表最终会处于一致，在准备（prepare）过程结束后，InnoDB表数据已经前滚到整个备份结束的点，而不是回滚到xtrabackup刚开始时的点。这个时间点与执行FLUSH TABLES WITH READ LOCK的时间点相同，所以MyISAM表数据与InnoDB表数据是同步的。类似Oracle的，InnoDB的prepare过程可以称为recover（恢复），MyISAM的数据复制过程可以称为restore（还原）。</p> <p>xtrabackup和innobackupex这两个工具都提供了许多前文没有提到的功能特点。手册上有对各个功能都有详细的介绍。简单介绍下，这些工具提供了如流（streaming）备份，增量（incremental）备份等，通过复制数据文件，复制日志文件和提交日志到数据文件（前滚）实现了各种复合备份方式。</p> <p>xtrabackup只能备份和恢复InnoDB表，而且只有ibd文件，frm文件它不管，恢复时就需要DBA提供frm。innobackupex可以备份和恢复MyISAM表以及frm文件，并且对xtrabackup也做了很好的封装，所以可以使用innobackupex来备份MySQL数据库。还有一个问题，就是innobackupex备份MyISAM表之前要对全库进行加READ LOCK，阻塞写操作，若备份是在从库上进行的话会影响主从同步，造成延迟。对InnoDB表备份不会阻塞读写。</p> <h2 id="xtrabackup增量备份的原理是"><a href="#xtrabackup增量备份的原理是" class="header-anchor">#</a> xtrabackup增量备份的原理是</h2> <p>首先完成一个完全备份，并记录下此时检查点LSN； 2)、然后增量备份时，比较表空间中每个页的LSN是否大于上次备份的LSN，若是则备份该页并记录当前检查点的LSN。</p> <p>具体来说，首先在logfile中找到并记录最后一个checkpoint（“last checkpoint LSN”），然后开始从LSN的位置开始拷贝InnoDB的logfile到<code>xtrabackup_logfile</code>；然后开始拷贝全部的数据文件.ibd；在拷贝全部数据文件结束之后，才停止拷贝logfile。</p> <p>所以xtrabackuplogfile文件在并发写入很大时也会变得很大，占用很多空间，需要注意。另外当我们使用--stream=tar或者远程备份--remote-host时默认使用/tmp，但最好显示用参数--tmpdir指定，以免把/tmp目录占满影响备份以及系统其它正常服务。 因为logfile里面记录全部的数据修改情况，所以即使在备份过程中数据文件被修改过了，恢复时仍然能够通过解析xtrabackuplogfile保持数据的一致。 xtrabackup的增量备份只能用于InnoDB表，不能用在MyISAM表上。采用增量备份MySQL数据库时xtrabackup会依据上次全备份或增量备份目录对InnoDB表进行增量备份，对MyISAM表会进行全表复制。</p> <p>流备份（streaming）可以将备份直接保存到远程服务器上。 当执行恢复时，由于复制是不锁表的所以此时数据文件都是不一致的，xtrabackup使用之前保存的redo log对各个数据文件检查是否与事务日志的checkpoint一致，执行恢复： 1)、根据复制数据文件时以及之后已提交事务产生的事务日志进行前滚； 2)、将未提交的事务进行回滚。</p> <p>这个过程就是MySQL数据库宕机之后执行的crash recovery。</p> <h2 id="增量备份"><a href="#增量备份" class="header-anchor">#</a> 增量备份</h2> <p>在InnoDB中，每个page中都记录LSN信息，每当相关数据发生改变，page的LSN就会自动增加，xtrabackup的增量备份就是依据这一原理进行的。xtrabackup将上次备份（完全备份集或者也是一个增量备份集）以来LSN改变的page进行备份。 所以，要做增量备份第一次就要做一个完全备份（就是将MySQL实例或者说要备份的数据库表做一个完全复制，同时记录LSN），之后可以基于此进行增量备份以及恢复。</p> <h3 id="增量备份优点"><a href="#增量备份优点" class="header-anchor">#</a> 增量备份优点</h3> <ol><li>数据库太大没有足够的空间全量备份，增量备份能有效节省空间，并且效率高；</li> <li>支持热备份，备份过程不锁表（针对InnoDB而言），不阻塞数据库的读写；</li> <li>每日备份只产生少量数据，也可采用远程备份，节省本地空间；</li> <li>备份恢复基于文件操作，降低直接对数据库操作风险；</li> <li>备份效率更高，恢复效率更高。</li></ol> <h3 id="恢复与还原"><a href="#恢复与还原" class="header-anchor">#</a> 恢复与还原</h3> <p><code>backup</code>的恢复过程中包括恢复和还原两个部分。 我们前面已经说了<code>xtrabackup</code>只备份<code>InnoDB</code>表的<code>ibd</code>文件，而<code>innobackupex</code>可以备份包括<code>InnoDB</code>表在内的其他存储引擎的表的所有数据文件。由于不同引擎表备份时的不同，也会让恢复过程看起来不一样。</p> <p>先来看看完全备份集的恢复。 在<code>InnoDB</code>表的备份或者更直接的说ibd数据文件复制的过程中，数据库处于不一致的状态，所以要将<code>xtraback_logfile</code>中尚未提交的事务进行回滚，以及将已经提交的事务进行前滚，使各个数据文件处于一个一致性状态，这个过程叫做“准备(prepare)”。</p> <p>如果你是在一个从库上执行的备份，那说明你没有东西需要回滚，只是简单的apply redo log就可以了。另外在prepare过程中可以使用参数--use-memory增大使用系统内存量从而提高恢复速度。</p> <p>之后，我们就可以根据backup-my.cnf中的配置把数据文件复制回对应的目录了，当然你也可以自己复制回去，但innobackupex都会帮我们完成。在这里，对于InnoDB表来说是完成“后准备”动作，我们称之为“恢复(recovery)”，而对于MyISAM表来说由于备份时是采用锁表方式复制的，所以此时只是简单的复制回来，不需要apply log，这个我们称之为“还原(restore)”。 注：本文档里之所以使用恢复和还原，也是和其他数据库比如Oracle看起来一样。</p> <p>对于增量备份的恢复过程，与完全备份集的恢复类似，只是有少许不同：</p> <ul><li>恢复过程需要使用完全备份集和各个增量备份集，各个备份集的恢复与前面说的一样（前滚和回滚），之后各个增量备份集的redo log都会应用到完全备份集中；</li> <li>对于完全备机集之后产生的新表，要有特殊处理方式，以便恢复后不丢表；</li> <li>要以完全备份集为基础，然后按顺序应用各个增量备份集。</li></ul> <h3 id="流备份和压缩"><a href="#流备份和压缩" class="header-anchor">#</a> 流备份和压缩</h3> <p>提到流备份(streaming)就要说远程备份和备份压缩，先说流备份吧。 流备份是指备份的数据通过标准输出STDOUT传输给tar程序进行归档，而不是单纯的将数据文件保存到指定的备份目录中，参数--stream=tar表示开启流备份功能并打包。同时也可以利用流备份到远程服务器上。
+举例来说:</p> <p><code>$ innobackupex --stream=TAR ${BACKUPDIR}/base | gzip &gt; ${BACKUPDIR}/base.tar.gz $ innobackupex --stream=TAR ${BACKUP_DIR}/base|ssh somebackupaddr “cat &gt; ${DIR}/base.tar”</code></p> <p>当然了，如果你使用了流备份，那么增量备份也就不能用了，因为增量备份需要参考次备份情况，而上次备份却被打包或者压缩了。 在我们现实使用中，更多的使用增量备份，至于归档压缩我们可以通过脚本自主完成。</p> <h3 id="部分备份和恢复"><a href="#部分备份和恢复" class="header-anchor">#</a> 部分备份和恢复</h3> <p>xtrabackup可以只备份/恢复部分库表，可以正则模式匹配或者是你想备份库表的列表，但InnoDB表必须是独立表空间，同时不能使用流备份功能。</p> <ul><li><p>使用正则模式匹配备份部分库表，需要使用参数--include，语句类似如下:</p> <p><code>$ innobackupex --include=’^qb.*’ ${BACKUP_DIR}/part-base</code></p></li> <li><p>使用数据库列表备份部分库，需要使用参数--databases，语句类似如下:</p> <p><code>$ innobackupex --databases=qb0 qb1 qb2 qb3 ${BACKUP_DIR}/part-base</code></p></li> <li><p>使用表列表备份部分表，需要使用参数--tables-file，语句类似如下:</p> <p><code>$ innobackupex --tables-list=${CONFDIR}/tab.conf ${BACKUPDIR}/part-base</code></p></li></ul> <blockquote><p>注：在我们的现实应用中，很少会只备份集群中部分库表，所以只是了解此功能即可，若有现实需要可以参考percona官方资料以获取更多信息。</p></blockquote> <p>能备份部分库表，也就能根据完全备份集进行部分库表的恢复，在现实中很少会用到，但还是说一下吧。 首先在“准备prepare”的过程中，使用参数--export将表导出，这个导出会将每个InnoDB表创建一个以.exp结尾的文件，这些文件为之后的导入过程服务。</p> <div class="language- extra-class"><pre><code>`$ innobackupex --apply-log --export ${BACKUP_DIR}/base`
+</code></pre></div><p>然后将你需要恢复的表的ibd和exp文件复制到目标机器，在目标机器上执行导入：</p> <div class="language- extra-class"><pre><code>  mysql&gt; create table t()engine=innodb;
+  //此处需要DBA手动创建一个同结构的表或表已存在
+  mysql&gt; ALTER TABLE t DISCARD TABLESPACE;
+  $ cp t.ibd t.exp ${DATA_DIR}/${DB}/ mysql&gt; ALTER TABLE t IMPORT TABLESPACE; 这样的导出导入就可以保住恢复的表可以与数据库其他表保持一致性了。
+</code></pre></div><h3 id="并行备份"><a href="#并行备份" class="header-anchor">#</a> 并行备份</h3> <p>xtrbackup还支持并行备份，默认情况下xtrabackup备份时只会开启一个进程进行数据文件的备份，若配置参数--parallel=N可以让xtrabackup开启N个子进程对多个数据文件进行并发备份，这样可以加快备份的速度。当然服务器的IO处理能力以及对服务器的影响也是要考虑的，所以另一个参数--throttle=IOS会与它同时使用，这个参数用来限制备份过程中每秒读写的IO次数，对服务器的IO是一个保护。</p> <p>这两个参数xtrabackup和innobackupex都支持，举例如下:</p> <div class="language- extra-class"><pre><code>$ innobackupex --parallel=4 --throttle=400 ${BACKUP_DIR}/part-base 注意：对同一个数据文件只会有一个进程在备份。
+</code></pre></div><h3 id="其他"><a href="#其他" class="header-anchor">#</a> 其他</h3> <p>xtrabackup在备份时主要的工作是做数据文件复制，它每次只会读写1MB的数据（即64个page，不能修改），xtrabackup逐页访问1MB数据，使用innodb的bufpageis_corrupted()函数检查此页的数据是否正常，如果数据不正常，就重新读取这一页，最多重新读取10次，如果还是失败，备份就失败了，退出。 在复制事务日志的时候，每次读写512KB的数据，同样不可以配置。 之前我在维护mysql数据库的时候，使用mysqldump来进行备份与恢复，在备份的时候锁住表，然后全部备份，在数据少的时候没问题，但如果数据很多，不允许锁表，同时需要恢复数据块的情况，mysqldump就不适合了，我在恢复一个4G数据文件的数据库的时候，恢复的数据是使用mysqldump的数据，恢复了3个小时还没有反应，造成的影响很严重，所以我开始寻找其他的别发软件来满足以上的需求，幸好找到了，就是使用xtrabackup来进行备份与恢复，恢复4G数据文件的数据库，仅需要14秒，同时在备份的时候不会锁表，而且支持增量备份，所以把我的比较分享给大家，希望对大家有益！</p> <h3 id="安装"><a href="#安装" class="header-anchor">#</a> 安装：</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>      yum <span class="token function">install</span> perl-Time-HiRes <span class="token parameter variable">-y</span>
+      yum <span class="token parameter variable">-y</span> <span class="token function">install</span> perl-DBD-MySQL.x86_64
+      <span class="token function">tar</span> xvf percona-xtrabackup-2.1.5-680-Linux-x86_64.tar.gz
+      <span class="token builtin class-name">cd</span> percona-xtrabackup-2.1.5-Linux-x86_64/
+      <span class="token function">cp</span> bin/* /usr/bin/
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><blockquote><p>innobackupex使用参数介绍由于innobackupex能同时备份InnoDB和MyISAM引擎的表，这里重点介绍innobackupex的备份与恢复使用通常一般都直接使用innobackupex，因为它能同时备份InnoDB和MyISAM引擎的表。要注意的是my.cnf里datadir这个参数是必须要指定的，xtrabackup_55是根据它去定位innodb数据文件的位置。</p></blockquote> <div class="language- extra-class"><pre><code>innobackupex语法及参数说明innobackup [--sleep=MS] [--compress[=LEVEL]] [--include=REGEXP] [--user=NAME] [--password=WORD] [--port=PORT] [--socket=SOCKET] [--no-timest a mp] [--ibbackup=IBBACKUP-BINARY] [--slave-info] [--stream=tar] [--defaults-file=MY.CNF] [--databases=LIST] [--remote-host=HOSTNAME] BACKUP-ROOT-DIR
+
+innobackup --apply-log [--use-memory=MB] [--uncompress] [--defaults-file=MY.CNF] [--ibbackup=IBBACKUP-BINARY] BACKUP-DIR
+
+innobackup --copy-back [--defaults-file=MY.CNF] BACKUP-DIR
+</code></pre></div><h4 id="各参数说明"><a href="#各参数说明" class="header-anchor">#</a> 各参数说明：</h4> <div class="language- extra-class"><pre><code>--defaults-file指定mysql的配置文件my.cnf的位置，如--defaults-file=/etc/my.cnf如果不该参数，xtrabackup将从依次从以下位置查找配置文件/etc/my.cnf、/etc/mysql/my.cnf、/usr/local/etc/my.cnf、~/.my.cnf，并读取配置文件中的[mysqld]和[xtrabackup]配置段。[mysqld]中只需要指定datadir、innodb_data_home_dir、innodb_data_file_path、innodb_log_group_home_dir、innodb_log_files_in_group、innodb_log_file_size6个参数即可让xtrabackup正常工作--apply-log对xtrabackup的--prepare参数的封装
+--copy-back做数据恢复时将备份数据文件拷贝到MySQL服务器的datadir ；
+--remote-host=HOSTNAME通过ssh将备份数据存储到进程服务器上,HOSTNAME是远程IP地址；
+--stream=[tar]
+</code></pre></div><blockquote><p>备份文件输出格式, tar时使用tar4ibd , 该文件可在XtarBackup binary文件中获得.如果备份时有指定--stream=tar, 则tar4ibd文件所处目录一定要在$PATH中(因为使用的是tar4ibd去压缩, 在XtraBackup的binary包中可获得该文件)。
+在使用参数stream=tar备份的时候，你的xtrabackup_logfile可能会临时放在/tmp目录下，如果你备份的时候并发写入较大的话xtrabackup_logfile可能会很大(5G+)，很可能会撑满你的/tmp目录，可以通过参数--tmpdir指定目录来解决这个问题。</p></blockquote> <div class="language- extra-class"><pre><code>--tmpdir=DIRECTORY
+当有指定--remote-host or --stream时, 事务日志临时存储的目录, 默认采用MySQL配置文件中所指定的临时目录tmpdir
+--redo-only --apply-log组,
+强制备份日志时只redo ,跳过rollback。这在做增量备份时非常必要。
+--use-memory=#
+该参数在prepare的时候使用，控制prepare时innodb实例使用的内存量
+--throttle=IOS  
+同xtrabackup的--throttle参数
+--sleep=是给ibbackup使用的，指定每备份1M数据，过程停止拷贝多少毫秒，也是为了在备份时尽量减小对正常业务的影响，具体可以查看ibbackup的手册 ；
+--compress[=LEVEL]对备份数据迚行压缩，仅支持ibbackup，xtrabackup还没有实现；
+--include=REGEXP对xtrabackup参数--tables的封装，也支持ibbackup。备份包含的库表，例如：--include=&quot;test.*&quot;，意思是要备份test库中所有的表。如果需要全备份，则省略这个参数；如果需要备份test库下的2个表：test1和test2,则写成：--include=&quot;test.test1|test.test2&quot;。也可以使用通配符，如：--include=&quot;test.test*&quot;。
+--databases=LIST列出需要备份的databases，如果没有指定该参数，所有包含MyISAM和InnoDB表的database都会被备份；
+--uncompress解压备份的数据文件，支持ibbackup，xtrabackup还没有实现该功能；
+--slave-info,备份从库, 加上--slave-info备份目录下会多生成一个xtrabackup_slave_info 文件, 这里会保存主日志文件以及偏移, 文件内容类似于:CHANGE MASTER TO MASTER_LOG_FILE='', MASTER_LOG_POS=0
+--socket=SOCKET指定mysql.sock所在位置，以便备份进程登录mysql.
+</code></pre></div><h4 id="操作"><a href="#操作" class="header-anchor">#</a> 操作：</h4> <p>对数据库全库备份：</p> <p>innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 /tmp/</p> <blockquote><p>解释：</p></blockquote> <div class="language- extra-class"><pre><code>--defaults-file=/etc/my.cnf  #指定my.cnf位置
+--user=root  #指定mysql帐号
+--password=111111   #指定mysql密码
+--port=3306   #指定mysql端口
+/tmp/   #指定备份好的文件存放目录，我这放在/tmp/下面，
+执行完成后，如下多了个时间为名了的目录，里面就是备份文件了：
+
+[root@drfdai-17 tmp]# ls
+2013-10-29_16-06-41
+[root@drfdai-17 tmp]# ls 2013-10-29_16-06-41/
+aa ibdata1 testxtrabackup_checkpoints
+backup-my.cnf  mysql   xtrabackup_binary   xtrabackup_logfile
+drfdai performance_schema  xtrabackup_binlog_info
+备份drfdai库：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database=drfdai /tmp/
+</code></pre></div><blockquote><p>解释：</p></blockquote> <div class="language- extra-class"><pre><code>--database=drfdai #指定需要备份的数据库名
+
+  [root@drfdai-17 2013-10-29_16-23-53]# ls
+  backup-my.cnf  ibdata1xtrabackup_binlog_info  xtrabackup_logfile
+  drfdai xtrabackup_binary  xtrabackup_checkpoints
+</code></pre></div><h4 id="备份多个库"><a href="#备份多个库" class="header-anchor">#</a> 备份多个库：</h4> <div class="language- extra-class"><pre><code>  innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database='drfdai mysql' /tmp/
+</code></pre></div><blockquote><p>解释：</p></blockquote> <div class="language- extra-class"><pre><code>  --database='drfdai mysql'  #指定你需要备份的那几个库名，用单引号把这些库名引起来，每个库中间用空格隔开。
+  [root@drfdai-17 2013-10-29_16-33-09]# ls
+  backup-my.cnf  ibdata1  xtrabackup_binary   xtrabackup_checkpoints
+  drfdai mysqlxtrabackup_binlog_info  xtrabackup_logfile
+</code></pre></div><h4 id="备份多个表"><a href="#备份多个表" class="header-anchor">#</a> 备份多个表：</h4> <div class="language- extra-class"><pre><code>  innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --database='drfdai.aa1 drfdai.aa2' /tmp/
+</code></pre></div><blockquote><p>解释：</p></blockquote> <div class="language- extra-class"><pre><code>--database='drfdai.aa1 drfdai.aa2' #指定备份drfdai库下面的aa1表和aa2表
+</code></pre></div><h3 id="还原操作"><a href="#还原操作" class="header-anchor">#</a> 还原操作：</h3> <div class="language- extra-class"><pre><code>停止mysql数据库并删除欲恢复的数据库文件夹
+如我的mysql数据库文件夹是在/data/mysql/data中，所以我删掉这个文件夹
+然后重建一个/data/mysql/data/
+      rm -rf /data/mysql/data
+      mkdir /data/mysql/data
+</code></pre></div><h4 id="还原完整备份"><a href="#还原完整备份" class="header-anchor">#</a> 还原完整备份：</h4> <div class="language- extra-class"><pre><code>innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --apply-log /tmp/2013-10-29_17-17-47/
+这里的--apply-log指明是将日志应用到数据文件上，完成之后将备份文件中的数据恢复到数据库中
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 --copy-back /tmp/2013-10-29_17-17-47/
+这里的—copy-back指明是进行数据恢复。数据恢复完成之后，需要修改相关文件的权限mysql数据库才能正常启动。
+
+chown -R mysql:mysql /data/mysql/data
+</code></pre></div><h4 id="增量备份-2"><a href="#增量备份-2" class="header-anchor">#</a> 增量备份：</h4> <div class="language- extra-class"><pre><code>次先进行完备： innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306 /tmp/ 备份完后，会生成最新的目录，名为：2013-10-29_17-17-47
+
+进行第一次增量备份：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306  --incremental --incremental-basedir=/tmp/2013-10-29_17-17-47 /tmp
+备份完成后，会生成最新增量备份，名为：2013-10-29_17-57-21
+解释：
+
+--incremental #指定为此次为增量备份
+--incremental-basedir=/tmp/2013-10-29_17-17-47  #指定是从哪个备份目录为参考点进行增量备份
+进行第二次增量备份：
+
+innobackupex --defaults-file=/etc/my.cnf --user=root --password=111111 --port=3306  --incremental --incremental-basedir=/tmp/2013-10-29_17-57-21/ /tmp
+以此类推，第三，第四 ……
+</code></pre></div><h4 id="增量备份恢复"><a href="#增量备份恢复" class="header-anchor">#</a> 增量备份恢复：</h4> <blockquote><p>增量备份恢复的步骤和完整备份恢复的步骤基本一致，只是应用日志的过程稍有不同。增量备份恢复时，是先将所有的增量备份挨个应用到完整备份的数据文件中，然后再将完整备份中的数据恢复到数据库中。命令如下：</p></blockquote> <ul><li><p>应用第一个增量备份</p> <p>innobackupex --user=root --password=MySQLPASSWORD --defaults-file=/etc/my.cnf --apply-log /mysqlbackup/full/2011-08-09_14-50-20/ --incremental-dir=/mysqlbackup/trn/2011-08-09_15-12-43/</p></li> <li><p>应用第二个增量备份</p> <p>innobackupex --user=root --password=MySQLPASSWORD --defaults-file=/etc/my.cnf --apply-log /mysqlbackup/full/2011-08-09_14-50-20/ --incremental-dir=/mysqlbackup/trn/2011-08-05_15-15-47/</p></li> <li><p>将完整备份中的数据恢复到数据库中</p> <p>innobackupex --user=root --password=MySQLPASSWORD --defaults-file=/etc/my.cnf --copy-back /mysqlbackup/full/2011-08-05_14-50-20/ 其中，--incremental-dir指定要恢复的增量备份的位置。</p></li></ul></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#官方原理" class="sidebar-link reco-side-官方原理" data-v-b57cc07c>官方原理</a></li><li class="level-2" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#xtrabackup增量备份的原理是" class="sidebar-link reco-side-xtrabackup增量备份的原理是" data-v-b57cc07c>xtrabackup增量备份的原理是</a></li><li class="level-2" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#增量备份" class="sidebar-link reco-side-增量备份" data-v-b57cc07c>增量备份</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#增量备份优点" class="sidebar-link reco-side-增量备份优点" data-v-b57cc07c>增量备份优点</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#恢复与还原" class="sidebar-link reco-side-恢复与还原" data-v-b57cc07c>恢复与还原</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#流备份和压缩" class="sidebar-link reco-side-流备份和压缩" data-v-b57cc07c>流备份和压缩</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#部分备份和恢复" class="sidebar-link reco-side-部分备份和恢复" data-v-b57cc07c>部分备份和恢复</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#并行备份" class="sidebar-link reco-side-并行备份" data-v-b57cc07c>并行备份</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#其他" class="sidebar-link reco-side-其他" data-v-b57cc07c>其他</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#安装" class="sidebar-link reco-side-安装" data-v-b57cc07c>安装：</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E6%95%B0%E6%8D%AE%E5%BA%93/xtarback.html#还原操作" class="sidebar-link reco-side-还原操作" data-v-b57cc07c>还原操作：</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.402024e5.js" defer></script><script src="/assets/js/3.35889db3.js" defer></script><script src="/assets/js/1.98e71d3a.js" defer></script><script src="/assets/js/119.05fc2356.js" defer></script>
+  </body>
+</html>

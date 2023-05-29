@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Django Rest Framework 教程及API向导 | 刘文奇</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="个人博客，技术笔记整理">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.402024e5.js" as="script"><link rel="preload" href="/assets/js/3.35889db3.js" as="script"><link rel="preload" href="/assets/js/1.98e71d3a.js" as="script"><link rel="preload" href="/assets/js/14.3c87d1f8.js" as="script"><link rel="prefetch" href="/assets/js/10.d70328f8.js"><link rel="prefetch" href="/assets/js/100.bdfeee98.js"><link rel="prefetch" href="/assets/js/101.0f0aa0e3.js"><link rel="prefetch" href="/assets/js/102.8810b363.js"><link rel="prefetch" href="/assets/js/103.018076eb.js"><link rel="prefetch" href="/assets/js/104.6ef1e09a.js"><link rel="prefetch" href="/assets/js/105.ef045d33.js"><link rel="prefetch" href="/assets/js/106.3aafc27c.js"><link rel="prefetch" href="/assets/js/107.f3da675e.js"><link rel="prefetch" href="/assets/js/108.6a197ffd.js"><link rel="prefetch" href="/assets/js/109.9bdef9f9.js"><link rel="prefetch" href="/assets/js/11.8a566d2b.js"><link rel="prefetch" href="/assets/js/110.57ebc428.js"><link rel="prefetch" href="/assets/js/111.b5447738.js"><link rel="prefetch" href="/assets/js/112.c716f5e7.js"><link rel="prefetch" href="/assets/js/113.557f7376.js"><link rel="prefetch" href="/assets/js/114.61a54316.js"><link rel="prefetch" href="/assets/js/115.6d0b291a.js"><link rel="prefetch" href="/assets/js/116.8c93c654.js"><link rel="prefetch" href="/assets/js/117.07743f06.js"><link rel="prefetch" href="/assets/js/118.d1774c94.js"><link rel="prefetch" href="/assets/js/119.05fc2356.js"><link rel="prefetch" href="/assets/js/12.f6bcfd1f.js"><link rel="prefetch" href="/assets/js/120.2444fe97.js"><link rel="prefetch" href="/assets/js/121.ca03cbf1.js"><link rel="prefetch" href="/assets/js/122.4fea1a12.js"><link rel="prefetch" href="/assets/js/123.0e2b6ebe.js"><link rel="prefetch" href="/assets/js/124.61410c00.js"><link rel="prefetch" href="/assets/js/125.98a05a32.js"><link rel="prefetch" href="/assets/js/126.f734fc8e.js"><link rel="prefetch" href="/assets/js/127.e9acb272.js"><link rel="prefetch" href="/assets/js/128.d4b47285.js"><link rel="prefetch" href="/assets/js/129.aa6f2614.js"><link rel="prefetch" href="/assets/js/13.fa622aa3.js"><link rel="prefetch" href="/assets/js/130.244a3895.js"><link rel="prefetch" href="/assets/js/131.86c3a012.js"><link rel="prefetch" href="/assets/js/132.fe1b85d2.js"><link rel="prefetch" href="/assets/js/133.e238c5c4.js"><link rel="prefetch" href="/assets/js/134.1b5b832b.js"><link rel="prefetch" href="/assets/js/135.6468c4f0.js"><link rel="prefetch" href="/assets/js/136.19775bf4.js"><link rel="prefetch" href="/assets/js/137.c6d0ed15.js"><link rel="prefetch" href="/assets/js/138.230a86e2.js"><link rel="prefetch" href="/assets/js/139.64f42c07.js"><link rel="prefetch" href="/assets/js/140.607b2c0d.js"><link rel="prefetch" href="/assets/js/141.224b1c65.js"><link rel="prefetch" href="/assets/js/142.0d0fc6e0.js"><link rel="prefetch" href="/assets/js/143.c78f7a17.js"><link rel="prefetch" href="/assets/js/144.5f6b6fe2.js"><link rel="prefetch" href="/assets/js/145.d9203869.js"><link rel="prefetch" href="/assets/js/146.ac383aae.js"><link rel="prefetch" href="/assets/js/147.5ad44c9c.js"><link rel="prefetch" href="/assets/js/148.4f051907.js"><link rel="prefetch" href="/assets/js/149.ba645a2b.js"><link rel="prefetch" href="/assets/js/15.527a7f7a.js"><link rel="prefetch" href="/assets/js/150.ac4e4278.js"><link rel="prefetch" href="/assets/js/151.0a2827cd.js"><link rel="prefetch" href="/assets/js/152.7a554168.js"><link rel="prefetch" href="/assets/js/153.af52f866.js"><link rel="prefetch" href="/assets/js/154.2ce71126.js"><link rel="prefetch" href="/assets/js/155.7154dc6f.js"><link rel="prefetch" href="/assets/js/156.3d24250b.js"><link rel="prefetch" href="/assets/js/157.59ac5226.js"><link rel="prefetch" href="/assets/js/158.2d506491.js"><link rel="prefetch" href="/assets/js/159.92262746.js"><link rel="prefetch" href="/assets/js/16.aebd5e39.js"><link rel="prefetch" href="/assets/js/160.63210a31.js"><link rel="prefetch" href="/assets/js/161.9b44e7a4.js"><link rel="prefetch" href="/assets/js/162.5b61f2c7.js"><link rel="prefetch" href="/assets/js/163.7589d833.js"><link rel="prefetch" href="/assets/js/164.b5c15ecb.js"><link rel="prefetch" href="/assets/js/165.a5f5cd29.js"><link rel="prefetch" href="/assets/js/166.767b9987.js"><link rel="prefetch" href="/assets/js/167.1ffc72bf.js"><link rel="prefetch" href="/assets/js/168.515eab1b.js"><link rel="prefetch" href="/assets/js/169.dcc68995.js"><link rel="prefetch" href="/assets/js/17.bac8416c.js"><link rel="prefetch" href="/assets/js/170.64bfe5e6.js"><link rel="prefetch" href="/assets/js/171.5ad45642.js"><link rel="prefetch" href="/assets/js/172.b6d37b2e.js"><link rel="prefetch" href="/assets/js/173.19619648.js"><link rel="prefetch" href="/assets/js/174.eaff3157.js"><link rel="prefetch" href="/assets/js/175.2dffa431.js"><link rel="prefetch" href="/assets/js/176.3096d3a7.js"><link rel="prefetch" href="/assets/js/177.6d911d1f.js"><link rel="prefetch" href="/assets/js/178.a8b4f936.js"><link rel="prefetch" href="/assets/js/179.3003a50e.js"><link rel="prefetch" href="/assets/js/18.38c2d3ff.js"><link rel="prefetch" href="/assets/js/180.a03fd18b.js"><link rel="prefetch" href="/assets/js/181.62ce609e.js"><link rel="prefetch" href="/assets/js/182.00b6356e.js"><link rel="prefetch" href="/assets/js/183.6adc62eb.js"><link rel="prefetch" href="/assets/js/184.b11447af.js"><link rel="prefetch" href="/assets/js/185.6a9556de.js"><link rel="prefetch" href="/assets/js/186.5b458a07.js"><link rel="prefetch" href="/assets/js/187.a9bd8543.js"><link rel="prefetch" href="/assets/js/188.627a76f3.js"><link rel="prefetch" href="/assets/js/19.62378543.js"><link rel="prefetch" href="/assets/js/20.31bf256b.js"><link rel="prefetch" href="/assets/js/21.dd768b7c.js"><link rel="prefetch" href="/assets/js/22.f270cfbc.js"><link rel="prefetch" href="/assets/js/23.652c5b0a.js"><link rel="prefetch" href="/assets/js/24.d8a77731.js"><link rel="prefetch" href="/assets/js/25.f4efa277.js"><link rel="prefetch" href="/assets/js/26.775d7d00.js"><link rel="prefetch" href="/assets/js/27.a42e7481.js"><link rel="prefetch" href="/assets/js/28.c81142a3.js"><link rel="prefetch" href="/assets/js/29.104d30bb.js"><link rel="prefetch" href="/assets/js/30.eeaa063e.js"><link rel="prefetch" href="/assets/js/31.c08c3cc6.js"><link rel="prefetch" href="/assets/js/32.96914904.js"><link rel="prefetch" href="/assets/js/33.b5e70d92.js"><link rel="prefetch" href="/assets/js/34.f72f363f.js"><link rel="prefetch" href="/assets/js/35.8e461891.js"><link rel="prefetch" href="/assets/js/36.a3887f60.js"><link rel="prefetch" href="/assets/js/37.f8ac624a.js"><link rel="prefetch" href="/assets/js/38.f9e3dfe7.js"><link rel="prefetch" href="/assets/js/39.00c6dac4.js"><link rel="prefetch" href="/assets/js/4.4a2913bc.js"><link rel="prefetch" href="/assets/js/40.0431cb0b.js"><link rel="prefetch" href="/assets/js/41.a0b96bac.js"><link rel="prefetch" href="/assets/js/42.81504763.js"><link rel="prefetch" href="/assets/js/43.a2f1e577.js"><link rel="prefetch" href="/assets/js/44.c6e577c7.js"><link rel="prefetch" href="/assets/js/45.e19251cb.js"><link rel="prefetch" href="/assets/js/46.2736b4a4.js"><link rel="prefetch" href="/assets/js/47.74eb52c3.js"><link rel="prefetch" href="/assets/js/48.e175852f.js"><link rel="prefetch" href="/assets/js/49.470cd3e4.js"><link rel="prefetch" href="/assets/js/5.894dfcfd.js"><link rel="prefetch" href="/assets/js/50.aa07f64f.js"><link rel="prefetch" href="/assets/js/51.7491ccca.js"><link rel="prefetch" href="/assets/js/52.ede9d894.js"><link rel="prefetch" href="/assets/js/53.f4ec39bc.js"><link rel="prefetch" href="/assets/js/54.11693e63.js"><link rel="prefetch" href="/assets/js/55.6158a230.js"><link rel="prefetch" href="/assets/js/56.d30bcbf8.js"><link rel="prefetch" href="/assets/js/57.7a28a471.js"><link rel="prefetch" href="/assets/js/58.f0c30984.js"><link rel="prefetch" href="/assets/js/59.ab16feee.js"><link rel="prefetch" href="/assets/js/6.71d47490.js"><link rel="prefetch" href="/assets/js/60.1c81418c.js"><link rel="prefetch" href="/assets/js/61.1dd5070d.js"><link rel="prefetch" href="/assets/js/62.7f7ce997.js"><link rel="prefetch" href="/assets/js/63.2cb3686d.js"><link rel="prefetch" href="/assets/js/64.18048f56.js"><link rel="prefetch" href="/assets/js/65.87291046.js"><link rel="prefetch" href="/assets/js/66.a7a7575d.js"><link rel="prefetch" href="/assets/js/67.ca181b91.js"><link rel="prefetch" href="/assets/js/68.4a9df39d.js"><link rel="prefetch" href="/assets/js/69.4a2661f5.js"><link rel="prefetch" href="/assets/js/7.6ba3ae87.js"><link rel="prefetch" href="/assets/js/70.0613e6ac.js"><link rel="prefetch" href="/assets/js/71.b092300b.js"><link rel="prefetch" href="/assets/js/72.25f9363b.js"><link rel="prefetch" href="/assets/js/73.be14e0d3.js"><link rel="prefetch" href="/assets/js/74.02d90af1.js"><link rel="prefetch" href="/assets/js/75.effffafd.js"><link rel="prefetch" href="/assets/js/76.c53ee55b.js"><link rel="prefetch" href="/assets/js/77.4aa1108d.js"><link rel="prefetch" href="/assets/js/78.672c6170.js"><link rel="prefetch" href="/assets/js/79.caf6aebe.js"><link rel="prefetch" href="/assets/js/8.89bc7f6d.js"><link rel="prefetch" href="/assets/js/80.39b1897d.js"><link rel="prefetch" href="/assets/js/81.7cce90fa.js"><link rel="prefetch" href="/assets/js/82.5be4879f.js"><link rel="prefetch" href="/assets/js/83.b47ca97a.js"><link rel="prefetch" href="/assets/js/84.93b6da79.js"><link rel="prefetch" href="/assets/js/85.97f70ae7.js"><link rel="prefetch" href="/assets/js/86.aa40b1cc.js"><link rel="prefetch" href="/assets/js/87.2a9e64ba.js"><link rel="prefetch" href="/assets/js/88.960c348f.js"><link rel="prefetch" href="/assets/js/89.81c8200d.js"><link rel="prefetch" href="/assets/js/9.31afac8d.js"><link rel="prefetch" href="/assets/js/90.313a5e05.js"><link rel="prefetch" href="/assets/js/91.dfb38398.js"><link rel="prefetch" href="/assets/js/92.7eac20c9.js"><link rel="prefetch" href="/assets/js/93.cb7e9ce1.js"><link rel="prefetch" href="/assets/js/94.7ae95a84.js"><link rel="prefetch" href="/assets/js/95.7f792a23.js"><link rel="prefetch" href="/assets/js/96.596eb777.js"><link rel="prefetch" href="/assets/js/97.06b96fe1.js"><link rel="prefetch" href="/assets/js/98.7c50f666.js"><link rel="prefetch" href="/assets/js/99.a5d107f2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>刘文奇</h3> <p class="description" data-v-59e6cb88>个人博客，技术笔记整理</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="刘文奇" class="logo"> <span class="site-name">刘文奇</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><!----> <h3 class="name" data-v-1fad0c41>
+    刘文奇
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>178</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>107</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>Django Rest Framework 教程及API向导</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">Django Rest Framework 教程及API向导</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>刘文奇</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>3/25/2018</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/views/Django/django.restFramework.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>Django</span><span class="tag-item" data-v-8a445198>python</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="django-rest-framework-教程及api向导"><a href="#django-rest-framework-教程及api向导" class="header-anchor">#</a> Django Rest Framework 教程及API向导</h1> <h2 id="一、请求-request"><a href="#一、请求-request" class="header-anchor">#</a> 一、请求（Request）</h2> <p>REST_FRAMEWORK 中的 <code>Request</code>扩展了标准的HttpRequest,为 REST_FRAMEWORK增加了灵活的request解析和request认证。</p> <ul><li>请求</li></ul> <p><code>.data</code>: 获取请求的主体，相当于request.POST和request.FILES</p> <p><code>.query_params</code>:   request.GET的重命名</p> <p><code>.parsers:</code>  APIView类或@api_view装饰将确保这个属性将自动设置为一个解析器实例列表</p> <ul><li><p>内容协商
+.accepted_render: 接受渲染一个对象内容协商
+.accepted_media_type: 接受的媒体类型</p></li> <li><p>身份验证
+.user:  通常返回django.contrib.auth.models.user的对象。虽然行为取决于所使用的身份验证策略。
+如果请求用户没有被认证，request.user是一个django.contrib.auth.models.Anoymoser对象。
+.auth:  被认证的后才会被使用，返回任何额外身份的环境。
+.authenticators:  APIView类或@api_view装饰将确保这个属性将自动设置为一个认证实例列表</p></li> <li><p>浏览器增强方法</p></li></ul> <blockquote><p>django rest framework提供一些附加的表单提交方法:PUT,PATCH,DELETE</p></blockquote> <p><code>.method</code>: 返回一个大写的HTTP请求方法字符串，包含了PUT,PATCH,DELETE等。</p> <p><code>.content_type</code>: 返回一个字符串对象代表HTTP请求的媒体类型的身体,或如果没有媒体类型提供一个空字符串。
+同样可以使用：request.META.get(‘HTTP_CONTENT_TYPE’)</p> <p><code>.stream</code>: 返回一个请求主体类容的流。</p> <ul><li>支持其他标准的HttpResquest属性
+.META/.session/等等</li></ul> <h2 id="二、response-响应"><a href="#二、response-响应" class="header-anchor">#</a> 二、Response（响应）</h2> <blockquote><p>你需要使用一个APIView类或@api_view函数返回response对象的views</p></blockquote> <ul><li><p>创建Response
+<code>from rest_framework.response import Response</code>
+例: <code>Response(data, status=None, template_name=None, headers=None, content_type=None)</code></p></li> <li><p><code>data</code>: 响应serialized(序列化)后的数据</p></li> <li><p><code>status</code>: 定义响应状态码，默认200</p></li> <li><p><code>template_name</code>: 如果HTMLRender被选择，返回一个模板</p></li> <li><p><code>headers</code>: 是关于HTTP请求头的一个字典</p></li> <li><p><code>content_type</code>: 响应内容类型，一般会根据内容自动协商。</p></li> <li><p>其他标准的HttpResponse属性</p></li></ul> <div class="language-python line-numbers-mode"><pre class="language-python"><code>response <span class="token operator">=</span> Response<span class="token punctuation">(</span><span class="token punctuation">)</span>
+response<span class="token punctuation">[</span>‘Cache<span class="token operator">-</span>Control’<span class="token punctuation">]</span> <span class="token operator">=</span> ‘no<span class="token operator">-</span>cache’
+<span class="token punctuation">.</span>render<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> 响应序列化的数据。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="三、基本视图类-apiview-api-view"><a href="#三、基本视图类-apiview-api-view" class="header-anchor">#</a> 三、基本视图类 (APIView/@api_view)</h2> <ol><li>类基础视图（APIView）</li></ol> <p>DRF不同于django常规的view类，他有如下几点优点：</p> <ul><li>提供了更好用的<code>request</code>对象，不同于普通的django HttpRequest更好用。</li> <li>封装了<code>Response</code>对象，代替了原有的django HttpResponse，视图将管理内容协商并设置正确的渲染器的响应。</li> <li>任何<code>APIException</code>异常将会被捕捉，并做适当的响应。</li> <li>传入的请求将身份验证和适当的权限和节流检查将之前运行调度请求处理程序的方法。
+一个小例子：</li></ul> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>views <span class="token keyword">import</span> APIView
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>response <span class="token keyword">import</span> Response
+<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> authenication<span class="token punctuation">,</span> permissions
+
+<span class="token keyword">class</span> <span class="token class-name">ListUser</span><span class="token punctuation">(</span>APIView<span class="token punctuation">)</span><span class="token punctuation">:</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p><strong>展示系统中所有的用户</strong></p> <ul><li>需要令牌认证。</li> <li>只有admin用户能够访问这一个视图</li></ul> <div class="language-python line-numbers-mode"><pre class="language-python"><code>authentication_classes <span class="token operator">=</span> <span class="token punctuation">(</span>authentication<span class="token punctuation">.</span>TokenAuthentication<span class="token punctuation">,</span><span class="token punctuation">)</span>  <span class="token comment"># 认证策略属性</span>
+permission_classes <span class="token operator">=</span> <span class="token punctuation">(</span>permissions<span class="token punctuation">.</span>IsAdminUser<span class="token punctuation">,</span><span class="token punctuation">)</span> <span class="token comment"># 权限策略属性</span>
+
+<span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> requeset<span class="token punctuation">,</span> <span class="token builtin">format</span><span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token triple-quoted-string string">&quot;&quot;&quot;
+返回一个用户列表
+&quot;&quot;&quot;</span>
+usernames <span class="token operator">=</span> <span class="token punctuation">[</span>user<span class="token punctuation">.</span>username <span class="token keyword">for</span> user <span class="token keyword">in</span>  User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">return</span> Response<span class="token punctuation">(</span>usernames<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><ol><li>API策略属性
+以下的API策略属性应用于APIView，控制视图的策略：</li></ol> <p><code>renderer_classes</code>： 渲染器类</p> <p><code>parser_classes</code>： 解释器类</p> <p><code>authentication_classes</code>： 权限类</p> <p><code>throttle_classes</code>：节流类</p> <p><code>permission_classes</code>： 权限类</p> <p><code>content_negotiation_class</code>： 内容协商类</p> <ol start="2"><li>API 策略方法
+以下的策略方法用在API的策略，通常不用重写它：</li></ol> <p><code>get_renderers(self)</code>:  获取渲染器方法
+<code>get_parsers(self)</code>: 获取解释器方法
+<code>get_authenticators(self)</code>: 或缺认证方法
+<code>get_throttles(self)</code>: 获取节流方法
+<code>get_permissions(self)</code>:  获取权限方法
+<code>get_content_negotiator(self)</code>: 获取内容协商方法</p> <ol start="3"><li>API策略实施方法</li></ol> <p>下列方法之前被称为调度处理程序方法：</p> <p><code>check_permissions(self, request)</code>: 检查权限</p> <p><code>check_throttles(self, request)</code>: 检查节流</p> <p><code>check_content_negotiation(self, request, force=False)</code>: 检查内容协商</p> <ol><li>调度方法</li></ol> <p>这些执行任何操作,需要发生之前或之后调用处理程序方法等.
+<code>initial(self, request, *args, **kwargs)</code>: 执行任何操作,需要发生在处理程序方法之前被调用。这个方法是用来执行权限和节流,并执行内容协商。</p> <p><code>handle_exception(self, exc)</code>：抛出的任何异常处理程序方法将被传递给这个方法,而返回响应实例,或者re-raises异常。
+<code>initialize_request(self, request, *args, **kwargs)</code>：确保请求对象传递给处理程序方法是request的一个实例，而不是django的HttpRequest</p> <p><code>finalize_response(self, request, response, *args, **kwargs)</code>：确保任何响应处理程序方法返回的对象将被呈现到正确的内容类型</p> <ol><li>函数基础视图（@api_view()）
+DRF同样提供了另外一种函数基础视图来装饰django的普通视图，我们同样可以使用request来接受请求和response响应。
+一个小例子：</li></ol> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>decorators <span class="token keyword">import</span> api_view
+
+<span class="token decorator annotation punctuation">@api_view</span>
+<span class="token keyword">def</span> <span class="token function">hello_world</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">return</span> Response<span class="token punctuation">(</span><span class="token punctuation">{</span>“message”<span class="token punctuation">:</span>”Hello world!”<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><ol><li>api_view()使用方法</li></ol> <blockquote><p>这个视图将使用默认渲染器、解析器、身份验证设置中指定的类等。通常默认只有GET方法，其他请求方法会报405错误，我们可以手动添加方法为这
+装饰器指定request方法。</p></blockquote> <p>像这样：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span>‘GET’<span class="token punctuation">,</span> ‘POST’<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">hello_world</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">if</span> request<span class="token punctuation">.</span>method  <span class="token operator">==</span> ‘POST’<span class="token punctuation">:</span>
+<span class="token keyword">return</span> Response<span class="token punctuation">(</span><span class="token punctuation">{</span>“message”<span class="token punctuation">:</span>”Got some data”<span class="token punctuation">,</span> “data”<span class="token punctuation">:</span> request<span class="token punctuation">.</span>data<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">return</span> Response<span class="token punctuation">(</span><span class="token punctuation">{</span>“messsage”<span class="token punctuation">:</span>”Hello world!”<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><ol><li>API策略装饰器
+DRF提供了很多附加的装饰器，我们可以添加到@api_view()后面，例如要加入一个节流的装饰器来确保特定用户每天只能一次通过这个视图，我
+我们就要用到@throttle_classes装饰器：</li></ol> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>decorators <span class="token keyword">import</span> api_view<span class="token punctuation">,</span> throttle_classes
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>throttling <span class="token keyword">import</span> UserRateThrottle
+
+<span class="token keyword">class</span> <span class="token class-name">OncePerDayUserThrottle</span><span class="token punctuation">(</span>UserRateThrottle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+rate <span class="token operator">=</span> “<span class="token number">1</span><span class="token operator">/</span>day”
+
+<span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span>‘GET’<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token decorator annotation punctuation">@throttle_classes</span><span class="token punctuation">(</span><span class="token punctuation">[</span>OncePerDayUserThrottle<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">view</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">return</span> Response<span class="token punctuation">(</span><span class="token punctuation">{</span>“message”<span class="token punctuation">:</span>”Hello <span class="token keyword">for</span> to day! see you tomorrow!”<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><div class="language- line-numbers-mode"><pre class="language-text"><code>其他可用API的装饰器：
+@renderer_classes(…)
+@parser_classes(…)
+@authentication_classes(…)
+@throttle_classes(…)
+@permission_classes(…)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h2 id="四、-通用视图-generic-views"><a href="#四、-通用视图-generic-views" class="header-anchor">#</a> 四、 通用视图（Generic views）</h2> <blockquote><p>基于类视图的主要好处之一是他们允许您编写可重用的行为.
+REST框架提供的通用视图允许您快速构建API观点紧密地映射到您的数据库模型.
+如果通用视图不适合你的需要API,您可以使用常规APIView类,或重用mixin和基类使用的通用视图来组成自己的组可重用通用视图。</p></blockquote> <h3 id="通用视图"><a href="#通用视图" class="header-anchor">#</a> 通用视图</h3> <p>同样我们可以设置一些类属性在通用视图内，也可以根据特殊要写重写它的内部视图方法。一个小例子：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>models <span class="token keyword">import</span> User
+<span class="token keyword">from</span> myapp<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> UserSerializer
+<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> generics
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>permissions <span class="token keyword">import</span> IsAdminUser
+
+<span class="token keyword">class</span> <span class="token class-name">UserList</span><span class="token punctuation">(</span>generics<span class="token punctuation">.</span>ListCreateAPIView<span class="token punctuation">)</span><span class="token punctuation">:</span>
+queryset <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+serializer_class <span class="token operator">=</span> UserSerializer
+permission_classes <span class="token operator">=</span> <span class="token punctuation">(</span>IsAdminUser<span class="token punctuation">,</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">list</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token comment"># Note the use of get_queryset() instead of self.queryset</span>
+queryset <span class="token operator">=</span> self<span class="token punctuation">.</span>get_queryset<span class="token punctuation">(</span><span class="token punctuation">)</span>
+serializer <span class="token operator">=</span> UserSerializer<span class="token punctuation">(</span>queryset<span class="token punctuation">,</span> many<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">return</span> Response<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>在urls配置中，<strong>我们可以使用.as_views()来转换成视图函数</strong>，当然也可以配置一些属性</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code>url<span class="token punctuation">(</span>r’<span class="token operator">^</span><span class="token operator">/</span>users<span class="token operator">/</span>’<span class="token punctuation">,</span> ListCreateAPIView<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span>queryset<span class="token operator">=</span>User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> serializer_class<span class="token operator">=</span>UserSerializer<span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token operator">=</span>’user<span class="token operator">-</span><span class="token builtin">list</span>’<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="genericapiview通用视图api参考"><a href="#genericapiview通用视图api参考" class="header-anchor">#</a> GenericAPIView通用视图API参考：</h3> <p>GenericAPIView继承了DRF的APIView类，为list和detail视图增加了一些一般需求行为方法（提供queryset）。</p> <h4 id="属性"><a href="#属性" class="header-anchor">#</a> 属性</h4> <p><strong><code>基本属性</code></strong>：</p> <p><code>queryset</code>: 用于返回query对象集合，也可以使用get_queryset()方法。</p> <p><code>serializer_class</code>: 序列化器类,应该用于输入进行验证和反序列化,并用于序列化输出。通常情况下,你必须设置这个属性,或重写get_serializer_class()方法。</p> <p><code>lookup_field</code>: 模型的字段应该用于执行对象查找个别的模型实例</p> <p><code>ookup_url_kwarg</code>:URL应该用于对象查找关键字参数</p> <p><strong><code>分页属性</code></strong>：
+<code>pagination_class</code>: 用于返回一个分页列表视图的分页类，默认与settings中设置的<code>DEFAULT_PAGINATION_CLASS</code> 值相同，
+可以通过<code>’rest_framework.pagination.PageNumberPagination’</code>设置分页数</p> <p><strong><code>过滤器属性</code></strong>：</p> <p><code>filter_backends</code>: 过滤queryset的类列表，和在settings中设置DEFAULT_FILTER_BACKENDS 一样</p> <h4 id="方法"><a href="#方法" class="header-anchor">#</a> 方法</h4> <p><em><strong>基本方法</strong></em>：</p> <p><code>get_queryset()</code>: 返回queryset。（详情见官网http://www.django-rest-framework.org/api-guide/generic-views/）</p> <p><code>get_object()</code>:获取某一个具体的model实例对象。</p> <p><em><strong>保存与删除挂钩方法：</strong></em></p> <blockquote><p>以下方法是mixins类提供，提供简单的对象保存和删除的行为重写：</p></blockquote> <p><code>perform_create(self, serializer)</code>: <code>CreateModelMixin</code> 当要保存对象时候会被调用</p> <p><code>perform_update(self, serializer)</code>:<code>UpdateModelMixin</code> 当要更新对象时候会被调用</p> <p><code>perform_destroy(self, instance)</code>: <code>DestoryModelMixin</code> 当药删除对象时候会被调用</p> <h3 id="mixins"><a href="#mixins" class="header-anchor">#</a> Mixins</h3> <blockquote><p>mixin类提供用于提供基础视图的操作行为。注意,mixin类提供操作方法而不是定义处理程序方法,比如. get()和. post(),直接。这允许更灵活的组合的行为。</p></blockquote> <p>通过rest_framework.mixins引用:</p> <p><code>ListModelMixin</code>：提供<code>list方法</code>，列出queryset</p> <p><code>CreateModelMixin</code>： 提供<code>create方法</code>，创建和保存一个Model对象</p> <p><code>RetrieveModelMixin</code>：提供<code>retrieve方法</code>，检索一个存在的model对象</p> <p><code>UpdateModelMixin</code>： 提供<code>Update方法</code>，更改一个模型对象</p> <p><code>DestroyModelMixin</code>：提供<code>destroy方法</code>，删除一个模型对象</p> <h3 id="generic"><a href="#generic" class="header-anchor">#</a> Generic</h3> <p>Generic通用视图类提供具体操作的通用视图类，可以理解为Generic.GenericAPIView和mixin类的合体.</p> <p>通过rest_framework.generic.调用
+.CreateAPIView:</p> <h4 id="创建一个模型实例"><a href="#创建一个模型实例" class="header-anchor">#</a> 创建一个模型实例</h4> <p><strong>提供post方法的处理器</strong>
+继承于：<code>GenericAPIView，CreateModelMixin .ListAPIView</code>:
+模型实例的集合</p> <p><strong>提供get方法处理器</strong>
+继承于：<code>GenericAPIView，ListModelMixin .RetrieveAPIView</code>:
+一个模型实例</p> <p><strong>提供get方法处理器</strong>
+继承于：<code>GenericAPIView，RetrieveModelMixin .DestoryAPIView</code>:</p> <h4 id="删除一个模型实例"><a href="#删除一个模型实例" class="header-anchor">#</a> 删除一个模型实例</h4> <p>提供delete方法处理器
+继承于：<code>GenericAPIView，DestroyModelMixin .UpdateAPIView</code>:</p> <h4 id="修改模型实例"><a href="#修改模型实例" class="header-anchor">#</a> 修改模型实例，</h4> <p>提供put和patch方法处理器
+继承于：GenericAPIView，UpdateModelMixin
+.ListCreateAPIView:</p> <h4 id="创建和展示一个模型实例集合"><a href="#创建和展示一个模型实例集合" class="header-anchor">#</a> 创建和展示一个模型实例集合</h4> <p>提供get和post处理器
+继承于：<code>GenericAPIView，ListModelMixin，CreateModelMixin .RetrieveUpdateAPIView</code>:</p> <h4 id="读和改一个模型实例"><a href="#读和改一个模型实例" class="header-anchor">#</a> 读和改一个模型实例</h4> <p>提供get,put,patch处理器
+继承于：<code>GenericAPIView，RetrieveModelMixin，UpdateModelMixin .RetrieveDestoryAPIView</code>:</p> <h4 id="读和删除一个模型实例"><a href="#读和删除一个模型实例" class="header-anchor">#</a> 读和删除一个模型实例</h4> <p>提供get和delete处理器
+继承于：<code>GenericAPIView，RetrieveModelMixin，DestroyModelMixin .RetrieveUpdateDestroyAPIView</code>：</p> <h4 id="读、改和删一个模型实例"><a href="#读、改和删一个模型实例" class="header-anchor">#</a> 读、改和删一个模型实例</h4> <p>get, put, patch,delete处理器
+继承于：<code>GenericAPIView，RetrieveModelMixin，UpdateModelMixin，DestroyModelMixin</code></p> <h2 id="五、视图集合viewsets"><a href="#五、视图集合viewsets" class="header-anchor">#</a> 五、视图集合ViewSets</h2> <p>Django REST框架允许您将一组相关的逻辑视图在一个类，ViewSet类是一个简单类型的基于类的观点,没有提供任何方法处理程序如.get()或. post(),
+而代替提供方法比如.list()和create()。
+一个小例子：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>auth<span class="token punctuation">.</span>models <span class="token keyword">import</span> User
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>shortcuts <span class="token keyword">import</span> get_object_or_404
+<span class="token keyword">from</span> myapps<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> UserSerializer
+<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> viewsets
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>response <span class="token keyword">import</span> Response
+
+<span class="token keyword">class</span> <span class="token class-name">UserViewSet</span><span class="token punctuation">(</span>viewsets<span class="token punctuation">.</span>ViewSet<span class="token punctuation">)</span><span class="token punctuation">:</span>
+“””
+A simple ViewSet <span class="token keyword">for</span> listing <span class="token keyword">or</span> retrieving users<span class="token punctuation">.</span>
+“””
+<span class="token keyword">def</span> <span class="token function">list</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+queryset <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+serializer <span class="token operator">=</span> UserSerializer<span class="token punctuation">(</span>queryset<span class="token punctuation">,</span> many<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">return</span> Response<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">retrieve</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> pk<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+queryset <span class="token operator">=</span> User<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+user <span class="token operator">=</span> get_object_or_404<span class="token punctuation">(</span>queryset<span class="token punctuation">,</span> pk<span class="token operator">=</span>pk<span class="token punctuation">)</span>
+serializer <span class="token operator">=</span> UserSerializer<span class="token punctuation">(</span>user<span class="token punctuation">)</span>
+<span class="token keyword">return</span> Response<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><h3 id="关于viewsets"><a href="#关于viewsets" class="header-anchor">#</a> 关于ViewSets</h3> <p>如果我们需要，我们需要为两个GET请求分开绑定视图：</p> <p><code>user_list = UserViewSet.as_view({“GET”:’list’}) user_detail = UserViewSet.as_view({‘GET’:’retrieve’})</code></p> <p>但是通常我们不会这样做，而是通过注册路由来配置url：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">from</span> myapp<span class="token punctuation">.</span>views <span class="token keyword">import</span> UserViewSet
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>routers <span class="token keyword">import</span> DefaultRouter
+router <span class="token operator">=</span> DefaultRouter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+router<span class="token punctuation">.</span>register<span class="token punctuation">(</span>r’users’<span class="token punctuation">,</span> UserViewSet<span class="token punctuation">)</span>
+urlpatterns <span class="token operator">=</span> router<span class="token punctuation">.</span>urls
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>或许你会经常用到自己模型数据，而不是手动写视图集合，这样就要用到模型视图集合ModelViewSet:</p> <p><code>class UserViewSet(viewsets.ModelViewSet): “”” A viewset for viewing and editing user instance “”” serializer_class = UserSerializer queryset = User.objects.all()</code></p> <p><strong>其他路由函数方法：</strong></p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">UserViewSet</span><span class="token punctuation">(</span>viewsets<span class="token punctuation">.</span>ViewSet<span class="token punctuation">)</span><span class="token punctuation">:</span>
+“””
+Example empty viewset demonstrating the standard
+actions that will be handled by a router <span class="token keyword">class</span><span class="token punctuation">.</span>
+
+If you’re using <span class="token builtin">format</span> suffixes<span class="token punctuation">,</span> make sure to also include
+the <span class="token builtin">format</span><span class="token operator">=</span><span class="token boolean">None</span> keyword argument <span class="token keyword">for</span> each action<span class="token punctuation">.</span>
+“””
+
+<span class="token keyword">def</span> <span class="token function">list</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">create</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">retrieve</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> pk<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> pk<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">partial_update</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> pk<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">pass</span>
+
+<span class="token keyword">def</span> <span class="token function">destroy</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> pk<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">pass</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br></div></div><p>如果你有特别的需要被路由到的方法,可以将它们标记为需要路由使用@detail_route或@list_route修饰符。</p> <p><code>@detail_route(methods=[‘post’], permission_classes=[IsAdminOrIsSelf]) def set_password(self, request, pk=None): …</code></p> <p>可以通过访问<code>^users/{pk}/set_password/$</code>来访问改视图</p> <h3 id="viewsets的api参考"><a href="#viewsets的api参考" class="header-anchor">#</a> ViewSets的API参考</h3> <p><code>.ViewSet</code>：
+继承了APIView，你可以使用一些标准的属性例如<code>permission_class,authentication_classes</code>去对视图做一些策略。ViewSet同样不提供具体
+行为方法的实现，你可以重写和定义一些请求处理方法。而代替了原来APIVIew的POST，GET等方法，取而代之的是list，create等方法。</p> <p><code>.GenericViewSet</code>:
+继承了<code>GenericAPIView</code>，提供了默认的<code>get_queryset()</code>和<code>get_object()</code>等方法来获取model数据，但不提供任何请求处理方法。
+<code>.ModelViewSet</code>:
+继承了GenericAPIView，增加了一些请求处理方法，如<code>list(), retrieve(),create()</code>等。</p> <p><em><strong>例子：</strong></em></p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">AccountViewSet</span><span class="token punctuation">(</span>viewsets<span class="token punctuation">.</span>ModelViewSet<span class="token punctuation">)</span><span class="token punctuation">:</span>
+“””
+A simple ViewSet <span class="token keyword">for</span> viewing <span class="token keyword">and</span> editing accounts
+“””
+queryset <span class="token operator">=</span> Account<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+serializer_class <span class="token operator">=</span> AccountSerializer
+permissions_classes <span class="token operator">=</span> <span class="token punctuation">[</span>IsAccountAdminOrReadOnly<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><code>.ReadOnlyModelViewSet</code>:
+继承了GenericAPIView，只增加了只读的请求处理方法list()和retrieve()</p> <p>自定义View类：
+只需要继承GenericAPIView, 增加mixins的相关处理方法。如：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">CreatListRetrieveViewSet</span><span class="token punctuation">(</span>mixins<span class="token punctuation">.</span>CreateModelMixin<span class="token punctuation">,</span>
+mixins<span class="token punctuation">.</span>ListModelMixin<span class="token punctuation">,</span>
+mixins<span class="token punctuation">.</span>RetrieveModelMixin<span class="token punctuation">,</span>
+View<span class="token punctuation">.</span>GenericViewSet<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">pass</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h2 id="六、路由-routers"><a href="#六、路由-routers" class="header-anchor">#</a> 六、路由(routers)</h2> <h3 id="rest框架还支持自动django-url路由-并为您提供了一个简单的、快速的和一致的方式连接视图逻辑的url。"><a href="#rest框架还支持自动django-url路由-并为您提供了一个简单的、快速的和一致的方式连接视图逻辑的url。" class="header-anchor">#</a> REST框架还支持自动Django URL路由,并为您提供了一个简单的、快速的和一致的方式连接视图逻辑的URL。</h3> <p>如果设置basename将自动生成基于queryset viewset的属性,如果它有一个。注意,如果viewset不包括queryset属性然后注册时必须设置base_name viewset。</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> routers
+router <span class="token operator">=</span> routers<span class="token punctuation">.</span>SimpleRouter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+router<span class="token punctuation">.</span>register<span class="token punctuation">(</span>r’users’<span class="token punctuation">,</span> UserViewSet<span class="token punctuation">,</span> ‘users’<span class="token punctuation">)</span>
+router<span class="token punctuation">.</span>register<span class="token punctuation">(</span>r’accounts’<span class="token punctuation">,</span> AccountViewSet<span class="token punctuation">)</span>
+urlpatterns <span class="token operator">=</span> router<span class="token punctuation">.</span>urls
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p><strong>注意：<code>router.register</code>有三个参数属性</strong>：</p> <p><code>prefix</code>：这是url匹配正则表达式。</p> <p><code>viewset</code>: 指定视图集合</p> <p><code>base_name</code>: 基于基础的url名字设置。这个特别要注意，如果不加这个参数，那么视图集合必须要包含queryset这个属性。</p> <h3 id="使用路由routers"><a href="#使用路由routers" class="header-anchor">#</a> 使用路由routers</h3> <div class="language-python line-numbers-mode"><pre class="language-python"><code>router <span class="token operator">=</span> routers<span class="token punctuation">.</span>SimpleRouter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+router<span class="token punctuation">.</span>register<span class="token punctuation">(</span>r’users’<span class="token punctuation">,</span> UserViewSet<span class="token punctuation">)</span>
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+url<span class="token punctuation">(</span>r’<span class="token operator">^</span>api<span class="token operator">/</span>’<span class="token punctuation">,</span> include<span class="token punctuation">(</span>router<span class="token punctuation">.</span>urls<span class="token punctuation">,</span> namespace<span class="token operator">=</span>’api’<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>或者：urlpatterns +=router.urls</p> <h3 id="detail-route-list-route指定路由"><a href="#detail-route-list-route指定路由" class="header-anchor">#</a> @detail_route / @list_route指定路由</h3> <p><code>@detail_route(methods=[‘post’], permission_classes=[IsAdminOrIsSelf]) -&gt;指定post方法，权限为IsAdminOrIsSelf</code></p> <h2 id="七、解释器-parse"><a href="#七、解释器-parse" class="header-anchor">#</a> 七、解释器(parse)</h2> <h3 id="设置解释器"><a href="#设置解释器" class="header-anchor">#</a> 设置解释器</h3> <p>设置成全局：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code>REST_FRAMEWORK <span class="token operator">=</span><span class="token punctuation">{</span>
+‘DEFAULT_PARSER_CLASSES’<span class="token punctuation">:</span> <span class="token punctuation">(</span>‘rest_framework<span class="token punctuation">.</span>parsers<span class="token punctuation">.</span>JSONParser’<span class="token punctuation">,</span>）
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>也可以在视图APIView中设置：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>parsers <span class="token keyword">import</span> JSONParser
+parser_class <span class="token operator">=</span> <span class="token punctuation">(</span>JSONParser<span class="token punctuation">,</span><span class="token punctuation">)</span>
+如果是@api_view装饰的视图：
+<span class="token decorator annotation punctuation">@api_view</span><span class="token punctuation">(</span><span class="token punctuation">[</span>‘POST’<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token decorator annotation punctuation">@parser_classes</span><span class="token punctuation">(</span><span class="token punctuation">(</span>JSONParser<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="api-参考"><a href="#api-参考" class="header-anchor">#</a> API 参考</h3> <p><code>JSONParse</code>: application/json</p> <p><code>FormParse</code>: application/x-www-form-urlencoded</p> <p><code>MultiPartParser</code>:  multipart/form-data</p> <p><code>FileUploadParser</code>: <em>/</em>
+–&gt;file_obj = request.data[‘file’]</p> <h2 id="八、渲染器-renders"><a href="#八、渲染器-renders" class="header-anchor">#</a> 八、渲染器(renders)</h2> <h3 id="设置渲染器"><a href="#设置渲染器" class="header-anchor">#</a> 设置渲染器</h3> <p>设置成全局：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>REST_FRAMEWORK ={
+‘rest_framework.renderers.JSONRenderer’,
+‘rest_framework.renderers.BrowsableAPIRenderer’,
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>也可以在视图APIView中设置：
+<code>from rest_framework.renderers import JSONRenderer renderer_classes = (JSONRenderer, )</code>
+如果是@api_view装饰的视图：
+<code>@api_view([‘GET’]) @renderer_classes((JSONRenderer,))</code></p> <h2 id="九、序列化器serializers"><a href="#九、序列化器serializers" class="header-anchor">#</a> 九、序列化器serializers</h2> <blockquote><p>序列化器可以将python的复杂数据格式渲染成json，xml等格式，同时也提供了反序列化器，可以将渲染成的数据解释成python的数据模型对象。它和django中
+的from表单用法很相似。</p></blockquote> <h3 id="渲染序列化对象"><a href="#渲染序列化对象" class="header-anchor">#</a> 渲染序列化对象：</h3> <p>可以将对象序列化成json,xml格式等</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code>serializer <span class="token operator">=</span> CommentSerializer<span class="token punctuation">(</span>comment<span class="token punctuation">)</span>
+serializer<span class="token punctuation">.</span>data
+<span class="token comment"># {’email’: ‘leila@example.com’, ‘content’: ‘foo bar’, ‘created’: ‘2016-01-27T15:17:10.375877′}</span>
+
+
+json <span class="token operator">=</span> JSONRenderer<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>render<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">)</span>  <span class="token comment"># 渲染成json格式</span>
+<span class="token comment"># b'{“email”:”leila@example.com”,”content”:”foo bar”,”created”:”2016-01-27T15:17:10.375877″}’</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><h3 id="反序列化"><a href="#反序列化" class="header-anchor">#</a> 反序列化</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>from django.utils.six import BytesIO
+from rest_framework.parsers import JSONParser
+
+stream = BytesIO(json)
+data = JSONParser().parse(stream)   # 解析json格式
+
+serializer.is_valid()
+# True
+serializer.validated_data
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="保存实例"><a href="#保存实例" class="header-anchor">#</a> 保存实例</h3> <p>可以利用.create()和.update()方法
+调用.save()方法会执行上面两个方法，自动保存或者更新实例对象
+有时候，需要保存其他的信息，可以在参数中添加，如：
+<code>serializer.save(owner=request.user)</code></p> <h3 id="验证validation"><a href="#验证validation" class="header-anchor">#</a> 验证validation</h3> <p>当需要保存反序列化的数据时，我们往往需要在之前用<code>is_valid()</code>验证数据的合法性，如果不合法可以用
+<code>serializer.errors</code>得到该错误信息。这个错误信息可以根据error_message来进行自定义</p> <h3 id="模型序列化modelserializer"><a href="#模型序列化modelserializer" class="header-anchor">#</a> 模型序列化ModelSerializer</h3> <blockquote><p>模型序列化与字段序列化用法类似，只需在类的属性Meta中指定相应的模型，就会根据模型自动生成相应的字段</p></blockquote> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">AccountSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+<span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+model <span class="token operator">=</span> Account
+fields <span class="token operator">=</span> <span class="token punctuation">(</span>‘<span class="token builtin">id</span>’<span class="token punctuation">,</span> ‘account_name’<span class="token punctuation">,</span> ‘users’<span class="token punctuation">,</span> ‘created’<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="超链接模型序列化hyperlinkedmodelserializer"><a href="#超链接模型序列化hyperlinkedmodelserializer" class="header-anchor">#</a> 超链接模型序列化HyperlinkedModelSerializer</h3> <p>与模型序列化类似，只不过过了一个可链接的形式。</p> <h2 id="十、序列化字段serializer-fields"><a href="#十、序列化字段serializer-fields" class="header-anchor">#</a> 十、序列化字段serializer fields</h2> <h3 id="核心参数"><a href="#核心参数" class="header-anchor">#</a> 核心参数</h3> <p><code>read_only</code>: 只读形式，只能序列化到api输出，不能被反序列化数据更新修改操作。默认False</p> <p><code>wirte_only</code>: 只写形式，只能被反序列化数据更新和创建，不能序列化表示。默认False</p> <p><code>required</code>: 必须字段，通常出现在反序列化的过程中，该字段必须有值。默认True</p> <p><code>allow_null</code>：是否允许为空，默认False</p> <p><code>default</code>: 默认值，</p> <p><code>source</code>：字段来源，为字段指定一个字段来源，如(source=’user.email’).</p> <p><code>validators</code>: 合法性函数列表，支持django的ValidationError包。</p> <p><code>error_message</code>: 一个错误信息的字典，包含null, blank, invalid, invalid_choice, unique等键值。</p> <p><code>label</code>:一篇简短的文本字符串,可以用作在HTML表单字段的名称或其他描述性的元素</p> <p><code>help_text</code>: 一个文本字符串,可以用作描述字段的HTML表单字段或其他描述性的元素。</p> <p><code>initial</code>: 用于预先填充HTML表单字段的值。</p> <p><code>style</code>: 字典的键-值对,可以用来控制渲染器应该如何呈现。</p> <h3 id="字段类型"><a href="#字段类型" class="header-anchor">#</a> 字段类型</h3> <p><code>布尔字段BooleanField</code>: BoolenField(defalut=True)</p> <p><code>字符字段StringField</code>: CharField(max_length=None, min_length=None, allow_blank=False, trim_whitespace=True)</p> <p><code>邮箱字段EmailField</code>: EmailField(max_length=None, min_length=None, allow_blank=False)</p> <p><code>正则字段RegexField</code>: RegexField(regex, max_length=None, min_length=None, allow_blank=False)</p> <p><code>新闻标题字段SlugField：SlugField</code>(max_length=50, min_length=None, allow_blank=False)</p> <p><code>URL地址字段</code> <code>UrlField</code>: URLField(max_length=200, min_length=None, allow_blank=False)</p> <p><code>UUID字段 UUIDField</code>: UUIDField(format=’hex_verbose’)   “de305d54-75b4-431b-adb2-eb6b9e546013″</p> <p><code>文件路径字段FilePathField</code>：FilePathField(path, match=None, recursive=False, allow_files=True, allow_folders=False, required=None, **kwargs)</p> <p><code>IP地址字段IPAddressField</code>：IPAddressField(protocol=’both’, unpack_ipv4=False, **options)
+*数字型字段：IntegerField、FloatField、DecimalField</p> <p><code>时间和日期字段：DateTimeField</code>：DateTimeField(format=None, input_formats=None)</p> <p>DateField：
+TimeField：
+DurationField：
+<code>选择字段</code>：ChoiceField
+<code>文件字段</code>：FileField：FileField(max_length=None, allow_empty_file=False, use_url=UPLOADED_FILES_USE_URL)</p> <p><code>ImageField</code>：ImageField(max_length=None, allow_empty_file=False, use_url=UPLOADED_FILES_USE_URL)
+<code>模型字段</code>：<code>ModelField</code>：ModelField(model_field Django ModelField instance)</p> <p><code>只读字段</code>：ReadOnlyField：</p> <h2 id="十一、字段关系serializer-relations"><a href="#十一、字段关系serializer-relations" class="header-anchor">#</a> 十一、字段关系serializer relations</h2> <p><strong>多对一</strong>：<code>ForeignKey</code></p> <p><strong>多对多</strong>: <code>ManyToManyField</code></p> <p><strong>一对一</strong>：<code>OneToOneField</code></p> <h3 id="api参考"><a href="#api参考" class="header-anchor">#</a> api参考</h3> <p><code>tracks = serializers.StringRelatedField(many=True)</code>  # 字符串形式关系字段</p> <p><code>tracks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)</code># 主键形式关系字段</p> <p><code>tracks = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name=’track-detail’)</code> # 超链接形式关系字段</p> <p><code>tracks = serializers.SlugRelatedField(many=True, read_only=True, slug_field=’title’)</code>  # 以小标题形式关系</p> <p><code>track_listing = serializers.HyperlinkedIdentityField(view_name=’track-list’)</code>  # 超链接身份关系</p> <h3 id="嵌套关系"><a href="#嵌套关系" class="header-anchor">#</a> 嵌套关系</h3> <p>序列化类中可以直接引用其他序列化化类
+十二、合法性验证(Validation)
+1、数据的唯一性UniqueValidator
+在模型中，只需设置字段的unique=True就会在该字段自动生成改唯一性判断
+例:slug = SlugField(max_length=100, validators=[UniqueValidator(queryset=BlogPost.objects.all(), messsage=”)])
+*queryset：模型数据对象集合</p> <p>*message: 异常提示信息</p> <p>2、数据字段的不重复性UniqueTogetherValidator</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+validators <span class="token operator">=</span> <span class="token punctuation">[</span>
+UniqueTogetherValidator<span class="token punctuation">(</span>
+queryset<span class="token operator">=</span>ToDoItem<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+fields<span class="token operator">=</span><span class="token punctuation">(</span>‘<span class="token builtin">list</span>’<span class="token punctuation">,</span> ‘position’<span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p><code>queryset</code>：模型数据对象集合</p> <p><code>fields</code>: 字段的集合元祖</p> <p><code>message</code>: 异常提示信息</p> <h2 id="十三、认证authentication"><a href="#十三、认证authentication" class="header-anchor">#</a> 十三、认证Authentication</h2> <h3 id="设置认证方案"><a href="#设置认证方案" class="header-anchor">#</a> 设置认证方案</h3> <p><strong>可以在settings文件中配置</strong><code>DEFAULT_AUTHENTICATION_CLASSES：</code></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>REST_FRAMEWORK = {
+‘DEFAULT_AUTHENTICATION_CLASSES’: (
+‘rest_framework.authentication.BasicAuthentication’,
+‘rest_framework.authentication.SessionAuthentication’,
+)
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><strong>也可以在视图中设置</strong></p> <p>(APIView)：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>authentication_classes = (SessionAuthentication, BasicAuthentication)
+permission_classes = (IsAuthenticated,)
+(@api_view)
+@authentication_classes((SessionAuthentication, BasicAuthentication))
+@permission_classes((IsAuthenticated,))
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h2 id="十四、权限"><a href="#十四、权限" class="header-anchor">#</a> 十四、权限</h2> <h3 id="设置权限方案"><a href="#设置权限方案" class="header-anchor">#</a> 设置权限方案</h3> <p><strong>可以在settings文件中配置</strong><code>DEFAULT_PERMISSION_CLASSES</code></p> <p>`REST_FRAMEWORK = {
+‘DEFAULT_PERMISSION_CLASSES’: (
+‘rest_framework.permissions.IsAuthenticated’,</p> <h1 id="rest-framework-permissions-allowany"><a href="#rest-framework-permissions-allowany" class="header-anchor">#</a> ‘rest_framework.permissions.AllowAny’,</h1> <p>)
+}`
+*视图中设置：
+（APIView）</p> <p><code>permission_classes = (IsAuthenticated,) （@api_view） @permission_classes((IsAuthenticated, ))</code></p> <h3 id="api引用"><a href="#api引用" class="header-anchor">#</a> API引用</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>*AllowAny：允许任何
+*IsAuthenticated：是否被认证
+*IsAdminUser：是管理用户
+*IsAuthenticatedOrReadOnly：是被认证或者只读
+*DjangoModelPermissions：标准的django模型设置权限
+*DjangoModelPermissionsOrAnonReadOnly：标准的django模型处理或者只读权限
+*DjangoObjectPermissions：相比模型权限，只提供queryset和get_queryset方法。
+*自定义权限：
+继承BasePermission;
+重写：.has_permission(self, request, view)
+.has_object_permission(self, request, view, obj)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h2 id="十五、节流trottling"><a href="#十五、节流trottling" class="header-anchor">#</a> 十五、节流Trottling</h2> <blockquote><p>限制请求量</p></blockquote> <p>1、设置节流方案</p> <p>*可以在settings文件中配置DEFAULT_THROTTLE_CLASSES 和 DEFAULT_THROTTLE_RATES</p> <p><code>‘DEFAULT_THROTTLE_CLASSES’: ( ‘rest_framework.throttling.AnonRateThrottle’, ‘rest_framework.throttling.UserRateThrottle’ ), ‘DEFAULT_THROTTLE_RATES’: { ‘anon’: ‘100/day’, ‘user’: ‘1000/day’ }</code></p> <p>*可以在视图中设置：
+（APIView）</p> <p><code>throttle_classes = (UserRateThrottle,) （@api_view） @throttle_classes([UserRateThrottle])</code></p> <h2 id="十六、过滤器filtering"><a href="#十六、过滤器filtering" class="header-anchor">#</a> 十六、过滤器Filtering</h2> <p>通常drf的默认的通用list视图类要处理的是全部模型的查询集合集，如果我们要指定结果集，
+这就必须用到过滤器了。通常的方法是重写get_queryset(self)方法。
+例如：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code># 根据用户过滤
+
+class PurchaseList(generics.ListAPIView):
+serializer_class = PurchaseSerializer
+
+def get_queryset(self):
+user = self.request.user
+return Purchase.objects.filter(purchase = user)
+# 根据url请求过滤
+def get_queryset(self):
+username = self.kwargs[‘username’]
+return Purchase.objects.filter(purchaser__username=username)
+# 根据请求参数过滤同上
+def get_queryset(self):
+queryset = Purchase.objects.all()
+username = self.request.query_params.get(‘username’, None)
+if username is not None:
+queryset = queryset.filter(purchaser__username=username)
+return queryset
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>1、generic filter过滤
+*通过settings文件中配置过滤</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>REST_FRAMEWORK = {
+‘DEFAULT_FILTER_BACKENDS’: (‘rest_framework.filters.DjangoFilterBackend’,)
+}
+*也可通过视图中过滤
+filter_backends = (filters.DjangoFilterBackend,)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>2、API向导
+*pip install django-filter
+filter.DjangoFilterBackend</p> <p>*filter_fields过滤字段</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">ProductList</span><span class="token punctuation">(</span>generics<span class="token punctuation">.</span>ListAPIView<span class="token punctuation">)</span><span class="token punctuation">:</span>
+query <span class="token operator">=</span> Product<span class="token punctuation">.</span><span class="token builtin">object</span><span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+serializer_class <span class="token operator">=</span> ProductSerializer
+filter_backends <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">filter</span><span class="token punctuation">.</span>DjangoFilterBackend<span class="token punctuation">,</span><span class="token punctuation">)</span>
+filter_fields <span class="token operator">=</span> <span class="token punctuation">(</span>‘category’<span class="token punctuation">,</span> ‘in_stock’<span class="token punctuation">)</span>
+http<span class="token punctuation">:</span><span class="token operator">//</span>example<span class="token punctuation">.</span>com<span class="token operator">/</span>api<span class="token operator">/</span>products?category<span class="token operator">=</span>clothing<span class="token operator">&amp;</span>in_stock<span class="token operator">=</span><span class="token boolean">True</span>
+<span class="token operator">*</span>filter_class指定一个过滤集合类
+<span class="token keyword">import</span> django_filters
+<span class="token keyword">from</span> myapp<span class="token punctuation">.</span>models <span class="token keyword">import</span> Product
+<span class="token keyword">from</span> myapp<span class="token punctuation">.</span>serializers impoert ProductSerializer
+<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> filters
+<span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> generics
+
+<span class="token keyword">class</span> <span class="token class-name">ProductFilter</span><span class="token punctuation">(</span>filters<span class="token punctuation">.</span>FilterSet<span class="token punctuation">)</span><span class="token punctuation">:</span>
+min_price <span class="token operator">=</span> django_filters<span class="token punctuation">.</span>NumberFilter<span class="token punctuation">(</span>name<span class="token operator">=</span>’price’<span class="token punctuation">,</span> lookup_type<span class="token operator">=</span>”gte”<span class="token punctuation">)</span>
+max_price <span class="token operator">=</span> django_filters<span class="token punctuation">.</span>NumberFilter<span class="token punctuation">(</span>name<span class="token operator">=</span>’price’<span class="token punctuation">,</span> lookup_type<span class="token operator">=</span>”lte”<span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+model <span class="token operator">=</span> Product
+fields <span class="token operator">=</span> <span class="token punctuation">[</span>‘category’<span class="token punctuation">,</span> ‘in_stock’<span class="token punctuation">,</span> ‘min_price’<span class="token punctuation">,</span> ‘max_price’<span class="token punctuation">]</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ProductList</span><span class="token punctuation">(</span>generics<span class="token punctuation">.</span>ListAPIView<span class="token punctuation">)</span><span class="token punctuation">:</span>
+queryset <span class="token operator">=</span> Product<span class="token punctuation">.</span><span class="token builtin">object</span><span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+serializer_class <span class="token operator">=</span> ProductSerializer
+filter_backends <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">filter</span><span class="token punctuation">.</span>DjangoFilterBackend<span class="token punctuation">,</span><span class="token punctuation">)</span>
+filter_class <span class="token operator">=</span> ProductFilter
+http<span class="token punctuation">:</span><span class="token operator">//</span>example<span class="token punctuation">.</span>com<span class="token operator">/</span>api<span class="token operator">/</span>products?category<span class="token operator">=</span>clothing<span class="token operator">&amp;</span>max_price<span class="token operator">=</span><span class="token number">10.00</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><p>同理双下划线强调名字：</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>class ProductFilter(filters.FilterSet):
+class Meta:
+model = Product
+fields = [‘category’, ‘in_stock’, ‘manufacturer__name’]
+http://example.com/api/products?manufacturer__name=foo
+上面例子等同于：
+class ProductFilter(filter.FilterSet):
+manufacturer = django_filters.CharFilter(name=”manufacter__name”)
+
+class Meta:
+model = Product
+fields = [‘category’, ‘in_stock’, ‘manufacturer’]
+http://example.com/api/products?manufacturer=foo
+*search_fields 搜索字段
+class UserListView(generics.ListAPIView):
+queryset = User.object.all()
+serializer = UserSerializer
+filter_backends = (filter.SearchFilter,)
+filter_fields = (“suername”, ’email’)
+http://example.com/api/users?search=russell
+
+*ordring_fields排序字段
+class UserList(generics.ListAPIView):
+queryset = User.object.all()
+serializer_class = UserSerializer
+filter_backends = (filter.OrderingFilter,)
+filter_fields = ‘__all__’
+ordering = (‘username’,)  # 默认排序字段
+*DjangoOjectPermissionFilter 对象权限的过滤器
+filter_backends = (filter.DjangoObjectPermissionFilter,)
+permission_classes = (myapp.permissions.CustomObjectPermissions,)  # 自定义的权限类
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><p>十七、分页Pagination</p> <p>1、设置分页
+*可以在settings中设置分页样式</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>REST_FRAMEWORK = {
+‘DEFAULT_PAGINATION_CLASS’: ‘rest_framework.pagination.LimitOffsetPagination’
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>*修改分页样式</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>class LargeResultsSetPagination(PageNumberPagination):
+page_size = 1000
+page_size_query_param = ‘page_size’
+max_page_size = 10000
+
+class StandardResultsSetPagination(PageNumberPagination):
+page_size = 100
+page_size_query_param = ‘page_size’
+max_page_size = 1000
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>*应用到视图中</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>class BillingRecordsView(generics.ListAPIView):
+queryset = Billing.objects.all()
+serializer = BillingRecordsSerializer
+pagination_class = LargeResultsSetPagination
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><ol><li>API引用
+<strong>PageNumberPagination</strong>
+设置全局的分页大小：</li></ol> <div class="language-python line-numbers-mode"><pre class="language-python"><code>REST_FRAMEWORK <span class="token operator">=</span> <span class="token punctuation">{</span>
+‘DEFAULT_PAGINATION_CLASS’<span class="token punctuation">:</span> ‘rest_framework<span class="token punctuation">.</span>pagination<span class="token punctuation">.</span>PageNumberPagination’<span class="token punctuation">,</span>
+‘PAGE_SIZE’<span class="token punctuation">:</span> <span class="token number">100</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#一、请求-request" class="sidebar-link reco-side-一、请求-request" data-v-b57cc07c>一、请求（Request）</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#二、response-响应" class="sidebar-link reco-side-二、response-响应" data-v-b57cc07c>二、Response（响应）</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#三、基本视图类-apiview-api-view" class="sidebar-link reco-side-三、基本视图类-apiview-api-view" data-v-b57cc07c>三、基本视图类 (APIView/@api_view)</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#四、-通用视图-generic-views" class="sidebar-link reco-side-四、-通用视图-generic-views" data-v-b57cc07c>四、 通用视图（Generic views）</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#通用视图" class="sidebar-link reco-side-通用视图" data-v-b57cc07c>通用视图</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#genericapiview通用视图api参考" class="sidebar-link reco-side-genericapiview通用视图api参考" data-v-b57cc07c>GenericAPIView通用视图API参考：</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#mixins" class="sidebar-link reco-side-mixins" data-v-b57cc07c>Mixins</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#generic" class="sidebar-link reco-side-generic" data-v-b57cc07c>Generic</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#五、视图集合viewsets" class="sidebar-link reco-side-五、视图集合viewsets" data-v-b57cc07c>五、视图集合ViewSets</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#关于viewsets" class="sidebar-link reco-side-关于viewsets" data-v-b57cc07c>关于ViewSets</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#viewsets的api参考" class="sidebar-link reco-side-viewsets的api参考" data-v-b57cc07c>ViewSets的API参考</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#六、路由-routers" class="sidebar-link reco-side-六、路由-routers" data-v-b57cc07c>六、路由(routers)</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#rest框架还支持自动django-url路由-并为您提供了一个简单的、快速的和一致的方式连接视图逻辑的url。" class="sidebar-link reco-side-rest框架还支持自动django-url路由-并为您提供了一个简单的、快速的和一致的方式连接视图逻辑的url。" data-v-b57cc07c>REST框架还支持自动Django URL路由,并为您提供了一个简单的、快速的和一致的方式连接视图逻辑的URL。</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#使用路由routers" class="sidebar-link reco-side-使用路由routers" data-v-b57cc07c>使用路由routers</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#detail-route-list-route指定路由" class="sidebar-link reco-side-detail-route-list-route指定路由" data-v-b57cc07c>@detailroute / @listroute指定路由</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#七、解释器-parse" class="sidebar-link reco-side-七、解释器-parse" data-v-b57cc07c>七、解释器(parse)</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#设置解释器" class="sidebar-link reco-side-设置解释器" data-v-b57cc07c>设置解释器</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#api-参考" class="sidebar-link reco-side-api-参考" data-v-b57cc07c>API 参考</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#八、渲染器-renders" class="sidebar-link reco-side-八、渲染器-renders" data-v-b57cc07c>八、渲染器(renders)</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#设置渲染器" class="sidebar-link reco-side-设置渲染器" data-v-b57cc07c>设置渲染器</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#九、序列化器serializers" class="sidebar-link reco-side-九、序列化器serializers" data-v-b57cc07c>九、序列化器serializers</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#渲染序列化对象" class="sidebar-link reco-side-渲染序列化对象" data-v-b57cc07c>渲染序列化对象：</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#反序列化" class="sidebar-link reco-side-反序列化" data-v-b57cc07c>反序列化</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#保存实例" class="sidebar-link reco-side-保存实例" data-v-b57cc07c>保存实例</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#验证validation" class="sidebar-link reco-side-验证validation" data-v-b57cc07c>验证validation</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#模型序列化modelserializer" class="sidebar-link reco-side-模型序列化modelserializer" data-v-b57cc07c>模型序列化ModelSerializer</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#超链接模型序列化hyperlinkedmodelserializer" class="sidebar-link reco-side-超链接模型序列化hyperlinkedmodelserializer" data-v-b57cc07c>超链接模型序列化HyperlinkedModelSerializer</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#十、序列化字段serializer-fields" class="sidebar-link reco-side-十、序列化字段serializer-fields" data-v-b57cc07c>十、序列化字段serializer fields</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#核心参数" class="sidebar-link reco-side-核心参数" data-v-b57cc07c>核心参数</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#字段类型" class="sidebar-link reco-side-字段类型" data-v-b57cc07c>字段类型</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#十一、字段关系serializer-relations" class="sidebar-link reco-side-十一、字段关系serializer-relations" data-v-b57cc07c>十一、字段关系serializer relations</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#api参考" class="sidebar-link reco-side-api参考" data-v-b57cc07c>api参考</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#嵌套关系" class="sidebar-link reco-side-嵌套关系" data-v-b57cc07c>嵌套关系</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#十三、认证authentication" class="sidebar-link reco-side-十三、认证authentication" data-v-b57cc07c>十三、认证Authentication</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#设置认证方案" class="sidebar-link reco-side-设置认证方案" data-v-b57cc07c>设置认证方案</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#十四、权限" class="sidebar-link reco-side-十四、权限" data-v-b57cc07c>十四、权限</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#设置权限方案" class="sidebar-link reco-side-设置权限方案" data-v-b57cc07c>设置权限方案</a></li><li class="level-3" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#api引用" class="sidebar-link reco-side-api引用" data-v-b57cc07c>API引用</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#十五、节流trottling" class="sidebar-link reco-side-十五、节流trottling" data-v-b57cc07c>十五、节流Trottling</a></li><li class="level-2" data-v-b57cc07c><a href="/views/Django/django.restFramework.html#十六、过滤器filtering" class="sidebar-link reco-side-十六、过滤器filtering" data-v-b57cc07c>十六、过滤器Filtering</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.402024e5.js" defer></script><script src="/assets/js/3.35889db3.js" defer></script><script src="/assets/js/1.98e71d3a.js" defer></script><script src="/assets/js/14.3c87d1f8.js" defer></script>
+  </body>
+</html>

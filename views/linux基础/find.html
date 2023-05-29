@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>find 命令使用 | 刘文奇</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="个人博客，技术笔记整理">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.402024e5.js" as="script"><link rel="preload" href="/assets/js/3.35889db3.js" as="script"><link rel="preload" href="/assets/js/1.98e71d3a.js" as="script"><link rel="preload" href="/assets/js/56.d30bcbf8.js" as="script"><link rel="prefetch" href="/assets/js/10.d70328f8.js"><link rel="prefetch" href="/assets/js/100.bdfeee98.js"><link rel="prefetch" href="/assets/js/101.0f0aa0e3.js"><link rel="prefetch" href="/assets/js/102.8810b363.js"><link rel="prefetch" href="/assets/js/103.018076eb.js"><link rel="prefetch" href="/assets/js/104.6ef1e09a.js"><link rel="prefetch" href="/assets/js/105.ef045d33.js"><link rel="prefetch" href="/assets/js/106.3aafc27c.js"><link rel="prefetch" href="/assets/js/107.f3da675e.js"><link rel="prefetch" href="/assets/js/108.6a197ffd.js"><link rel="prefetch" href="/assets/js/109.9bdef9f9.js"><link rel="prefetch" href="/assets/js/11.8a566d2b.js"><link rel="prefetch" href="/assets/js/110.57ebc428.js"><link rel="prefetch" href="/assets/js/111.b5447738.js"><link rel="prefetch" href="/assets/js/112.c716f5e7.js"><link rel="prefetch" href="/assets/js/113.557f7376.js"><link rel="prefetch" href="/assets/js/114.61a54316.js"><link rel="prefetch" href="/assets/js/115.6d0b291a.js"><link rel="prefetch" href="/assets/js/116.8c93c654.js"><link rel="prefetch" href="/assets/js/117.07743f06.js"><link rel="prefetch" href="/assets/js/118.d1774c94.js"><link rel="prefetch" href="/assets/js/119.05fc2356.js"><link rel="prefetch" href="/assets/js/12.f6bcfd1f.js"><link rel="prefetch" href="/assets/js/120.2444fe97.js"><link rel="prefetch" href="/assets/js/121.ca03cbf1.js"><link rel="prefetch" href="/assets/js/122.4fea1a12.js"><link rel="prefetch" href="/assets/js/123.0e2b6ebe.js"><link rel="prefetch" href="/assets/js/124.61410c00.js"><link rel="prefetch" href="/assets/js/125.98a05a32.js"><link rel="prefetch" href="/assets/js/126.f734fc8e.js"><link rel="prefetch" href="/assets/js/127.e9acb272.js"><link rel="prefetch" href="/assets/js/128.d4b47285.js"><link rel="prefetch" href="/assets/js/129.aa6f2614.js"><link rel="prefetch" href="/assets/js/13.fa622aa3.js"><link rel="prefetch" href="/assets/js/130.244a3895.js"><link rel="prefetch" href="/assets/js/131.86c3a012.js"><link rel="prefetch" href="/assets/js/132.fe1b85d2.js"><link rel="prefetch" href="/assets/js/133.e238c5c4.js"><link rel="prefetch" href="/assets/js/134.1b5b832b.js"><link rel="prefetch" href="/assets/js/135.6468c4f0.js"><link rel="prefetch" href="/assets/js/136.19775bf4.js"><link rel="prefetch" href="/assets/js/137.c6d0ed15.js"><link rel="prefetch" href="/assets/js/138.230a86e2.js"><link rel="prefetch" href="/assets/js/139.64f42c07.js"><link rel="prefetch" href="/assets/js/14.3c87d1f8.js"><link rel="prefetch" href="/assets/js/140.607b2c0d.js"><link rel="prefetch" href="/assets/js/141.224b1c65.js"><link rel="prefetch" href="/assets/js/142.0d0fc6e0.js"><link rel="prefetch" href="/assets/js/143.c78f7a17.js"><link rel="prefetch" href="/assets/js/144.5f6b6fe2.js"><link rel="prefetch" href="/assets/js/145.d9203869.js"><link rel="prefetch" href="/assets/js/146.ac383aae.js"><link rel="prefetch" href="/assets/js/147.5ad44c9c.js"><link rel="prefetch" href="/assets/js/148.4f051907.js"><link rel="prefetch" href="/assets/js/149.ba645a2b.js"><link rel="prefetch" href="/assets/js/15.527a7f7a.js"><link rel="prefetch" href="/assets/js/150.ac4e4278.js"><link rel="prefetch" href="/assets/js/151.0a2827cd.js"><link rel="prefetch" href="/assets/js/152.7a554168.js"><link rel="prefetch" href="/assets/js/153.af52f866.js"><link rel="prefetch" href="/assets/js/154.2ce71126.js"><link rel="prefetch" href="/assets/js/155.7154dc6f.js"><link rel="prefetch" href="/assets/js/156.3d24250b.js"><link rel="prefetch" href="/assets/js/157.59ac5226.js"><link rel="prefetch" href="/assets/js/158.2d506491.js"><link rel="prefetch" href="/assets/js/159.92262746.js"><link rel="prefetch" href="/assets/js/16.aebd5e39.js"><link rel="prefetch" href="/assets/js/160.63210a31.js"><link rel="prefetch" href="/assets/js/161.9b44e7a4.js"><link rel="prefetch" href="/assets/js/162.5b61f2c7.js"><link rel="prefetch" href="/assets/js/163.7589d833.js"><link rel="prefetch" href="/assets/js/164.b5c15ecb.js"><link rel="prefetch" href="/assets/js/165.a5f5cd29.js"><link rel="prefetch" href="/assets/js/166.767b9987.js"><link rel="prefetch" href="/assets/js/167.1ffc72bf.js"><link rel="prefetch" href="/assets/js/168.515eab1b.js"><link rel="prefetch" href="/assets/js/169.dcc68995.js"><link rel="prefetch" href="/assets/js/17.bac8416c.js"><link rel="prefetch" href="/assets/js/170.64bfe5e6.js"><link rel="prefetch" href="/assets/js/171.5ad45642.js"><link rel="prefetch" href="/assets/js/172.b6d37b2e.js"><link rel="prefetch" href="/assets/js/173.19619648.js"><link rel="prefetch" href="/assets/js/174.eaff3157.js"><link rel="prefetch" href="/assets/js/175.2dffa431.js"><link rel="prefetch" href="/assets/js/176.3096d3a7.js"><link rel="prefetch" href="/assets/js/177.6d911d1f.js"><link rel="prefetch" href="/assets/js/178.a8b4f936.js"><link rel="prefetch" href="/assets/js/179.3003a50e.js"><link rel="prefetch" href="/assets/js/18.38c2d3ff.js"><link rel="prefetch" href="/assets/js/180.a03fd18b.js"><link rel="prefetch" href="/assets/js/181.62ce609e.js"><link rel="prefetch" href="/assets/js/182.00b6356e.js"><link rel="prefetch" href="/assets/js/183.6adc62eb.js"><link rel="prefetch" href="/assets/js/184.b11447af.js"><link rel="prefetch" href="/assets/js/185.6a9556de.js"><link rel="prefetch" href="/assets/js/186.5b458a07.js"><link rel="prefetch" href="/assets/js/187.a9bd8543.js"><link rel="prefetch" href="/assets/js/188.627a76f3.js"><link rel="prefetch" href="/assets/js/19.62378543.js"><link rel="prefetch" href="/assets/js/20.31bf256b.js"><link rel="prefetch" href="/assets/js/21.dd768b7c.js"><link rel="prefetch" href="/assets/js/22.f270cfbc.js"><link rel="prefetch" href="/assets/js/23.652c5b0a.js"><link rel="prefetch" href="/assets/js/24.d8a77731.js"><link rel="prefetch" href="/assets/js/25.f4efa277.js"><link rel="prefetch" href="/assets/js/26.775d7d00.js"><link rel="prefetch" href="/assets/js/27.a42e7481.js"><link rel="prefetch" href="/assets/js/28.c81142a3.js"><link rel="prefetch" href="/assets/js/29.104d30bb.js"><link rel="prefetch" href="/assets/js/30.eeaa063e.js"><link rel="prefetch" href="/assets/js/31.c08c3cc6.js"><link rel="prefetch" href="/assets/js/32.96914904.js"><link rel="prefetch" href="/assets/js/33.b5e70d92.js"><link rel="prefetch" href="/assets/js/34.f72f363f.js"><link rel="prefetch" href="/assets/js/35.8e461891.js"><link rel="prefetch" href="/assets/js/36.a3887f60.js"><link rel="prefetch" href="/assets/js/37.f8ac624a.js"><link rel="prefetch" href="/assets/js/38.f9e3dfe7.js"><link rel="prefetch" href="/assets/js/39.00c6dac4.js"><link rel="prefetch" href="/assets/js/4.4a2913bc.js"><link rel="prefetch" href="/assets/js/40.0431cb0b.js"><link rel="prefetch" href="/assets/js/41.a0b96bac.js"><link rel="prefetch" href="/assets/js/42.81504763.js"><link rel="prefetch" href="/assets/js/43.a2f1e577.js"><link rel="prefetch" href="/assets/js/44.c6e577c7.js"><link rel="prefetch" href="/assets/js/45.e19251cb.js"><link rel="prefetch" href="/assets/js/46.2736b4a4.js"><link rel="prefetch" href="/assets/js/47.74eb52c3.js"><link rel="prefetch" href="/assets/js/48.e175852f.js"><link rel="prefetch" href="/assets/js/49.470cd3e4.js"><link rel="prefetch" href="/assets/js/5.894dfcfd.js"><link rel="prefetch" href="/assets/js/50.aa07f64f.js"><link rel="prefetch" href="/assets/js/51.7491ccca.js"><link rel="prefetch" href="/assets/js/52.ede9d894.js"><link rel="prefetch" href="/assets/js/53.f4ec39bc.js"><link rel="prefetch" href="/assets/js/54.11693e63.js"><link rel="prefetch" href="/assets/js/55.6158a230.js"><link rel="prefetch" href="/assets/js/57.7a28a471.js"><link rel="prefetch" href="/assets/js/58.f0c30984.js"><link rel="prefetch" href="/assets/js/59.ab16feee.js"><link rel="prefetch" href="/assets/js/6.71d47490.js"><link rel="prefetch" href="/assets/js/60.1c81418c.js"><link rel="prefetch" href="/assets/js/61.1dd5070d.js"><link rel="prefetch" href="/assets/js/62.7f7ce997.js"><link rel="prefetch" href="/assets/js/63.2cb3686d.js"><link rel="prefetch" href="/assets/js/64.18048f56.js"><link rel="prefetch" href="/assets/js/65.87291046.js"><link rel="prefetch" href="/assets/js/66.a7a7575d.js"><link rel="prefetch" href="/assets/js/67.ca181b91.js"><link rel="prefetch" href="/assets/js/68.4a9df39d.js"><link rel="prefetch" href="/assets/js/69.4a2661f5.js"><link rel="prefetch" href="/assets/js/7.6ba3ae87.js"><link rel="prefetch" href="/assets/js/70.0613e6ac.js"><link rel="prefetch" href="/assets/js/71.b092300b.js"><link rel="prefetch" href="/assets/js/72.25f9363b.js"><link rel="prefetch" href="/assets/js/73.be14e0d3.js"><link rel="prefetch" href="/assets/js/74.02d90af1.js"><link rel="prefetch" href="/assets/js/75.effffafd.js"><link rel="prefetch" href="/assets/js/76.c53ee55b.js"><link rel="prefetch" href="/assets/js/77.4aa1108d.js"><link rel="prefetch" href="/assets/js/78.672c6170.js"><link rel="prefetch" href="/assets/js/79.caf6aebe.js"><link rel="prefetch" href="/assets/js/8.89bc7f6d.js"><link rel="prefetch" href="/assets/js/80.39b1897d.js"><link rel="prefetch" href="/assets/js/81.7cce90fa.js"><link rel="prefetch" href="/assets/js/82.5be4879f.js"><link rel="prefetch" href="/assets/js/83.b47ca97a.js"><link rel="prefetch" href="/assets/js/84.93b6da79.js"><link rel="prefetch" href="/assets/js/85.97f70ae7.js"><link rel="prefetch" href="/assets/js/86.aa40b1cc.js"><link rel="prefetch" href="/assets/js/87.2a9e64ba.js"><link rel="prefetch" href="/assets/js/88.960c348f.js"><link rel="prefetch" href="/assets/js/89.81c8200d.js"><link rel="prefetch" href="/assets/js/9.31afac8d.js"><link rel="prefetch" href="/assets/js/90.313a5e05.js"><link rel="prefetch" href="/assets/js/91.dfb38398.js"><link rel="prefetch" href="/assets/js/92.7eac20c9.js"><link rel="prefetch" href="/assets/js/93.cb7e9ce1.js"><link rel="prefetch" href="/assets/js/94.7ae95a84.js"><link rel="prefetch" href="/assets/js/95.7f792a23.js"><link rel="prefetch" href="/assets/js/96.596eb777.js"><link rel="prefetch" href="/assets/js/97.06b96fe1.js"><link rel="prefetch" href="/assets/js/98.7c50f666.js"><link rel="prefetch" href="/assets/js/99.a5d107f2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>刘文奇</h3> <p class="description" data-v-59e6cb88>个人博客，技术笔记整理</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="刘文奇" class="logo"> <span class="site-name">刘文奇</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><!----> <h3 class="name" data-v-1fad0c41>
+    刘文奇
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>178</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>107</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>find 命令使用</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">find 命令使用</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>刘文奇</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>11/1/2014</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/views/linux%E5%9F%BA%E7%A1%80/find.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>shell</span><span class="tag-item" data-v-8a445198>find</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="find-使用介绍"><a href="#find-使用介绍" class="header-anchor">#</a> find 使用介绍</h1> <h2 id="一、find-15种用法实例"><a href="#一、find-15种用法实例" class="header-anchor">#</a> 一、find 15种用法实例</h2> <p><strong>除了在一个目录结构下查找文件这种基本的操作，你还可以用find命令实现一些实用的操作，使你的命令行之旅更加简易.</strong></p> <p>本文将介绍15种无论是于新手还是老鸟都非常有用的Linux find命令。</p> <p>首先，在你的home目录下面创建下面的空文件，来测试下面的find命令示例。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># vim create_sample_files.sh</span>
+<span class="token function">touch</span> MybashProgram.sh
+<span class="token function">touch</span> mycprogram.c
+<span class="token function">touch</span> MyCProgram.c
+<span class="token function">touch</span> Program.c
+
+<span class="token function">mkdir</span> backup
+<span class="token builtin class-name">cd</span> backup
+
+<span class="token function">touch</span> MybashProgram.sh
+<span class="token function">touch</span> mycprogram.c
+<span class="token function">touch</span> MyCProgram.c
+<span class="token function">touch</span> Program.c
+
+<span class="token comment"># chmod +x create_sample_files.sh</span>
+
+<span class="token comment"># ./create_sample_files.sh</span>
+
+<span class="token comment"># ls -R</span>
+.:
+backup                  MybashProgram.sh  MyCProgram.c
+create_sample_files.sh  mycprogram.c      Program.c
+
+./backup:
+MybashProgram.sh  mycprogram.c  MyCProgram.c  Program.c
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><h3 id="_1-用文件名查找文件"><a href="#_1-用文件名查找文件" class="header-anchor">#</a> 1. 用文件名查找文件</h3> <p>这是find命令的一个基本用法。下面的例子展示了用MyCProgram.c作为查找名在当前目录及其子目录中查找文件的方法。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find -name &quot;MyCProgram.c&quot;</span>
+./backup/MyCProgram.c
+./MyCProgram.c
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_2-用文件名查找文件-忽略大小写"><a href="#_2-用文件名查找文件-忽略大小写" class="header-anchor">#</a> 2.用文件名查找文件，忽略大小写</h3> <p><strong>这是find命令的一个基本用法。下面的例子展示了用MyCProgram.c作为查找名在当前目录及其子目录中查找文件的方法，忽略了大小写.</strong></p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find -iname &quot;MyCProgram.c&quot;</span>
+./mycprogram.c
+./backup/mycprogram.c
+./backup/MyCProgram.c
+./MyCProgram.c
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_3-使用mindepth和maxdepth限定搜索指定目录的深度"><a href="#_3-使用mindepth和maxdepth限定搜索指定目录的深度" class="header-anchor">#</a> 3. 使用mindepth和maxdepth限定搜索指定目录的深度</h3> <p>在root目录及其子目录下查找passwd文件。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find / -name passwd</span>
+./usr/share/doc/nss_ldap-253/pam.d/passwd
+./usr/bin/passwd
+./etc/pam.d/passwd
+./etc/passwd
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>在root目录及其1层深的子目录中查找passwd. (例如root — level 1, and one sub-directory — level 2)</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find -maxdepth 2 -name passwd</span>
+./etc/passwd
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>在root目录下及其最大两层深度的子目录中查找passwd文件. (例如 root — level 1, and two sub-directories — level 2 and 3 )</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find / -maxdepth 3 -name passwd</span>
+./usr/bin/passwd
+./etc/pam.d/passwd
+./etc/passwd
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>在第二层子目录和第四层子目录之间查找passwd文件。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find -mindepth 3 -maxdepth 5 -name passwd</span>
+./usr/bin/passwd
+./etc/pam.d/passwd
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_4-在find命令查找到的文件上执行命令"><a href="#_4-在find命令查找到的文件上执行命令" class="header-anchor">#</a> 4. 在find命令查找到的文件上执行命令</h3> <p>下面的例子展示了find命令来计算所有不区分大小写的文件名为“MyCProgram.c”的文件的MD5验证和。{}将会被当前文件名取代。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">find</span> <span class="token parameter variable">-iname</span> <span class="token string">&quot;MyCProgram.c&quot;</span> <span class="token parameter variable">-exec</span> md5sum <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+d41d8cd98f00b204e9800998ecf8427e  ./mycprogram.c
+d41d8cd98f00b204e9800998ecf8427e  ./backup/mycprogram.c
+d41d8cd98f00b204e9800998ecf8427e  ./backup/MyCProgram.c
+d41d8cd98f00b204e9800998ecf8427e  ./MyCProgram.c
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_5-相反匹配"><a href="#_5-相反匹配" class="header-anchor">#</a> 5. 相反匹配</h3> <p>显示所有的名字不是MyCProgram.c的文件或者目录。由于maxdepth是1，所以只会显示当前目录下的文件和目录。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">find</span> <span class="token parameter variable">-maxdepth</span> <span class="token number">1</span> <span class="token parameter variable">-not</span> <span class="token parameter variable">-iname</span> <span class="token string">&quot;MyCProgram.c&quot;</span>
+<span class="token builtin class-name">.</span>
+./MybashProgram.sh
+./create_sample_files.sh
+./backup
+./Program.c
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="_6-使用inode编号查找文件"><a href="#_6-使用inode编号查找文件" class="header-anchor">#</a> 6. 使用inode编号查找文件</h3> <p>任何一个文件都有一个独一无二的inode编号，借此我们可以区分文件。创建两个名字相似的文件，例如一个有空格结尾，一个没有。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">touch</span> <span class="token string">&quot;test-file-name&quot;</span>
+<span class="token comment"># touch &quot;test-file-name &quot;</span>
+<span class="token punctuation">[</span>Note: There is a space at the end<span class="token punctuation">]</span>
+
+<span class="token comment"># ls -1 test*</span>
+test-file-name
+test-file-name
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>从ls的输出不能区分哪个文件有空格结尾。使用选项-i，可以看到文件的inode编号，借此可以区分这两个文件。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">ls</span> <span class="token parameter variable">-i1</span> test*
+<span class="token number">16187429</span> test-file-name
+<span class="token number">16187430</span> test-file-name
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>你可以如下面所示在find命令中指定inode编号。在此，find命令用inode编号重命名了一个文件。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">find</span> <span class="token parameter variable">-inum</span> <span class="token number">16187430</span> <span class="token parameter variable">-exec</span> <span class="token function">mv</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> new-test-file-name <span class="token punctuation">\</span><span class="token punctuation">;</span>
+
+<span class="token comment"># ls -i1 *test*</span>
+<span class="token number">16187430</span> new-test-file-name
+<span class="token number">16187429</span> test-file-name
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>你可以在你想对那些像上面一样的糟糕命名的文件做某些操作时使用这一技术。例如，名为file?.txt的文件名字中有一个特殊字符。若你想执行“rm file?.txt”，下面所示的所有三个文件都会被删除。所以，采用下面的步骤来删除&quot;file?.txt&quot;文件。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">ls</span>
+file1.txt  file2.txt  file?.txt
+
+找到每一个文件的inode编号。
+
+<span class="token function">ls</span> <span class="token parameter variable">-i1</span>
+<span class="token number">804178</span> file1.txt
+<span class="token number">804179</span> file2.txt
+<span class="token number">804180</span> file?.txt
+如下所示： 使用inode编号来删除那些具有特殊符号的文件名。
+
+<span class="token function">find</span> <span class="token parameter variable">-inum</span> <span class="token number">804180</span> <span class="token parameter variable">-exec</span> <span class="token function">rm</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+
+<span class="token comment"># ls</span>
+file1.txt  file2.txt
+<span class="token punctuation">[</span>Note: The <span class="token function">file</span> with name <span class="token string">&quot;file?.txt&quot;</span> is now removed<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><h3 id="_7-根据文件权限查找文件"><a href="#_7-根据文件权限查找文件" class="header-anchor">#</a> 7. 根据文件权限查找文件</h3> <p>下面的操作时合理的：
+找到具有指定权限的文件
+忽略其他权限位，检查是否和指定权限匹配
+根据给定的八进制/符号表达的权限搜索
+此例中，假设目录包含以下文件。注意这些文件的权限不同。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">ls</span> <span class="token parameter variable">-l</span>
+total <span class="token number">0</span>
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:31 all_for_all
+-rw-r--r-- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:30 everybody_read
+---------- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:31 no_for_all
+-rw------- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:29 ordinary_file
+-rw-r----- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:27 others_can_also_read
+----r----- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:27 others_can_only_read
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>找到具有组读权限的文件。使用下面的命令来找到当前目录下对同组用户具有读权限的文件，忽略该文件的其他权限。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">find</span> <span class="token builtin class-name">.</span> <span class="token parameter variable">-perm</span> <span class="token parameter variable">-g</span><span class="token operator">=</span>r <span class="token parameter variable">-type</span> f <span class="token parameter variable">-exec</span> <span class="token function">ls</span> <span class="token parameter variable">-l</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+-rw-r--r-- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:30 ./everybody_read
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:31 ./all_for_all
+----r----- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:27 ./others_can_only_read
+-rw-r----- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:27 ./others_can_also_read
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>找到对组用户具有只读权限的文件。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">find</span> <span class="token builtin class-name">.</span> <span class="token parameter variable">-perm</span> <span class="token assign-left variable">g</span><span class="token operator">=</span>r <span class="token parameter variable">-type</span> f <span class="token parameter variable">-exec</span> <span class="token function">ls</span> <span class="token parameter variable">-l</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+----r----- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:27 ./others_can_only_read
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>找到对组用户具有只读权限的文件(使用八进制权限形式)。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">find</span> <span class="token builtin class-name">.</span> <span class="token parameter variable">-perm</span> 040 <span class="token parameter variable">-type</span> f <span class="token parameter variable">-exec</span> <span class="token function">ls</span> <span class="token parameter variable">-l</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+----r----- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:27 ./others_can_only_read
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_8-找到home目录及子目录下所有的空文件-0字节文件"><a href="#_8-找到home目录及子目录下所有的空文件-0字节文件" class="header-anchor">#</a> 8. 找到home目录及子目录下所有的空文件(0字节文件)</h3> <p>下面命令的输出文件绝大多数都是锁定文件盒其他程序创建的place hoders</p> <p><code>find ~ -empty</code>
+只列出你home目录里的空文件。</p> <p><code>find . -maxdepth 1 -empty</code></p> <p>只列出当年目录下的非隐藏空文件。</p> <p><code>find . -maxdepth 1 -empty -not -name &quot;.*&quot;</code></p> <h3 id="_9-查找5个最大的文件"><a href="#_9-查找5个最大的文件" class="header-anchor">#</a> 9. 查找5个最大的文件</h3> <p>下面的命令列出当前目录及子目录下的5个最大的文件。这会需要一点时间，取决于命令需要处理的文件数量。</p> <p><code>find . -type f -exec ls -s {} \; | sort -n -r | head -5</code></p> <h3 id="_10-查找5个最小的文件"><a href="#_10-查找5个最小的文件" class="header-anchor">#</a> 10. 查找5个最小的文件</h3> <p>方法同查找5个最大的文件类似，区别只是sort的顺序是降序。</p> <p><code>find . -type f -exec ls -s {} \; | sort -n | head -5</code>
+上面的命令中，很可能你看到的只是空文件(0字节文件)。如此，你可以使用下面的命令列出最小的文件，而不是0字节文件。</p> <p><code>find . -not -empty -type f -exec ls -s {} \; | sort -n | head -5</code></p> <h3 id="_11-使用-type查找指定文件类型的文件"><a href="#_11-使用-type查找指定文件类型的文件" class="header-anchor">#</a> 11. 使用-type查找指定文件类型的文件</h3> <ul><li>只查找socket文件</li></ul> <p><code>find . -type s</code></p> <ul><li>查找所有的目录</li></ul> <p><code>find . -type d</code></p> <ul><li>查找所有的一般文件</li></ul> <p><code>find . -type f</code></p> <ul><li>查找所有的隐藏文件</li></ul> <p><code>find . -type f -name &quot;.*&quot;</code></p> <ul><li>查找所有的隐藏目录</li></ul> <p><code>find -type d -name &quot;.*&quot;</code></p> <h3 id="_12-通过和其他文件比较修改时间查找文件"><a href="#_12-通过和其他文件比较修改时间查找文件" class="header-anchor">#</a> 12. 通过和其他文件比较修改时间查找文件</h3> <blockquote><p>显示在指定文件之后做出修改的文件。下面的find命令将显示所有的在ordinary_file之后创建修改的文件。</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">ls</span> <span class="token parameter variable">-lrt</span>
+total <span class="token number">0</span>
+-rw-r----- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:27 others_can_also_read
+----r----- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:27 others_can_only_read
+-rw------- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:29 ordinary_file
+-rw-r--r-- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:30 everybody_read
+<span class="token parameter variable">-rwxrwxrwx</span> <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:31 all_for_all
+---------- <span class="token number">1</span> root root <span class="token number">0</span> <span class="token number">2009</span>-02-19 <span class="token number">20</span>:31 no_for_all
+
+
+<span class="token comment"># find -newer ordinary_file</span>
+<span class="token builtin class-name">.</span>
+./everybody_read
+./all_for_all
+./no_for_all
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h3 id="_13-通过文件大小查找文件"><a href="#_13-通过文件大小查找文件" class="header-anchor">#</a> 13. 通过文件大小查找文件</h3> <blockquote><p>使用-size选项可以通过文件大小查找文件。</p></blockquote> <ul><li>查找比指定文件大的文件</li></ul> <p><code>find ~ -size +100M</code></p> <ul><li>查找比指定文件小的文件</li></ul> <p><code>find ~ -size -100M</code></p> <ul><li>查找符合给定大小的文件</li></ul> <p><code>find ~ -size 100</code></p> <p>注意: – 指比给定尺寸小，+ 指比给定尺寸大。没有符号代表和给定尺寸完全一样大。</p> <h3 id="_14-给常用find操作取别名"><a href="#_14-给常用find操作取别名" class="header-anchor">#</a> 14. 给常用find操作取别名</h3> <p>若你发现有些东西很有用，你可以给他取别名。并且在任何你希望的地方执行。</p> <ul><li>常用的删除a.out文件。</li></ul> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">alias</span> <span class="token assign-left variable">rmao</span><span class="token operator">=</span><span class="token string">&quot;find . -iname a.out -exec rm {} \;&quot;</span>
+<span class="token comment"># rmao</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><ul><li>删除c程序产生的core文件。</li></ul> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">alias</span> <span class="token assign-left variable">rmc</span><span class="token operator">=</span><span class="token string">&quot;find . -iname core -exec rm {} \;&quot;</span>
+<span class="token comment"># rmc</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_15-用find命令删除大型打包文件"><a href="#_15-用find命令删除大型打包文件" class="header-anchor">#</a> 15. 用find命令删除大型打包文件</h3> <p>下面的命令删除大于100M的*.zip文件。</p> <p><code>find / -type f -name *.zip -size +100M -exec rm -i {} \;&quot;</code>
+用别名rm100m删除所有大雨100M的*.tar文件。使用同样的思想可以创建rm1g,rm2g,rm5g的一类别名来删除所有大于1G,2G,5G的文件。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token builtin class-name">alias</span> <span class="token assign-left variable">rm100m</span><span class="token operator">=</span><span class="token string">&quot;find / -type f -name *.tar -size +100M -exec rm -i {} \;&quot;</span>
+<span class="token comment"># alias rm1g=&quot;find / -type f -name *.tar -size +1G -exec rm -i {} \;&quot;</span>
+<span class="token comment"># alias rm2g=&quot;find / -type f -name *.tar -size +2G -exec rm -i {} \;&quot;</span>
+<span class="token comment"># alias rm5g=&quot;find / -type f -name *.tar -size +5G -exec rm -i {} \;&quot;</span>
+
+<span class="token comment"># rm100m</span>
+<span class="token comment"># rm1g</span>
+<span class="token comment"># rm2g</span>
+<span class="token comment"># rm5g</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h2 id="二-find使用命令高级使用方法例子"><a href="#二-find使用命令高级使用方法例子" class="header-anchor">#</a> 二.find使用命令高级使用方法例子</h2> <blockquote><p>前阵子，我们审查了15件实事 find命令的例子（第一部分）。查找命令可以做很多比只是在寻找基于名称的文件 （第2部分）在这篇文章中，让我们来讨论15高级find命令的例子， 包括-根据它访问，修改或改变的时间查找文件，查找文件相比之下，执行操作找到的文件等， 拉梅什纳塔拉詹：这是我的照片中的可爱的小女儿。她很高兴地发现在加州长滩水族馆海狮。
+基于访问/修改/更改时间查找文件
+你可以找到基于以下三个文件的时间属性的文件。
+访问时间的文件。文件访问时，访问时间得到更新。
+的文件的修改时间。文件内容修改时，修改时间得到更新。
+更改文件的时间。更改时间时，被更新的inode数据的变化。
+在下面的例子中，min选项之间的差异和时间选项是参数。
+分论点将它的参数为分钟。例如，60分钟（1小时）= 60分钟。
+时间参数，将它的参数为24小时。例如，时间2 = 2 * 24小时（2天）。
+虽然这样做的24个小时计算，小数部分都将被忽略，所以25小时为24小时，和47小时取为24小时，仅48小时为48小时。要获得更清晰的参考atime的部分find命令的手册页。</p></blockquote> <h3 id="例1-找到在1个小时内被更改的文件"><a href="#例1-找到在1个小时内被更改的文件" class="header-anchor">#</a> 例1：找到在1个小时内被更改的文件</h3> <p>想要通过文件修改时间找出文件，可以使用参数 -mmin -mtime。下面是man手册中有关mmin和mtime的定义。
+-mmin n 文件最后一次修改是在n分钟之内
+-mtime n 文件最后一次修改是在 n*24小时之内（译者注：也就是n天了呗）
+执行下面例子中的命令，将会找到当前目录以及其子目录下，最近一次修改时间在1个小时（60分钟）之内的文件或目录</p> <p><code># find . -mmin -60</code></p> <p>同样的方式，执行下面例子中的命令，将会找到24小时（1天）内修改了的文件（文件系统根目录 / 下）</p> <p><code># find / -mtime -1</code></p> <h3 id="例2-找到1个小时内被访问过的文件"><a href="#例2-找到1个小时内被访问过的文件" class="header-anchor">#</a> 例2：找到1个小时内被访问过的文件</h3> <p>想要通过文件访问时间找出文件，可以使用参数 -amin -atime。下面是man手册中有关amin和atime的定义。
+-amin n 文件最后一次访问是在n分钟之内
+-atime n 文件最后一次访问是在 n*24小时之内
+执行下面例子中的命令，将会找到当前目录以及其子目录下，最近一次访问时间在1个小时（60分钟）之内的文件或目录</p> <p><code># find . -amin -60</code>
+同样的方式，执行下面例子中的命令，将会找到24小时（1天）内被访问了的文件（文件系统根目录 / 下）</p> <p><code># find / -atime -1</code></p> <h3 id="例3-查找一个小时内状态被改变的文件"><a href="#例3-查找一个小时内状态被改变的文件" class="header-anchor">#</a> 例3：查找一个小时内状态被改变的文件</h3> <p>（译者注：这里的改变更第1个例子的更改文件内容时间是不同概念，这里是更改的是文件inode的数据，比如文件的权限，所属人等等信息）
+要查找文件的inode的更改时间，使用-cmin和-ctime选项
+-cmin n  文件的状态在n分钟内被改变
+-ctime n  文件状态在n*24小时内（也就是n天内）被改变
+（译者注：如果上面的n为-n形式，则表示n分钟/天之内，n为+n则表示n分钟/天之前）
+下面的例子在当前目录和其子目录下面查找一个小时内文件状态改变的文件（也就是60分钟内）：</p> <p><code># find . -cmin -60</code>
+同样的道理，下面的例子在根目录/及其子目录下一天内（24小时内）文件状态被改变的文件列表：</p> <p><code># find / -ctime -1</code></p> <h3 id="例4-搜索仅仅限定于文件-不显示文件夹"><a href="#例4-搜索仅仅限定于文件-不显示文件夹" class="header-anchor">#</a> 例4：搜索仅仅限定于文件，不显示文件夹</h3> <p>上面的例子搜索出来不仅仅有文件，还会显示文件夹。因为当一个文件被访问的时候，它所处的文件夹也会被访问，
+如果你对文件夹不感兴趣，那么可以使用 -type f 选项
+下面的例子会显示30分钟内被修改过的文件，文件夹不显示：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find /etc/sysconfig -amin -30</span>
+<span class="token builtin class-name">.</span>
+./console
+./network-scripts
+./i18n
+./rhn
+./rhn/clientCaps.d
+./networking
+./networking/profiles
+./networking/profiles/default
+./networking/profiles/default/resolv.conf
+./networking/profiles/default/hosts
+./networking/devices
+./apm-scripts
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><blockquote><p>[注: 上面的输出包含了文件和文件夹]</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find /etc/sysconfig -amin -30 -type f</span>
+./i18n
+./networking/profiles/default/resolv.conf
+./networking/profiles/default/hosts
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><blockquote><p>[注: 上面的输出仅仅包含文件]</p></blockquote> <h3 id="例5-仅仅查找非隐藏的文件-不显示隐藏文件"><a href="#例5-仅仅查找非隐藏的文件-不显示隐藏文件" class="header-anchor">#</a> 例5：仅仅查找非隐藏的文件(不显示隐藏文件)</h3> <p>如果我们查找的时候不想隐藏文件也显示出来，可以使用下面的正则式查找：
+下面的命令会显示当前目录及其子目录下15分钟内文件内容被修改过的文件，并且只列出非隐藏文件。也就是说，以.开头的文件时不会显示出来的</p> <p><code># find . -mmin -15 \( ! -regex &quot;.*/\..*&quot; \)</code></p> <p>基于文件比较的查找命令
+我们平时通过更别的东西进行比较，会更容易记住一些事情。比如说我想找出在我编辑test文件之后编辑过的文件。你可以通过test这个文件的编辑时间作为比较基准去查找之后编辑过的文件：</p> <h3 id="例6-查找文件修改时间在某一文件修改后的文件"><a href="#例6-查找文件修改时间在某一文件修改后的文件" class="header-anchor">#</a> 例6： 查找文件修改时间在某一文件修改后的文件</h3> <p>语法： find -newer FILE
+下面的例子显示在/etc/passwd修改之后被修改过的文件。对于系统管理员，想知道你新增了一个用户后去跟踪系统的活动状态是很有帮助的（万一那新用户不老实，一上来就乱搞，你很快就知道了  ^_^）：</p> <p><code># find -newer /etc/passwd</code></p> <h3 id="例7-查找文件访问时间在某一文件的修改时间之后的文件"><a href="#例7-查找文件访问时间在某一文件的修改时间之后的文件" class="header-anchor">#</a> 例7：查找文件访问时间在某一文件的修改时间之后的文件</h3> <p><code># find -newer /etc/passwd</code>
+下面的例子显示所有在/etc/hosts文件被修改后被访问到的文件。如果你新增了一个主机/端口记录在/etc/hosts文件中，你很可能很想知道在那之后有什么文件被访问到了，下面是这个命令：</p> <p><code># find -anewer /etc/hosts</code></p> <h3 id="例8-查找状态改变时间在某个文件修改时间之后的文件"><a href="#例8-查找状态改变时间在某个文件修改时间之后的文件" class="header-anchor">#</a> 例8：查找状态改变时间在某个文件修改时间之后的文件</h3> <p>语法： find -cnewer FILE
+下面的例子显示在修改文件/etc/fstab之后所有文件状态改变过的文件。如果你在/etc/fstab新增了一个挂载点，
+你很可能想知道之后哪些文件的状态发生了改变，这时候你可以使用如下命令：</p> <p><code># find -cnewer /etc/fstab</code>
+在查找到的文件列表结果上直接执行命令：
+这之前你已经看到了如果通过find命令去查找各种条件的文件列表。如果你对这些find命令还不熟悉，我建议你看完上面的第一部分</p> <p>接下来这部分我们向你介绍如果在find命令上执行各种不同的命令，也就是说如何去操作find命令查找出来的文件列表。
+我们能在find命令查找出来的文件名列表上指定任意的操作：</p> <p><code># find &lt;CONDITION to Find files&gt; -exec &lt;OPERATION&gt; \;</code>
+其中的OPERATION可以是任意的命令，下面列举一下比较常用的：
+rm 命令，用于删除find查找出来的文件
+mv 命令，用于重命名查找出的文件
+ls -l 命令，显示查找出的文件的详细信息
+md5sum， 对查找出的文件进行md5sum运算，可以获得一个字符串，用于检测文件内容的合法性
+wc 命令，用于统计计算文件的单词数量，文件大小等待
+执行任何Unix的shell命令
+执行你自己写的shell脚本，参数就是每个查找出来的文件名</p> <h3 id="例9-在find命令输出上使用-ls-l-列举出1小时内被编辑过的文件的详细信息"><a href="#例9-在find命令输出上使用-ls-l-列举出1小时内被编辑过的文件的详细信息" class="header-anchor">#</a> 例9：在find命令输出上使用 ls -l， 列举出1小时内被编辑过的文件的详细信息</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find -mmin -60</span>
+./cron
+./secure
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># find -mmin -60 -exec ls -l {} \;</span>
+-rw-------  <span class="token number">1</span> root root <span class="token number">1028</span> Jun <span class="token number">21</span> <span class="token number">15</span>:01 ./cron
+-rw-------  <span class="token number">1</span> root root <span class="token number">831752</span> Jun <span class="token number">21</span> <span class="token number">15</span>:42 ./secure
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="例10-仅仅在当前文件系统中搜索"><a href="#例10-仅仅在当前文件系统中搜索" class="header-anchor">#</a> 例10：仅仅在当前文件系统中搜索</h3> <p>系统管理员有时候仅仅想在/挂载的文件系统分区上搜索，而不想去搜索其他的挂载分区，比如/home/挂载分区。如果你有多个分区被挂载了，你想在/下搜索，一般可以按下面的这样做
+下面这个命令会搜索根目录/及其子目录下所有.log结尾的文件名。如果你有多个分区在/下面，那么这个搜索会去搜索所有的被挂载的分区：</p> <p><code># find / -name &quot;*.log&quot;</code>
+如果我们使用-xdev选项，那么仅仅会在在当前文件系统中搜索，下面是在xdev的man page上面找到的一段-xdev的定义：
+-xdev Don’t descend directories on other filesystems.
+下面的命令会在/目录及其子目录下搜索当前文件系统(也就是/挂载的文件系统)中所有以.log结尾的文件，也就是说如果你有多个分区挂载在/下面，下面的搜索不会去搜索其他的分区的（比如/home/）</p> <p><code># find / -xdev -name &quot;*.log&quot;</code></p> <h3 id="例11-在同一个命令中使用多个"><a href="#例11-在同一个命令中使用多个" class="header-anchor">#</a> 例11： 在同一个命令中使用多个{}</h3> <p>linux手册说命令中只能使用一个{}，不过你可以像下面这样在同一个命令中使用多个{}</p> <p><code># find -name &quot;*.txt&quot; cp {} {}.bkup \;</code></p> <blockquote><p>注意，在同一个命令中使用这个{}是可以的，但是在不同的命令里就不行了，也就是说，如果你想象下面这样重命名文件是行不通的</p></blockquote> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">find</span> <span class="token parameter variable">-name</span> <span class="token string">&quot;*.txt&quot;</span> <span class="token parameter variable">-exec</span> <span class="token function">mv</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token variable"><span class="token variable">`</span><span class="token function">basename</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> .htm<span class="token variable">`</span></span>.html <span class="token punctuation">\</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="例12-使用多个-实例"><a href="#例12-使用多个-实例" class="header-anchor">#</a> 例12： 使用多个{}实例</h3> <p>你可以像下面这样写一个shell脚本去模拟上面那个重命名的例子</p> <p><code># mv &quot;$1&quot; &quot;</code>basename &quot;$1&quot; .htm<code>.html&quot;</code>
+上面的双引号是为了防止文件名中出现的空格，不加的话会有问题。然后你把这个shell脚本保存为mv.sh，你可以像下面这样使用find命令了</p> <p><code>find -name &quot;*.html&quot; -exec ./mv.sh '{}' \;</code>
+所以，任何情况下你在find命令执行中想使用同一个文件名多次的话，先写一个脚本，然后在find中通过-exec执行这个脚本，把文件名参数传递进去就行，这是最简单的办法</p> <h3 id="例13-将错误重定向到-dev-nul"><a href="#例13-将错误重定向到-dev-nul" class="header-anchor">#</a> 例13:将错误重定向到/dev/nul</h3> <p>重定向错误输出一般不是什么好的想法。一个有经验的程序员懂得在终端显示错误并及时修正它是很重要的。
+尤其是在find命令中重定向错误不是个好的实践。 但是如果你确实不想看到那些烦人的错误，想把错误都重定向到null设备中（也就是linux上的黑洞装置，任何丢进去的东西消失的无影无踪了）。你可以像下面这样做</p> <p><code>find -name &quot;*.txt&quot; 2&gt;&gt;/dev/null</code>
+有时候这是很有用的。比如，如果你想通过你自己的账号在/目录下查找所有的*.conf文件，你会得到很多很多的&quot;Permission denied&quot;的错误消息， 就像下面这样：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> <span class="token string">&quot;*.conf&quot;</span>
+/sbin/generate-modprobe.conf
+find: /tmp/orbit-root: Permission denied
+find: /tmp/ssh-gccBMp5019: Permission denied
+find: /tmp/keyring-5iqiGo: Permission denied
+find: /var/log/httpd: Permission denied
+find: /var/log/ppp: Permission denied
+/boot/grub/grub.conf
+find: /var/log/audit: Permission denied
+find: /var/log/squid: Permission denied
+find: /var/log/samba: Permission denied
+find: /var/cache/alchemist/printconf.rpm/wm: Permission denied
+<span class="token punctuation">[</span>Note: There are two valid *.conf files burned <span class="token keyword">in</span> the <span class="token string">&quot;Permission denied&quot;</span> messages<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>你说烦人不？所以，如果你只想看到find命令真实的查找结果而不是这些&quot;Permission denied&quot;错误消息，你可以将这些错误消息重定向到/dev/null中去</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>$ <span class="token function">find</span> / <span class="token parameter variable">-name</span> <span class="token string">&quot;*.conf&quot;</span> <span class="token operator"><span class="token file-descriptor important">2</span>&gt;&gt;</span>/dev/null
+/sbin/generate-modprobe.conf
+/boot/grub/grub.conf
+<span class="token punctuation">[</span>Note: All the <span class="token string">&quot;Permission denied&quot;</span> messages are not displayed<span class="token punctuation">]</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="例14-将文件名中的空格换成下划线"><a href="#例14-将文件名中的空格换成下划线" class="header-anchor">#</a> 例14： 将文件名中的空格换成下划线</h3> <p>你从网上下载下来的音频文件的文件名很多都带有空格。但是带有空格的文件名在linux(类Unix)系统里面是很不好的。你可以使用find然后后面加上rename命令的替换功能去重命名这些文件，将空格转换成下划线
+下面显示怎样将所有mp3文件的文件名中的空格换成_</p> <p><code>$ find . -type f -iname “*.mp3″ -exec rename “s/ /_/g” {} \;</code></p> <h3 id="例15-在find结果中同时执行两条命令"><a href="#例15-在find结果中同时执行两条命令" class="header-anchor">#</a> 例15:在find结果中同时执行两条命令</h3> <p>在find的man page页面中，下面是一次文件查找遍历中使用两条命令的语法举例
+下面的find命令的例子，遍历文件系统一次，列出拥有setuid属性的文件和目录，写入/root/suid.txt文件， 如果文件大小超过100M，将其记录到/root/big.txt中</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">find</span> / <span class="token punctuation">\</span><span class="token punctuation">(</span> <span class="token parameter variable">-perm</span> <span class="token parameter variable">-4000</span> <span class="token parameter variable">-fprintf</span> /root/suid.txt <span class="token string">'%#m %u %p\n'</span> <span class="token punctuation">\</span><span class="token punctuation">)</span> , <span class="token punctuation">\</span>
+ <span class="token punctuation">\</span><span class="token punctuation">(</span> <span class="token parameter variable">-size</span> +100M <span class="token parameter variable">-fprintf</span> /root/big.txt <span class="token string">'%-10s %p\n'</span> <span class="token punctuation">\</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#一、find-15种用法实例" class="sidebar-link reco-side-一、find-15种用法实例" data-v-b57cc07c>一、find 15种用法实例</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_1-用文件名查找文件" class="sidebar-link reco-side-_1-用文件名查找文件" data-v-b57cc07c>1. 用文件名查找文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_2-用文件名查找文件-忽略大小写" class="sidebar-link reco-side-_2-用文件名查找文件-忽略大小写" data-v-b57cc07c>2.用文件名查找文件，忽略大小写</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_3-使用mindepth和maxdepth限定搜索指定目录的深度" class="sidebar-link reco-side-_3-使用mindepth和maxdepth限定搜索指定目录的深度" data-v-b57cc07c>3. 使用mindepth和maxdepth限定搜索指定目录的深度</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_4-在find命令查找到的文件上执行命令" class="sidebar-link reco-side-_4-在find命令查找到的文件上执行命令" data-v-b57cc07c>4. 在find命令查找到的文件上执行命令</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_5-相反匹配" class="sidebar-link reco-side-_5-相反匹配" data-v-b57cc07c>5. 相反匹配</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_6-使用inode编号查找文件" class="sidebar-link reco-side-_6-使用inode编号查找文件" data-v-b57cc07c>6. 使用inode编号查找文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_7-根据文件权限查找文件" class="sidebar-link reco-side-_7-根据文件权限查找文件" data-v-b57cc07c>7. 根据文件权限查找文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_8-找到home目录及子目录下所有的空文件-0字节文件" class="sidebar-link reco-side-_8-找到home目录及子目录下所有的空文件-0字节文件" data-v-b57cc07c>8. 找到home目录及子目录下所有的空文件(0字节文件)</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_9-查找5个最大的文件" class="sidebar-link reco-side-_9-查找5个最大的文件" data-v-b57cc07c>9. 查找5个最大的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_10-查找5个最小的文件" class="sidebar-link reco-side-_10-查找5个最小的文件" data-v-b57cc07c>10. 查找5个最小的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_11-使用-type查找指定文件类型的文件" class="sidebar-link reco-side-_11-使用-type查找指定文件类型的文件" data-v-b57cc07c>11. 使用-type查找指定文件类型的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_12-通过和其他文件比较修改时间查找文件" class="sidebar-link reco-side-_12-通过和其他文件比较修改时间查找文件" data-v-b57cc07c>12. 通过和其他文件比较修改时间查找文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_13-通过文件大小查找文件" class="sidebar-link reco-side-_13-通过文件大小查找文件" data-v-b57cc07c>13. 通过文件大小查找文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_14-给常用find操作取别名" class="sidebar-link reco-side-_14-给常用find操作取别名" data-v-b57cc07c>14. 给常用find操作取别名</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#_15-用find命令删除大型打包文件" class="sidebar-link reco-side-_15-用find命令删除大型打包文件" data-v-b57cc07c>15. 用find命令删除大型打包文件</a></li><li class="level-2" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#二-find使用命令高级使用方法例子" class="sidebar-link reco-side-二-find使用命令高级使用方法例子" data-v-b57cc07c>二.find使用命令高级使用方法例子</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例1-找到在1个小时内被更改的文件" class="sidebar-link reco-side-例1-找到在1个小时内被更改的文件" data-v-b57cc07c>例1：找到在1个小时内被更改的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例2-找到1个小时内被访问过的文件" class="sidebar-link reco-side-例2-找到1个小时内被访问过的文件" data-v-b57cc07c>例2：找到1个小时内被访问过的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例3-查找一个小时内状态被改变的文件" class="sidebar-link reco-side-例3-查找一个小时内状态被改变的文件" data-v-b57cc07c>例3：查找一个小时内状态被改变的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例4-搜索仅仅限定于文件-不显示文件夹" class="sidebar-link reco-side-例4-搜索仅仅限定于文件-不显示文件夹" data-v-b57cc07c>例4：搜索仅仅限定于文件，不显示文件夹</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例5-仅仅查找非隐藏的文件-不显示隐藏文件" class="sidebar-link reco-side-例5-仅仅查找非隐藏的文件-不显示隐藏文件" data-v-b57cc07c>例5：仅仅查找非隐藏的文件(不显示隐藏文件)</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例6-查找文件修改时间在某一文件修改后的文件" class="sidebar-link reco-side-例6-查找文件修改时间在某一文件修改后的文件" data-v-b57cc07c>例6： 查找文件修改时间在某一文件修改后的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例7-查找文件访问时间在某一文件的修改时间之后的文件" class="sidebar-link reco-side-例7-查找文件访问时间在某一文件的修改时间之后的文件" data-v-b57cc07c>例7：查找文件访问时间在某一文件的修改时间之后的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例8-查找状态改变时间在某个文件修改时间之后的文件" class="sidebar-link reco-side-例8-查找状态改变时间在某个文件修改时间之后的文件" data-v-b57cc07c>例8：查找状态改变时间在某个文件修改时间之后的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例9-在find命令输出上使用-ls-l-列举出1小时内被编辑过的文件的详细信息" class="sidebar-link reco-side-例9-在find命令输出上使用-ls-l-列举出1小时内被编辑过的文件的详细信息" data-v-b57cc07c>例9：在find命令输出上使用 ls -l， 列举出1小时内被编辑过的文件的详细信息</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例10-仅仅在当前文件系统中搜索" class="sidebar-link reco-side-例10-仅仅在当前文件系统中搜索" data-v-b57cc07c>例10：仅仅在当前文件系统中搜索</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例11-在同一个命令中使用多个" class="sidebar-link reco-side-例11-在同一个命令中使用多个" data-v-b57cc07c>例11： 在同一个命令中使用多个{}</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例12-使用多个-实例" class="sidebar-link reco-side-例12-使用多个-实例" data-v-b57cc07c>例12： 使用多个{}实例</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例13-将错误重定向到-dev-nul" class="sidebar-link reco-side-例13-将错误重定向到-dev-nul" data-v-b57cc07c>例13:将错误重定向到/dev/nul</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例14-将文件名中的空格换成下划线" class="sidebar-link reco-side-例14-将文件名中的空格换成下划线" data-v-b57cc07c>例14： 将文件名中的空格换成下划线</a></li><li class="level-3" data-v-b57cc07c><a href="/views/linux%E5%9F%BA%E7%A1%80/find.html#例15-在find结果中同时执行两条命令" class="sidebar-link reco-side-例15-在find结果中同时执行两条命令" data-v-b57cc07c>例15:在find结果中同时执行两条命令</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.402024e5.js" defer></script><script src="/assets/js/3.35889db3.js" defer></script><script src="/assets/js/1.98e71d3a.js" defer></script><script src="/assets/js/56.d30bcbf8.js" defer></script>
+  </body>
+</html>

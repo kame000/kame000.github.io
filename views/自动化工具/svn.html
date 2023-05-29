@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SVN  使用 | 刘文奇</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.min.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="Svn 搭建使用、配置管理">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e853742c.css" as="style"><link rel="preload" href="/assets/js/app.402024e5.js" as="script"><link rel="preload" href="/assets/js/3.35889db3.js" as="script"><link rel="preload" href="/assets/js/1.98e71d3a.js" as="script"><link rel="preload" href="/assets/js/184.b11447af.js" as="script"><link rel="prefetch" href="/assets/js/10.d70328f8.js"><link rel="prefetch" href="/assets/js/100.bdfeee98.js"><link rel="prefetch" href="/assets/js/101.0f0aa0e3.js"><link rel="prefetch" href="/assets/js/102.8810b363.js"><link rel="prefetch" href="/assets/js/103.018076eb.js"><link rel="prefetch" href="/assets/js/104.6ef1e09a.js"><link rel="prefetch" href="/assets/js/105.ef045d33.js"><link rel="prefetch" href="/assets/js/106.3aafc27c.js"><link rel="prefetch" href="/assets/js/107.f3da675e.js"><link rel="prefetch" href="/assets/js/108.6a197ffd.js"><link rel="prefetch" href="/assets/js/109.9bdef9f9.js"><link rel="prefetch" href="/assets/js/11.8a566d2b.js"><link rel="prefetch" href="/assets/js/110.57ebc428.js"><link rel="prefetch" href="/assets/js/111.b5447738.js"><link rel="prefetch" href="/assets/js/112.c716f5e7.js"><link rel="prefetch" href="/assets/js/113.557f7376.js"><link rel="prefetch" href="/assets/js/114.61a54316.js"><link rel="prefetch" href="/assets/js/115.6d0b291a.js"><link rel="prefetch" href="/assets/js/116.8c93c654.js"><link rel="prefetch" href="/assets/js/117.07743f06.js"><link rel="prefetch" href="/assets/js/118.d1774c94.js"><link rel="prefetch" href="/assets/js/119.05fc2356.js"><link rel="prefetch" href="/assets/js/12.f6bcfd1f.js"><link rel="prefetch" href="/assets/js/120.2444fe97.js"><link rel="prefetch" href="/assets/js/121.ca03cbf1.js"><link rel="prefetch" href="/assets/js/122.4fea1a12.js"><link rel="prefetch" href="/assets/js/123.0e2b6ebe.js"><link rel="prefetch" href="/assets/js/124.61410c00.js"><link rel="prefetch" href="/assets/js/125.98a05a32.js"><link rel="prefetch" href="/assets/js/126.f734fc8e.js"><link rel="prefetch" href="/assets/js/127.e9acb272.js"><link rel="prefetch" href="/assets/js/128.d4b47285.js"><link rel="prefetch" href="/assets/js/129.aa6f2614.js"><link rel="prefetch" href="/assets/js/13.fa622aa3.js"><link rel="prefetch" href="/assets/js/130.244a3895.js"><link rel="prefetch" href="/assets/js/131.86c3a012.js"><link rel="prefetch" href="/assets/js/132.fe1b85d2.js"><link rel="prefetch" href="/assets/js/133.e238c5c4.js"><link rel="prefetch" href="/assets/js/134.1b5b832b.js"><link rel="prefetch" href="/assets/js/135.6468c4f0.js"><link rel="prefetch" href="/assets/js/136.19775bf4.js"><link rel="prefetch" href="/assets/js/137.c6d0ed15.js"><link rel="prefetch" href="/assets/js/138.230a86e2.js"><link rel="prefetch" href="/assets/js/139.64f42c07.js"><link rel="prefetch" href="/assets/js/14.3c87d1f8.js"><link rel="prefetch" href="/assets/js/140.607b2c0d.js"><link rel="prefetch" href="/assets/js/141.224b1c65.js"><link rel="prefetch" href="/assets/js/142.0d0fc6e0.js"><link rel="prefetch" href="/assets/js/143.c78f7a17.js"><link rel="prefetch" href="/assets/js/144.5f6b6fe2.js"><link rel="prefetch" href="/assets/js/145.d9203869.js"><link rel="prefetch" href="/assets/js/146.ac383aae.js"><link rel="prefetch" href="/assets/js/147.5ad44c9c.js"><link rel="prefetch" href="/assets/js/148.4f051907.js"><link rel="prefetch" href="/assets/js/149.ba645a2b.js"><link rel="prefetch" href="/assets/js/15.527a7f7a.js"><link rel="prefetch" href="/assets/js/150.ac4e4278.js"><link rel="prefetch" href="/assets/js/151.0a2827cd.js"><link rel="prefetch" href="/assets/js/152.7a554168.js"><link rel="prefetch" href="/assets/js/153.af52f866.js"><link rel="prefetch" href="/assets/js/154.2ce71126.js"><link rel="prefetch" href="/assets/js/155.7154dc6f.js"><link rel="prefetch" href="/assets/js/156.3d24250b.js"><link rel="prefetch" href="/assets/js/157.59ac5226.js"><link rel="prefetch" href="/assets/js/158.2d506491.js"><link rel="prefetch" href="/assets/js/159.92262746.js"><link rel="prefetch" href="/assets/js/16.aebd5e39.js"><link rel="prefetch" href="/assets/js/160.63210a31.js"><link rel="prefetch" href="/assets/js/161.9b44e7a4.js"><link rel="prefetch" href="/assets/js/162.5b61f2c7.js"><link rel="prefetch" href="/assets/js/163.7589d833.js"><link rel="prefetch" href="/assets/js/164.b5c15ecb.js"><link rel="prefetch" href="/assets/js/165.a5f5cd29.js"><link rel="prefetch" href="/assets/js/166.767b9987.js"><link rel="prefetch" href="/assets/js/167.1ffc72bf.js"><link rel="prefetch" href="/assets/js/168.515eab1b.js"><link rel="prefetch" href="/assets/js/169.dcc68995.js"><link rel="prefetch" href="/assets/js/17.bac8416c.js"><link rel="prefetch" href="/assets/js/170.64bfe5e6.js"><link rel="prefetch" href="/assets/js/171.5ad45642.js"><link rel="prefetch" href="/assets/js/172.b6d37b2e.js"><link rel="prefetch" href="/assets/js/173.19619648.js"><link rel="prefetch" href="/assets/js/174.eaff3157.js"><link rel="prefetch" href="/assets/js/175.2dffa431.js"><link rel="prefetch" href="/assets/js/176.3096d3a7.js"><link rel="prefetch" href="/assets/js/177.6d911d1f.js"><link rel="prefetch" href="/assets/js/178.a8b4f936.js"><link rel="prefetch" href="/assets/js/179.3003a50e.js"><link rel="prefetch" href="/assets/js/18.38c2d3ff.js"><link rel="prefetch" href="/assets/js/180.a03fd18b.js"><link rel="prefetch" href="/assets/js/181.62ce609e.js"><link rel="prefetch" href="/assets/js/182.00b6356e.js"><link rel="prefetch" href="/assets/js/183.6adc62eb.js"><link rel="prefetch" href="/assets/js/185.6a9556de.js"><link rel="prefetch" href="/assets/js/186.5b458a07.js"><link rel="prefetch" href="/assets/js/187.a9bd8543.js"><link rel="prefetch" href="/assets/js/188.627a76f3.js"><link rel="prefetch" href="/assets/js/19.62378543.js"><link rel="prefetch" href="/assets/js/20.31bf256b.js"><link rel="prefetch" href="/assets/js/21.dd768b7c.js"><link rel="prefetch" href="/assets/js/22.f270cfbc.js"><link rel="prefetch" href="/assets/js/23.652c5b0a.js"><link rel="prefetch" href="/assets/js/24.d8a77731.js"><link rel="prefetch" href="/assets/js/25.f4efa277.js"><link rel="prefetch" href="/assets/js/26.775d7d00.js"><link rel="prefetch" href="/assets/js/27.a42e7481.js"><link rel="prefetch" href="/assets/js/28.c81142a3.js"><link rel="prefetch" href="/assets/js/29.104d30bb.js"><link rel="prefetch" href="/assets/js/30.eeaa063e.js"><link rel="prefetch" href="/assets/js/31.c08c3cc6.js"><link rel="prefetch" href="/assets/js/32.96914904.js"><link rel="prefetch" href="/assets/js/33.b5e70d92.js"><link rel="prefetch" href="/assets/js/34.f72f363f.js"><link rel="prefetch" href="/assets/js/35.8e461891.js"><link rel="prefetch" href="/assets/js/36.a3887f60.js"><link rel="prefetch" href="/assets/js/37.f8ac624a.js"><link rel="prefetch" href="/assets/js/38.f9e3dfe7.js"><link rel="prefetch" href="/assets/js/39.00c6dac4.js"><link rel="prefetch" href="/assets/js/4.4a2913bc.js"><link rel="prefetch" href="/assets/js/40.0431cb0b.js"><link rel="prefetch" href="/assets/js/41.a0b96bac.js"><link rel="prefetch" href="/assets/js/42.81504763.js"><link rel="prefetch" href="/assets/js/43.a2f1e577.js"><link rel="prefetch" href="/assets/js/44.c6e577c7.js"><link rel="prefetch" href="/assets/js/45.e19251cb.js"><link rel="prefetch" href="/assets/js/46.2736b4a4.js"><link rel="prefetch" href="/assets/js/47.74eb52c3.js"><link rel="prefetch" href="/assets/js/48.e175852f.js"><link rel="prefetch" href="/assets/js/49.470cd3e4.js"><link rel="prefetch" href="/assets/js/5.894dfcfd.js"><link rel="prefetch" href="/assets/js/50.aa07f64f.js"><link rel="prefetch" href="/assets/js/51.7491ccca.js"><link rel="prefetch" href="/assets/js/52.ede9d894.js"><link rel="prefetch" href="/assets/js/53.f4ec39bc.js"><link rel="prefetch" href="/assets/js/54.11693e63.js"><link rel="prefetch" href="/assets/js/55.6158a230.js"><link rel="prefetch" href="/assets/js/56.d30bcbf8.js"><link rel="prefetch" href="/assets/js/57.7a28a471.js"><link rel="prefetch" href="/assets/js/58.f0c30984.js"><link rel="prefetch" href="/assets/js/59.ab16feee.js"><link rel="prefetch" href="/assets/js/6.71d47490.js"><link rel="prefetch" href="/assets/js/60.1c81418c.js"><link rel="prefetch" href="/assets/js/61.1dd5070d.js"><link rel="prefetch" href="/assets/js/62.7f7ce997.js"><link rel="prefetch" href="/assets/js/63.2cb3686d.js"><link rel="prefetch" href="/assets/js/64.18048f56.js"><link rel="prefetch" href="/assets/js/65.87291046.js"><link rel="prefetch" href="/assets/js/66.a7a7575d.js"><link rel="prefetch" href="/assets/js/67.ca181b91.js"><link rel="prefetch" href="/assets/js/68.4a9df39d.js"><link rel="prefetch" href="/assets/js/69.4a2661f5.js"><link rel="prefetch" href="/assets/js/7.6ba3ae87.js"><link rel="prefetch" href="/assets/js/70.0613e6ac.js"><link rel="prefetch" href="/assets/js/71.b092300b.js"><link rel="prefetch" href="/assets/js/72.25f9363b.js"><link rel="prefetch" href="/assets/js/73.be14e0d3.js"><link rel="prefetch" href="/assets/js/74.02d90af1.js"><link rel="prefetch" href="/assets/js/75.effffafd.js"><link rel="prefetch" href="/assets/js/76.c53ee55b.js"><link rel="prefetch" href="/assets/js/77.4aa1108d.js"><link rel="prefetch" href="/assets/js/78.672c6170.js"><link rel="prefetch" href="/assets/js/79.caf6aebe.js"><link rel="prefetch" href="/assets/js/8.89bc7f6d.js"><link rel="prefetch" href="/assets/js/80.39b1897d.js"><link rel="prefetch" href="/assets/js/81.7cce90fa.js"><link rel="prefetch" href="/assets/js/82.5be4879f.js"><link rel="prefetch" href="/assets/js/83.b47ca97a.js"><link rel="prefetch" href="/assets/js/84.93b6da79.js"><link rel="prefetch" href="/assets/js/85.97f70ae7.js"><link rel="prefetch" href="/assets/js/86.aa40b1cc.js"><link rel="prefetch" href="/assets/js/87.2a9e64ba.js"><link rel="prefetch" href="/assets/js/88.960c348f.js"><link rel="prefetch" href="/assets/js/89.81c8200d.js"><link rel="prefetch" href="/assets/js/9.31afac8d.js"><link rel="prefetch" href="/assets/js/90.313a5e05.js"><link rel="prefetch" href="/assets/js/91.dfb38398.js"><link rel="prefetch" href="/assets/js/92.7eac20c9.js"><link rel="prefetch" href="/assets/js/93.cb7e9ce1.js"><link rel="prefetch" href="/assets/js/94.7ae95a84.js"><link rel="prefetch" href="/assets/js/95.7f792a23.js"><link rel="prefetch" href="/assets/js/96.596eb777.js"><link rel="prefetch" href="/assets/js/97.06b96fe1.js"><link rel="prefetch" href="/assets/js/98.7c50f666.js"><link rel="prefetch" href="/assets/js/99.a5d107f2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e853742c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-7dd95ae2><div data-v-7dd95ae2><div class="password-shadow password-wrapper-out" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>刘文奇</h3> <p class="description" data-v-59e6cb88>个人博客，技术笔记整理</p> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div class="hide" data-v-7dd95ae2><header class="navbar" data-v-7dd95ae2><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/head.jpg" alt="刘文奇" class="logo"> <span class="site-name">刘文奇</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-7dd95ae2></div> <aside class="sidebar" data-v-7dd95ae2><div class="personal-info-wrapper" data-v-1fad0c41 data-v-7dd95ae2><!----> <h3 class="name" data-v-1fad0c41>
+    刘文奇
+  </h3> <div class="num" data-v-1fad0c41><div data-v-1fad0c41><h3 data-v-1fad0c41>178</h3> <h6 data-v-1fad0c41>Articles</h6></div> <div data-v-1fad0c41><h3 data-v-1fad0c41>107</h3> <h6 data-v-1fad0c41>Tags</h6></div></div> <ul class="social-links" data-v-1fad0c41></ul> <hr data-v-1fad0c41></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/docker/" class="nav-link"><i class="undefined"></i>
+  docker
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Django/" class="nav-link"><i class="undefined"></i>
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Python基础/" class="nav-link"><i class="undefined"></i>
+  Python基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/go_base/" class="nav-link"><i class="undefined"></i>
+  go_base
+</a></li><li class="dropdown-item"><!----> <a href="/categories/linux基础/" class="nav-link"><i class="undefined"></i>
+  linux基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/tools/" class="nav-link"><i class="undefined"></i>
+  tools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/网络基础/" class="nav-link"><i class="undefined"></i>
+  网络基础
+</a></li><li class="dropdown-item"><!----> <a href="/categories/代码管理/" class="nav-link"><i class="undefined"></i>
+  代码管理
+</a></li><li class="dropdown-item"><!----> <a href="/categories/前端/" class="nav-link"><i class="undefined"></i>
+  前端
+</a></li><li class="dropdown-item"><!----> <a href="/categories/存储/" class="nav-link"><i class="undefined"></i>
+  存储
+</a></li><li class="dropdown-item"><!----> <a href="/categories/安全/" class="nav-link"><i class="undefined"></i>
+  安全
+</a></li><li class="dropdown-item"><!----> <a href="/categories/数据库/" class="nav-link"><i class="undefined"></i>
+  数据库
+</a></li><li class="dropdown-item"><!----> <a href="/categories/ELK/" class="nav-link"><i class="undefined"></i>
+  ELK
+</a></li><li class="dropdown-item"><!----> <a href="/categories/系统/" class="nav-link"><i class="undefined"></i>
+  系统
+</a></li><li class="dropdown-item"><!----> <a href="/categories/杂文/" class="nav-link"><i class="undefined"></i>
+  杂文
+</a></li><li class="dropdown-item"><!----> <a href="/categories/生产事故/" class="nav-link"><i class="undefined"></i>
+  生产事故
+</a></li><li class="dropdown-item"><!----> <a href="/categories/监控/" class="nav-link"><i class="undefined"></i>
+  监控
+</a></li><li class="dropdown-item"><!----> <a href="/categories/架构/" class="nav-link"><i class="undefined"></i>
+  架构
+</a></li><li class="dropdown-item"><!----> <a href="/categories/负载均衡/" class="nav-link"><i class="undefined"></i>
+  负载均衡
+</a></li><li class="dropdown-item"><!----> <a href="/categories/消息队列/" class="nav-link"><i class="undefined"></i>
+  消息队列
+</a></li><li class="dropdown-item"><!----> <a href="/categories/自动化/" class="nav-link"><i class="undefined"></i>
+  自动化
+</a></li><li class="dropdown-item"><!----> <a href="/categories/面试题/" class="nav-link"><i class="undefined"></i>
+  面试题
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeLine/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/kame000" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.jianshu.com/u/f6cf3fdb1c59" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-jianshu"></i>
+  简书
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.zhihu.com/people/liuwenqi_kame" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-zhihu"></i>
+  知乎
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-59e6cb88 data-v-7dd95ae2><h3 class="title" data-v-59e6cb88>SVN  使用</h3> <!----> <label id="box" class="inputBox" data-v-59e6cb88><input type="password" value="" data-v-59e6cb88> <span data-v-59e6cb88>Konck! Knock!</span> <button data-v-59e6cb88>OK</button></label> <div class="footer" data-v-59e6cb88><span data-v-59e6cb88><i class="iconfont reco-theme" data-v-59e6cb88></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-59e6cb88>vuePress-theme-reco</a></span> <span data-v-59e6cb88><i class="iconfont reco-copyright" data-v-59e6cb88></i> <a data-v-59e6cb88><span data-v-59e6cb88>刘文奇</span>
+          
+        <span data-v-59e6cb88>2014 - </span>
+        2023
+      </a></span></div></div> <div data-v-7dd95ae2><div data-v-7dd95ae2><main class="page"><section style="display:;"><div class="page-title"><h1 class="title">SVN  使用</h1> <div data-v-8a445198><i class="iconfont reco-account" data-v-8a445198><span data-v-8a445198>刘文奇</span></i> <i class="iconfont reco-date" data-v-8a445198><span data-v-8a445198>5/1/2015</span></i> <i class="iconfont reco-eye" data-v-8a445198><span id="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-8a445198><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-8a445198><span class="tag-item" data-v-8a445198>SVN</span><span class="tag-item" data-v-8a445198>代码管理</span></i></div></div> <div class="theme-reco-content content__default"><h1 id="linux下搭建svn服务器及创建项目"><a href="#linux下搭建svn服务器及创建项目" class="header-anchor">#</a> linux下搭建svn服务器及创建项目</h1> <p>主题 SVN Linux</p> <h2 id="一-使用yum-安装svn包"><a href="#一-使用yum-安装svn包" class="header-anchor">#</a> 一. 使用yum 安装SVN包</h2> <p>关于YUM 服务器的配置参考：
+Linux 搭建 YUM 服务器
+http://blog.csdn.net/tianlesoftware/archive/2011/01/03/6113902.aspx</p> <h3 id="_1-安装svn命令如下"><a href="#_1-安装svn命令如下" class="header-anchor">#</a> 1.安装svn命令如下</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token punctuation">[</span>root@shxt~<span class="token punctuation">]</span><span class="token comment"># yum install -y subversion</span>
+验证安装版本
+<span class="token punctuation">[</span>root@shxt ~<span class="token punctuation">]</span><span class="token comment"># svnserve --version</span>
+创建SVN 版本库
+<span class="token punctuation">[</span>root@shxt ~<span class="token punctuation">]</span><span class="token comment"># mkdir /var/www/svn</span>
+<span class="token punctuation">[</span>root@shxt ~<span class="token punctuation">]</span><span class="token comment"># svnadmin create /var/www/svn/testproject  --  testproject 为版本库名称</span>
+为svn创建用户
+<span class="token punctuation">[</span>root@shxt ~<span class="token punctuation">]</span><span class="token comment"># htpasswd -c /var/www/passwd ***(这个根据情况不同，写法不同， -c是创建用户（删除原有用户）,-d是在原有基础上添加用户）)  </span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h3 id="_2-配置svn"><a href="#_2-配置svn" class="header-anchor">#</a> 2.配置svn</h3> <p>创建版本库后，在这个目录下会生成3个配置文件：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment"># pwd</span>
+/var/www/svn/testproject/conf
+<span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment"># ls</span>
+  authz  <span class="token function">passwd</span>  svnserve.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><ul><li><p>svnserve.conf 文件， 该文件配置项分为以下5项：</p> <ul><li><code>anon-access</code>： 控制非鉴权用户访问版本库的权限。</li> <li><code>auth-access</code>： 控制鉴权用户访问版本库的权限。</li> <li><code>password-db</code>： 指定用户名口令文件名。</li> <li><code>authz-db</code>：指定权限配置文件名，通过该文件可以实现以路径为基础的访问控制。</li> <li><code>realm</code>：指定版本库的认证域，即在登录时提示的认证域名称。若两个版本库的认证域相同，建议使用相同的用户名口令数据文件</li></ul></li> <li><p>Passwd 文件 ：</p></li></ul> <p>我们在<code>svnserve.conf</code>文件里启用这个文件。然后配置如下：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment"># vi passwd</span>
+<span class="token punctuation">[</span>users<span class="token punctuation">]</span>
+<span class="token comment"># harry = harryssecret</span>
+<span class="token comment"># sally = sallyssecret</span>
+admin <span class="token operator">=</span> admin
+<span class="token assign-left variable">zhangsan</span><span class="token operator">=</span> zhangsanpwd
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><ul><li>authz  文件 ：</li></ul> <p>下面我们来配置我们的<code>authz</code>文件：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment"># vi authz</span>
+<span class="token punctuation">[</span>groups<span class="token punctuation">]</span>
+admin <span class="token operator">=</span> admin
+<span class="token assign-left variable">zhangsan</span><span class="token operator">=</span>zhangsan
+<span class="token punctuation">[</span>project:/<span class="token punctuation">]</span>
+@admin <span class="token operator">=</span> rw
+@zhangsan <span class="token operator">=</span> rw
+<span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment">#</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>以下是在网上找到一个很好的配置例子：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token punctuation">[</span>groups<span class="token punctuation">]</span>
+admin <span class="token operator">=</span> john, kate
+devteam1 <span class="token operator">=</span> john, rachel, sally
+devteam2 <span class="token operator">=</span> kate, peter, mark
+docs <span class="token operator">=</span> bob, jane, mike
+training <span class="token operator">=</span> zak
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>-- 这里把不同用户放到不同的组里面，下面在设置目录访问权限的时候，用目录来操作就可以了。</p> <div class="language-yml line-numbers-mode"><pre class="language-yml"><code><span class="token comment"># 为所有库指定默认访问规则</span>
+<span class="token comment"># 所有人可以读，管理员可以写，危险分子没有任何权限</span>
+<span class="token punctuation">[</span>/<span class="token punctuation">]</span>  <span class="token punctuation">-</span><span class="token punctuation">-</span>对应我测试里的：/u02/svn 目录
+* = r
+@admin = rw
+dangerman =
+
+<span class="token comment"># 允许开发人员可以完全访问他们的项目版本库</span>
+<span class="token punctuation">[</span>proj1<span class="token punctuation">:</span>/<span class="token punctuation">]</span>
+@devteam1 = rw
+<span class="token punctuation">[</span>proj2<span class="token punctuation">:</span>/<span class="token punctuation">]</span>
+@devteam2 = rw
+<span class="token punctuation">[</span>bigproj<span class="token punctuation">:</span>/<span class="token punctuation">]</span>
+@devteam1 = rw
+@devteam2 = rw
+trevor = rw
+
+<span class="token comment"># 文档编写人员对所有的docs目录有写权限</span>
+<span class="token punctuation">[</span>/trunk/doc<span class="token punctuation">]</span>
+@docs = rw
+
+<span class="token comment"># 培训人员可以完全访问培训版本库</span>
+<span class="token punctuation">[</span>TrainingRepos<span class="token punctuation">:</span>/<span class="token punctuation">]</span>
+@training = rw
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><h3 id="_3-启动和停止svn服务"><a href="#_3-启动和停止svn服务" class="header-anchor">#</a> 3.启动和停止SVN服务</h3> <h4 id="_1-启动svn服务"><a href="#_1-启动svn服务" class="header-anchor">#</a> 1）启动SVN服务</h4> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	<span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment"># svnserve -d -r /var/www/svn</span>
+   		-d表示后台运行
+    	<span class="token parameter variable">-r</span> 指定根目录是 /var/www/svn
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="_2-查看svn服务"><a href="#_2-查看svn服务" class="header-anchor">#</a> 2） 查看svn服务</h4> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	<span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment"># ps -ef | grep svn</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h4 id="_3-停止svn服务"><a href="#_3-停止svn服务" class="header-anchor">#</a> 3）停止SVN服务:</h4> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	<span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment"># ps -aux |grep svn</span>
+	<span class="token punctuation">[</span>root@shxt conf<span class="token punctuation">]</span><span class="token comment"># kill -9 进程杀掉</span>
+
+多数时候会把svn服务放到apache的服务中
+
+```shell
+重启apache
+	/usr/local/apache/bin/apachectl restart
+    或者
+      <span class="token function">service</span> httpd restart
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><strong>如果遇到下列问题</strong></p> <p><code>Can't open file '/var/www/svn/repo_name/db/txn-current-lock': Permission denied</code></p> <p>需要分配读写权限</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	$ <span class="token builtin class-name">cd</span> /var/www/svn
+    $ <span class="token function">chown</span> <span class="token parameter variable">-R</span> apache.apache project（项目名）
+  或者
+     $ <span class="token function">chmod</span> –R o+rw  /var/www/svn/
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h2 id="二-客户端连接svn-服务器"><a href="#二-客户端连接svn-服务器" class="header-anchor">#</a> 二. 客户端连接SVN 服务器</h2> <h3 id="_2-1-安装tortoisesvn-客户端"><a href="#_2-1-安装tortoisesvn-客户端" class="header-anchor">#</a> 2.1 安装TortoiseSVN 客户端</h3> <p><code>下载地址：http://tortoisesvn.net/downloads.html</code></p> <h3 id="_2-2-找到自己项目的目录-右击-进行svn-操作"><a href="#_2-2-找到自己项目的目录-右击-进行svn-操作" class="header-anchor">#</a> 2.2 找到自己项目的目录，右击，进行SVN 操作</h3> <p>（1）新建测试目录svn，进入后右键，点checkout：</p> <p>SVN 服务器的IP地址和版本库名称。</p> <p>新建个文件svn.txt. 把这个文件上传到SVN服务器(add)：</p> <h2 id="三-linux下svn使用命令总结"><a href="#三-linux下svn使用命令总结" class="header-anchor">#</a> 三.linux下svn使用命令总结</h2> <h3 id="_1、将文件checkout到本地目录"><a href="#_1、将文件checkout到本地目录" class="header-anchor">#</a> 1、将文件checkout到本地目录</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn checkout path（path是服务器上的目录）
+	例如：svn checkout svn://192.168.1.1/pro/domain
+	简写：svn co
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_2、往版本库中添加新的文件"><a href="#_2、往版本库中添加新的文件" class="header-anchor">#</a> 2、往版本库中添加新的文件</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn <span class="token function">add</span> <span class="token function">file</span>
+	例如：svn <span class="token function">add</span> test.php<span class="token punctuation">(</span>添加test.php<span class="token punctuation">)</span>
+	svn <span class="token function">add</span> *.php<span class="token punctuation">(</span>添加当前目录下所有的php文件<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_3、将改动的文件提交到版本库"><a href="#_3、将改动的文件提交到版本库" class="header-anchor">#</a> 3、将改动的文件提交到版本库</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn commit <span class="token parameter variable">-m</span> “LogMessage“ <span class="token punctuation">[</span>-N<span class="token punctuation">]</span> <span class="token punctuation">[</span>--no-unlock<span class="token punctuation">]</span> <span class="token environment constant">PATH</span><span class="token punctuation">(</span>如果选择了保持锁，就使用–no-unlock开关<span class="token punctuation">)</span>
+	例如：svn commit <span class="token parameter variable">-m</span> “add <span class="token builtin class-name">test</span> <span class="token function">file</span> <span class="token keyword">for</span> my test“ test.php
+	简写：svn ci
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_4、加锁-解锁"><a href="#_4、加锁-解锁" class="header-anchor">#</a> 4、加锁/解锁</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn lock <span class="token parameter variable">-m</span> “LockMessage“ <span class="token punctuation">[</span>--force<span class="token punctuation">]</span> <span class="token environment constant">PATH</span>
+	例如：svn lock <span class="token parameter variable">-m</span> “lock <span class="token builtin class-name">test</span> file“ test.php
+	svn unlock <span class="token environment constant">PATH</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_5、更新到某个版本"><a href="#_5、更新到某个版本" class="header-anchor">#</a> 5、更新到某个版本</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn update <span class="token parameter variable">-r</span> m path
+	例如：
+	svn update如果后面没有目录，默认将当前目录以及子目录下的所有文件都更新到最新版本。
+	svn update <span class="token parameter variable">-r</span> <span class="token number">200</span> test.php<span class="token punctuation">(</span>将版本库中的文件test.php还原到版本200<span class="token punctuation">)</span>
+	svn update test.php<span class="token punctuation">(</span>更新，于版本库同步。如果在提交的时候提示过期的话，是因为冲突，需要先update，修改文件，然后清除svn resolved，最后再提交commit<span class="token punctuation">)</span>
+	简写：svn up
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="_6、查看文件或者目录状态"><a href="#_6、查看文件或者目录状态" class="header-anchor">#</a> 6、查看文件或者目录状态</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	<span class="token number">1</span>）svn status path（目录下的文件和子目录的状态，正常状态不显示）
+	【?：不在svn的控制中；M：内容被修改；C：发生冲突；A：预定加入到版本库；K：被锁定】
+	<span class="token number">2</span>）svn status <span class="token parameter variable">-v</span> path<span class="token punctuation">(</span>显示文件和子目录状态<span class="token punctuation">)</span>
+	第一列保持相同，第二列显示工作版本号，第三和第四列显示最后一次修改的版本号和修改人。
+	注：svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。
+	简写：svn st
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h3 id="_7、删除文件"><a href="#_7、删除文件" class="header-anchor">#</a> 7、删除文件</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn delete path <span class="token parameter variable">-m</span> “delete <span class="token builtin class-name">test</span> fle“
+	例如：svn delete svn://192.168.1.1/pro/domain/test.php <span class="token parameter variable">-m</span> “delete <span class="token builtin class-name">test</span> file”
+	或者直接svn delete test.php 然后再svn ci <span class="token parameter variable">-m</span> ‘delete <span class="token builtin class-name">test</span> file‘，推荐使用这种
+	简写：svn <span class="token punctuation">(</span>del, remove, <span class="token function">rm</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="_8、查看日志"><a href="#_8、查看日志" class="header-anchor">#</a> 8、查看日志</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn log path
+	例如：svn log test.php 显示这个文件的所有修改记录，及其版本号的变化
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_9、查看文件详细信息"><a href="#_9、查看文件详细信息" class="header-anchor">#</a> 9、查看文件详细信息</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn info path
+	例如：svn info test.php
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_10、比较差异"><a href="#_10、比较差异" class="header-anchor">#</a> 10、比较差异</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn <span class="token function">diff</span> path<span class="token punctuation">(</span>将修改的文件与基础版本比较<span class="token punctuation">)</span>
+	例如：svn <span class="token function">diff</span> test.php
+	svn <span class="token function">diff</span> <span class="token parameter variable">-r</span> m:n path<span class="token punctuation">(</span>对版本m和版本n比较差异<span class="token punctuation">)</span>
+	例如：svn <span class="token function">diff</span> <span class="token parameter variable">-r</span> <span class="token number">200</span>:201 test.php
+	简写：svn di
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="_11、将两个版本之间的差异合并到当前文件"><a href="#_11、将两个版本之间的差异合并到当前文件" class="header-anchor">#</a> 11、将两个版本之间的差异合并到当前文件</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn merge <span class="token parameter variable">-r</span> m:n path
+	例如：svn merge <span class="token parameter variable">-r</span> <span class="token number">200</span>:205 test.php（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_12、svn-帮助"><a href="#_12、svn-帮助" class="header-anchor">#</a> 12、SVN 帮助</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn <span class="token builtin class-name">help</span>
+	svn <span class="token builtin class-name">help</span> ci
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><hr> <p><strong>以上是常用命令，下面写几个不经常用的</strong></p> <hr> <h3 id="_13、版本库下的文件和目录列表"><a href="#_13、版本库下的文件和目录列表" class="header-anchor">#</a> 13、版本库下的文件和目录列表</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn list path
+	显示path目录下的所有属于版本库的文件和目录
+	简写：svn <span class="token function">ls</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_14、创建纳入版本控制下的新目录"><a href="#_14、创建纳入版本控制下的新目录" class="header-anchor">#</a> 14、创建纳入版本控制下的新目录</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn mkdir: 创建纳入版本控制下的新目录。
+	用法: 
+	- <span class="token number">1</span>、mkdir <span class="token environment constant">PATH</span>…
+	- <span class="token number">2</span>、mkdir URL…
+	创建版本控制的目录。
+	<span class="token number">1</span>、每一个以工作副本 <span class="token environment constant">PATH</span> 指定的目录，都会创建在本地端，并且加入新增
+	调度，以待下一次的提交。
+	<span class="token number">2</span>、每个以URL指定的目录，都会透过立即提交于仓库中创建。
+	在这两个情况下，所有的中间目录都必须事先存在。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="_15、恢复本地修改"><a href="#_15、恢复本地修改" class="header-anchor">#</a> 15、恢复本地修改</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn revert: 恢复原始未改变的工作副本文件 <span class="token punctuation">(</span>恢复大部份的本地修改<span class="token punctuation">)</span>。revert:
+	用法: revert <span class="token environment constant">PATH</span>…
+	注意: 本子命令不会存取网络，并且会解除冲突的状况。但是它不会恢复
+	被删除的目录
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="_16、代码库url变更"><a href="#_16、代码库url变更" class="header-anchor">#</a> 16、代码库URL变更</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn switch <span class="token punctuation">(</span>sw<span class="token punctuation">)</span>: 更新工作副本至不同的URL。
+	用法: <span class="token number">1</span>、switch URL <span class="token punctuation">[</span><span class="token environment constant">PATH</span><span class="token punctuation">]</span>
+	<span class="token number">2</span>、switch –relocate FROM TO <span class="token punctuation">[</span><span class="token environment constant">PATH</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+	<span class="token number">1</span>、更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将
+	服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的
+	方法。
+	<span class="token number">2</span>、改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动
+	<span class="token punctuation">(</span>比如方案名或是主机名称变动<span class="token punctuation">)</span>，但是工作副本仍旧对映到同一仓库的同一目录时使用
+	这个命令更新工作副本与仓库的对应关系。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h3 id="_17、解决冲突"><a href="#_17、解决冲突" class="header-anchor">#</a> 17、解决冲突</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn resolved: 移除工作副本的目录或文件的“冲突”状态。
+	用法: resolved <span class="token environment constant">PATH</span>…
+	注意: 本子命令不会依语法来解决冲突或是移除冲突标记；它只是移除冲突的
+	相关文件，然后让 <span class="token environment constant">PATH</span> 可以再次提交。
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="_18、输出指定文件或url的内容"><a href="#_18、输出指定文件或url的内容" class="header-anchor">#</a> 18、输出指定文件或URL的内容.</h3> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>	svn <span class="token function">cat</span> 目标<span class="token punctuation">[</span>@版本<span class="token punctuation">]</span>…如果指定了版本，将从指定的版本开始查找。
+	svn <span class="token function">cat</span> <span class="token parameter variable">-r</span> PREV filename <span class="token operator">&gt;</span> filename <span class="token punctuation">(</span>PREV 是上一版本,也可以写具体版本号,这样输出结果是可以提交的<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div></main></div> <!----></div> <ul class="sub-sidebar sub-sidebar-wrapper" style="width:12rem;" data-v-b57cc07c data-v-7dd95ae2><li class="level-2" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#一-使用yum-安装svn包" class="sidebar-link reco-side-一-使用yum-安装svn包" data-v-b57cc07c>一. 使用yum 安装SVN包</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_1-安装svn命令如下" class="sidebar-link reco-side-_1-安装svn命令如下" data-v-b57cc07c>1.安装svn命令如下</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_2-配置svn" class="sidebar-link reco-side-_2-配置svn" data-v-b57cc07c>2.配置svn</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_3-启动和停止svn服务" class="sidebar-link reco-side-_3-启动和停止svn服务" data-v-b57cc07c>3.启动和停止SVN服务</a></li><li class="level-2" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#二-客户端连接svn-服务器" class="sidebar-link reco-side-二-客户端连接svn-服务器" data-v-b57cc07c>二. 客户端连接SVN 服务器</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_2-1-安装tortoisesvn-客户端" class="sidebar-link reco-side-_2-1-安装tortoisesvn-客户端" data-v-b57cc07c>2.1 安装TortoiseSVN 客户端</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_2-2-找到自己项目的目录-右击-进行svn-操作" class="sidebar-link reco-side-_2-2-找到自己项目的目录-右击-进行svn-操作" data-v-b57cc07c>2.2 找到自己项目的目录，右击，进行SVN 操作</a></li><li class="level-2" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#三-linux下svn使用命令总结" class="sidebar-link reco-side-三-linux下svn使用命令总结" data-v-b57cc07c>三.linux下svn使用命令总结</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_1、将文件checkout到本地目录" class="sidebar-link reco-side-_1、将文件checkout到本地目录" data-v-b57cc07c>1、将文件checkout到本地目录</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_2、往版本库中添加新的文件" class="sidebar-link reco-side-_2、往版本库中添加新的文件" data-v-b57cc07c>2、往版本库中添加新的文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_3、将改动的文件提交到版本库" class="sidebar-link reco-side-_3、将改动的文件提交到版本库" data-v-b57cc07c>3、将改动的文件提交到版本库</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_4、加锁-解锁" class="sidebar-link reco-side-_4、加锁-解锁" data-v-b57cc07c>4、加锁/解锁</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_5、更新到某个版本" class="sidebar-link reco-side-_5、更新到某个版本" data-v-b57cc07c>5、更新到某个版本</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_6、查看文件或者目录状态" class="sidebar-link reco-side-_6、查看文件或者目录状态" data-v-b57cc07c>6、查看文件或者目录状态</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_7、删除文件" class="sidebar-link reco-side-_7、删除文件" data-v-b57cc07c>7、删除文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_8、查看日志" class="sidebar-link reco-side-_8、查看日志" data-v-b57cc07c>8、查看日志</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_9、查看文件详细信息" class="sidebar-link reco-side-_9、查看文件详细信息" data-v-b57cc07c>9、查看文件详细信息</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_10、比较差异" class="sidebar-link reco-side-_10、比较差异" data-v-b57cc07c>10、比较差异</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_11、将两个版本之间的差异合并到当前文件" class="sidebar-link reco-side-_11、将两个版本之间的差异合并到当前文件" data-v-b57cc07c>11、将两个版本之间的差异合并到当前文件</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_12、svn-帮助" class="sidebar-link reco-side-_12、svn-帮助" data-v-b57cc07c>12、SVN 帮助</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_13、版本库下的文件和目录列表" class="sidebar-link reco-side-_13、版本库下的文件和目录列表" data-v-b57cc07c>13、版本库下的文件和目录列表</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_14、创建纳入版本控制下的新目录" class="sidebar-link reco-side-_14、创建纳入版本控制下的新目录" data-v-b57cc07c>14、创建纳入版本控制下的新目录</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_15、恢复本地修改" class="sidebar-link reco-side-_15、恢复本地修改" data-v-b57cc07c>15、恢复本地修改</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_16、代码库url变更" class="sidebar-link reco-side-_16、代码库url变更" data-v-b57cc07c>16、代码库URL变更</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_17、解决冲突" class="sidebar-link reco-side-_17、解决冲突" data-v-b57cc07c>17、解决冲突</a></li><li class="level-3" data-v-b57cc07c><a href="/views/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E5%85%B7/svn.html#_18、输出指定文件或url的内容" class="sidebar-link reco-side-_18、输出指定文件或url的内容" data-v-b57cc07c>18、输出指定文件或URL的内容.</a></li></ul></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.402024e5.js" defer></script><script src="/assets/js/3.35889db3.js" defer></script><script src="/assets/js/1.98e71d3a.js" defer></script><script src="/assets/js/184.b11447af.js" defer></script>
+  </body>
+</html>
